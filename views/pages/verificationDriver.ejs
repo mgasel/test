@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>verify user</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" >
+        $(function(){
+                var url_string=document.URL;
+                var url = new URL(url_string);
+                var datatoSend={
+                    id:url.searchParams.get("id"),
+                    accessToken:url.searchParams.get("accessToken")
+                }
+    try {
+        $.post('http://34.218.73.62:8000/VerifyDriverEmailAddress',datatoSend,function(response,data){
+
+            console.log(response.msg,'response message');
+
+
+
+            let val=response.msg.split("!");
+            
+            $("#emailMessage1").text(val[0]+'!');
+            $("#emailMessage2").text(val[1]);
+
+
+            console.log(val,'value')
+
+
+        });
+        }
+        catch(err) {
+                        swal({
+                        title: "something went wrong",
+                        text: "clicked the button!",
+                        icon: "error",
+                        });
+                   
+                }
+            
+        
+      
+           
+        });
+    </script>
+    <style type="text/css">
+    body
+    {
+        overflow: hidden;
+    }
+    .main-section
+    {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        /* background:url('https://s3-us-west-2.amazonaws.com/lawnmowerstatic/profileThumb_1497355720011.jpg'); */
+        background-size: cover;
+        background-position: center center;
+        padding: 10px;
+        background-color: #eee;
+    }
+    .confirm-wrapper
+    {
+        width: 100%;
+        max-width: 550px;
+        margin-top: 100px;
+        margin: 30px auto;
+        background: rgba(255, 255, 255, 0.84);
+        padding: 30px;
+        box-shadow: 0px 1px 13px rgba(0, 0, 0, 0.39);
+        border-radius: 4px;
+    }
+
+    .logo
+    {
+        width: 100%;
+        height: auto;
+        text-align: center;
+    }
+
+    .outer
+    {
+        width: 130px;
+        height: 130px;
+        background: rgb(6, 91, 74);
+        margin: 20px auto;
+        border-radius: 50%;
+        padding: 20px 26px;
+    }
+
+    .btn-login
+    {
+        width: 100%;
+        max-width: 200px;
+        padding: 10px;
+        color: #fff;
+        font-size: 16px;
+        background: rgb(6, 91, 74);
+        border-radius: 40px;
+        margin-top: 10px;
+    }
+
+    .btn-login:hover,
+    .btn-login:focus,
+    .btn-login:active
+    {
+        color: #eee;
+        background: rgb(8, 59, 49);
+    }
+
+    hr
+    {
+        border-color: #d9d9d9;
+    }
+
+    .content-sect h2
+    {
+        font-weight: 700;
+        color: rgb(72, 72, 72);
+    }
+
+    .content-sect h3
+    {
+        font-weight: 500;
+        color: rgb(119, 119, 119);
+    }
+
+    .footer-cont
+    {
+        position: absolute;
+        bottom: 20px;
+        left:0px;
+        right: 0px;
+        color: #fff;
+        text-shadow: 0px 0px 3px #000;
+        letter-spacing: 0.5px;
+        font-weight: 300;
+    }
+    </style>
+</head>
+<body>
+<div class="main-section">
+    <div class="confirm-wrapper animated fadeIn">
+        <div class="logo text-center">
+
+            <!-- <img src="https://s3-us-west-2.amazonaws.com/inthenights/appicon.png" width="125px"> -->
+
+        </div>
+        <div class="content-sect">
+            <h2 class="text-center" id="emailMessage1"></h2>
+            <hr>
+        </div>
+        <div class="content-sect text-center">
+            <h4 id="emailMessage2"></h4>
+        </div>
+    </div>
+
+    <div class="footer-cont">
+        <p class="text-center">
+            <i class="fa fa-copyright" aria-hidden="true"></i> Copyright 2018. 3ndk!. All Right Reserved.
+        </p>
+    </div>
+
+</div>
+<body>
+</html>

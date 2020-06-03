@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=utf-8 />
+    <title>Forgot User</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        .famcam
+         {
+             top: 20px;
+             left: 80px;
+             align-items: center;
+             margin-left:120px; 
+         }
+    
+         body.login-div {
+             background-repeat: no-repeat;
+             background-size: cover;
+             background-color: none;
+         }
+    
+         .maindiv{
+             background-color: none;
+             top:0px;
+             bottom: 0px;
+             left: 0px;
+             right: 0px;
+             margin: auto;
+             height:450px;
+             width:600px;
+             position: absolute;
+            
+         }
+         .centered {
+             width: 100%;
+             max-width: 320px;
+             position: absolute;
+             top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+             background-color: transparent;
+         }
+         input{
+             width: 100%;
+             height:48px;
+             border:1px groove ;
+             border-radius: 5px;
+             color:white;
+             font-size: 1.2em;
+             background-color: rgba(0, 0, 0, 0.5)
+         }
+         
+         .password{
+              margin-top: 10px; 
+         }
+         .btn{
+             margin-top: 20px;
+             height:50px;
+             background-color: #0078FF;
+             color: white;
+             font-size: 1.2em;
+         }
+         
+         
+             </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    
+    <script type="text/javascript" >
+        $(function(){
+                
+                    var url_string=document.URL;
+                    var url = new URL(url_string);
+                    var id = url.searchParams.get("id");
+                    var accessToken=url.searchParams.get("accessToken");
+                    var datatoSend={
+                        verificationcode:id,
+                        accessTokenkey:accessToken
+                    }
+
+
+                    let html=''
+
+                    $.post('http://34.218.73.62:8000/checkLinkExpired',datatoSend,function(response,data){
+                        if(response.success==1){
+                             html+='<div class="container">'+
+                                        '<div class="maindiv animated fadeInDown">'+
+                                        '<div><center>'+
+                                            // <!-- <img src="https://s3-us-west-2.amazonaws.com/inthenights/appicon.png" width="125px"> -->
+                                        '</center><center><h4 style="margin-top: 30">3ndk</h4></center>'+
+                                        '</div><div class="centered"><div>'+
+                                        '<input name="username" id="password" class="form-control username"  type="password" placeholder="Enter new password" >'+
+                                        '</div><div>'+
+                                        '<input name="password" class="form-control password" id="confpassword" type="password" placeholder="Enter confirm Password" >'+
+                                        '</div><button type="submit" class="btn btn-block" id="btnVerify" onClick="forgotUser()">Reset</button></div></div></div><div style="position: fixed;left: 0;bottom: 0;width: 100%;color: white;text-align: center;">'+
+                                        '<i class="fa fa-copyright" aria-hidden="true"></i> Copyright 2018. 3ndk!. All Right Reserved.</div>';
+
+
+                                         $("#mainbody").html(html);
+                        }
+                        else if(response.success==0){
+                             html='<div class="main-section"><div class="confirm-wrapper animated fadeIn"><div class="logo text-center">'+
+                                    '</div><div class="content-sect"><h2 class="text-center" id="emailMessage1">Sorry !</h2><hr></div>'+
+                                    '<div class="content-sect text-center"><h4 id="emailMessage2">'+response.msg+'</h4></div></div>'+
+                                    '<div class="footer-cont"><p class="text-center"><i class="fa fa-copyright" aria-hidden="true"></i> Copyright 2018. 3ndk!. All Right Reserved.</p>'+
+                                    '</div></div>';
+
+                            $("#mainbody").html(html);
+
+                        }
+                    });
+
+           
+        });
+    </script>
+
+
+    <script type="text/javascript">
+            forgotUser=()=>{
+                if($("#password").val().trim().toString().length<6){
+                        swal({
+                        title: "Password can have min 6 characters",
+                        text: "clicked the button!",
+                        icon: "error",
+                        });
+                        return false;
+                    }
+                    else if($("#password").val().trim().toString().length>15){
+                            swal({
+                            title: "Password can have max 15 characters",
+                            text: "clicked the button!",
+                            icon: "error",
+                            });
+                            return false;
+                    }
+
+                    else if($("#password").val().trim().toString()!=$("#confpassword").val().trim().toString())
+                    {
+                        swal({
+                        title: "Password and confirm password should same",
+                        text: "clicked the button!",
+                        icon: "error",
+                        });
+                        return false;
+                    }
+                else{
+                var url_string=document.URL;
+                var url = new URL(url_string);
+                var id = url.searchParams.get("id");
+                var accessToken=url.searchParams.get("accessToken");
+                var datatoSend={
+                    verificationcode:id,
+                    accessTokenkey:accessToken,
+                    password:$("#password").val().trim().toString()
+                }
+        try {
+           
+
+
+
+    $.post('http://34.218.73.62:8000/updateDriverPasswordFromEmail',datatoSend,function(response,data){
+            if(response.success==1){
+                swal({
+                        title: "Password successfully updated",
+                        text: "clicked the button!",
+                        icon: "success",
+                    });
+            }
+
+            else if(response.success==0){
+                swal({
+                        title: "Link has been expired",
+                        text: "clicked the button!",
+                        icon: "warning",
+                    });
+            }
+            else if(response.success==3){
+                swal({
+                        title: "Link has expire",
+                        text: "clicked the button!",
+                        icon: "warning",
+                    });
+            }
+            })
+            }
+            catch(err) 
+            {
+                swal({
+                        title: "Link has expire",
+                        text: "clicked the button!",
+                        icon: "warning",
+                    });
+            }
+            }
+            }
+
+
+
+
+        </script>
+
+
+        <script type="text/javascript">
+
+
+               $(document).keypress(function(e) {
+                var keycode = (e.keyCode ? e.keyCode : e.which);
+                if (keycode == '13') {
+                    forgotUser();
+                }
+            });
+                
+            </script>
+</head>
+<body class="login-div" id="mainbody">
+</body>
+</html>

@@ -1,0 +1,1003 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "3ndk",
+      "description": "3ndk api documentation for Driver",
+      "version": "1.0"
+    },
+ 
+    "produces": ["application/json"],
+    "host": "35.160.104.147:8006",
+    "basePath": "",
+    "paths": {
+      "/loginDriver":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "registerUser",
+            "tags": ["User"],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "email",
+                    "in": "formData",
+                    "description": "email is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+               },
+               {
+                    "name": "password",
+                    "in": "formData",
+                    "description": "password is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+               },
+               
+                {
+                    "name": "deviceType",
+                    "in": "formData",
+                    "description": "deviceType is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                },
+                {
+                    "name": "deviceToken",
+                    "in": "formData",
+                    "description": "deviceToken is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                },
+                {
+                    "name": "lat",
+                    "in": "formData",
+                    "description": "lat is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                },
+                {
+                    "name": "long",
+                    "in": "formData",
+                    "description": "long is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                }
+            ],
+            "responses": {}
+          }
+        },
+
+
+
+        "/updateDriverProfile":{
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "registerUser",
+                "tags": ["User"],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value":""
+                    },
+                    {
+                        "name": "name",
+                        "in": "formData",
+                        "description": "name of driver to update",
+                        "type": "string",
+                        "value":""
+                    },
+                    {
+                        "name": "original",
+                        "in": "formData",
+                        "description": "profile pic original to update",
+                        "type": "string",
+                        "value":""
+                    },
+                    {
+                        "name": "thumbnail",
+                        "in": "formData",
+                        "description": "profile pic thumbnail to update",
+                        "type": "string",
+                        "value":""
+                    },
+                    {
+                        "name": "gender",
+                        "in": "formData",
+                        "description": "gender to update",
+                        "type": "string",
+                        "value":""
+                    },
+                    {
+                        "name": "countryName",
+                        "in": "formData",
+                        "description": "countryName to update",
+                        "type": "string",
+                        "value":""
+                    }
+                ],
+                "responses": {}
+              }
+            },
+
+            
+            "/quickReviewWash":{
+                "get": {
+                    "x-swagger-router-controller": "middleware-name1",
+                    "operationId": "registerUser",
+                    "tags": ["User"],
+                    "description": "",
+                    "parameters": [
+                        {
+                            "name": "authorization",
+                            "in": "header",
+                            "description": "authorization is required",
+                            "required": true,
+                            "type": "string",
+                            "value":""
+                        }
+                    ],
+                    "responses": {}
+                  }
+                },
+
+
+                "/goingToUser":{
+                    "get": {
+                        "x-swagger-router-controller": "middleware-name1",
+                        "operationId": "registerUser",
+                        "tags": ["User"],
+                        "description": "",
+                        "parameters": [
+                            {
+                                "name": "authorization",
+                                "in": "header",
+                                "description": "authorization is required",
+                                "required": true,
+                                "type": "string",
+                                "value":""
+                            },
+                            {
+                                "name": "bookingId",
+                                "in": "query",
+                                "description": "bookingId is required",
+                                "required": true,
+                                "type": "string",
+                                "value":""
+                            }
+                        ],
+                        "responses": {}
+                      }
+                    },
+        
+        "/changeDriverPassword":{
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "registerUser",
+                "tags": ["User"],
+                "description": "",
+                "parameters": [
+                    {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value":""
+                    },
+                    {
+                        "name": "newPassword",
+                        "in": "formData",
+                        "description": "newPassword is required",
+                        "required": true,
+                        "type": "string",
+                        "value":""
+                    },
+                    {
+                        "name": "currentPassword",
+                        "in": "formData",
+                        "description": "currentPassword is required",
+                        "required": true,
+                        "type": "string",
+                        "value":""
+                    },
+                    {
+                        "name": "confirmPassword",
+                        "in": "formData",
+                        "description": "confirmPassword is required",
+                        "required": true,
+                        "type": "string",
+                        "value":""
+                    }
+                ],
+                "responses": {}
+              }
+            },
+
+
+
+            
+
+
+
+            "/logoutDriver":{
+                "get": {
+                    "x-swagger-router-controller": "middleware-name1",
+                    "operationId": "registerUser",
+                    "tags": ["User"],
+                    "description": "",
+                    "parameters": [
+                        {
+                            "name": "authorization",
+                            "in": "header",
+                            "description": "authorization is required",
+                            "required": true,
+                            "type": "string",
+                            "value":""
+                        }
+                    ],
+                    "responses": {}
+                  }
+                },
+
+
+
+                "/getAllReviewsByDriver":{
+                    "get": {
+                        "x-swagger-router-controller": "middleware-name1",
+                        "operationId": "registerUser",
+                        "tags": ["User"],
+                        "description": "",
+                        "parameters": [
+                            {
+                                "name": "authorization",
+                                "in": "header",
+                                "description": "authorization is required",
+                                "required": true,
+                                "type": "string",
+                                "value":""
+                            },
+                            {
+                                "name": "perPage",
+                                "in": "query",
+                                "description": "perPage is required",
+                                "required": true,
+                                "type": "string",
+                                "value":""
+                            },
+                            {
+                                "name": "page",
+                                "in": "query",
+                                "description": "page is required",
+                                "required": true,
+                                "type": "string",
+                                "value":""
+                            }
+                        ],
+                        "responses": {}
+                      }
+                    },
+    
+
+
+            "/driverConfirmedBooking":{
+                "post": {
+                    "x-swagger-router-controller": "middleware-name1",
+                    "operationId": "registerUser",
+                    "tags": ["User"],
+                    "description": "",
+                    "parameters": [
+                        {
+                            "name": "authorization",
+                            "in": "header",
+                            "description": "authorization is required",
+                            "required": true,
+                            "type": "string",
+                            "value":""
+                        },
+                        {
+                            "name": "page",
+                            "in": "formData",
+                            "description": "page is required",
+                            "required": true,
+                            "type": "string",
+                            "value":""
+                        },
+                        {
+                            "name": "perPage",
+                            "in": "formData",
+                            "description": "perPage is required",
+                            "required": true,
+                            "type": "string",
+                            "value":""
+                        }
+                    ],
+                    "responses": {}
+                  }
+                },
+
+
+
+
+                
+
+                "/raiseAnIssueByDriver":{
+                    "post": {
+                        "x-swagger-router-controller": "middleware-name1",
+                        "operationId": "registerUser",
+                        "tags": ["User"],
+                        "description": "",
+                        "parameters": [
+                            {
+                                "name": "authorization",
+                                "in": "header",
+                                "description": "authorization is required",
+                                "required": true,
+                                "type": "string",
+                                "value":""
+                            },
+                            {
+                                "name": "issue",
+                                "in": "query",
+                                "description": "issue is required",
+                                "required": true,
+                                "type": "string",
+                                "value":""
+                            },
+                            {
+                                "name": "issueType",
+                                "in": "query",
+                                "description": "issueType is required",
+                                "required": true,
+                                "type": "string",
+                                "value":""
+                            },
+                            {
+                                "name": "imageUrl",
+                                "in": "query",
+                                "description": "imageUrl is required",
+                                "type": "string",
+                                "value":""
+                            }
+                           
+                        ],
+                        "responses": {}
+                      }
+                    },
+                
+
+
+                "/driverScheduledBooking":{
+                    "post": {
+                        "x-swagger-router-controller": "middleware-name1",
+                        "operationId": "registerUser",
+                        "tags": ["User"],
+                        "description": "",
+                        "parameters": [
+                            {
+                                "name": "authorization",
+                                "in": "header",
+                                "description": "authorization is required",
+                                "required": true,
+                                "type": "string",
+                                "value":""
+                            },
+                            {
+                                "name": "page",
+                                "in": "formData",
+                                "description": "page is required",
+                                "required": true,
+                                "type": "string",
+                                "value":""
+                            },
+                            {
+                                "name": "perPage",
+                                "in": "formData",
+                                "description": "perPage is required",
+                                "required": true,
+                                "type": "string",
+                                "value":""
+                            }
+                        ],
+                        "responses": {}
+                      }
+                    },
+                
+
+
+                "/makeAvailabilityOnOff":{
+                    "get": {
+                        "x-swagger-router-controller": "middleware-name1",
+                        "operationId": "registerUser",
+                        "tags": ["User"],
+                        "description": "",
+                        "parameters": [
+                            {
+                                "name": "authorization",
+                                "in": "header",
+                                "description": "authorization is required",
+                                "required": true,
+                                "type": "string",
+                                "value":""
+                            },
+
+                            {
+                                "name": "isAvailable",
+                                "in": "query",
+                                "description": "isAvailable is required",
+                                "required": true,
+                                "type": "boolean",
+                                "default": true
+                            }
+                        ],
+                        "responses": {}
+                      }
+                    },
+
+
+
+
+                    "/makePickUpOrder":{
+                        "get": {
+                            "x-swagger-router-controller": "middleware-name1",
+                            "operationId": "registerUser",
+                            "tags": ["User"],
+                            "description": "",
+                            "parameters": [
+                                {
+                                    "name": "authorization",
+                                    "in": "header",
+                                    "description": "authorization is required",
+                                    "required": true,
+                                    "type": "string",
+                                    "value":""
+                                },
+    
+                                {
+                                    "name": "bookingId",
+                                    "in": "query",
+                                    "description": "bookingId is required",
+                                    "required": true,
+                                    "type": "string",
+                                    "value":true
+                                }
+                            ],
+                            "responses": {}
+                          }
+                        },
+
+
+
+                 "/sendForgotPasswordLinkDriver":{
+                        "post": {
+                            "x-swagger-router-controller": "middleware-name1",
+                            "operationId": "registerUser",
+                            "tags": ["User"],
+                            "description": "",
+                            "parameters": [
+                               
+                                {
+                                    "name": "forgotField",
+                                    "in": "query",
+                                    "description": "forgotField is required",
+                                    "required": true,
+                                    "type": "string",
+                                    "value":""
+                                }
+                            ],
+                            "responses": {}
+                          }
+                        },
+
+                        
+
+                        
+
+
+                        "/getNotificationListingByDriver":{
+                            "get": {
+                                "x-swagger-router-controller": "middleware-name1",
+                                "operationId": "registerUser",
+                                "tags": ["User"],
+                                "description": "",
+                                "parameters": [
+    
+                                    {
+                                        "name": "authorization",
+                                        "in": "header",
+                                        "description": "authorization is required",
+                                        "required": true,
+                                        "type": "string",
+                                        "value":""
+                                    },
+        
+                                    {
+                                        "name": "perPage",
+                                        "in": "query",
+                                        "description": "perPage is required",
+                                        "required": true,
+                                        "type": "string",
+                                        "value":""
+                                    },
+                                    {
+                                        "name": "page",
+                                        "in": "query",
+                                        "description": "page is required",
+                                        "required": true,
+                                        "type": "string",
+                                        "value":""
+                                    }
+    
+                                    
+                                ],
+                                "responses": {}
+                              }
+                            },
+
+                        "/acceptBooking":{
+                            "post": {
+                                "x-swagger-router-controller": "middleware-name1",
+                                "operationId": "registerUser",
+                                "tags": ["User"],
+                                "description": "",
+                                "parameters": [
+    
+                                    {
+                                        "name": "authorization",
+                                        "in": "header",
+                                        "description": "authorization is required",
+                                        "required": true,
+                                        "type": "string",
+                                        "value":""
+                                    },
+        
+                                    {
+                                        "name": "bookingId",
+                                        "in": "query",
+                                        "description": "bookingId is required",
+                                        "required": true,
+                                        "type": "string",
+                                        "value":""
+                                    }
+    
+                                    
+                                ],
+                                "responses": {}
+                              }
+                            },
+
+
+                            
+
+
+
+                            "/acceptedBookingsListByDriver":{
+                                "get": {
+                                    "x-swagger-router-controller": "middleware-name1",
+                                    "operationId": "registerUser",
+                                    "tags": ["User"],
+                                    "description": "",
+                                    "parameters": [
+                                        {
+                                            "name": "authorization",
+                                            "in": "header",
+                                            "description": "authorization is required",
+                                            "required": true,
+                                            "type": "string",
+                                            "value":""
+                                        }  
+                                    ],
+                                    "responses": {}
+                                  }
+                                },
+                                
+                    "/makeDeliveredOreder":{
+                        "get": {
+                            "x-swagger-router-controller": "middleware-name1",
+                            "operationId": "registerUser",
+                            "tags": ["User"],
+                            "description": "",
+                            "parameters": [
+
+                                {
+                                    "name": "authorization",
+                                    "in": "header",
+                                    "description": "authorization is required",
+                                    "required": true,
+                                    "type": "string",
+                                    "value":""
+                                },
+    
+                                {
+                                    "name": "bookingId",
+                                    "in": "query",
+                                    "description": "bookingId is required",
+                                    "required": true,
+                                    "type": "string",
+                                    "value":true
+                                }
+
+                                
+                            ],
+                            "responses": {}
+                          }
+                        },
+
+
+
+                        
+
+
+                        "/notAvailableUser":{
+                            "post": {
+                                "x-swagger-router-controller": "middleware-name1",
+                                "operationId": "registerUser",
+                                "tags": ["User"],
+                                "description": "",
+                                "parameters": [
+    
+                                    
+        
+    
+                                    
+                                ],
+                                "responses": {}
+                              }
+                            },
+
+                        "/orderDetailsForDriver":{
+                            "get": {
+                                "x-swagger-router-controller": "middleware-name1",
+                                "operationId": "registerUser",
+                                "tags": ["User"],
+                                "description": "",
+                                "parameters": [
+    
+                                    {
+                                        "name": "authorization",
+                                        "in": "header",
+                                        "description": "authorization is required",
+                                        "required": true,
+                                        "type": "string",
+                                        "value":""
+                                    },
+        
+                                    {
+                                        "name": "bookingId",
+                                        "in": "query",
+                                        "description": "bookingId is required",
+                                        "required": true,
+                                        "type": "string",
+                                        "value":true
+                                    }
+    
+                                    
+                                ],
+                                "responses": {}
+                              }
+                            },
+
+
+                            
+
+                            "/userNotAvailable":{
+                                "post": {
+                                    "x-swagger-router-controller": "middleware-name1",
+                                    "operationId": "service",
+                                    "tags": ["User"],
+                                    "description": "",
+                                    "parameters": [
+                                          {
+                                            "name": "authorization",
+                                            "in": "header",
+                                            "description": "authorization is required",
+                                            "required": true,
+                                            "type": "string",
+                                            "value":""
+                                          },
+                                          
+                                          {
+                                            "name": "notAvailableType",
+                                            "in": "formData",
+                                            "description": "notAvailableType is required",
+                                            "required": true,
+                                            "type": "string",
+                                            "value":""
+                                          },
+                                          {
+                                            "name": "bookingId",
+                                            "in": "formData",
+                                            "description": "bookingId is bookingId",
+                                            "required": true,
+                                            "type": "string",
+                                            "value":""
+                                          }
+                                    ],
+                                    "responses": {}
+                                  }
+                            },
+
+
+
+
+                            "/changeDriverPhoneNumber":{
+                                "post": {
+                                    "x-swagger-router-controller": "middleware-name1",
+                                    "operationId": "service",
+                                    "tags": ["User"],
+                                    "description": "",
+                                    "parameters": [
+                                          {
+                                            "name": "authorization",
+                                            "in": "header",
+                                            "description": "authorization is required",
+                                            "required": true,
+                                            "type": "string",
+                                            "value":""
+                                          },
+                                          
+                                          {
+                                            "name": "phoneNumber",
+                                            "in": "query",
+                                            "description": "phoneNumber is required",
+                                            "required": true,
+                                            "type": "string",
+                                            "value":""
+                                          },
+                                          {
+                                            "name": "callingCode",
+                                            "in": "query",
+                                            "description": "callingCode is required",
+                                            "required": true,
+                                            "type": "string",
+                                            "value":""
+                                          }
+                                    ],
+                                    "responses": {}
+                                  }
+                                },
+                                "/sendOtpByDriver":{
+                                    "get": {
+                                        "x-swagger-router-controller": "middleware-name1",
+                                        "operationId": "service",
+                                        "tags": ["User"],
+                                        "description": "",
+                                        "parameters": [
+                                            {
+                                                "name": "callingCode",
+                                                "in": "query",
+                                                "description": "callingCode is required",
+                                                "required": true,
+                                                "type": "string",
+                                                "value":""
+                                            },
+                                            {
+                                                "name": "phoneNumber",
+                                                "in": "query",
+                                                "description": "phoneNumber is required",
+                                                "required": true,
+                                                "type": "string",
+                                                "value":""
+                                            }
+                                        ],
+                                        "responses": {}
+                                    }
+                                },  
+                                
+                                
+                        
+                                "/resendOtpByDriver":{
+                                    "get": {
+                                        "x-swagger-router-controller": "middleware-name1",
+                                        "operationId": "service",
+                                        "tags": ["User"],
+                                        "description": "",
+                                        "parameters": [
+                                            {
+                                                "name": "otpId",
+                                                "in": "query",
+                                                "description": "otpId is required",
+                                                "required": true,
+                                                "type": "string",
+                                                "value":""
+                                            }
+                                        ],
+                                        "responses": {}
+                                    }
+                                }, 
+                                "/verifyOtpByDriver":{
+                                    "get": {
+                                        "x-swagger-router-controller": "middleware-name1",
+                                        "operationId": "service",
+                                        "tags": ["User"],
+                                        "description": "",
+                                        "parameters": [
+                                            {
+                                                "name": "otpId",
+                                                "in": "query",
+                                                "description": "otpId is required",
+                                                "required": true,
+                                                "type": "string",
+                                                "value":""
+                                            },
+                                            {
+                                                "name": "otp",
+                                                "in": "query",
+                                                "description": "otp is required",
+                                                "required": true,
+                                                "type": "string",
+                                                "value":""
+                                            }
+                                        ],
+                                        "responses": {}
+                                    }
+                                },
+                                "/handlecollect":{
+                                    "get": {
+                                        "x-swagger-router-controller": "middleware-name1",
+                                        "operationId": "service",
+                                        "tags": ["User"],
+                                        "description": "",
+                                        "parameters": [
+                                              {
+                                                "name": "authorization",
+                                                "in": "header",
+                                                "description": "authorization is required",
+                                                "required": true,
+                                                "type": "string",
+                                                "value":""
+                                              },
+                                              
+                                              {
+                                                "name": "handleOrCollect",
+                                                "in": "query",
+                                                "description": "handleOrCollect is required",
+                                                "required": true,
+                                                "type": "string",
+                                                "value":""
+                                              }
+                                             
+                                        ],
+                                        "responses": {}
+                                      }
+                                    },
+                                    "/readytomove":{
+                                        "post": {
+                                            "x-swagger-router-controller": "middleware-name1",
+                                            "operationId": "service",
+                                            "tags": ["User"],
+                                            "description": "",
+                                            "parameters": [
+                                                  {
+                                                    "name": "authorization",
+                                                    "in": "header",
+                                                    "description": "authorization is required",
+                                                    "required": true,
+                                                    "type": "string",
+                                                    "value":""
+                                                  },
+                                                  {
+                                                    "name": "bookingId",
+                                                    "in": "formData",
+                                                    "description": "bookingId is required",
+                                                    "required": true,
+                                                    "type": "string",
+                                                    "value":""
+                                                  }
+                                            ],
+                                            "responses": {}
+                                          }
+                                        },
+                                        "/collect":{
+                                            "post": {
+                                                "x-swagger-router-controller": "middleware-name1",
+                                                "operationId": "service",
+                                                "tags": ["User"],
+                                                "description": "",
+                                                "parameters": [
+                                                      {
+                                                        "name": "authorization",
+                                                        "in": "header",
+                                                        "description": "authorization is required",
+                                                        "required": true,
+                                                        "type": "string",
+                                                        "value":""
+                                                      },
+                                                      {
+                                                        "name": "bookingId",
+                                                        "in": "formData",
+                                                        "description": "bookingId is required",
+                                                        "required": true,
+                                                        "type": "string",
+                                                        "value":""
+                                                      }
+                                                ],
+                                                "responses": {}
+                                              }
+                                            },
+                                            
+                                            "/pickedupfromlaundry":{
+                                                "get": {
+                                                    "x-swagger-router-controller": "middleware-name1",
+                                                    "operationId": "service",
+                                                    "tags": ["User"],
+                                                    "description": "",
+                                                    "parameters": [
+                                                          {
+                                                            "name": "authorization",
+                                                            "in": "header",
+                                                            "description": "authorization is required",
+                                                            "required": true,
+                                                            "type": "string",
+                                                            "value":""
+                                                          },
+                                                          {
+                                                            "name": "bookingId",
+                                                            "in": "query",
+                                                            "description": "bookingId is required",
+                                                            "required": true,
+                                                            "type": "string",
+                                                            "value":""
+                                                          }
+                                                    ],
+                                                    "responses": {}
+                                                  }
+                                                },
+                                            "/versionCheck":{
+                                                "post": {
+                                                    "x-swagger-router-controller": "middleware-name1",
+                                                    "operationId": "service",
+                                                    "tags": ["User"],
+                                                    "description": "",
+                                                    "parameters": [
+                                                            {
+                                                            "name": "authorization",
+                                                            "in": "header",
+                                                            "description": "authorization is required",
+                                                            "required": true,
+                                                            "type": "string",
+                                                            "value":""
+                                                            },
+                                                            {
+                                                            "name": "version",
+                                                            "in": "formData",
+                                                            "description": "version is required",
+                                                            "required": true,
+                                                            "type": "string",
+                                                            "value":""
+                                                            },
+                                                            {
+                                                            "name": "app_type",
+                                                            "in": "formData",
+                                                            "description": "app_type should be USER/DRIVER",
+                                                            "required": true,
+                                                            "type": "string",
+                                                            "value":""
+                                                            },  {
+                                                            "name": "platform",
+                                                            "in": "formData",
+                                                            "description": "platform should be IOS/ANDROID",
+                                                            "required": true,
+                                                            "type": "string",
+                                                            "value":""
+                                                            }
+                                                    ],
+                                                    "responses": {}
+                                                    }
+                                                }
+                                                  
+                                           
+                                    
+    }
+}
+
+
+

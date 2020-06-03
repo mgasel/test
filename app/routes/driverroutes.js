@@ -1,0 +1,40 @@
+module.exports=function(app){
+    var driver=require('../controllers/driverControllers');
+    app.get('/verifyEmailDriverPage',driver.verifyEmailDriverPage);
+    app.post('/VerifyDriverEmailAddress',driver.VerifyDriverEmailAddress);
+    app.post('/loginDriver',driver.loginDriver);
+    app.get('/renderResetDriver',driver.renderResetDriver);
+    app.post('/resetPassword',driver.resetPassword);
+    app.post('/updateDriverProfile',driver.updateDriverProfile);
+    app.post('/changeDriverPassword',driver.changeDriverPassword);
+    app.get('/logoutDriver',driver.logoutDriver);
+    app.get('/makeAvailabilityOnOff',driver.makeAvailabilityOnOff);
+    app.get('/makePickUpOrder',driver.makePickUpOrder);
+    app.get('/makeDeliveredOreder',driver.makeDeliveredOreder);
+    app.post('/raiseAnIssueByDriver',driver.raiseAnIssueByDriver);
+    app.post('/driverScheduledBooking',driver.driverScheduledBooking);
+    app.post('/driverConfirmedBooking',driver.driverConfirmedBooking);
+    app.post('/sendForgotPasswordLinkDriver',driver.sendForgotPasswordLinkDriver);
+    app.get('/renderForgotPageDriver',driver.renderForgotPageDriver);
+    app.post('/updateDriverPasswordFromEmail',driver.updateDriverPasswordFromEmail);
+    app.get('/getAllReviewsByDriver',driver.getAllReviewsByDriver);
+    app.post('/acceptBooking',driver.acceptBooking);
+    app.get('/getNotificationListingByDriver',driver.getNotificationListingByDriver);
+    app.get('/acceptedBookingsListByDriver',driver.acceptedBookingsListByDriver);
+    app.get('/quickReviewWash',driver.quickReviewWash);
+    app.get('/orderDetailsForDriver',driver.orderDetailsForDriver);
+    app.get('/handlecollect',driver.handlecollect);
+    app.post('/collect',driver.collect);
+    app.post('/readytomove',driver.readytomove);
+    app.get('/pickedupfromlaundry',driver.pickedupfromlaundry);
+    app.get('/sendOtpByDriver',driver.sendOtpByDriver)
+    app.get('/verifyOtpByDriver',driver.verifyOtpByDriver)
+    app.get('/resendOtpByDriver',driver.resendOtpByDriver)
+    app.get('/changeDriverPhoneNumber',driver.changeDriverPhoneNumber);
+    app.post('/userNotAvailable',driver.userNotAvailable);
+    app.get('/goingToUser',driver.goingToUser);
+    app.post('/versionCheck',driver.versionCheck);
+    app.post('/changeLanguageDriver',driver.changeLanguageDriver);
+    app.post('/ratingToUser',driver.ratingToUser);
+
+}

@@ -1,0 +1,2768 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "3ndk",
+      "description": "3ndk api documentation for admin",
+      "version": "1.0"
+    },
+
+    
+    "produces": ["application/json"],
+    "host": "35.160.104.147:8006",
+    "basePath": "",
+    "paths": {
+      
+      "/loginAdmin":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "login",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                {
+                    "name": "email",
+                    "in": "formData",
+                    "description": "email is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+               },
+               {
+                    "name": "password",
+                    "in": "formData",
+                    "description": "password is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+               }
+            ],
+            "responses": {}
+          }
+    },
+    
+    "/forgotPassword":{
+      "post": {
+          "x-swagger-router-controller": "middleware-name1",
+          "operationId": "service",
+          "tags": ["Admin"],
+          "description": "",
+          "parameters": [
+               
+                {
+                  "name": "email",
+                  "in": "formData",
+                  "required": true,
+                  "description": "message is required",
+                  "type": "string",
+                  "value":""
+                }                             
+          ],
+          "responses": {}
+        }
+      },
+    
+
+
+      "/resetPassword":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [{
+              "name": "passwordResetToken",
+              "in": "formData",
+              "description": "passwordResetToken is required",
+              "required": true,
+              "type": "string",
+              "value":""
+         }, {
+          "name": "newPassword",
+          "in": "formData",
+          "description": "newPassword is required",
+          "required": true,
+          "type": "string",
+          "value":""
+     }],
+            "responses": {}
+          }
+        },
+        
+
+      "/sendEmailToAllUser":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "message",
+                    "in": "formData",
+                    "required": true,
+                    "description": "message is required",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "subject",
+                    "in": "formData",
+                    "required": true,
+                    "description": "subject is required",
+                    "type": "string",
+                    "value":""
+                  }                                    
+            ],
+            "responses": {}
+          }
+        },
+
+      "/listOfAllDriverEarnings":{
+        "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "description": "authorization is required",
+                  "required": true,
+                  "type": "string",
+                  "value":""
+                }                           
+            ],
+            "responses": {}
+          }
+        },
+
+
+        "/yearlyRevenueData":{
+          "get": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "service",
+              "tags": ["Admin"],
+              "description": "",
+              "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  }                           
+              ],
+              "responses": {}
+            }
+          },
+
+
+          
+
+      "/serviceItemListingToAdmin":{
+        "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "description": "authorization is required",
+                  "required": true,
+                  "type": "string",
+                  "value":""
+                },
+                {
+                  "name": "serviceId",
+                  "in": "query",
+                  "required": true,
+                  "description": "serviceId is required",
+                  "type": "string",
+                  "value":""
+                },
+                {
+                  "name": "status",
+                  "in": "query",
+                  "description": "status to filter result(DELETED or ACTIVE)",
+                  "type": "string",
+                  "value":""
+                }                                        
+            ],
+            "responses": {}
+          }
+        },
+
+
+
+
+        
+
+
+        "/editOrDeletePromoCode":{
+          "get": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "service",
+              "tags": ["Admin"],
+              "description": "",
+              "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "promoCodeId",
+                    "in": "formData",
+                    "required": true,
+                    "description": "promoCodeId is required",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "status",
+                    "in": "formData",
+                    "required": true,
+                    "description": "status to filter result(DELETED or EDIT)",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "startDate",
+                    "in": "formData",
+                    "description": "startDate to edit",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "promoCode",
+                    "in": "formData",
+                    "description": "promoCode to edit",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "expiryDate",
+                    "in": "formData",
+                    "description": "expiryDate to edit)",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "discount",
+                    "in": "formData",
+                    "description": "discount to edit)",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "message",
+                    "in": "formData",
+                    "description": "message to edit)",
+                    "type": "string",
+                    "value":""
+                  }                                                          
+              ],
+              "responses": {}
+            }
+          },
+  
+
+
+       "/totalEarningAccordingToDriver":{
+        "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "description": "authorization is required",
+                  "required": true,
+                  "type": "string",
+                  "value":""
+                },
+                {
+                  "name": "driverId",
+                  "in": "query",
+                  "required": true,
+                  "description": "driverId is required",
+                  "type": "string",
+                  "value":""
+                }                                  
+            ],
+            "responses": {}
+          }
+        },
+      
+      "/totalEarningAccordingToLaundry":{
+        "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "description": "authorization is required",
+                  "required": true,
+                  "type": "string",
+                  "value":""
+                },
+                {
+                  "name": "laundryId",
+                  "in": "query",
+                  "required": true,
+                  "description": "laundryId is required",
+                  "type": "string",
+                  "value":""
+                }                                  
+            ],
+            "responses": {}
+          }
+        },
+
+      "/sendPushNotificationToAllUser":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "description": "authorization is required",
+                  "required": true,
+                  "type": "string",
+                  "value":""
+                },
+                {
+                  "name": "message",
+                  "in": "formData",
+                  "required": true,
+                  "description": "message is required",
+                  "type": "string",
+                  "value":""
+                }                                  
+            ],
+            "responses": {}
+          }
+        },
+
+
+
+        
+
+
+
+
+    "/findPaymentPaidByCustomer":{
+      "post": {
+          "x-swagger-router-controller": "middleware-name1",
+          "operationId": "service",
+          "tags": ["Admin"],
+          "description": "",
+          "parameters": [
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "description": "authorization is required",
+                  "required": true,
+                  "type": "string",
+                  "value":""
+                },
+                {
+                  "name": "userId",
+                  "in": "formData",
+                  "required": true,
+                  "description": "userId id is required",
+                  "type": "string",
+                  "value":""
+                }                              
+          ],
+          "responses": {}
+        }
+      },
+
+
+      "/raisedIssueListing":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "userType",
+                    "in": "formData",
+                    "description": "userType is [ DRIVER, USER ]}",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "fromDate",
+                    "in": "formData",
+                    "description": "fromDate to filter",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "toDate",
+                    "in": "formData",
+                    "description": "toDate to filter",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "page",
+                    "in": "formData",
+                    "description": "page for pagination",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "perPage",
+                    "in": "formData",
+                    "description": "perPage for pagination",
+                    "type": "string",
+                    "value":""
+                  }             
+
+            ],
+            "responses": {}
+          }
+        },
+
+
+
+    "/viewDriverOrderHistory":{
+      "post": {
+          "x-swagger-router-controller": "middleware-name1",
+          "operationId": "service",
+          "tags": ["Admin"],
+          "description": "",
+          "parameters": [
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "description": "authorization is required",
+                  "required": true,
+                  "type": "string",
+                  "value":""
+                },
+                {
+                  "name": "driverId",
+                  "in": "formData",
+                  "description": "driver id is required",
+                  "type": "string",
+                  "value":""
+                },
+            {
+              "name": "userId",
+              "in": "formData",
+              "description": "user id is required",
+              "type": "string",
+              "value":""
+            }
+          ],
+          "responses": {}
+        }
+      },
+    
+
+
+    "/getUserListing":{
+      "post": {
+          "x-swagger-router-controller": "middleware-name1",
+          "operationId": "service",
+          "tags": ["Admin"],
+          "description": "",
+          "parameters": [
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "description": "authorization is required",
+                  "required": true,
+                  "type": "string",
+                  "value":""
+                },
+                {
+                  "name": "page",
+                  "in": "formData",
+                  "description": "page is required(current page number for pagination)",
+                  "required": true,
+                  "type": "string",
+                  "value":""
+                },
+                {
+                  "name": "perPage",
+                  "in": "formData",
+                  "description": "perPage is required(how many entries you need on page)",
+                  "required": true,
+                  "type": "string",
+                  "value":""
+                }, 
+                {
+                  "name": "fromDate",
+                  "in": "formData",
+                  "description": "fromDate is to filter",
+                  "type": "string",
+                  "value":""
+                },
+                {
+                  "name": "toDate",
+                  "in": "formData",
+                  "description": "toDate is to filter",
+                  "type": "string",
+                  "value":""
+                } ,
+                {
+                  "name": "status",
+                  "in": "formData",
+                  "description": "status is to filter(BLOCKED,UNBLOCKED if status will empty than all will listed)",
+                  "type": "string",
+                  "value":""
+                } ,
+                {
+                  "name": "serachField",
+                  "in": "formData",
+                  "description": "serachField is to serching user by user name",
+                  "type": "string",
+                  "value":""
+                }                              
+          ],
+          "responses": {}
+        }
+      },
+      
+
+      
+
+
+
+      "/assignSlotToDriver":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "bookingId",
+                    "in": "formData",
+                    "description": "bookingId is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "driverId",
+                    "in": "formData",
+                    "description": "driverId is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "slotTime",
+                    "in": "formData",
+                    "description": "slotTime is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  }
+            ],
+            "responses": {}
+          }
+        },
+
+      
+      "/createServiceItems":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "serviceId",
+                    "in": "formData",
+                    "description": "serviceId is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "itemName",
+                    "in": "formData",
+                    "description": "itemName is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "itemNameAr",
+                    "in": "formData",
+                    "description": "itemNameAr is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "itemPicOriginal",
+                    "in": "formData",
+                    "description": "itemPicOriginal is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "itemPicThumbnail",
+                    "in": "formData",
+                    "description": "itemPicThumbnail is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "amountPerItem",
+                    "in": "formData",
+                    "description": "amountPerItem is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  }
+            ],
+            "responses": {}
+          }
+        },
+
+      "/editOrDeleteLaundry":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "status",
+                    "in": "formData",
+                    "description": "status should either DELETE or EDIT",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "laundryId",
+                    "in": "formData",
+                    "description": "laundryId is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "laundryName",
+                    "in": "formData",
+                    "description": "laundryName name to edit",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "laundryLat",
+                    "in": "formData",
+                    "description": "laundryLat name to edit",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "laundryLong",
+                    "in": "formData",
+                    "description": "laundryLong name to edit",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "serviceId",
+                    "in": "formData",
+                    "description": "serviceId name to edit",
+                    "type": "string",
+                    "value":""
+                  },
+                  
+                  {
+                    "name": "laundryAddress",
+                    "in": "formData",
+                    "description": "laundryAddress name to edit",
+                    "type": "string",
+                    "value":""
+                  }
+            ],
+            "responses": {}
+          }
+        },
+        
+
+
+        "/editOrDeleteServiceItems":{
+          "post": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "service",
+              "tags": ["Admin"],
+              "description": "",
+              "parameters": [
+                    {
+                      "name": "authorization",
+                      "in": "header",
+                      "description": "authorization is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "serviceItemId",
+                      "in": "formData",
+                      "description": "serviceItemId is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "status",
+                      "in": "formData",
+                      "description": "status is required(EDIT or DELETE)",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "serviceId",
+                      "in": "formData",
+                      "description": "serviceId is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+
+                    {
+                      "name": "itemName",
+                      "in": "formData",
+                      "description": "itemName is required",
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "itemPicOriginal",
+                      "in": "formData",
+                      "description": "itemPicOriginal is required",
+                      "type": "string",
+                      "value":""
+                    },
+
+
+                    {
+                      "name": "itemPicThumbnail",
+                      "in": "formData",
+                      "description": "itemPicThumbnail is required",
+                      "type": "string",
+                      "value":""
+                    },
+
+                    {
+                      "name": "amountPerItem",
+                      "in": "formData",
+                      "description": "amountPerItem is required",
+                      "type": "string",
+                      "value":""
+                    }
+              ],
+              "responses": {}
+            }
+          },
+  
+
+
+
+
+      "/editOrDeleteService":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "serviceName",
+                    "in": "formData",
+                    "description": "serviceName is required",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "servicePicOriginal",
+                    "in": "formData",
+                    "description": "servicePicOriginal is required",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "hexString",
+                    "in": "formData",
+                    "description": "hexString is required",
+                    "type": "string",
+                    "value":""
+                  },
+                  
+                  {
+                    "name": "servicePicThumbnail",
+                    "in": "formData",
+                    "description": "servicePicThumbnail is required",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "status",
+                    "in": "formData",
+                    "description": "status should either DELETE or EDIT",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "serviceId",
+                    "in": "formData",
+                    "description": "serviceId is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  }
+            ],
+            "responses": {}
+          }
+        },
+
+
+
+        "/imageUploader":{
+          "post": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "service",
+              "tags": ["Admin"],
+              "description": "",
+              "parameters": [
+                    {
+                      "name": "authorization",
+                      "in": "header",
+                      "description": "authorization is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "file",
+                      "in": "formData",
+                      "description": "file is required",
+                      "required": true,
+                      "type": "file",
+                      "value":""
+                    }
+              ],
+              "responses": {}
+            }
+          },
+
+
+
+
+      "/getDriverListing":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "driverId",
+                    "description": "driverId",
+                    "type": "string",
+                    "value":"",
+                    "in":"formData"
+                  },
+                  {
+                    "name": "page",
+                    "description": "page is required(current page number for pagination)",
+                    "type": "string",
+                    "value":"",
+                    "in":"formData"
+
+                  },
+                  {
+                    "name": "perPage",
+                    "in": "formData",
+                    "description": "perPage is required(how many entries you need on page)",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "fromDate",
+                    "in": "formData",
+                    "description": "fromDate is to filter",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "toDate",
+                    "in": "formData",
+                    "description": "toDate is to filter",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "serachField",
+                    "in": "formData",
+                    "description": "serachField is to serching user by user name",
+                    "type": "string",
+                    "value":""
+                  }                                
+            ],
+            "responses": {}
+          }
+        },
+
+        
+
+
+
+        "/getAllLaundryList":{
+          "post": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "service",
+              "tags": ["Admin"],
+              "description": "",
+              "parameters": [
+                    {
+                      "name": "authorization",
+                      "in": "header",
+                      "description": "authorization is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "page",
+                      "in": "formData",
+                      "description": "page is required(current page number for pagination)",
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "perPage",
+                      "in": "formData",
+                      "description": "perPage is required(how many entries you need on page)",
+                      "type": "string",
+                      "value":""
+                    }, 
+                    {
+                      "name": "fromDate",
+                      "in": "formData",
+                      "description": "fromDate is to filter",
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "toDate",
+                      "in": "formData",
+                      "description": "toDate is to filter",
+                      "type": "string",
+                      "value":""
+                    } ,
+                    {
+                      "name": "serachField",
+                      "in": "formData",
+                      "description": "serachField is to serching user by user name",
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "status",
+                      "in": "formData",
+                      "description": "status is to serching {it shuld BLOCKED or ACTIVE}",
+                      "type": "string",
+                      "value":""
+                    }                                
+              ],
+              "responses": {}
+            }
+      },
+
+        "/getServiceListing":{
+          "post": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "service",
+              "tags": ["Admin"],
+              "description": "",
+              "parameters": [
+                    {
+                      "name": "authorization",
+                      "in": "header",
+                      "description": "authorization is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "fromDate",
+                      "in": "formData",
+                      "description": "fromDate is to filter",
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "toDate",
+                      "in": "formData",
+                      "description": "toDate is to filter",
+                      "type": "string",
+                      "value":""
+                    } ,
+                    {
+                      "name": "serachField",
+                      "in": "formData",
+                      "description": "serachField is to serching user by user name",
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "status",
+                      "in": "formData",
+                      "description": "status(it should ACTIVE or BLOCKED)",
+                      "type": "string",
+                      "value":""
+                    }                              
+              ],
+              "responses": {}
+            }
+      },
+      
+
+      
+
+      "/promocodeListingToAdmin":{
+        "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+
+                  {
+                    "name": "status",
+                    "in": "query",
+                    "description": "status should be (ACTIVE,BLOCKED)",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  }
+                  
+                  
+            ],
+            "responses": {}
+          }
+        },
+
+      "/getVehicleListing":{
+        "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "searchText",
+                    "in": "query",
+                    "description": "searchText is to search",
+                    "type": "string",
+                    "value":""
+                  }
+                  
+            ],
+            "responses": {}
+          }
+        },
+
+        
+
+
+        "/addSubscriptionPlanAndPlanItem":{
+          "post": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "service",
+              "tags": ["Admin"],
+              "description": "",
+              "parameters": [
+                    {
+                      "name": "authorization",
+                      "in": "header",
+                      "description": "authorization is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "planName",
+                      "in": "formData",
+                      "description": "planName is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "planAmount",
+                      "in": "formData",
+                      "description": "planAmount is required",
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "perPeriod",
+                      "in": "formData",
+                      "description": "perPeriod is required",
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "planItem",
+                      "in": "formData",
+                      "description": "planItem is required(json array as   [{itemQwery:val,itemStatus:val}] )",
+                      "required": true,
+                      "type": "array",
+                      "value":""
+                    }
+                    
+              ],
+              "responses": {}
+            }
+          },
+
+
+
+
+
+        "/updateSubscriptionPlanAndPlanItem":{
+          "post": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "service",
+              "tags": ["Admin"],
+              "description": "",
+              "parameters": [
+                    {
+                      "name": "authorization",
+                      "in": "header",
+                      "description": "authorization is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "planId",
+                      "in": "formData",
+                      "description": "planId is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "planName",
+                      "in": "formData",
+                      "description": "planName is required",
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "planAmount",
+                      "in": "formData",
+                      "description": "planAmount is required",
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "perPeriod",
+                      "in": "formData",
+                      "description": "perPeriod is required",
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "planItem",
+                      "in": "formData",
+                      "description": "planItem is required(json array as   [{planItemId:val,itemQwery:val,itemStatus:val}] )",
+                      "required": true,
+                      "type": "array",
+                      "value":""
+                    }
+                    
+              ],
+              "responses": {}
+            }
+          },
+
+        "/createCharge":{
+          "post": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "service",
+              "tags": ["Admin"],
+              "description": "",
+              "parameters": [
+                    {
+                      "name": "authorization",
+                      "in": "header",
+                      "description": "authorization is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "quickCharge",
+                      "in": "formData",
+                      "description": "quickCharge is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "deliveryCharge",
+                      "in": "formData",
+                      "description": "deliveryCharge is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    }
+                    
+              ],
+              "responses": {}
+            }
+          },
+  
+
+    "/blockUnblockUser":{
+      "post": {
+          "x-swagger-router-controller": "middleware-name1",
+          "operationId": "service",
+          "tags": ["Admin"],
+          "description": "",
+          "parameters": [
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "description": "authorization is required",
+                  "required": true,
+                  "type": "string",
+                  "value":""
+                },
+                {
+                  "name": "userId",
+                  "in": "formData",
+                  "description": "serviceName is required",
+                  "required": true,
+                  "type": "string",
+                  "value":""
+                },
+                {
+                  "name": "isBlocked",
+                  "in": "formData",
+                  "description": "isBlocked is required",
+                  "required": true,
+                  "type": "boolean",
+                  "value":""
+                }
+                
+          ],
+          "responses": {}
+        }
+      },
+
+      
+
+      "/addVehicle":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "VehicleName",
+                    "in": "formData",
+                    "description": "VehicleName is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "VehicleNumber",
+                    "in": "formData",
+                    "description": "VehicleNumber is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  }        
+            ],
+            "responses": {}
+          }
+        },
+      
+
+      "/giveIncentivesToDriver":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "driverId",
+                    "in": "body",
+                    "description": "driverId is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "incentive",
+                    "in": "body",
+                    "description": "incentive is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  }        
+            ],
+            "responses": {}
+          }
+        },
+
+      "/getPerticularUserData":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "userId",
+                    "in": "query",
+                    "description": "userId is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  }    
+            ],
+            "responses": {}
+          }
+        },
+
+      "/editOrDeleteVehicle":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "status",
+                    "in": "formData",
+                    "description": "status is required(Status should be EDIT  || DELETE)",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "vehicleId",
+                    "in": "formData",
+                    "description": "vehicleId is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "VehicleName",
+                    "in": "formData",
+                    "description": "VehicleName is required",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "VehicleNumber",
+                    "in": "formData",
+                    "description": "VehicleNumber is required",
+                    "type": "string",
+                    "value":""
+                  }   
+            ],
+            "responses": {}
+          }
+        },
+  
+
+
+      "/blockUnblockDriver":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "driverId",
+                    "in": "formData",
+                    "description": "driverId is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "isBlocked",
+                    "in": "formData",
+                    "description": "isBlocked is required",
+                    "type": "boolean",
+                    "value":""
+                  },
+              {
+                "name": "isDeleted",
+                "in": "formData",
+                "description": "isDeleted is required",
+                "type": "boolean",
+                "value":""
+              }
+                  
+            ],
+            "responses": {}
+          }
+        },
+        
+
+
+        "/planItemDataListing":{
+          "get": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "service",
+              "tags": ["Admin"],
+              "description": "",
+              "parameters": [
+                    {
+                      "name": "authorization",
+                      "in": "header",
+                      "description": "authorization is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "planId",
+                      "in": "query",
+                      "description": "planId is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    }
+              ],
+              "responses": {}
+            }
+          },
+        
+    "/createService":{
+      "post": {
+          "x-swagger-router-controller": "middleware-name1",
+          "operationId": "service",
+          "tags": ["Admin"],
+          "description": "",
+          "parameters": [
+                {
+                  "name": "authorization",
+                  "in": "header",
+                  "description": "authorization is required",
+                  "required": true,
+                  "type": "string",
+                  "value":""
+                },
+                {
+                  "name": "serviceName",
+                  "in": "formData",
+                  "description": "serviceName is required",
+                  "required": true,
+                  "type": "string",
+                  "value":""
+                },
+                {
+                  "name": "serviceNameAr",
+                  "in": "formData",
+                  "description": "serviceNameAr is required",
+                  "required": true,
+                  "type": "string",
+                  "value":""
+                },
+
+                {
+                  "name": "hexString",
+                  "in": "formData",
+                  "description": "hexString is required for shadow (show invision screen)",
+                  "required": true,
+                  "type": "string",
+                  "value":""
+                },
+
+                {
+                  "name": "servicePicOriginal",
+                  "in": "formData",
+                  "description": "servicePicOriginal is required",
+                  "required": true,
+                  "type": "string",
+                  "value":""
+                },
+                {
+                  "name": "servicePicThumbnail",
+                  "in": "formData",
+                  "description": "servicePicThumbnail is required",
+                  "required": true,
+                  "type": "string",
+                  "value":""
+                }
+          ],
+          "responses": {}
+        }
+      },
+      
+      
+
+      "/createCoupon":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "couponCode",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+
+                  {
+                    "name": "couponCode",
+                    "in": "formData",
+                    "description": "couponCode is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "expiryDate",
+                    "in": "formData",
+                    "description": "expiryDate is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "startDate",
+                    "in": "formData",
+                    "description": "startDate is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  }
+                  
+                  
+            ],
+            "responses": {}
+          }
+      },
+
+
+      "/createPrmoCode":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "promocode",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+
+                  {
+                    "name": "promoCode",
+                    "in": "formData",
+                    "description": "promoCode is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "expiryDate",
+                    "in": "formData",
+                    "description": "expiryDate is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "discount",
+                    "in": "formData",
+                    "description": "discount is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  
+                  {
+                    "name": "message",
+                    "in": "formData",
+                    "description": "message is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "startDate",
+                    "in": "formData",
+                    "description": "startDate is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  }
+                  
+            ],
+            "responses": {}
+          }
+      },
+
+      
+      "/createSubscriptionPlaneItem":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+
+                  {
+                    "name": "planId",
+                    "in": "formData",
+                    "description": "planId is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "itemQwery",
+                    "in": "formData",
+                    "description": "itemQwery is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "itemStatus",
+                    "in": "formData",
+                    "description": "itemStatus is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  }
+            ],
+            "responses": {}
+          }
+      },
+
+
+      "/subscriptionPlanListing":{
+        "get": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  }
+            ],
+            "responses": {}
+          }
+        },
+        
+        
+
+
+
+        "/getAllbookingList":{
+          "post": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "service",
+              "tags": ["Admin"],
+              "description": "",
+              "parameters": [
+                    {
+                      "name": "authorization",
+                      "in": "header",
+                      "description": "authorization is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "perPage",
+                      "in": "formData",
+                      "description": "perPage is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "page",
+                      "in": "formData",
+                      "description": "page is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "status",
+                      "in": "formData",
+                      "description": "status is required('PENDING','COMPLETED','REJECTED','CANCELLED')",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    }
+              ],
+              "responses": {}
+            }
+        },
+        
+
+
+
+      "/getListOfReviews":{
+          "get": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "service",
+              "tags": ["Admin"],
+              "description": "",
+              "parameters": [
+                    {
+                      "name": "authorization",
+                      "in": "header",
+                      "description": "authorization is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "searchText",
+                      "in": "query",
+                      "description": "searchText to search revies",
+                      "type": "string",
+                      "value":""
+                    }
+              ],
+              "responses": {}
+            }
+      },
+
+
+      
+
+
+
+
+
+      "/assignBookingToDriver":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "driverId",
+                    "in": "formData",
+                    "description": "driverId is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "bookingId",
+                    "in": "formData",
+                    "description": "bookingId is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  }
+            ],
+            "responses": {}
+          }
+        },
+        
+        "/reAssignedOrder":{
+          "post": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "service",
+              "tags": ["Admin"],
+              "description": "",
+              "parameters": [
+                    {
+                      "name": "authorization",
+                      "in": "header",
+                      "description": "authorization is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "bookingId",
+                      "in": "formData",
+                      "description": "bookingId is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    }
+              ],
+              "responses": {}
+            }
+          },
+
+
+
+
+      "/createSubscriptionPlan":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "planName",
+                    "in": "formData",
+                    "description": "planName is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "planAmount",
+                    "in": "formData",
+                    "description": "planAmount in number ",
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "perPeriod",
+                    "in": "formData",
+                    "description": "perPeriod is yearly or monthly etc",
+                    "type": "string",
+                    "value":""
+                  }
+            ],
+            "responses": {}
+          }
+        },
+        
+
+
+        "/editOrDeleteSubscriptionPlane":{
+          "post": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "service",
+              "tags": ["Admin"],
+              "description": "",
+              "parameters": [
+                    {
+                      "name": "authorization",
+                      "in": "header",
+                      "description": "authorization is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "planId",
+                      "in": "formData",
+                      "description": "planId is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "status",
+                      "in": "formData",
+                      "description": "status should either DELETE or EDIT ",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "planName",
+                      "in": "formData",
+                      "description": "planName to edit",
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "planAmount",
+                      "in": "formData",
+                      "description": "planAmount to edit",
+                      "type": "string",
+                      "value":""
+                    },
+
+                    {
+                      "name": "perPeriod",
+                      "in": "formData",
+                      "description": "perPeriod to edit",
+                      "type": "string",
+                      "value":""
+                    }
+              ],
+              "responses": {}
+            }
+          },
+
+
+
+
+          
+
+
+        "/editOrDeleteSubscriptionPlaneItem":{
+          "post": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "service",
+              "tags": ["Admin"],
+              "description": "",
+              "parameters": [
+                    {
+                      "name": "authorization",
+                      "in": "header",
+                      "description": "authorization is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "planItemId",
+                      "in": "formData",
+                      "description": "planItemId is required ",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "status",
+                      "in": "formData",
+                      "description": "status should either DELETE or EDIT ",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+
+                    {
+                      "name": "itemQwery",
+                      "in": "formData",
+                      "description": "itemQwery is required",
+                      "type": "string",
+                      "value":""
+                    },
+
+                    {
+                      "name": "itemStatus",
+                      "in": "formData",
+                      "description": "itemStatus to edit",
+                      "type": "string",
+                      "value":""
+                    }
+                    
+              ],
+              "responses": {}
+            }
+          },
+
+      "/createDriver":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "districtId",
+                    "in": "formData",
+                    "description": "districtId is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "name",
+                    "in": "formData",
+                    "description": "name is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "phoneNumber",
+                    "in": "formData",
+                    "description": "phoneNumber is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "callingCode",
+                    "in": "formData",
+                    "description": "callingCode is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "email",
+                    "in": "formData",
+                    "description": "email is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "cityName",
+                    "in": "formData",
+                    "description": "cityName is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "licencePicOriginal",
+                    "in": "formData",
+                    "description": "licencePicOriginal is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "licencePicThumbnail",
+                    "in": "formData",
+                    "description": "licencePicThumbnail is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  }
+            ],
+            "responses": {}
+          }
+        },
+
+
+
+        
+        "/createLaundry":{
+          "post": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "service",
+              "tags": ["Admin"],
+              "description": "",
+              "parameters": [
+                    {
+                      "name": "authorization",
+                      "in": "header",
+                      "description": "authorization is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "laundryName",
+                      "in": "formData",
+                      "description": "laundryName is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "laundryAddress",
+                      "in": "formData",
+                      "description": "laundryAddress is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "laundryLat",
+                      "in": "formData",
+                      "description": "laundryLat is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "serviceId",
+                      "in": "formData",
+                      "description": "serviceId name to edit",
+                      "type": "string",
+                      "required": true,
+                      "value":""
+                    },
+                    {
+                      "name": "laundryLong",
+                      "in": "formData",
+                      "description": "laundryLong is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "districtId",
+                      "in": "formData",
+                      "description": "districtId is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    }
+              ],
+              "responses": {}
+            }
+          },
+          "/createSlots":{
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "service",
+                "tags": ["Admin"],
+                "description": "",
+                "parameters": [
+                      {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value":""
+                      },
+                      {
+                        "name": "slotTime",
+                        "in": "formData",
+                        "description": "slotTime is required",
+                        "required": true,
+                        "type": "string",
+                        "value":""
+                      },
+                      {
+                        "name": "timing",
+                        "in": "formData",
+                        "description": "timing is required",
+                        "required": true,
+                        "type": "string",
+                        "value":""
+                      }
+                ],
+                "responses": {}
+              }
+            },
+            "/versionUpdate":{
+              "post": {
+                  "x-swagger-router-controller": "middleware-name1",
+                  "operationId": "service",
+                  "tags": ["Admin"],
+                  "description": "",
+                  "parameters": [
+                        {
+                          "name": "authorization",
+                          "in": "header",
+                          "description": "authorization is required",
+                          "required": true,
+                          "type": "string",
+                          "value":""
+                        },
+                        {
+                          "name": "version",
+                          "in": "formData",
+                          "description": "version is required",
+                          "required": true,
+                          "type": "string",
+                          "value":""
+                        },
+                        {
+                          "name": "app_type",
+                          "in": "formData",
+                          "description": "app_type should be USER/DRIVER",
+                          "required": true,
+                          "type": "string",
+                          "value":""
+                        },  {
+                          "name": "platform",
+                          "in": "formData",
+                          "description": "platform should be IOS/ANDROID",
+                          "required": true,
+                          "type": "string",
+                          "value":""
+                        }
+                  ],
+                  "responses": {}
+                }
+              },
+              "/addDistrict":{
+                "post": {
+                    "x-swagger-router-controller": "middleware-name1",
+                    "operationId": "service",
+                    "tags": ["Admin"],
+                    "description": "",
+                    "parameters": [
+                          {
+                            "name": "authorization",
+                            "in": "header",
+                            "description": "authorization is required",
+                            "required": true,
+                            "type": "string",
+                            "value":""
+                          },
+                          {
+                            "name": "districtName",
+                            "in": "formData",
+                            "description": "districtName is required",
+                            "required": true,
+                            "type": "string",
+                            "value":""
+                          },
+                          {
+                            "name": "districtLat",
+                            "in": "formData",
+                            "description": "districtLat is required",
+                            "required": true,
+                            "type": "string",
+                            "value":""
+                          },  {
+                            "name": "districtLong",
+                            "in": "formData",
+                            "description": "districtlong is required",
+                            "required": true,
+                            "type": "string",
+                            "value":""
+                          } , {
+                            "name": "Address",
+                            "in": "formData",
+                            "description": "Address is required",
+                            "required": true,
+                            "type": "string",
+                            "value":""
+                          }
+                    ],
+                    "responses": {}
+                  }
+                },
+                "/getDistrictListing":{
+                  "get": {
+                      "x-swagger-router-controller": "middleware-name1",
+                      "operationId": "registerUser",
+                      "tags": ["Admin"],
+                      "description": "",
+                      "parameters": [
+                          {
+                              "name": "authorization",
+                              "in": "header",
+                              "description": "authorization is required",
+                              "required": true,
+                              "type": "string",
+                              "value":""
+                          },
+                          {
+                            "name": "status",
+                            "in": "query",
+                            "description": "ACTIVE/BLOCKED",
+                            "type": "string",
+                            "value":""
+                        },
+                          {
+                              "name": "page",
+                              "in": "query",
+                              "description": "page",
+                              "type": "string",
+                              "value":""
+                          },
+                          {
+                              "name": "perPage",
+                              "in": "query",
+                              "description": "perPage ",
+                              "type": "string",
+                              "value":""
+                          }
+                      ],
+                      "responses": {}
+                    }
+              },
+              "/editOrDeleteDistrict":{
+                "post": {
+                    "x-swagger-router-controller": "middleware-name1",
+                    "operationId": "service",
+                    "tags": ["Admin"],
+                    "description": "",
+                    "parameters": [
+                          {
+                            "name": "authorization",
+                            "in": "header",
+                            "description": "authorization is required",
+                            "required": true,
+                            "type": "string",
+                            "value":""
+                          },
+                          {
+                            "name": "status",
+                            "in": "formData",
+                            "description": "status should either DELETE or EDIT",
+                            "required": true,
+                            "type": "string",
+                            "value":""
+                          },
+                          {
+                            "name": "districtId",
+                            "in": "formData",
+                            "description": "districtId is required",
+                            "required": true,
+                            "type": "string",
+                            "value":""
+                          },
+                          {
+                            "name": "districtName",
+                            "in": "formData",
+                            "description": "district name to edit",
+                            "type": "string",
+                            "value":""
+                          },
+                          {
+                            "name": "districtLat",
+                            "in": "formData",
+                            "description": "districtLat name to edit",
+                            "type": "string",
+                            "value":""
+                          },
+                          {
+                            "name": "districtLong",
+                            "in": "formData",
+                            "description": "districtLong name to edit",
+                            "type": "string",
+                            "value":""
+                          },
+                  
+                          
+                          {
+                            "name": "Address",
+                            "in": "formData",
+                            "description": "Address name to edit",
+                            "type": "string",
+                            "value":""
+                          }
+                    ],
+                    "responses": {}
+                  }
+                },
+                
+                "/getLaundryServices":{
+                  "post": {
+                      "x-swagger-router-controller": "middleware-name1",
+                      "operationId": "service",
+                      "tags": ["Admin"],
+                      "description": "",
+                      "parameters": [
+                            {
+                              "name": "authorization",
+                              "in": "header",
+                              "description": "authorization is required",
+                              "required": true,
+                              "type": "string",
+                              "value":""
+                            },
+                            {
+                              "name": "laundryId",
+                              "in": "formData",
+                              "required": true,
+                              "description": "laundryId is required",
+                              "type": "string",
+                              "value":""
+                            }
+                      
+                      ],
+                      "responses": {}
+                    }
+                  },
+                  "/getLaundrySerivceItems":{
+                    "post": {
+                        "x-swagger-router-controller": "middleware-name1",
+                        "operationId": "service",
+                        "tags": ["Admin"],
+                        "description": "",
+                        "parameters": [
+                              {
+                                "name": "authorization",
+                                "in": "header",
+                                "description": "authorization is required",
+                                "required": true,
+                                "type": "string",
+                                "value":""
+                              },
+                              {
+                                "name": "laundryId",
+                                "in": "formData",
+                                "required": true,
+                                "description": "laundryId is required",
+                                "type": "string",
+                                "value":""
+                              },
+                              {
+                                "name": "serviceId",
+                                "in": "formData",
+                                "required": true,
+                                "description": "serviceId is required",
+                                "type": "string",
+                                "value":""
+                              }
+                        
+                        ],
+                        "responses": {}
+                      }
+                    },
+
+                    
+
+
+      "/editOrDeleteServiceItem":{
+        "post": {
+            "x-swagger-router-controller": "middleware-name1",
+            "operationId": "service",
+            "tags": ["Admin"],
+            "description": "",
+            "parameters": [
+                  {
+                    "name": "authorization",
+                    "in": "header",
+                    "description": "authorization is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "status",
+                    "in": "formData",
+                    "description": "status should either DELETE or EDIT",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "serviceItemId",
+                    "in": "formData",
+                    "description": "serviceItemId is required",
+                    "required": true,
+                    "type": "string",
+                    "value":""
+                  },
+                  {
+                    "name": "amountPerItem",
+                    "in": "formData",
+                    "description": "amountPerItem to edit",
+                    "type": "string",
+                    "value":""
+                  }
+            ],
+            "responses": {}
+          }
+        },
+        "/activeInActiveItem":{
+          "post": {
+              "x-swagger-router-controller": "middleware-name1",
+              "operationId": "service",
+              "tags": ["Admin"],
+              "description": "",
+              "parameters": [
+                    {
+                      "name": "authorization",
+                      "in": "header",
+                      "description": "authorization is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "serviceItemId",
+                      "in": "formData",
+                      "description": "serviceItemId is required",
+                      "required": true,
+                      "type": "string",
+                      "value":""
+                    },
+                    {
+                      "name": "isActive",
+                      "in": "formData",
+                      "description": "FALSE OR TRUE",
+                      "type": "boolean",
+                      "value":""
+                    }
+              ],
+              "responses": {}
+            }
+          },
+          "/editDriver":{
+            "post": {
+                "x-swagger-router-controller": "middleware-name1",
+                "operationId": "service",
+                "tags": ["Admin"],
+                "description": "",
+                "parameters": [
+                      {
+                        "name": "authorization",
+                        "in": "header",
+                        "description": "authorization is required",
+                        "required": true,
+                        "type": "string",
+                        "value":""
+                      },
+                      {
+                        "name": "driverId",
+                        "in": "formData",
+                        "description": "driverId is required",
+                        "required": true,
+                        "type": "string",
+                        "value":""
+                      },
+                      {
+                        "name": "name",
+                        "in": "formData",
+                        "description": "name",
+                        "type": "string",
+                        "value":""
+                      },
+                      {
+                        "name": "email",
+                        "in": "formData",
+                        "description": "email",
+                        "type": "string",
+                        "value":""
+                      },
+                      {
+                        "name": "phoneNumber",
+                        "in": "formData",
+                        "description": "phoneNumber",
+                        "type": "string",
+                        "value":""
+                      },
+                      {
+                        "name": "licencePicOriginal",
+                        "in": "formData",
+                        "description": "licencePicOriginal",
+                        "type": "string",
+                        "value":""
+                      },
+                      {
+                        "name": "licencePicThumbnail",
+                        "in": "formData",
+                        "description": "licencePicThumbnail",
+                        "type": "string",
+                        "value":""
+                      },
+                      {
+                        "name": "cityName",
+                        "in": "formData",
+                        "description": "cityName",
+                 
+                        "type": "string",
+                        "value":""
+                      },
+                      {
+                        "name": "districtId",
+                        "in": "formData",
+                        "description": "districtId",
+                        "type": "string",
+                        "value":""
+                      }
+                      
+                ],
+                "responses": {}
+              }
+            }
+    
+          
+                                        
+      
+        
+     
+
+
+
+
+
+
+    }
+}
