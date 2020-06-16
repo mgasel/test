@@ -48,7 +48,7 @@ exports.branches= async(request,response)=>{
     request.checkBody('phoneNumber',AppConstraints.PHONE_NUMBER).notEmpty();
     request.checkBody('countryCode',AppConstraints.REQUIRED_COUNTRY).notEmpty();
     request.checkBody('laundryName',AppConstraints.LAUNDRY_NAME).notEmpty();
-    request.checkBody('address',AppConstraints.LAUNDRY_ADDRESS).notEmpty();
+    request.checkBody('laundryAddress',AppConstraints.LAUNDRY_ADDRESS).notEmpty();
     request.checkBody('laundryLat',AppConstraints.LAUNDRY_LAT).notEmpty();
     request.checkBody('laundryLong',AppConstraints.LAUNDRY_LONG).notEmpty();
     // request.checkBody('districtId',AppConstraints.DISTRICT_ID).notEmpty();
@@ -101,6 +101,7 @@ exports.verifyLaundry =async(request,response)=>{
     let verification = await ownwerServices.verifyLaundry(request,response)
     return response.json(verification)
 }
-exports.ownwerServices = async(request,response)=>{
-    let servicesList 
+exports.ownwerServicesList = async(request,response)=>{
+    let servicesList  = await ownwerServices.getList(request,response)
+    response.json(servicesList)
 }

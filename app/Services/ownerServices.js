@@ -10,6 +10,7 @@ const salt = 10
 const authToken = require('../../config/authenticate')
 const otp = require('../models/otp')
 const universal = require('../../app/UnivershalFunctions/Univershalfunctions')
+let ObjectId = require('mongoose').Types.ObjectId
 module.exports = {
     registerOwner: async (request, response) => {
         try {
@@ -222,6 +223,52 @@ module.exports = {
             let serviceItem = await serviceItemModel(request.body).save()
             return serviceItem
 
+        } catch (error) {
+            
+        }
+    },
+    getList : async(request,response)=>{
+        try {
+            // let serviceList = await laundryModel.findOne({_id:request.body.id}).populate({
+            //     path:"services",
+            //     populate:{
+            //         path:'serviceCategory'
+            //     }
+            // })
+            let serviceList = await laundryModel.aggregate([
+                {
+                    $match : {_id :ObjectId(request.body.id) }
+
+                },
+                // {$unwind:"$services"},
+                {
+                    $lookup : {
+                        from:'services',      
+                        localField : "services",
+                        foreignField:"_id",
+                        as : 'services'
+                    }
+                },
+                { $unwind: "$services" },
+                {
+                   $lookup:{
+                    from:'servicecategories',      
+                    localField : "services.serviceCategory",
+                    foreignField:"services._id",
+                    as : 'serviceCategory'
+                   } 
+                },
+
+    //             { $group: {
+    //  _id: "$_id",
+    //  phoneNumber: { "$first": "$phoneNumber" },
+    //  countryCode: { "$first": "$countryCode" },
+    //  ownerId: { "$first": "$ownerId" },
+    //  services: { "$push": "$services" }}}
+            ])
+            console.log('ervii',serviceList);
+            return serviceList
+            
         } catch (error) {
             
         }
