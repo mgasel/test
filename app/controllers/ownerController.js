@@ -1,6 +1,7 @@
 const laundryModel = require('../models/Laundry')
 const AppConstraints = require('../../config/appConstraints')
 const ownwerServices = require('../Services/ownerServices')
+const servicesCategoryModel = require('../models/serviceItemCategory')
 exports.register = async(request,response)=>{
 
     request.checkBody('phoneNumber',AppConstraints.PHONE_NUMBER).notEmpty();
@@ -83,4 +84,9 @@ exports.getList = async(request,response)=>{
     if (errors){ return response.status(400).json({statusCode:400,success:0 , msg: errors[0].msg, error:errors})}
     let branchList = await ownwerServices.getBranchList(request,response)
     return response.json(branchList)
+}
+exports.addCategories = async(request,response)=>{
+    let data = await ownwerServices.addCategory(request,response)
+    return data
+
 }

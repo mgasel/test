@@ -1,5 +1,7 @@
 const laundryModel = require('../models/Laundry')
 // const ownwerModel = require('../models/owner')
+const servicesModel = require('../models/Services') 
+const categoryModel = require('../models/serviceItemCategory')
 const AppConstraints = require('../../config/appConstraints')
 const otpModel = require('../models/otp')
 const bcrypt = require('bcrypt')
@@ -100,7 +102,8 @@ module.exports = {
             if(await laundryModel.findOne({$and:[{phoneNumber:request.body.phoneNumber},{isDeleted:false}]})!=null) return ({ statusCode: 400, success: 0, msg: AppConstraints.NUMBER_ALREADY_EXIST })
             //  if(await laundryModel.findOne({$and:[{$or:[{phoneNumber:request.body.phoneNumber},{isDeleted:false}]},{$or:[{email:request.body.email},{isDeleted:false}]}]})!=null)  return ({ statusCode: 400, success: 0, msg: AppConstraints.NUMBER_ALREADY_EXIST })
           
-             if(await laundryModel.findOne({$and:[{email:request.body.email},{isDeleted:false}]})!=null) return ({ statusCode: 400, success: 0, msg: AppConstraints.NUMBER_ALREADY_EXIST })
+            
+            //  if(await laundryModel.findOne({$and:[{email:request.body.email},{isDeleted:false}]})!=null) return ({ statusCode: 400, success: 0, msg: AppConstraints.NUMBER_ALREADY_EXIST })
             
             let  password = Math.random().toString(36).slice(-8);
             request.body.password = bcrypt.hashSync(password, salt)
@@ -182,6 +185,19 @@ module.exports = {
     getBranchList :async(request,response)=>{
         let list = await laundryModel.findOne({$and:[{ownerId:request.body.id},{isDeleted:false}]})
         return ({ statusCode: 200, success: 1, List:list })
-        
+    },
+    addServices : async(request,response)=>{
+        let Services = await servicesModel(req.body).save()
+        res.json({Services:Services})
+    },
+    addCategory : async(request,response)=>{
+        console.log('ijnnnnn');
+        try {
+            
+        } catch (error) {
+            console.log('eee',error);
+            
+        }
+      
     }
 }

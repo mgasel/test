@@ -17,5 +17,6 @@ module.exports= function(app){
     {name:'Document3',maxCount:3}
 ]),ownerController.update)
     app.post('/owner/branchList',authenticattion.verifyOwnwer,ownerController.getList)
+    app.post('/owner/addCategory',ownerController.addCategories)
 
 }
