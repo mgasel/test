@@ -64,7 +64,7 @@ module.exports = {
         try {
             let otp = Math.floor(1000 + Math.random() * 9000)
 
-            const genrateOtp = await otpModel({ otp: otp, phoneNumber: request.body.phoneNumber }).save()
+            const genrateOtp = await otpModel({ otp: otp, phoneNumber: request.body.phoneNumber,countryCode:request.body.countryCode }).save()
             console.log('dgee',genrateOtp);
             
             let findOtp = await otpModel.findOne({phoneNumber:request.body.phoneNumber})
@@ -187,17 +187,32 @@ module.exports = {
         return ({ statusCode: 200, success: 1, List:list })
     },
     addServices : async(request,response)=>{
-        let Services = await servicesModel(req.body).save()
-        res.json({Services:Services})
+        let Services = await servicesModel(request.body).save()
+        response.json({Services:Services})
     },
     addCategory : async(request,response)=>{
         console.log('ijnnnnn');
         try {
-            
+            let Services = await categoryModel(request.body).save()
+            return Services
         } catch (error) {
             console.log('eee',error);
             
+        } 
+    },
+    verifyLaundry : async(request,response)=>{
+        try {
+            let otp = await otpModel.findOne({$and:[{otp:request.body.otp,phoneNumber:request.body.phoneNumber,countryCode:request.body.countryCode}]})
+            if(otp==null) return ({ statusCode: 400, success: 0, msg: AppConstraints.VALID_OTP })
+            await otpModel.deleteOne({otp:request.body.otp})
+            await otpModel.deleteMany({$and:[{phoneNumber:request.body.phoneNumber,countryCode:request.body.countryCode}]})
+            const find = await laundryModel.findOne({phoneNumber:request.body.phoneNumber})
+            if(find==null)return ({ statusCode: 400, success: 0, msg: AppConstraints.OTP_VERIFIED_SUCCESSFULLY })
+            await laundryModel.update({phoneNumber:request.body.phoneNumber},{isVerified:true})
+            return ({ statusCode: 200, success: 1, msg: AppConstraints.OTP_VERIFIED_SUCCESSFULLY })
+
+        } catch (error) {
+            return ({ statusCode: 400, success: 0, msg: error });
         }
-      
     }
 }

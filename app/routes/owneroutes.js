@@ -10,6 +10,7 @@ module.exports= function(app){
     app.post('/owner/login',ownerController.login)
     app.post('/owner/sendOtp',ownerController.sendOtp)
     app.post('/owner/verifyOtp',ownerController.verifyOtp)
+    app.post('/owner/verifyLaundry',ownerController.verifyLaundry)
     app.post('/owner/branches',authenticattion.verifyOwnwer,ownerController.branches)
     app.post('/owner/forgotPassword',ownerController.forgotPassword)
     app.put('/owner/update',authenticattion.verifyOwnerBranch,upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
@@ -18,5 +19,6 @@ module.exports= function(app){
 ]),ownerController.update)
     app.post('/owner/branchList',authenticattion.verifyOwnwer,ownerController.getList)
     app.post('/owner/addCategory',ownerController.addCategories)
+    app.post('/owner/services',ownerController.addServices)
 
 }

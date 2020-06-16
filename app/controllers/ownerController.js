@@ -87,6 +87,13 @@ exports.getList = async(request,response)=>{
 }
 exports.addCategories = async(request,response)=>{
     let data = await ownwerServices.addCategory(request,response)
-    return data
-
+    return response.json(data)
+}
+exports.addServices = async(request,response)=>{
+    let data = await ownwerServices.addServices(request,response)
+    return response.json(data)
+}
+exports.verifyLaundry =async(request,response)=>{
+    let verification = await ownwerServices.verifyLaundry(request,response)
+    return response.json(verification)
 }
