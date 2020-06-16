@@ -5,7 +5,7 @@ module.exports= function(app){
    
     app.post('/owner/registerLaundry',upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
                                                                     {name:'Document2',maxCount:1},
-                                                                    {name:'Documents3',maxCount:3}
+                                                                    {name:'Document3',maxCount:3}
                                                                 ]),ownerController.register)
     app.post('/owner/login',ownerController.login)
     app.post('/owner/sendOtp',ownerController.sendOtp)

@@ -15,28 +15,22 @@ module.exports = {
             if(await laundryModel.findOne({$and:[{phoneNumber:request.body.phoneNumber},{isDeleted:false}]})!=null) return ({ statusCode: 400, success: 0, msg: AppConstraints.NUMBER_ALREADY_EXIST })
             if (await laundryModel.findOne({ email: request.body.email }) != null) return ({ statusCode: 400, success: 0, msg: AppConstraints.EMAIL_ALREADY });
             request.body.password = bcrypt.hashSync(request.body.password, salt)
-            if(req.files){ 
-                for(let index in req.files){     
+            if(request.files){ 
+                for(let index in request.files){     
                     // console.log(demo[index]);
                            
-                    req.files[index].map((currentValue,index,array)=>{
+                    request.files[index].map((currentValue,index,array)=>{
                         console.log('inn',currentValue.fieldname);                    
-                        if(currentValue.fieldname == 'frontSide'){
+                        if(currentValue.fieldname == 'Document1'){
                             
-                            req.body.frontSide =  '/'+currentValue.filename
+                            request.body.Document1 =  '/'+currentValue.filename
                         }
-                        if(currentValue.fieldname == 'backSide'){
-                            req.body.backSide =  '/'+currentValue.filename  
+                        if(currentValue.fieldname == 'Document2'){
+                            request.body.Document2 =  '/'+currentValue.filename  
                         }
-                        if(currentValue.fieldname == 'leftSide'){
-                            console.log('3');
-                            req.body.leftSide =  '/'+currentValue.filename  
-                        }
-                        if(currentValue.fieldname == 'bottomSide' ){
-                            req.body.bottomSide = '/'+currentValue.filename
-                        }
-                        if(currentValue.fieldname == 'rightSide'){
-                            req.body.rightSide = '/'+currentValue.filename
+                        if(currentValue.fieldname == 'Document3'){
+                          
+                            request.body.Document3 =  '/'+currentValue.filename  
                         }
                     })
                 }
@@ -48,6 +42,8 @@ module.exports = {
             let token = await authToken.generateOwnwerToken(laundry)
             return ({ statusCode: 200, success: 1, msg: AppConstraints.REGISTRATIONS_SUCESSFULL, ownwer: laundry, token: token })
         } catch (error) {
+            console.log('eer',error);
+            
             return ({ statusCode: 400, success: 0, msg: error });
         }
     },

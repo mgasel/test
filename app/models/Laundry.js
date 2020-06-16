@@ -34,7 +34,10 @@ let Laundry=Schema({
     document2:{type:String},
     document3:{type:String},
     countryCode:{type:String},
-    isVerified:{type:Boolean,default:false}
+    isVerified:{type:Boolean,default:false},
+    Document1:{type:String,default:''},
+    Document2:{type:String,default:''},
+    Document3:{type:String,default:''}
    
 });
 
