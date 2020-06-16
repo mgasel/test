@@ -93,7 +93,14 @@ exports.addServices = async(request,response)=>{
     let data = await ownwerServices.addServices(request,response)
     return response.json(data)
 }
+exports.addServiceItem = async(request,response)=>{
+    let serviceItems = await ownwerServices.serviceItem(request,response)
+    return response.json(serviceItems)
+}
 exports.verifyLaundry =async(request,response)=>{
     let verification = await ownwerServices.verifyLaundry(request,response)
     return response.json(verification)
+}
+exports.ownwerServices = async(request,response)=>{
+    let servicesList 
 }

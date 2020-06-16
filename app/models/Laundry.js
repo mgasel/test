@@ -26,7 +26,8 @@ let Laundry=Schema({
 
     districtId:                              {type:Schema.Types.ObjectId, ref:'district'} ,
     ownerId:{type:Schema.Types.ObjectId,ref:'Laundry'},
-    email : {type:String},
+    email : {type:String,default:''},
+    userName :{type:String,default:''},
     password : {type:String},
     owner:{type:Boolean},
     phoneNumber:{type:Number},

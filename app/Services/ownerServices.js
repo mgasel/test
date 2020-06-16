@@ -2,6 +2,7 @@ const laundryModel = require('../models/Laundry')
 // const ownwerModel = require('../models/owner')
 const servicesModel = require('../models/Services') 
 const categoryModel = require('../models/serviceItemCategory')
+const serviceItemModel = require('../models/serviceItems')
 const AppConstraints = require('../../config/appConstraints')
 const otpModel = require('../models/otp')
 const bcrypt = require('bcrypt')
@@ -213,6 +214,16 @@ module.exports = {
 
         } catch (error) {
             return ({ statusCode: 400, success: 0, msg: error });
+        }
+    },
+    serviceItem : async(request,response)=>{
+        
+        try {
+            let serviceItem = await serviceItemModel(request.body).save()
+            return serviceItem
+
+        } catch (error) {
+            
         }
     }
 }
