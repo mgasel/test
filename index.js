@@ -29,6 +29,7 @@ app.use(bodyParser.json({limit:'200mb'}));
 app.use(expressValidator());
 app.set('port', process.env.PORT);
 app.set('views', __dirname + '/views');
+app.use(express.static(__dirname+'/app/uploader'));
 app.set('view engine', 'ejs');
 mongoose.connect(process.env.URL,{useMongoClient:true});
 mongoose.connection.on('error',function(err){
@@ -55,6 +56,7 @@ require('./app/routes/userroutes.js')(app);
 require('./app/routes/adminroutes.js')(app);
 require('./app/routes/driverroutes.js')(app);
 require('./app/LIB/imageUploader.js')(app);
+require('./app/routes/owneroutes.js')(app)
 
 Bootstrap.bootstrapAdmin(function (err, message) {
   if (err) {

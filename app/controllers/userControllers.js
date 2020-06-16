@@ -99,9 +99,6 @@ exports.sendOtp = async (request, response) => {
         let sendOtp = await UnivershalFunction.unifonicMessage(data);
 
 
-
-
-
         //console.log('otp data')
 
 
@@ -242,9 +239,11 @@ exports.registerUser = async (request, response) => {
         request.checkBody('langaugeType', langaugeType == "EN" ? AppConstraints.DEVICE_TOKEN.EN : AppConstraints.DEVICE_TOKEN.AR).notEmpty();
 
         let errors = await request.validationErrors();
-        if (errors)
+        if (errors){
+            console.log('eerr',errors);
+            
             return response.status(400).json({ statusCode: 400, success: 0, msg: errors[0].msg, error: errors });
-
+        }
 
         if (!(!isNaN(parseFloat(request.body.phoneNumber)) && isFinite(request.body.phoneNumber)))
             return response.status(400).json({ statusCode: 400, success: 0, msg: langaugeType == "EN" ? AppConstraints.PHONE_NUMERIC.EN : AppConstraints.PHONE_NUMERIC.AR });

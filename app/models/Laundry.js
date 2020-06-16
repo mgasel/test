@@ -24,7 +24,18 @@ let Laundry=Schema({
 
     serviceCategory:                        [{   type:Schema.Types.ObjectId, ref:'serviceCategory'}],
 
-    districtId:                              {type:Schema.Types.ObjectId, ref:'district'}   
+    districtId:                              {type:Schema.Types.ObjectId, ref:'district'} ,
+    ownerId:{type:Schema.Types.ObjectId,ref:'Laundry'},
+    email : {type:String},
+    password : {type:String},
+    owner:{type:Boolean},
+    phoneNumber:{type:Number},
+    document1:{type:String},
+    document2:{type:String},
+    document3:{type:String},
+    countryCode:{type:String},
+    isVerified:{type:Boolean,default:false}
+   
 });
 
 

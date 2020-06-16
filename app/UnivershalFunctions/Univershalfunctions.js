@@ -203,6 +203,8 @@ exports.sortByKey=(array, key) =>{
 
 
 exports.unifonicMessage=(data)=>{
+    console.log('data',data);
+    
     return new Promise(function(resolve, reject) {
         let option={
                 method: 'POST',
