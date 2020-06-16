@@ -20,5 +20,6 @@ module.exports= function(app){
     app.post('/owner/branchList',authenticattion.verifyOwnwer,ownerController.getList)
     app.post('/owner/addCategory',ownerController.addCategories)
     app.post('/owner/services',ownerController.addServices)
+    // app.post('/owner/ser')
 
 }

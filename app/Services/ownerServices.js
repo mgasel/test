@@ -183,7 +183,7 @@ module.exports = {
         return ({ statusCode: 200, success: 1, msg: AppConstraints.PROFILE_SUCCESSFULLY })
     },
     getBranchList :async(request,response)=>{
-        let list = await laundryModel.findOne({$and:[{ownerId:request.body.id},{isDeleted:false}]})
+        let list = await laundryModel.find({$and:[{ownerId:request.body.id},{isDeleted:false}]})
         return ({ statusCode: 200, success: 1, List:list })
     },
     addServices : async(request,response)=>{
