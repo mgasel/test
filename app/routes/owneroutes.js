@@ -12,7 +12,10 @@ module.exports= function(app){
     app.post('/owner/verifyOtp',ownerController.verifyOtp)
     app.post('/owner/branches',authenticattion.verifyOwnwer,ownerController.branches)
     app.post('/owner/forgotPassword',ownerController.forgotPassword)
-    app.put('/owner/update',authenticattion.verifyOwnerBranch,ownerController.update)
+    app.put('/owner/update',authenticattion.verifyOwnerBranch,upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
+    {name:'Document2',maxCount:1},
+    {name:'Document3',maxCount:3}
+]),ownerController.update)
     app.get('/owner/branchList',authenticattion.verifyOwnwer,ownerController.getList)
 
 }

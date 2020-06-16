@@ -436,5 +436,6 @@ module.exports={
    NUMBER_INVALID : {EN:'Invalid phone number',AR:'رقم الهاتف غير صحيح'},
    INVALID_ID : {EN:'Invalid ID',AR:'رقم معرف غير صالح'},
    UPDATE : {EN:'Update Sucessfully',AR:'تحديث بنجاح'},
-   ENTER_NEW_PASSWORD : {EN:'Please enter new password',AR:'يرجى إدخال كلمة المرور الجديدة'}
+   ENTER_NEW_PASSWORD : {EN:'Please enter new password',AR:'يرجى إدخال كلمة المرور الجديدة'},
+   EMAIL_NUMBER_USED :{EN:'Email or number alredy used',AR:'البريد الإلكتروني أو الرقم المستخدم بالفعل'}
 }

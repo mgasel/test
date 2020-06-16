@@ -136,9 +136,36 @@ module.exports = {
      }   
     },
     update:async(request,response)=>{
-        let find = await laundryModel.findOne({$and:[{_id:request.body.id},{isDeleted:false}]})
+        let find = await laundryModel.find({$and:[{_id:request.body.id},{isDeleted:false}]})
+        let findEmailPassword = await laundryModel.find(
+            {$or:[{$and:[{email:request.body.email,isDeleted:false}]},
+            {$and:[{phoneNumber:request.body.phoneNumber,isDeleted:false}]}
+        ]})
+        console.log('ifnnf',findEmailPassword)
+        if(findEmailPassword.length!=0){
+        if( findEmailPassword[0]._id.toString() != request.body.id)return  ({ statusCode: 200, success: 1, msg: AppConstraints.EMAIL_NUMBER_USED })
+        }
         if(find == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_ID })
-
+        if(request.files){ 
+            for(let index in request.files){     
+                // console.log(demo[index]);
+                       
+                request.files[index].map((currentValue,index,array)=>{
+                    console.log('inn',currentValue.fieldname);                    
+                    if(currentValue.fieldname == 'Document1'){
+                        
+                        request.body.Document1 =  '/'+currentValue.filename
+                    }
+                    if(currentValue.fieldname == 'Document2'){
+                        request.body.Document2 =  '/'+currentValue.filename  
+                    }
+                    if(currentValue.fieldname == 'Document3'){
+                      
+                        request.body.Document3 =  '/'+currentValue.filename  
+                    }
+                })
+            }
+        }
         if(request.body.password){
             if(!request.body.newPassword)return ({ statusCode: 400, success: 0, msg: AppConstraints.ENTER_NEW_PASSWORD })
             const comparePassword =await bcrypt.compare(request.body.password,find.password)
@@ -150,7 +177,7 @@ module.exports = {
         console.log('rew',request.body);
         
         let upadate = await laundryModel.update({_id:request.body.id},request.body)  
-        return ({ statusCode: 200, success: 1, msg: AppConstraints.PASSWORD_SUCCESSFULLY_UPDATED })
+        return ({ statusCode: 200, success: 1, msg: AppConstraints.PROFILE_SUCCESSFULLY })
     },
     // getBranchList :async(request,response)=>{
     //     let list = await laundryModel.findOne({_id:releaseEvents.body.id}).populate('ownerId')
