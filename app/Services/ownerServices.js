@@ -179,9 +179,9 @@ module.exports = {
         let upadate = await laundryModel.update({_id:request.body.id},request.body)  
         return ({ statusCode: 200, success: 1, msg: AppConstraints.PROFILE_SUCCESSFULLY })
     },
-    // getBranchList :async(request,response)=>{
-    //     let list = await laundryModel.findOne({_id:releaseEvents.body.id}).populate('ownerId')
-    //     console.log('list',list);
+    getBranchList :async(request,response)=>{
+        let list = await laundryModel.findOne({$and:[{ownerId:request.body.id},{isDeleted:false}]})
+        return ({ statusCode: 200, success: 1, List:list })
         
-    // }
+    }
 }
