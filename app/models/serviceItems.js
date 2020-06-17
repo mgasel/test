@@ -34,9 +34,6 @@ let serviceItems=Schema({
     createDate:{ type:Date,default:Date.now},
 
 
-
-
-
 });
 
 

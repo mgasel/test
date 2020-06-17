@@ -105,3 +105,7 @@ exports.ownwerServicesList = async(request,response)=>{
     let servicesList  = await ownwerServices.getList(request,response)
     response.json(servicesList)
 }
+exports.updateServices = async(request,response)=>{
+    let services = await ownwerServices.updateLaundryServices(request,response)
+    return response.json(services)
+}

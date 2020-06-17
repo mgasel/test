@@ -250,21 +250,21 @@ module.exports = {
                     }
                 },
                 { $unwind: "$services" },
-                {
-                   $lookup:{
-                    from:'servicecategories',      
-                    localField : "services.serviceCategory",
-                    foreignField:"services._id",
-                    as : 'serviceCategory'
-                   } 
-                },
+                // {
+                //    $lookup:{
+                //     from:'servicecategories',      
+                //     localField : "services.serviceCategory",
+                //     foreignField:"services._id",
+                //     as : 'serviceCategory'
+                //    } 
+                // },
 
-    //             { $group: {
-    //  _id: "$_id",
-    //  phoneNumber: { "$first": "$phoneNumber" },
-    //  countryCode: { "$first": "$countryCode" },
-    //  ownerId: { "$first": "$ownerId" },
-    //  services: { "$push": "$services" }}}
+                { $group: {
+     _id: "$_id",
+     phoneNumber: { "$first": "$phoneNumber" },
+     countryCode: { "$first": "$countryCode" },
+     ownerId: { "$first": "$ownerId" },
+     services: { "$push": "$services" }}}
             ])
             console.log('ervii',serviceList);
             return serviceList
@@ -272,5 +272,20 @@ module.exports = {
         } catch (error) {
             
         }
+    },
+    updateLaundryServices : async (request,response)=>{
+     try {
+         laundry = await laundryModel.findOne({_id:request.body.id})
+         if(laundry)
+         if(request.body.services){
+             console.log('reee',request);
+
+             
+         }
+         
+     } catch (error) {
+         
+     }
+        
     }
 }
