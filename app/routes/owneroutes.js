@@ -22,5 +22,5 @@ module.exports= function(app){
     app.post('/owner/services',ownerController.addServices)
     app.post('/owner/serviceItem',ownerController.addServiceItem)
     app.post('/owner/getServicesList',ownerController.ownwerServicesList)
-    app.post('/owner/addService',)
+    app.post('/owner/addService',ownerController.updateServices)
 }

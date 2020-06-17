@@ -12,7 +12,6 @@ let laundryService=Schema({
         default:"",
         index:true
     },
-
     servicePic:{
         
         servicePicOriginal:{
@@ -32,7 +31,10 @@ let laundryService=Schema({
         type:String,
         default:""
     },
-
+    laundryId : {
+        type:Schema.Types.ObjectId,
+        ref:'Laundry'
+    },
     serviceCategory:[{
         type:Schema.Types.ObjectId,
         ref:'serviceCategory'
