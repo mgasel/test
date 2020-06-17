@@ -287,15 +287,33 @@ module.exports = {
     },
     updateLaundryServices: async (request, response) => {
         try {
+            console.log('innnn');
+            
             laundry = await laundryModel.findOne({ _id: request.body.id })
             if (laundry == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_LAUNDRY_ID })
             if (request.body.services) {
-                await laundryModel.update({ _id: request.body.id }, services)
+                // await laundryModel.update({ _id: request.body.id }, services)
+                await request.body.services.map(async(object)=>{
+                    console.log('onegc',object);
+                    let findService = await servicesModel.findOne({_id:object.serviceId})
+                        let laundryServices = {
+                            serviceName:findService.serviceName,
+                            servicePic:findService.servicePic,
+                            hexString:findService.hexString,
+                            serviceCategory:object.serviceCategory,
+                            laundryId:request.body.id
+                        }
+                        let save = await laundryServiceModel(laundryServices).save()
+                        console.log('savee',save);
+                })
+
+                
             }
             
 
         } catch (error) {
-
+            console.log('eee',error);
+            
         }
 
     }
