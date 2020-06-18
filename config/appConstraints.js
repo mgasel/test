@@ -429,7 +429,7 @@ module.exports={
    PURCHASED_SUB: {EN:"You have already subscribed with other plan",AR:"المستخدم مع هذا الرقم مشترك بالفعل"},
    REGISTRATIONS_SUCESSFULL : {EN:"registration sucessfull",AR:"تم التسجيل بنجاح"},
    LOGIN_SUCESSFULL : {EN:"Login Sucessfull",AR:"نجح تسجيل الدخول"},
-   VALID_OTP : {EN:"Please enter valid OTP",AR:"الرجاء إدخال otp صالح"},
+   VALID_OTP : {EN:"Please enter valid OTP",AR:"الرجاء إدخال otp صالح"},``
    ENTER_OWNER_ID:{EN:"Please Enter the owner ID",AR:'يرجى إدخال معرف المالك'},
    NUMBER_ALREADY_EXIST:{EN:"Phone Number already exist",AR:'رقم الهاتف موجود بالفعل'},
    REQUIRED_COUNTRY:{EN:'Country code is required',AR:'رمز البلد مطلوب'},
