@@ -383,5 +383,16 @@ module.exports = {
     },
     deleteData:async(request,response)=>{
         await laundryServiceModel.deleteMany({laundryId:request.body.id})
+    },
+    updatePrice:async(request,response)=>{
+        console.log('reee',request.body.laundryId);
+        
+        let findItems = await laundryItemsModel.findOne({$and:[{_id:request.body.id},{laundryId:request.body.laundryId}]})
+        console.log('djdsd',findItems);
+        
+        if(findItems== null)return response.json({statusCode:400,sucess:0,msg:AppConstraints.INVALID_ID})
+        await laundryItemsModel.update({_id:findItems._id},{amountPerItem:request.body.price})
+        return ({ statusCode: 200, success: 1, msg: AppConstraints.UPDATE_PRICE })
+
     }
 }

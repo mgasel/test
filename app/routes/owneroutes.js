@@ -25,5 +25,5 @@ module.exports= function(app){
     app.post('/owner/addService',ownerController.updateServices)
     app.post('/owner/find',ownerController.findEmailPhone)
     app.post('/owner/delete',ownerController.delete)
-    app.post('/ownwer/updatePrice',authenticattion.verifyOwnerBranch)
+    app.put('/owner/updatePrice',authenticattion.verifyOwnerBranch,ownerController.updaetPrice)
 }

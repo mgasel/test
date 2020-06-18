@@ -116,4 +116,7 @@ exports.findEmailPhone = async(request,response)=>{
 exports.delete = async(request,response)=>{
     let data = await ownwerServices.deleteData(request,response)
 }
-// exports.updaetPrice = async(request,response)
+exports.updaetPrice = async(request,response)=>{
+    let updatePrice = await ownwerServices.updatePrice(request,response)
+    return response.json(updatePrice)
+}
