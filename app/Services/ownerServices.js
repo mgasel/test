@@ -293,9 +293,9 @@ module.exports = {
             laundry = await laundryModel.findOne({ _id: request.body.id })
             if (laundry == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_LAUNDRY_ID })
             if (request.body.services) {
-    
+                
                 await request.body.services.map(async(object)=>{
-                    console.log('onegc',object);
+                    
                     let findService = await servicesModel.findOne({_id:object.serviceId})
                         let laundryServices = {
                             serviceName:findService.serviceName,
@@ -305,30 +305,32 @@ module.exports = {
                             laundryId:request.body.id
                         }
                         let save = await laundryServiceModel(laundryServices).save()
-                        await laundryModel.update({_id:request.body.id},{$push:{laundryServices:save._id}})
+                        await laundryModel.update({_id:request.body.id},{$push:{laundryServices:save._id}}) // add services in launderies
                        await object.serviceCategory.map(async(categories,index)=>{
-                        //    console.log('cateee',categories[index]);
-                           console.log('index',index);               
-                            let findItems = await serviceItemModel.findOne({$and:[{serviceId:object.serviceId},{categoryId:categories}]})
-                            // console.log('finndd',findItems);
-                            let items = {
-                                itemName : findItems.itemName,
-                                itemNameAr: findItems.itemNameAr,
-                                itemPic:findItems.itemPic,
-                                amountPerItem:findItems.amountPerItem,
-                                categoryId:findItems.categoryId,
-                                serviceId:findItems.serviceId
-                            }
+                        //    console.log('cateee',categories);               
+                            let findItems = await serviceItemModel.find({$and:[{serviceId:object.serviceId},{categoryId:categories}]})
+                           await findItems.map(async(laundryServiceItems)=>{
+                                let items = {
+                                    itemName : laundryServiceItems.itemName,
+                                    itemNameAr: laundryServiceItems.itemNameAr,
+                                    itemPic:laundryServiceItems.itemPic,
+                                    amountPerItem:laundryServiceItems.amountPerItem,
+                                    categoryId:laundryServiceItems.categoryId,
+                                    serviceId:save._id
+                                }
+                                
+                                let savesItems = await laundryItemsModel(items).save()
+                            })
                             
-                            let savesItems = await laundryItemsModel(items).save()
-                            console.log('save ',savesItems);
-                            
+                          
                         })
                 })
-
-                
+              
             }
-            
+    
+            return response.json({ statusCode: 200, success: 1, services: AppConstraints.SERVICES_ADDED })
+                        
+       
 
         } catch (error) {
             console.log('eee',error);

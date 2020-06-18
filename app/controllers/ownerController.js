@@ -107,7 +107,7 @@ exports.ownwerServicesList = async(request,response)=>{
 }
 exports.updateServices = async(request,response)=>{
     let services = await ownwerServices.updateLaundryServices(request,response)
-    return response.json(services)
+    // return response.json(services)
 }
 exports.findEmailPhone = async(request,response)=>{
     let check = await ownwerServices.findEmailNumber(request,response)
