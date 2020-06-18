@@ -3,6 +3,7 @@ const laundryModel = require('../models/Laundry')
 const servicesModel = require('../models/Services')
 const categoryModel = require('../models/serviceItemCategory')
 const serviceItemModel = require('../models/serviceItems')
+const laundryItemsModel = require('../models/laundryItems')
 const AppConstraints = require('../../config/appConstraints')
 const otpModel = require('../models/otp')
 const laundryServiceModel = require('../models/laundryService')
@@ -292,7 +293,7 @@ module.exports = {
             laundry = await laundryModel.findOne({ _id: request.body.id })
             if (laundry == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_LAUNDRY_ID })
             if (request.body.services) {
-                // await laundryModel.update({ _id: request.body.id }, services)
+    
                 await request.body.services.map(async(object)=>{
                     console.log('onegc',object);
                     let findService = await servicesModel.findOne({_id:object.serviceId})
@@ -304,7 +305,25 @@ module.exports = {
                             laundryId:request.body.id
                         }
                         let save = await laundryServiceModel(laundryServices).save()
-                        console.log('savee',save);
+                        await laundryModel.update({_id:request.body.id},{$push:{laundryServices:save._id}})
+                       await object.serviceCategory.map(async(categories,index)=>{
+                        //    console.log('cateee',categories[index]);
+                           console.log('index',index);               
+                            let findItems = await serviceItemModel.findOne({$and:[{serviceId:object.serviceId},{categoryId:categories}]})
+                            // console.log('finndd',findItems);
+                            let items = {
+                                itemName : findItems.itemName,
+                                itemNameAr: findItems.itemNameAr,
+                                itemPic:findItems.itemPic,
+                                amountPerItem:findItems.amountPerItem,
+                                categoryId:findItems.categoryId,
+                                serviceId:findItems.serviceId
+                            }
+                            
+                            let savesItems = await laundryItemsModel(items).save()
+                            console.log('save ',savesItems);
+                            
+                        })
                 })
 
                 
@@ -316,5 +335,16 @@ module.exports = {
             
         }
 
+    },
+    findEmailNumber : async(request,response)=>{
+        if(request.body.phoneNumber){
+            let find = await laundryModel.findOne({$and:[{phoneNumber:request.body.phoneNumber},{isDeleted:false}]})
+            if(find!=null)  return ({ statusCode: 400, success: 1, msg: AppConstraints.PHONE_ALREADY })
+        }
+        if(request.body.email){
+            let find = await laundryModel.findOne({$and:[{email:request.body.email},{isDeleted:false}]})
+            if(find!=null)  return ({ statusCode: 400, success: 1, msg: AppConstraints.EMAIL_ALREADY })
+        }
+        return ({ statusCode: 200, success: 1, msg: AppConstraints.EMAIL_PHONE_NOT_REGISTER })
     }
 }

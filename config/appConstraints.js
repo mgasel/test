@@ -438,5 +438,6 @@ module.exports={
    UPDATE : {EN:'Update Sucessfully',AR:'تحديث بنجاح'},
    ENTER_NEW_PASSWORD : {EN:'Please enter new password',AR:'يرجى إدخال كلمة المرور الجديدة'},
    EMAIL_NUMBER_USED :{EN:'Email or number alredy used',AR:'البريد الإلكتروني أو الرقم المستخدم بالفعل'},
-   PHONE_NUMBER_NOT_REGISTER : {EN:'Phone Number not registered',AR:'رقم الهاتف غير مسجل'}
+   PHONE_NUMBER_NOT_REGISTER : {EN:'Phone Number not registered',AR:'رقم الهاتف غير مسجل'},
+   EMAIL_PHONE_NOT_REGISTER : {EN:'Email and Phone Number not register',AR:'البريد الإلكتروني ورقم الهاتف غير مسجل'}
 }

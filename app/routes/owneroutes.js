@@ -23,4 +23,5 @@ module.exports= function(app){
     app.post('/owner/serviceItem',ownerController.addServiceItem)
     app.post('/owner/getServicesList',ownerController.ownwerServicesList)
     app.post('/owner/addService',ownerController.updateServices)
+    app.post('/owner/find',ownerController.findEmailPhone)
 }

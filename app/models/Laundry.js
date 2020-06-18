@@ -38,8 +38,8 @@ let Laundry=Schema({
     isVerified:{type:Boolean,default:false},
     Document1:{type:String},
     Document2:{type:String},
-    Document3:{type:String}
-   
+    Document3:{type:String},
+   laundryServices:[{type:Schema.Types.ObjectId,ref:'laundryService'}]
 });
 
 
