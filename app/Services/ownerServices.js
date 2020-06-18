@@ -348,5 +348,8 @@ module.exports = {
             if(find!=null)  return ({ statusCode: 400, success: 1, msg: AppConstraints.EMAIL_ALREADY })
         }
         return ({ statusCode: 200, success: 1, msg: AppConstraints.EMAIL_PHONE_NOT_REGISTER })
+    },
+    deleteData:async(request,response)=>{
+        await laundryServiceModel.deleteMany({laundryId:request.body.id})
     }
 }

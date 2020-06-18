@@ -113,3 +113,6 @@ exports.findEmailPhone = async(request,response)=>{
     let check = await ownwerServices.findEmailNumber(request,response)
     return response.json(check)
 }
+exports.delete = async(request,response)=>{
+    let data = await ownwerServices.deleteData(request,response)
+}
