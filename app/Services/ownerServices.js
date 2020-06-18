@@ -68,15 +68,16 @@ module.exports = {
     },
     sendOtp: async (request, response) => {
         try {
+            let findOtp = await otpModel.findOne({ phoneNumber: request.body.phoneNumber })
+            if(findOtp){
+                await otpModel.deleteMany({_id:findOtp._id})
+            }
             let otp = Math.floor(1000 + Math.random() * 9000)
 
             const genrateOtp = await otpModel({ otp: otp, phoneNumber: request.body.phoneNumber, countryCode: request.body.countryCode }).save()
             console.log('dgee', genrateOtp);
 
-            let findOtp = await otpModel.findOne({ phoneNumber: request.body.phoneNumber })
-            // if(findOtp){
-            //     await otpModel.deleteOne({_id:findOtp._id})
-            // }
+    
             let data = {
                 phoneNumber: request.body.countryCode + request.body.phoneNumber,
                 message: `OTP is ${otp}`
