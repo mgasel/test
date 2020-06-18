@@ -1,7 +1,7 @@
 let mongoose=require('mongoose');
 let Schema=mongoose.Schema;
 let laundaryItems=Schema({
-    
+    laundryId:{type:Schema.Types.ObjectId,ref:'Laundry'},
     serviceId:{ type:Schema.Types.ObjectId, ref:'laundryService'},
 
     categoryId:{ type:Schema.Types.ObjectId, ref:'serviceCategory' },

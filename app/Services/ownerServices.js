@@ -290,10 +290,11 @@ module.exports = {
         try {
             console.log('innnn');
             
-            laundry = await laundryModel.findOne({ _id: request.body.id })
-            if (laundry == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_LAUNDRY_ID })
+            // laundry = await laundryModel.findOne({ _id: request.body.id })
+            // if (laundry == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_LAUNDRY_ID })
             if (request.body.services) {
-                
+                laundry = await laundryModel.findOne({ _id: request.body.id })
+                if (laundry == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_LAUNDRY_ID })
                 await request.body.services.map(async(object)=>{
                     
                     let findService = await servicesModel.findOne({_id:object.serviceId})
@@ -306,8 +307,7 @@ module.exports = {
                         }
                         let save = await laundryServiceModel(laundryServices).save()
                         await laundryModel.update({_id:request.body.id},{$push:{laundryServices:save._id}}) // add services in launderies
-                       await object.serviceCategory.map(async(categories,index)=>{
-                        //    console.log('cateee',categories);               
+                       await object.serviceCategory.map(async(categories,index)=>{           
                             let findItems = await serviceItemModel.find({$and:[{serviceId:object.serviceId},{categoryId:categories}]})
                            await findItems.map(async(laundryServiceItems)=>{
                                 let items = {
@@ -317,16 +317,46 @@ module.exports = {
                                     amountPerItem:laundryServiceItems.amountPerItem,
                                     categoryId:laundryServiceItems.categoryId,
                                     serviceId:save._id,
-                                    series : laundryServiceItems.series
+                                    series : laundryServiceItems.series,
+                                    laundryId : request.body.id
                                 }
                                 
                                 let savesItems = await laundryItemsModel(items).save()
                             })
-                            
                           
                         })
                 })
               
+            }
+            if(request.body.serviceCategory){
+                request.body.serviceCategory.category.map(async(category)=>{
+                    
+                    
+                    let findItems = await serviceItemModel.find({$and:[{serviceId:request.body.serviceCategory.serviceId},{categoryId:category}]})
+                    console.log('finndd',findItems);
+                    
+                    await findItems.map(async(laundryServiceItems)=>{
+                
+                        
+                        let items = {
+                            itemName : laundryServiceItems.itemName,
+                            itemNameAr: laundryServiceItems.itemNameAr,
+                            itemPic:laundryServiceItems.itemPic,
+                            amountPerItem:laundryServiceItems.amountPerItem,
+                            categoryId:category,
+                            serviceId:request.body.serviceCategory.launderyServiceId,
+                            series : laundryServiceItems.series,
+                            laundryId:  request.body.serviceCategory.id
+                        }
+                        let savesItems = await laundryItemsModel(items).save()
+                    })
+                    
+                    // await laundryServiceModel.update({_id:request.body.serviceCategory.launderyServiceId},{$push:{serviceCategory:category}})
+
+                    // console.log('finnd',findItems);
+                    
+                })
+                
             }
     
             return response.json({ statusCode: 200, success: 1, services: AppConstraints.SERVICES_ADDED })
