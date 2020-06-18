@@ -316,7 +316,8 @@ module.exports = {
                                     itemPic:laundryServiceItems.itemPic,
                                     amountPerItem:laundryServiceItems.amountPerItem,
                                     categoryId:laundryServiceItems.categoryId,
-                                    serviceId:save._id
+                                    serviceId:save._id,
+                                    series : laundryServiceItems.series
                                 }
                                 
                                 let savesItems = await laundryItemsModel(items).save()
