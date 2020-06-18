@@ -246,21 +246,50 @@ module.exports = {
             //         path:'serviceCategory'
             //     }
             // })
-            let serviceList = await laundryModel.aggregate([
-                {
-                    $match: { _id: ObjectId(request.body.id) }
+            console.log('reeee',request.body.id);
+            
+            let serviceList = await servicesModel.aggregate([
+                // {
+                //     $match: { _id: ObjectId(request.body.id) }
 
-                },
+                // },
                 // {$unwind:"$services"},
                 {
                     $lookup: {
-                        from: 'services',
-                        localField: "services",
+                        from: 'servicecategories',
+                        localField: "serviceCategory",
                         foreignField: "_id",
-                        as: 'services'
+                        as: 'category'
                     }
                 },
-                { $unwind: "$services" },
+                { $unwind: "$category" },
+                // {
+                //     $lookup:{
+                //         from: 'serviceitems',
+                //         localField: "category._id",
+                //         foreignField: "categoryId",
+                //         as: 'serviceItem'
+                //     }
+                // }
+                {
+                    $lookup:{
+                        from: 'serviceitems',
+                        let: { categoryId: "$category._id", order_qty: "$ordered" },
+                        pipeline: [
+                           { $match:
+                              { $expr:
+                                 { $and:
+                                    [
+                                      { $eq: [ "$categoryId",  "$$categoryId" ] },
+                                    //   { $gte: [ "$instock", "$$order_qty" ] }
+                                    ]
+                                 }
+                              }
+                           },
+                        ],
+                        as: 'serviceItem'
+                    }
+                }
                 // {
                 //    $lookup:{
                 //     from:'servicecategories',      
@@ -270,15 +299,15 @@ module.exports = {
                 //    } 
                 // },
 
-                {
-                    $group: {
-                        _id: "$_id",
-                        phoneNumber: { "$first": "$phoneNumber" },
-                        countryCode: { "$first": "$countryCode" },
-                        ownerId: { "$first": "$ownerId" },
-                        services: { "$push": "$services" }
-                    }
-                }
+                // {
+                //     $group: {
+                //         _id: "$_id",
+                //         phoneNumber: { "$first": "$phoneNumber" },
+                //         countryCode: { "$first": "$countryCode" },
+                //         ownerId: { "$first": "$ownerId" },
+                //         services: { "$push": "$services" }
+                //     }
+                // }
             ])
             console.log('ervii', serviceList);
             return serviceList
