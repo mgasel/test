@@ -240,116 +240,59 @@ module.exports = {
     },
     getList: async (request, response) => {
         try {
-            // let serviceList = await laundryModel.findOne({_id:request.body.id}).populate({
-            //     path:"services",
-            //     populate:{
-            //         path:'serviceCategory'
-            //     }
-            // })
+            let serviceList = await servicesModel.find({}).populate('serviceCategory')
             console.log('reeee',request.body.id);
             
-            let serviceList = await servicesModel.aggregate([
-                // {
-                //     $match: { _id: ObjectId(request.body.id) }
+            // let serviceList = await servicesModel.aggregate([
+            //     // {
+            //     //     $match: { _id: ObjectId(request.body.id) }
 
-                // },
-                // {$unwind:"$services"},
-                {
-                    $lookup: {
-                        from: 'servicecategories',
-                        localField: "serviceCategory",
-                        foreignField: "_id",
-                        as: 'category'
-                    }
-                },
-                { $unwind:{path: "$category",    preserveNullAndEmptyArrays: true
-            } },
-                // {
-                //     $project: {
-                //         category: {
-                //         $arrayElemAt: [ '$category',0 ]
-                //       }
-                //     }
-                //   },
-                // {
-                //     $lookup:{
-                //         from: 'serviceitems',
-                //         localField: "category._id",
-                //         foreignField: "categoryId",
-                //         as: 'serviceItem'
-                //     }
-                // }
+            //     // },
+            //     // {$unwind:"$services"},
+            //     {
+            //         $lookup: {
+            //             from: 'servicecategories',
+            //             localField: "serviceCategory",
+            //             foreignField: "_id",
+            //             as: 'category'
+            //         }
+            //     },
+            //     { $unwind:{path: "$category",    preserveNullAndEmptyArrays: true
+            // } },
 
-          
+            //     {
+            //         $lookup:{
+            //             from: 'serviceitems',
+            //             let: { categoryId: "$category._id", serviceId: "$_id" },
+            //             // let: { categoryId: "$category._id" },
 
-                {
-                    $lookup:{
-                        from: 'serviceitems',
-                        let: { categoryId: "$category._id", serviceId: "$_id" },
-                        // let: { categoryId: "$category._id" },
+            //             pipeline: [
+            //                { $match:
+            //                   { $expr:
+            //                      { $and:
+            //                         [
+            //                           { $eq: [ "$categoryId",  "$$categoryId" ] },
+            //                        { $eq: [ "$serviceId",  "$$serviceId" ] },
 
-                        pipeline: [
-                           { $match:
-                              { $expr:
-                                 { $and:
-                                    [
-                                      { $eq: [ "$categoryId",  "$$categoryId" ] },
-                                   { $eq: [ "$serviceId",  "$$serviceId" ] },
-
-                                    ]
-                                 }
-                              }
-                           },
-                        ],
-                        as: 'category.serviceItem'
-                    }
+            //                         ]
+            //                      }
+            //                   }
+            //                },
+            //             ],
+            //             as: 'category.serviceItem'
+            //         }
                     
-                },
-                {
-                    $group: {
-                      _id : "$_id",
-                      name: { $first: "$serviceName" },
-                      category: { $push: "$category" }
+            //     },
+            //     {
+            //         $group: {
+            //           _id : "$_id",
+            //           name: { $first: "$serviceName" },
+            //           category: { $push: "$category" }
 
-                    }
-                  }
-                // { $unwind: "$serviceItem" },
-                // { $group: { _id: '$_id', serviceItem: { $addToSet: '$serviceItem' } } },
-                // {
-                //    $lookup:{
-                //     from:'servicecategories',      
-                //     localField : "services.serviceCategory",
-                //     foreignField:"services._id",
-                //     as : 'serviceCategory'
-                //    } 
-                // },
-
-                // {
-                //     $group: {
-                //         _id: "$_id",
-                //         phoneNumber: { "$first": "$phoneNumber" },
-                //         countryCode: { "$first": "$countryCode" },
-                //         ownerId: { "$first": "$ownerId" },
-                //         category: { "$push": {"category":"$category",
-                //         {data:{"$push":  {"serviceItem":"$serviceItem"}},
-                //                         "serviceItem":"$serviceItem"
-                //     } }
-                //     }
-                // },
-                //   {
-                    // $group: {
-                    //     _id: "$_id",
-                        // phoneNumber: { "$first": "$phoneNumber" },
-                        // countryCode: { "$first": "$countryCode" },
-                        // ownerId: { "$first": "$ownerId" },
-                        // services: { "$push": "$category" },
-                        // index:{"$push":"$serviceItem"}
-                        // data:{"$push":"serviceItem"}
-                        // $addFields:{}
-                    // }
-                // }
-
-            ])
+            //         }
+            //       }
+            
+            // ])
             console.log('ervii', serviceList);
             return serviceList
 
