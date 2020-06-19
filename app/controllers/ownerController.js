@@ -122,3 +122,7 @@ exports.updaetPrice = async(request,response)=>{
     let updatePrice = await ownwerServices.updatePrice(request,response)
     return response.json(updatePrice)
 }
+exports.getList = async(request,response)=>{
+    let list = await ownwerServices.listing(request,response)
+    return response.json(list)
+}

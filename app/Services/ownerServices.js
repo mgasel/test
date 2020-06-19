@@ -240,12 +240,7 @@ module.exports = {
     },
     getList: async (request, response) => {
         try {
-            // let serviceList = await laundryModel.findOne({_id:request.body.id}).populate({
-            //     path:"services",
-            //     populate:{
-            //         path:'serviceCategory'
-            //     }
-            // })
+            
             console.log('reeee',request.body.id);
             
             let serviceList = await servicesModel.aggregate([
@@ -264,10 +259,7 @@ module.exports = {
                 },
                 { $unwind:{path: "$category",    preserveNullAndEmptyArrays: true
             } },
-                 
-
-          
-
+                
                 {
                     $lookup:{
                         from: 'serviceitems',
@@ -416,6 +408,14 @@ module.exports = {
         if(findItems== null)return response.json({statusCode:400,sucess:0,msg:AppConstraints.INVALID_ID})
         await laundryItemsModel.update({_id:findItems._id},{amountPerItem:request.body.price})
         return ({ statusCode: 200, success: 1, msg: AppConstraints.UPDATE_PRICE })
-
+    },
+    listing:async(request,response)=>{
+        // let list = await servicesModel.find()
+        if(request.body.id){
+            let list = await servicesModel.findOne({_id:request.body.id}).populate('serviceCategory')
+            return ({ statusCode: 200, success: 1, List:list })
+        }
+        let list = await servicesModel.find({})
+        return ({ statusCode: 200, success: 1, List:list })
     }
 }

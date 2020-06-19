@@ -27,4 +27,6 @@ module.exports= function(app){
     app.post('/owner/delete',ownerController.delete)
     app.put('/owner/updatePrice',authenticattion.verifyOwnerBranch,ownerController.updaetPrice)
     // app.post('/owner/getServices')
+    app.post('/owner/service',ownerController.getList)
+    
 }
