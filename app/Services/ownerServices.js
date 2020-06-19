@@ -197,6 +197,7 @@ module.exports = {
     },
     getBranchList: async (request, response) => {
         let list = await laundryModel.find({ $and: [{ ownerId: request.body.id }, { isDeleted: false }] })
+        if(list.length==0) return ({ statusCode: 400, success: 1, List: AppConstraints.EMPTY })
         return ({ statusCode: 200, success: 1, List: list })
     },
     addServices: async (request, response) => {
@@ -345,11 +346,15 @@ module.exports = {
               
             }
             if(request.body.serviceCategory){
+                console.log('sdjsdhsd');
+                
                 request.body.serviceCategory.category.map(async(category)=>{
                     
                     
                     let findItems = await serviceItemModel.find({$and:[{serviceId:request.body.serviceCategory.serviceId},{categoryId:category}]})
-                    console.log('finndd',findItems);
+                    // console.log('finndd',findItems);
+                    let laundryServices = await laundryServiceModel.findOne({_id:request.body.serviceCategory.launderyServiceId})
+                    console.log('lauundryyy',laundryServices);
                     
                     await findItems.map(async(laundryServiceItems)=>{
                 
@@ -367,9 +372,7 @@ module.exports = {
                         let savesItems = await laundryItemsModel(items).save()
                     })
                     
-                    // await laundryServiceModel.update({_id:request.body.serviceCategory.launderyServiceId},{$push:{serviceCategory:category}})
-
-                    // console.log('finnd',findItems);
+                   
                     
                 })
                 

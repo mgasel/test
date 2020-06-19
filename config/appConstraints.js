@@ -441,5 +441,6 @@ module.exports={
    PHONE_NUMBER_NOT_REGISTER : {EN:'Phone Number not registered',AR:'رقم الهاتف غير مسجل'},
    EMAIL_PHONE_NOT_REGISTER : {EN:'Email and Phone Number not register',AR:'البريد الإلكتروني ورقم الهاتف غير مسجل'},
    SERVICES_ADDED:{EN:'Services added sucessfully',AR:'تمت إضافة الخدنة بنجاح'},
-   UPDATE_PRICE : {EN:'Price upadted sucessfully',AR:'تم تحديث السعر بنجاح'}
+   UPDATE_PRICE : {EN:'Price upadted sucessfully',AR:'تم تحديث السعر بنجاح'},
+   EMPTY:{EN:"List Empty",AR:'القائمة فارغة'}
 }
