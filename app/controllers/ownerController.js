@@ -36,6 +36,8 @@ exports.sendOtp=async(request,response)=>{
 }
 exports.verifyOtp=async(request,response)=>{
     request.checkBody('otp',AppConstraints.OTP_REQUIRED).notEmpty();
+    request.checkBody('phoneNumber',AppConstraints.PHONE_NUMBER).notEmpty();
+    request.checkBody('countryCode',AppConstraints.REQUIRED_COUNTRY).notEmpty();
     let errors = request.validationErrors();
     if (errors){ return response.status(400).json({statusCode:400,success:0 , msg: errors[0].msg, error:errors})}
     const verifyOtp = await ownwerServices.verifyOtp(request,response)

@@ -262,7 +262,15 @@ module.exports = {
                         as: 'category'
                     }
                 },
-                { $unwind: "$category" },
+                { $unwind:{path: "$category",    preserveNullAndEmptyArrays: true
+            } },
+                // {
+                //     $project: {
+                //         category: {
+                //         $arrayElemAt: [ '$category',0 ]
+                //       }
+                //     }
+                //   },
                 // {
                 //     $lookup:{
                 //         from: 'serviceitems',
@@ -271,25 +279,42 @@ module.exports = {
                 //         as: 'serviceItem'
                 //     }
                 // }
+
+          
+
                 {
                     $lookup:{
                         from: 'serviceitems',
-                        let: { categoryId: "$category._id", order_qty: "$ordered" },
+                        let: { categoryId: "$category._id", serviceId: "$_id" },
+                        // let: { categoryId: "$category._id" },
+
                         pipeline: [
                            { $match:
                               { $expr:
                                  { $and:
                                     [
                                       { $eq: [ "$categoryId",  "$$categoryId" ] },
-                                    //   { $gte: [ "$instock", "$$order_qty" ] }
+                                   { $eq: [ "$serviceId",  "$$serviceId" ] },
+
                                     ]
                                  }
                               }
                            },
                         ],
-                        as: 'serviceItem'
+                        as: 'category.serviceItem'
                     }
-                }
+                    
+                },
+                {
+                    $group: {
+                      _id : "$_id",
+                      name: { $first: "$serviceName" },
+                      category: { $push: "$category" }
+
+                    }
+                  }
+                // { $unwind: "$serviceItem" },
+                // { $group: { _id: '$_id', serviceItem: { $addToSet: '$serviceItem' } } },
                 // {
                 //    $lookup:{
                 //     from:'servicecategories',      
@@ -305,15 +330,32 @@ module.exports = {
                 //         phoneNumber: { "$first": "$phoneNumber" },
                 //         countryCode: { "$first": "$countryCode" },
                 //         ownerId: { "$first": "$ownerId" },
-                //         services: { "$push": "$services" }
+                //         category: { "$push": {"category":"$category",
+                //         {data:{"$push":  {"serviceItem":"$serviceItem"}},
+                //                         "serviceItem":"$serviceItem"
+                //     } }
                 //     }
+                // },
+                //   {
+                    // $group: {
+                    //     _id: "$_id",
+                        // phoneNumber: { "$first": "$phoneNumber" },
+                        // countryCode: { "$first": "$countryCode" },
+                        // ownerId: { "$first": "$ownerId" },
+                        // services: { "$push": "$category" },
+                        // index:{"$push":"$serviceItem"}
+                        // data:{"$push":"serviceItem"}
+                        // $addFields:{}
+                    // }
                 // }
+
             ])
             console.log('ervii', serviceList);
             return serviceList
 
         } catch (error) {
-
+            console.log(error);
+            
         }
     },
     updateLaundryServices: async (request, response) => {
