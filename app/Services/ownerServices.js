@@ -240,25 +240,33 @@ module.exports = {
     },
     getList: async (request, response) => {
         try {
-            let serviceList = await servicesModel.find({}).populate('serviceCategory')
+            // let serviceList = await laundryModel.findOne({_id:request.body.id}).populate({
+            //     path:"services",
+            //     populate:{
+            //         path:'serviceCategory'
+            //     }
+            // })
             console.log('reeee',request.body.id);
             
-            // let serviceList = await servicesModel.aggregate([
-            //     // {
-            //     //     $match: { _id: ObjectId(request.body.id) }
+            let serviceList = await servicesModel.aggregate([
+                // {
+                //     $match: { _id: ObjectId(request.body.id) }
 
-            //     // },
-            //     // {$unwind:"$services"},
-            //     {
-            //         $lookup: {
-            //             from: 'servicecategories',
-            //             localField: "serviceCategory",
-            //             foreignField: "_id",
-            //             as: 'category'
-            //         }
-            //     },
+                // },
+                // {$unwind:"$services"},
+                {
+                    $lookup: {
+                        from: 'servicecategories',
+                        localField: "serviceCategory",
+                        foreignField: "_id",
+                        as: 'category'
+                    }
+                },
             //     { $unwind:{path: "$category",    preserveNullAndEmptyArrays: true
             // } },
+                 
+
+          
 
             //     {
             //         $lookup:{
@@ -292,7 +300,8 @@ module.exports = {
             //         }
             //       }
             
-            // ])
+
+            ])
             console.log('ervii', serviceList);
             return serviceList
 
