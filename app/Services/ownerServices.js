@@ -200,7 +200,7 @@ module.exports = {
         
         let list = await laundryModel.find({ $and: [{ ownerId: request.body.id }, { isDeleted: false }] })
            
-        if(list.length==0) return ({ statusCode: 400, success: 1, List: AppConstraints.EMPTY })
+        if(list.length==0) return ({ statusCode: 400, success: 0, msg: AppConstraints.EMPTY,List:list })
         return ({ statusCode: 200, success: 1, List: list })
     },
     addServices: async (request, response) => {
@@ -356,7 +356,7 @@ module.exports = {
                     
                     let findItems = await serviceItemModel.find({$and:[{serviceId:request.body.serviceCategory.serviceId},{categoryId:category}]})
                     // console.log('finndd',findItems);
-                    let laundryServices = await laundryServiceModel.update({_id:request.body.serviceCategory.launderyServiceId})
+                    let laundryServices = await laundryServiceModel.update({_id:request.body.serviceCategory.launderyServiceId},{$push:{serviceCategory:category}})
                     console.log('lauundryyy',laundryServices);
                     
                     await findItems.map(async(laundryServiceItems)=>{
