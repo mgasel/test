@@ -262,43 +262,43 @@ module.exports = {
                         as: 'category'
                     }
                 },
-            //     { $unwind:{path: "$category",    preserveNullAndEmptyArrays: true
-            // } },
+                { $unwind:{path: "$category",    preserveNullAndEmptyArrays: true
+            } },
                  
 
           
 
-            //     {
-            //         $lookup:{
-            //             from: 'serviceitems',
-            //             let: { categoryId: "$category._id", serviceId: "$_id" },
-            //             // let: { categoryId: "$category._id" },
+                {
+                    $lookup:{
+                        from: 'serviceitems',
+                        let: { categoryId: "$category._id", serviceId: "$_id" },
+                        // let: { categoryId: "$category._id" },
 
-            //             pipeline: [
-            //                { $match:
-            //                   { $expr:
-            //                      { $and:
-            //                         [
-            //                           { $eq: [ "$categoryId",  "$$categoryId" ] },
-            //                        { $eq: [ "$serviceId",  "$$serviceId" ] },
+                        pipeline: [
+                           { $match:
+                              { $expr:
+                                 { $and:
+                                    [
+                                      { $eq: [ "$categoryId",  "$$categoryId" ] },
+                                   { $eq: [ "$serviceId",  "$$serviceId" ] },
 
-            //                         ]
-            //                      }
-            //                   }
-            //                },
-            //             ],
-            //             as: 'category.serviceItem'
-            //         }
+                                    ]
+                                 }
+                              }
+                           },
+                        ],
+                        as: 'category.serviceItem'
+                    }
                     
-            //     },
-            //     {
-            //         $group: {
-            //           _id : "$_id",
-            //           name: { $first: "$serviceName" },
-            //           category: { $push: "$category" }
-
-            //         }
-            //       }
+                },
+                {
+                    $group: {
+                      _id : "$_id",
+                      name: { $first: "$serviceName" },
+                      serviceNameAr : {$first:"$serviceNameAr"},
+                      category: { $push: "$category" }
+                    }
+                  }
             
 
             ])
