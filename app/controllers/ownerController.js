@@ -81,9 +81,13 @@ exports.update = async(request,response)=>{
     return response.json(update)
 }
 exports.getList = async(request,response)=>{
+    console.log('k,,,,,,,,,');
+    
     request.checkBody('id',AppConstraints.INVALID_ID).notEmpty();
     let errors = request.validationErrors();
     if (errors){ return response.status(400).json({statusCode:400,success:0 , msg: errors[0].msg, error:errors})}
+    console.log('.................');
+    
     let branchList = await ownwerServices.getBranchList(request,response)
     return response.json(branchList)
 }
@@ -122,7 +126,7 @@ exports.updaetPrice = async(request,response)=>{
     let updatePrice = await ownwerServices.updatePrice(request,response)
     return response.json(updatePrice)
 }
-exports.getList = async(request,response)=>{
+exports.getLists = async(request,response)=>{
     let list = await ownwerServices.listing(request,response)
     return response.json(list)
 }

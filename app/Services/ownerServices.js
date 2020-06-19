@@ -196,7 +196,10 @@ module.exports = {
         return ({ statusCode: 200, success: 1, msg: AppConstraints.PROFILE_SUCCESSFULLY })
     },
     getBranchList: async (request, response) => {
+        console.log('...................');
+        
         let list = await laundryModel.find({ $and: [{ ownerId: request.body.id }, { isDeleted: false }] })
+           
         if(list.length==0) return ({ statusCode: 400, success: 1, List: AppConstraints.EMPTY })
         return ({ statusCode: 200, success: 1, List: list })
     },
@@ -353,7 +356,7 @@ module.exports = {
                     
                     let findItems = await serviceItemModel.find({$and:[{serviceId:request.body.serviceCategory.serviceId},{categoryId:category}]})
                     // console.log('finndd',findItems);
-                    let laundryServices = await laundryServiceModel.findOne({_id:request.body.serviceCategory.launderyServiceId})
+                    let laundryServices = await laundryServiceModel.update({_id:request.body.serviceCategory.launderyServiceId})
                     console.log('lauundryyy',laundryServices);
                     
                     await findItems.map(async(laundryServiceItems)=>{
