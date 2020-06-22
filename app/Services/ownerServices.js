@@ -487,7 +487,7 @@ module.exports = {
             request.body.driverId = nearDriver._id
             request.body.orderId = uuid.sync(4)
             let user = await userModel.findOne({$and:[{completePhoneNumber:request.body.completePhoneNumber},{isDeleted:false}]})
-            // if(user == null
+            
             request.body.userId = user._id
             let totalAmount = 0
             await request.body.bookingData.map(async(values,index)=>{
@@ -498,7 +498,7 @@ module.exports = {
                 })
             })
             request.body.totalAmount = totalAmount
-            
+            request.body.status = 'CONFIRMED'
             
             let booking = await bookingModel(request.body).save()
             return ({ statusCode: 200, success: 1, msg:AppConstraints.BOOKING_ACCEPTED,Booking:booking })
