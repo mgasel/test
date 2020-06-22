@@ -14,7 +14,7 @@ const authToken = require('../../config/authenticate')
 const otp = require('../models/otp')
 const universal = require('../../app/UnivershalFunctions/Univershalfunctions')
 let ObjectId = require('mongoose').Types.ObjectId
-const bookingModel = require('../models/laundryBooking')
+const bookingModel = require('../models/Bookings')
 const nannoId = require('nanoid/non-secure')
 module.exports = {
     registerOwner: async (request, response) => {
@@ -452,7 +452,9 @@ module.exports = {
             // let data = nannoId()
     
             console.log('requeyi',request.body);
-            // let booking = await bookingModel
+            let booking = await bookingModel(request.body).save()
+            console.log('booibd',booking);
+            
             
         } catch (error) {
             console.log(error);
