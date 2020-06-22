@@ -15,7 +15,8 @@ const otp = require('../models/otp')
 const universal = require('../../app/UnivershalFunctions/Univershalfunctions')
 let ObjectId = require('mongoose').Types.ObjectId
 const bookingModel = require('../models/Bookings')
-const nannoId = require('nanoid/non-secure')
+const userModel = require('../models/User')
+let uuid = require('uid-safe')
 module.exports = {
     registerOwner: async (request, response) => {
         try {
@@ -59,7 +60,9 @@ module.exports = {
         }
     },
     loginOwner: async (request, response) => {
-        const ownwer = await laundryModel.findOne({ phoneNumber: request.body.phoneNumber })
+        const ownwer = await laundryModel.findOne({ $and:[{phoneNumber:request.body.phoneNumber},{countryCode:request.body.countryCode}]})
+        console.log('ownnw',ownwer);
+        
         if (ownwer == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_PHONE_PASSWORD });
         const compare = bcrypt.compareSync(request.body.password, ownwer.password)
         if (compare == true) {
@@ -451,9 +454,13 @@ module.exports = {
             // console.log('jdlkasldjasld');
             // let data = nannoId()
     
-            console.log('requeyi',request.body);
-            let booking = await bookingModel(request.body).save()
-            console.log('booibd',booking);
+            // console.log('requeyi',uid());
+          
+            let data = uuid.sync(9)
+            let user = await userModel.findOne({$and:[{completePhoneNumber:request.body.completePhoneNumber},{completePhoneNumber:false}]})
+            
+            // let booking = await bookingModel(request.body).save()
+            // console.log('booibd',booking);
             
             
         } catch (error) {

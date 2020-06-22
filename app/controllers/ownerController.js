@@ -21,6 +21,7 @@ exports.register = async(request,response)=>{
 exports.login=async(request,response)=>{
     request.checkBody('phoneNumber',AppConstraints.PHONE_NUMBER).notEmpty();
     request.checkBody('password',AppConstraints.PASSWORD).notEmpty();
+    request.checkBody('countryCode',AppConstraints.REQUIRED_COUNTRY).notEmpty()
     let errors = request.validationErrors();
     if (errors){ return response.status(400).json({statusCode:400,success:0 , msg: errors[0].msg, error:errors})}
     const laundry = await ownwerServices.loginOwner(request,response)
