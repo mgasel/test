@@ -131,7 +131,9 @@ exports.getLists = async(request,response)=>{
     return response.json(list)
 }
 exports.createBooking = async(request,response)=>{
-    // let bookings = await ownwerServices.bookings(request,response)
+    // console.log('sadslkasdj');
+    
+    let bookings = await ownwerServices.createBookings(request,response)
     // return response.json(bookings)
 }
 exports.itemPrice = async(request,response)=>{

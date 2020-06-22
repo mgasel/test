@@ -148,6 +148,10 @@ slotId:                             { type:Schema.Types.ObjectId,ref:"slots"},
 
 isRescheduledBookingByUserDate:     { type:Number,default:0 },
 
+customerNumber:{type:String},
+
+customerName :{type:String},
+
 subplanid:{ type:Schema.Types.ObjectId,ref:'subscriptionPlan' },
 
     isReviewd: {type:Boolean, required:true, default:false}

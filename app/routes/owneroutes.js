@@ -22,13 +22,13 @@ module.exports= function(app){
     app.post('/owner/services',ownerController.addServices)
     app.post('/owner/serviceItem',ownerController.addServiceItem)
     app.post('/owner/getServicesList',ownerController.ownwerServicesList)
-    app.post('/owner/addService',ownerController.updateServices)
+    app.post('/owner/addService',authenticattion.verifyOwnerBranch,ownerController.updateServices)
     app.post('/owner/find',ownerController.findEmailPhone)
     app.post('/owner/delete',ownerController.delete)
     app.put('/owner/updatePrice',authenticattion.verifyOwnerBranch,ownerController.updaetPrice)
     // app.post('/owner/getServices')
     app.post('/owner/service',ownerController.getLists)
-    // app.post('/owner/createBookings',ownerController.createBooking)
-    app.post('/owner/laundryItemPrice',ownerController.itemPrice) // listing item price
+    app.post('/owner/createBookings',ownerController.createBooking)
+    app.post('/owner/laundryItemPrice',authenticattion.verifyOwnerBranch,ownerController.itemPrice) // listing item price
     
 }

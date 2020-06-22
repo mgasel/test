@@ -14,6 +14,8 @@ const authToken = require('../../config/authenticate')
 const otp = require('../models/otp')
 const universal = require('../../app/UnivershalFunctions/Univershalfunctions')
 let ObjectId = require('mongoose').Types.ObjectId
+const bookingModel = require('../models/laundryBooking')
+const nannoId = require('nanoid/non-secure')
 module.exports = {
     registerOwner: async (request, response) => {
         try {
@@ -161,6 +163,7 @@ module.exports = {
             if (findEmailPassword.length != 0) {
                 if (findEmailPassword[0]._id.toString() != request.body.id) return ({ statusCode: 200, success: 1, msg: AppConstraints.EMAIL_NUMBER_USED })
             }
+            request.body.isVerified = false
         }
         if (find == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_ID })
         if (request.files) {
@@ -440,6 +443,19 @@ module.exports = {
             if(itemPrice==null) return response.json({ statusCode: 400, success: 0,  msg :AppConstraints.VALID_ID })
             return ({ statusCode: 200, success: 1, priceList:itemPrice })
         } catch (error) {
+            
+        }
+    },
+    createBookings:async(request,response)=>{
+        try {
+            // console.log('jdlkasldjasld');
+            // let data = nannoId()
+    
+            console.log('requeyi',request.body);
+            // let booking = await bookingModel
+            
+        } catch (error) {
+            console.log(error);
             
         }
     }
