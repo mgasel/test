@@ -436,7 +436,7 @@ module.exports = {
         console.log('innnnsahadgsh');
         
         try {
-            let itemPrice = await laundryItemsModel.findOne({$and:[{categoryId:request.body.categoryId},{serviceId:request.body.serviceId},{laundryId:request.body.laundryId}]})
+            let itemPrice = await laundryItemsModel.find({$and:[{categoryId:request.body.categoryId},{serviceId:request.body.serviceId},{laundryId:request.body.laundryId}]})
             if(itemPrice==null) return response.json({ statusCode: 400, success: 0,  msg :AppConstraints.VALID_ID })
             return ({ statusCode: 200, success: 1, priceList:itemPrice })
         } catch (error) {
