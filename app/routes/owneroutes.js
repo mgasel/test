@@ -28,5 +28,7 @@ module.exports= function(app){
     app.put('/owner/updatePrice',authenticattion.verifyOwnerBranch,ownerController.updaetPrice)
     // app.post('/owner/getServices')
     app.post('/owner/service',ownerController.getLists)
+    // app.post('/owner/createBookings',ownerController.createBooking)
+    app.post('/owner/laundryItemPrice',) // listing item price
     
 }

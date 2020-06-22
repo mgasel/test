@@ -5,6 +5,7 @@ const categoryModel = require('../models/serviceItemCategory')
 const serviceItemModel = require('../models/serviceItems')
 const laundryItemsModel = require('../models/laundryItems')
 const AppConstraints = require('../../config/appConstraints')
+const laundryBooking = require('../models/laundryBooking')
 const otpModel = require('../models/otp')
 const laundryServiceModel = require('../models/laundryService')
 const bcrypt = require('bcrypt')
@@ -306,10 +307,10 @@ module.exports = {
             
         }
     },
-    updateLaundryServices: async (request, response) => {
+ updateLaundryServices: async (request, response) => {
         try {
             console.log('innnn');
-            
+
             // laundry = await laundryModel.findOne({ _id: request.body.id })
             // if (laundry == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_LAUNDRY_ID })
             if (request.body.services) {
@@ -326,7 +327,9 @@ module.exports = {
                             laundryId:request.body.id
                         }
                         let save = await laundryServiceModel(laundryServices).save()
-                        await laundryModel.update({_id:request.body.id},{$push:{laundryServices:save._id}}) // add services in launderies
+                        console.log('..............................');
+                        
+                        await laundryModel.findByIdAndUpdate({_id:request.body.id},{$push:{laundryServices:save._id}}) // add services in launderies
                        await object.serviceCategory.map(async(categories,index)=>{           
                             let findItems = await serviceItemModel.find({$and:[{serviceId:object.serviceId},{categoryId:categories}]})
                            await findItems.map(async(laundryServiceItems)=>{
@@ -345,6 +348,9 @@ module.exports = {
                             })
                           
                         })
+                        laundry = await laundryModel.findOne({_id:request.body.id}).populate({path:'laundryServices',populate:{path:"serviceCategory"}})
+                       return response.json({ statusCode: 200, success: 1, Laundry: laundry })
+
                 })
               
             }
@@ -378,10 +384,10 @@ module.exports = {
                    
                     
                 })
-                
+                return response.json({ statusCode: 200, success: 1, services: AppConstraints.SERVICES_ADDED })
             }
     
-            return response.json({ statusCode: 200, success: 1, services: AppConstraints.SERVICES_ADDED })
+          
                         
        
 
@@ -423,5 +429,13 @@ module.exports = {
         }
         let list = await servicesModel.find({})
         return ({ statusCode: 200, success: 1, List:list })
+    },
+    itemsPrice:async(request,response)=>{
+        
+        try {
+            let itemPrice = await laundryItemsModel.find({$and:[{categoryId:request.body.categoryId,serviceId:request.body.serviceId,}]})
+        } catch (error) {
+            
+        }
     }
 }

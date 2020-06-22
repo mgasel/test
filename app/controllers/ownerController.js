@@ -130,3 +130,10 @@ exports.getLists = async(request,response)=>{
     let list = await ownwerServices.listing(request,response)
     return response.json(list)
 }
+exports.createBooking = async(request,response)=>{
+    // let bookings = await ownwerServices.bookings(request,response)
+    // return response.json(bookings)
+}
+exports.itemPrice = async(request,response)=>{
+    let price = await ownwerServices.itemsPrice(request,response)
+}
