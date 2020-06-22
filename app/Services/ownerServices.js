@@ -185,7 +185,9 @@ module.exports = {
         }
         if (request.body.password) {
             if (!request.body.newPassword) return ({ statusCode: 400, success: 0, msg: AppConstraints.ENTER_NEW_PASSWORD })
-            const comparePassword = await bcrypt.compare(request.body.password, find.password)
+            console.log('kjjds',find[0].password);
+            
+            const comparePassword = await bcrypt.compare(request.body.password, find[0].password)
             console.log('jdss', comparePassword);
 
             if (comparePassword == false) return ({ statusCode: 400, success: 0, msg: AppConstraints.PASSWORD_AND_CONFIRM_PASSWORD })
@@ -431,9 +433,15 @@ module.exports = {
         return ({ statusCode: 200, success: 1, List:list })
     },
     itemsPrice:async(request,response)=>{
+        console.log('innnnsahadgsh');
         
         try {
-            let itemPrice = await laundryItemsModel.find({$and:[{categoryId:request.body.categoryId,serviceId:request.body.serviceId,}]})
+            let itemPrice = await laundryItemsModel.find({$and:[{categoryId:request.body.categoryId,serviceId:request.body.serviceId}]})
+            console.log('tee',itemPrice);
+            
+
+            if(itemPrice==null) return response.json({ statusCode: 400, success: 0,  msg :AppConstraints.VALID_ID })
+            return ({ statusCode: 200, success: 1, priceList:itemPrice })
         } catch (error) {
             
         }

@@ -136,4 +136,5 @@ exports.createBooking = async(request,response)=>{
 }
 exports.itemPrice = async(request,response)=>{
     let price = await ownwerServices.itemsPrice(request,response)
+    return response.json({price})
 }

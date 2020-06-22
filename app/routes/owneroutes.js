@@ -29,6 +29,6 @@ module.exports= function(app){
     // app.post('/owner/getServices')
     app.post('/owner/service',ownerController.getLists)
     // app.post('/owner/createBookings',ownerController.createBooking)
-    app.post('/owner/laundryItemPrice',) // listing item price
+    app.post('/owner/laundryItemPrice',ownerController.itemPrice) // listing item price
     
 }
