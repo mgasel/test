@@ -444,5 +444,5 @@ module.exports={
    UPDATE_PRICE : {EN:'Price upadted sucessfully',AR:'تم تحديث السعر بنجاح'},
    EMPTY:{EN:"List Empty",AR:'القائمة فارغة'},
    VALID_ID:{EN:"Please enter valid ID",AR:'يرجى إدخال معرف صالح'},
-   
+   DRIVER_NOT_FOUND:{EN:"Driver not found",AR:'لم يتم العثور على السائق'}
 }
