@@ -443,5 +443,6 @@ module.exports={
    SERVICES_ADDED:{EN:'Services added sucessfully',AR:'تمت إضافة الخدنة بنجاح'},
    UPDATE_PRICE : {EN:'Price upadted sucessfully',AR:'تم تحديث السعر بنجاح'},
    EMPTY:{EN:"List Empty",AR:'القائمة فارغة'},
-   VALID_ID:{EN:"Please enter valid ID",AR:'يرجى إدخال معرف صالح'}
+   VALID_ID:{EN:"Please enter valid ID",AR:'يرجى إدخال معرف صالح'},
+   
 }

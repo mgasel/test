@@ -394,7 +394,27 @@ module.exports = {
                 })
                 return response.json({ statusCode: 200, success: 1, services: AppConstraints.SERVICES_ADDED })
             }
-    
+            if(request.body.emptyServices){
+                laundry = await laundryModel.findOne({ _id: request.body.id })
+                console.log('asndasdasdashdkasl');
+                
+                if (laundry == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_LAUNDRY_ID })
+                await request.body.emptyServices.map(async(object,index)=>{
+                    let findService = await servicesModel.findOne({_id:object.serviceId})
+                    let laundryServices = {
+                        serviceName:findService.serviceName,
+                        servicePic:findService.servicePic,
+                        hexString:findService.hexString,
+                        serviceCategory:object.serviceCategory,
+                        laundryId:request.body.id
+                    }
+                    let save = await laundryServiceModel(laundryServices).save()
+                    await laundryModel.findByIdAndUpdate({_id:request.body.id},{$push:{laundryServices:save._id}})
+
+                })
+                laundry = await laundryModel.findOne({_id:request.body.id}).populate({path:'laundryServices',populate:{path:"serviceCategory"}})
+                return response.json({ statusCode: 200, success: 1, Laundry: laundry })
+            }
           
                         
        
@@ -451,16 +471,25 @@ module.exports = {
     },
     createBookings:async(request,response)=>{
         try {
-            // console.log('jdlkasldjasld');
-            // let data = nannoId()
-    
-            // console.log('requeyi',uid());
           
-            let data = uuid.sync(9)
-            let user = await userModel.findOne({$and:[{completePhoneNumber:request.body.completePhoneNumber},{completePhoneNumber:false}]})
+          
+            request.body.orderId = uuid.sync(4)
+            let user = await userModel.findOne({$and:[{completePhoneNumber:request.body.completePhoneNumber},{isDeleted:false}]})
+            // if(user == null
+            request.body.userId = user._id
+            let totalAmount = 0
+            await request.body.bookingData.map(async(values,index)=>{
+                await values.serviceItem.map((service,index)=>{
+                 
+                    totalAmount +=service.serviceItemPrice * service.serviceItemQuantity
+                    
+                })
+            })
+            request.body.totalAmount = totalAmount
             
-            // let booking = await bookingModel(request.body).save()
-            // console.log('booibd',booking);
+            
+            let booking = await bookingModel(request.body).save()
+            return ({ statusCode: 200, success: 1, msg:AppConstraints.BOOKING_ACCEPTED,Booking:booking })
             
             
         } catch (error) {

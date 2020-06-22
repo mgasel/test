@@ -147,10 +147,9 @@ deliveryTimeNotAvailable:           { type:Boolean,default:false },
 slotId:                             { type:Schema.Types.ObjectId,ref:"slots"},
 
 isRescheduledBookingByUserDate:     { type:Number,default:0 },
-
-customerNumber:{type:String},
-
-customerName :{type:String},
+bagNo:{type:String},
+orderType:{type:String},
+deliveryChoice:{type:String},
 
 subplanid:{ type:Schema.Types.ObjectId,ref:'subscriptionPlan' },
 
