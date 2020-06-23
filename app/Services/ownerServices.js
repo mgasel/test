@@ -479,19 +479,19 @@ module.exports = {
     createBookings:async(request,response)=>{
         try {
           
-            let nearDriver = await userModel.findOne({$and:[{    currentLocation:
-                { $near :
-                   {
-                     $geometry: { type: "Point",  coordinates: [30.712905, 
-                        76.709302 ] },
-                     $minDistance: 0,
-                     $maxDistance: 10000
-                   }
-                }},{ userType : "DRIVER"},{isOnline : true},{isAvailable: true}]})
+            // let nearDriver = await userModel.findOne({$and:[{    currentLocation:
+            //     { $near :
+            //        {
+            //          $geometry: { type: "Point",  coordinates: [30.712905, 
+            //             76.709302 ] },
+            //          $minDistance: 0,
+            //          $maxDistance: 10000
+            //        }
+            //     }},{ userType : "DRIVER"},{isOnline : true},{isAvailable: true}]})
 
-            console.log('neq',nearDriver);
-            if(nearDriver == null)  return ({ statusCode: 400, success: 1, msg:AppConstraints.DRIVER_NOT_AVAILABLE }) 
-            request.body.driverId = nearDriver._id
+            // console.log('neq',nearDriver);
+            // if(nearDriver == null)  return ({ statusCode: 400, success: 1, msg:AppConstraints.DRIVER_NOT_AVAILABLE }) 
+            // request.body.driverId = nearDriver._id
             request.body.orderId = uuid.sync(4)
             let user = await userModel.findOne({$and:[{completePhoneNumber:request.body.completePhoneNumber},{isDeleted:false}]})
             
