@@ -19,6 +19,7 @@ const redisClient = redis.createClient({host : 'localhost', port : 6379});
 const Bootstrap=require('./app/Utils/Bootstrap.js');
 const Socket=require('./app/LIB/SocketManager.js');
 const Scheduler=require('./app/LIB/scheduler.js');
+const ScheduleBooking = require('./app/LIB/ownerCron.js')
 app.use('/api-docs-User', swaggerUi.serve, swaggerUi.setup(swaggerDocumentUser));
 app.use('/api-docs-Driver',swaggerUi.serve,swaggerUi.setup(swaggerDocumentDriver));
 app.use('/api-docs-Admin',swaggerUi.serve, swaggerUi.setup(swaggerDocumentAdmin));
@@ -83,6 +84,7 @@ Scheduler.changeStatusSheduler();
 Scheduler.inAppNotificationToUser();
 Scheduler.changeStatusShedulerUser()
 Scheduler.autoRenewFunction()
+ScheduleBooking.assignDriver()
 // Scheduler.backupScheduler();
 
 server.listen(app.get('port'),function() {
