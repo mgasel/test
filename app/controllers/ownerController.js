@@ -149,3 +149,14 @@ exports.laundryServices = async(request,response)=>{
     let laundryServices = await ownwerServices.laundryService(request,response)
     return response.json(laundryServices)
 }
+exports.getBooking = async(request,response)=>{
+    request.checkBody('id',AppConstraints.INVALID_ID).notEmpty();
+    let errors = request.validationErrors();
+    if (errors){ return response.status(400).json({statusCode:400,success:0 , msg: errors[0].msg, error:errors})}
+    let bookings = await ownwerServices.getBookings(request,response)
+    return response.json(bookings)
+}
+exports.ordersById = async(request,response)=>{
+    let bookings = await await ownwerServices.getOrderById(request,response)
+    return response.json(bookings)
+}

@@ -1,6 +1,9 @@
 const cron = require('node-cron')
 const bookingModel = require('../models/Bookings')
 const userModel = require('../models/User')
+const FCM = require('fcm-node')
+const serverKey = 'AIzaSyCqXl2CnsIZSKmxOlfAhXzRuW8qsZLWLa0'
+// const fcm = new FC
 exports.assignDriver = async()=>{
     cron.schedule('* * * * *', async ()=> {
 

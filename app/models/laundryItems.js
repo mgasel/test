@@ -33,7 +33,7 @@ let laundaryItems=Schema({
    
     createDate:{ type:Date,default:Date.now},
 
-
+    vendorItemId:{type:Schema.Types.ObjectId, ref:'serviceItems'}
 });
 
 

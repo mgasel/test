@@ -32,6 +32,8 @@ module.exports= function(app){
     app.post('/owner/laundryItemPrice',authenticattion.verifyOwnerBranch,ownerController.itemPrice) // listing item price
     app.post('/owner/laundryData',authenticattion.verifyOwnerBranch,ownerController.laundryDetails)
     app.post('/owner/laundryDetails',authenticattion.verifyOwnerBranch,ownerController.laundryServices)
-
+    app.post('/owner/getBookings',authenticattion.verifyOwnerBranch,ownerController.getBooking)
+    app.get('/owner/booking/:orderId',authenticattion.verifyOwnerBranch,ownerController.ordersById)
     
+
 }

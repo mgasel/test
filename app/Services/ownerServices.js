@@ -334,12 +334,15 @@ module.exports = {
                 await request.body.services.map(async(object)=>{
                     
                     let findService = await servicesModel.findOne({_id:object.serviceId})
+                    console.log('finnnd',findService);
+                    
                         let laundryServices = {
                             serviceName:findService.serviceName,
                             servicePic:findService.servicePic,
                             hexString:findService.hexString,
                             serviceCategory:object.serviceCategory,
-                            laundryId:request.body.id
+                            laundryId:request.body.id,
+                            vendorServiceId:findService._id
                         }
                         let save = await laundryServiceModel(laundryServices).save()
                         console.log('..............................');
@@ -356,9 +359,9 @@ module.exports = {
                                     categoryId:laundryServiceItems.categoryId,
                                     serviceId:save._id,
                                     series : laundryServiceItems.series,
-                                    laundryId : request.body.id
+                                    laundryId : request.body.id,
+                                    vendorItemId:laundryServiceItems._id
                                 }
-                                
                                 let savesItems = await laundryItemsModel(items).save()
                             })
                           
@@ -391,7 +394,8 @@ module.exports = {
                             categoryId:category,
                             serviceId:request.body.serviceCategory.launderyServiceId,
                             series : laundryServiceItems.series,
-                            laundryId:  request.body.serviceCategory.id
+                            laundryId:  request.body.serviceCategory.id,
+                            vendorItemId:laundryServiceItems._id
                         }
                         let savesItems = await laundryItemsModel(items).save()
                     })
@@ -413,7 +417,8 @@ module.exports = {
                         servicePic:findService.servicePic,
                         hexString:findService.hexString,
                         serviceCategory:object.serviceCategory,
-                        laundryId:request.body.id
+                        laundryId:request.body.id,
+                        vendorServiceId:findService._id
                     }
                     let save = await laundryServiceModel(laundryServices).save()
                     await laundryModel.findByIdAndUpdate({_id:request.body.id},{$push:{laundryServices:save._id}})
@@ -588,6 +593,24 @@ module.exports = {
         if(request.body.status=='serviceItems'){
             let serviceItems = await laundryItemsModel.find({$and:[{categoryId:request.body.categoryId},{serviceId:request.body.serviceId},{laundryId:request.body.id}]})
             return ({ statusCode: 200, success: 1, Serviceitems:serviceItems })
+        }
+    },
+    getBookings:async(request,response)=>{
+        try {
+            let booking = await bookingModel.find({laundryId:request.body.id})
+            return ({ statusCode: 200, success: 1, Booking:booking })
+        } catch (error) {
+            return ({ statusCode: 400, success: 0, msg: error }); 
+        }
+    },
+    getOrderById:async(request,response)=>{
+        try {
+            console.log('order id',request.params.orderId);
+            
+            let booking = await bookingModel.findOne({orderId:request.params.orderId})
+            return ({ statusCode: 200, success: 1, Booking:booking })
+        } catch (error) {
+            
         }
     }
 }

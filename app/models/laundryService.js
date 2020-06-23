@@ -53,6 +53,10 @@ let laundryService=Schema({
     createDate:{
         type:Date,
         default:Date.now
+    },
+    vendorServiceId:{
+        type:Schema.Types.ObjectId,
+        ref:'Service'
     }
 });
 
