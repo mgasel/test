@@ -554,7 +554,7 @@ module.exports = {
         return ({ statusCode: 200, success: 1, Laundry:laundry })
         }
         if(request.body.status=='category'){
-            let category = await laundryServiceModel.findOne({_id:request.body.id}).populate('serviceCategory')
+            let category = await laundryServiceModel.findOne({$and:[{_id:request.body.serviceId},{laundryId:request.body.id}]}).populate('serviceCategory')
             return ({ statusCode: 200, success: 1, Category:category })
         }
         if(request.body.status=='serviceItems'){
