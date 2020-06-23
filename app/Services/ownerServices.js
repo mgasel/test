@@ -605,12 +605,43 @@ module.exports = {
     },
     getOrderById:async(request,response)=>{
         try {
-            console.log('order id',request.params.orderId);
+            
             
             let booking = await bookingModel.findOne({orderId:request.params.orderId})
             return ({ statusCode: 200, success: 1, Booking:booking })
         } catch (error) {
             
         }
+    },
+    deleteServices:async(request,response)=>{
+        try {
+            if(request.body.status=='service'){
+                findService = await laundryModel.findOne({$and:[{_id:request.body.id},{laundryServices:request.body.serviceId}]})
+                console.log('findServices',findService);
+                if(findService == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.VALID_ID });
+                await laundryModel.update({_id:findService._id},{$pull:{laundryServices:request.body.serviceId}})
+                await laundryServiceModel.deleteOne({$and:[{laundryId:findService._id},{_id:request.body.serviceId}]})
+                await laundryItemsModel.deleteMany({$and:[{laundryId:findService._id},{serviceId:request.body.serviceId}]})
+                return ({ statusCode: 200, success: 1, msg:AppConstraints.DELETED }) 
+            }
+            if(request.body.status=='category'){
+                let findCategory = await laundryServiceModel.findOne({$and:[{laundryId:request.body.id},{serviceCategory:request.body.categoryId},{_id:request.body.serviceId}]})
+                console.log('find category',findCategory);
+                
+                if(findCategory == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.VALID_ID });
+               await laundryServiceModel.update({_id:findCategory._id},{$pull:{serviceCategory:request.body.categoryId}})
+            //   let data = await laundryItemsModel.find({$and:[{laundryId:request.body.id},{serviceId:request.body.serviceId},{categoryId:request.body.categoryId}]})
+            // let data = await laundryItemsModel.find({$and:[{laundryId:request.body.id},{serviceId:request.body.serviceId},{categoryId:request.body.categoryId}]})
+
+            //   console.log('data',data);
+              
+               await laundryItemsModel.deleteMany({$and:[{laundryId:request.body.id},{serviceId:request.body.serviceId},{categoryId:request.body.categoryId}]})
+               return ({ statusCode: 200, success: 1, msg:AppConstraints.DELETED }) 
+            }
+        } catch (error) {
+            console.log('error',error);
+            
+        }
     }
+    
 }

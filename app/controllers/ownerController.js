@@ -157,6 +157,10 @@ exports.getBooking = async(request,response)=>{
     return response.json(bookings)
 }
 exports.ordersById = async(request,response)=>{
-    let bookings = await await ownwerServices.getOrderById(request,response)
+    let bookings =  await ownwerServices.getOrderById(request,response)
     return response.json(bookings)
+}
+exports.deleteService = async(request,response)=>{
+    let services = await ownwerServices.deleteServices(request,response)
+    response.json(services)
 }

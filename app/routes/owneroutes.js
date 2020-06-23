@@ -34,6 +34,7 @@ module.exports= function(app){
     app.post('/owner/laundryDetails',authenticattion.verifyOwnerBranch,ownerController.laundryServices)
     app.post('/owner/getBookings',authenticattion.verifyOwnerBranch,ownerController.getBooking)
     app.get('/owner/booking/:orderId',authenticattion.verifyOwnerBranch,ownerController.ordersById)
+    app.delete('/owner/service',authenticattion.verifyOwnerBranch,ownerController.deleteService)
     
 
 }
