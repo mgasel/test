@@ -84,7 +84,7 @@ Scheduler.changeStatusSheduler();
 Scheduler.inAppNotificationToUser();
 Scheduler.changeStatusShedulerUser()
 Scheduler.autoRenewFunction()
-ScheduleBooking.assignDriver()
+// ScheduleBooking.assignDriver()
 // Scheduler.backupScheduler();
 
 server.listen(app.get('port'),function() {
