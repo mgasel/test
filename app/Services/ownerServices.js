@@ -160,18 +160,9 @@ module.exports = {
                     { $and: [{ phoneNumber: request.body.phoneNumber, isDeleted: false }] }    
                 )
             if (findEmailPassword.length != 0) {
-                if (findEmailPassword[0]._id.toString() != request.body.id) return ({ statusCode: 400, success: 0, msg: AppConstraints.EMAIL_NUMBER_USED })
+                if (findEmailPassword[0]._id.toString() != request.body.id) return ({ statusCode: 200, success: 1, msg: AppConstraints.EMAIL_NUMBER_USED })
             }
             request.body.isVerified = false
-        }
-        if(request.body.email){
-            let findEmailPassword = await laundryModel.find(
-                { $and: [{ email: request.body.email, isDeleted: false }] }    
-            )
-        if (findEmailPassword.length != 0) {
-            if (findEmailPassword[0]._id.toString() != request.body.id) return ({ statusCode: 400, success: 0, msg: AppConstraints.EMAIL_NUMBER_USED })
-        }
-        // request.body.isVerified = false
         }
         if (find == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_ID })
         if (request.files) {
