@@ -507,13 +507,59 @@ module.exports = {
             request.body.totalAmount = totalAmount
             request.body.status = 'CONFIRMED'
             
-            let booking = await bookingModel(request.body).save()
+            let booking = await bookingModel(rlaundryServices.categoryequest.body).save()
             return ({ statusCode: 200, success: 1, msg:AppConstraints.BOOKING_ACCEPTED,Booking:booking })
             
             
         } catch (error) {
             console.log(error);
             
+        }
+    },
+    laundryDetails:async(request,response)=>{
+        let laudry = await laundryModel.aggregate([
+            {$match:{_id:ObjectId(request.body.id)}},
+            {
+                $lookup: {
+                    from: 'laundryservices',
+                    localField: "laundryServices",
+                    foreignField: "_id",
+                    as: 'laundryServices'
+                } 
+            },
+            { $unwind:{path: "$laundryServices",    preserveNullAndEmptyArrays: true
+        } },
+        {
+            $lookup: {
+                from: 'servicecategories',
+                localField: "laundryServices.serviceCategory",
+                foreignField: "_id",
+                as: 'laundryServices.category'
+            } 
+        },
+            { $unwind:{path: "$laundryServices.category",    preserveNullAndEmptyArrays: true
+        } },
+        {$group:{
+            _id : "$_id",
+            // name: { $first: "$serviceName" },
+            // serviceNameAr : {$first:"$serviceNameAr"},
+            laundryServices: { $push: "$laundryServices" }
+        }}
+        ])
+        response.json(laudry)
+    },
+    laundryService:async(request,response)=>{
+        if(request.body.status=='service'){
+        let laundry = await laundryModel.findOne({$and:[{_id:request.body.id},{isDeleted:false}]}).populate('laundryServices')
+        return ({ statusCode: 200, success: 1, Laundry:laundry })
+        }
+        if(request.body.status=='category'){
+            let category = await laundryServiceModel.findOne({_id:request.body.id}).populate('serviceCategory')
+            return ({ statusCode: 200, success: 1, Category:category })
+        }
+        if(request.body.status=='serviceItems'){
+            let serviceItems = await laundryItemsModel.find({$and:[{categoryId:request.body.categoryId},{serviceId:request.body.serviceId},{laundryId:request.body.id}]})
+            return ({ statusCode: 200, success: 1, Serviceitems:serviceItems })
         }
     }
 }

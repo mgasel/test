@@ -30,5 +30,8 @@ module.exports= function(app){
     app.post('/owner/service',ownerController.getLists)
     app.post('/owner/createBookings',ownerController.createBooking)
     app.post('/owner/laundryItemPrice',authenticattion.verifyOwnerBranch,ownerController.itemPrice) // listing item price
+    app.post('/owner/laundryDetails',authenticattion.verifyOwnerBranch,ownerController.laundryDetails)
+    app.post('/owner/laundryDetails',authenticattion.verifyOwnerBranch,ownerController.laundryServices)
+
     
 }

@@ -141,3 +141,11 @@ exports.itemPrice = async(request,response)=>{
     let price = await ownwerServices.itemsPrice(request,response)
     return response.json({price})
 }
+exports.laundryDetails = async(request,response)=>{
+    let laundryDescription = await ownwerServices.laundryDetails(request,response)
+    return response.json(laundryDescription)
+}
+exports.laundryServices = async(request,response)=>{
+    let laundryServices = await ownwerServices.laundryService(request,response)
+    return response.json(laundryServices)
+}
