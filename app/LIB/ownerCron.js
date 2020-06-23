@@ -24,10 +24,6 @@ exports.assignDriver = async()=>{
           await userModel.update({_id:nearDriver._id},{isAvailable: false})
         }
       })
- 
-      
-
-
     })
 
 } 
