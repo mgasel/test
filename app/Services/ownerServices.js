@@ -68,7 +68,7 @@ module.exports = {
             if (compare == true) {
                 let token = await authToken.generateOwnwerToken(ownwer)
                 console.log('sucessful login===============>>>>>>>');
-                console.log('owner',owner);
+                console.log('owner',ownwer);
                 return ({ statusCode: 200, success: 1, msg: AppConstraints.LOGIN_SUCESSFULL, ownwer: ownwer, token: token })
             }
             return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_PHONE_PASSWORD })
