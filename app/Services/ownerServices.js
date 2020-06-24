@@ -163,7 +163,7 @@ module.exports = {
             if (findEmailPassword.length != 0) {
                 if (findEmailPassword[0]._id.toString() != request.body.id) return ({ statusCode: 200, success: 1, msg: AppConstraints.EMAIL_NUMBER_USED })
             }
-            request.body.isVerified = false
+            // request.body.isVerified = false
         }
         if (request.body.email ) {
             let findEmailPassword = await laundryModel.find(
