@@ -471,7 +471,7 @@ module.exports = {
             let list = await servicesModel.findOne({_id:request.body.id}).populate('serviceCategory')
             return ({ statusCode: 200, success: 1, List:list })
         }
-        let list = await servicesModel.find({}).populate('serviceCategory')
+        let list = await servicesModel.find({})
         return ({ statusCode: 200, success: 1, List:list })
     },
     itemsPrice:async(request,response)=>{
