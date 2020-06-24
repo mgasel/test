@@ -524,7 +524,7 @@ module.exports = {
             request.body.totalAmount = totalAmount
             request.body.status = 'CONFIRMED'
             
-            let booking = await bookingModel(rlaundryServices.categoryequest.body).save()
+            let booking = await bookingModel(request.body).save()
             return ({ statusCode: 200, success: 1, msg:AppConstraints.BOOKING_ACCEPTED,Booking:booking })
             
             
@@ -574,7 +574,7 @@ module.exports = {
                          }
                       }
                    },
-                //    { $project: { stock_item: 0, _id: 0 } }
+                //    { $group: {  _id: "$_id",laundryServices:{$addToSet:"$laundryServices"} } },
                 ],
                 as: 'laundryServices.serviceCategory.serviceItems'
             }
@@ -583,11 +583,15 @@ module.exports = {
         {$group:{
             _id : "$_id",
             laundryName: { $first: "$laundryName" },
-            // laundryServices:{$push:"$laundryServices"},
-            laundryServices:{$push:"$laundryServices"}
+            laundryServices:{$push:"$laundryServices"},
+            "$laundryServices.serviceCategory":{$push:"$laundryServices.serviceCategory"},
+            // serviceItems:{$push:"$laundryServices.serviceCategory.serviceItems"},
+           
+           
             // laundryService:{$addToSet:"$laundryServices."}
             // laundryServices: {$addToSet : "$laundryServices" }
         }},
+
         // {$project:{
         //     _id : 1,
         //     laundryName: 1,

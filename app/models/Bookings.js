@@ -64,6 +64,8 @@ deliveryLat:                        {   type:Number,default:0.0 },
 
 deliveryLat:                        {   type:Number,default:0.0 },
 
+deliveryLong :                      {   type:Number,default:0.0 },
+
 deliveryLocation:                   {   type:[Number],index: '2dsphere' },
 
 orderId:                            {   type:String,default:"" },
