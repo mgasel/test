@@ -407,8 +407,7 @@ module.exports = {
             }
             if(request.body.emptyServices){
                 laundry = await laundryModel.findOne({ _id: request.body.id })
-                console.log('asndasdasdashdkasl');
-                
+             
                 if (laundry == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_LAUNDRY_ID })
                 await request.body.emptyServices.map(async(object,index)=>{
                     let findService = await servicesModel.findOne({_id:object.serviceId})
@@ -422,10 +421,11 @@ module.exports = {
                     }
                     let save = await laundryServiceModel(laundryServices).save()
                     await laundryModel.findByIdAndUpdate({_id:request.body.id},{$push:{laundryServices:save._id}})
-
-                })
-                laundry = await laundryModel.findOne({_id:request.body.id}).populate({path:'laundryServices',populate:{path:"serviceCategory"}})
-                return response.json({ statusCode: 200, success: 1, Laundry: laundry })
+                    let laundryData = await laundryModel.findOne({_id:request.body.id}).populate('laundryServices')
+                    return response.json({ statusCode: 200, success: 1, Laundry: laundryData })
+                }
+                )
+           
             }
           
                         
