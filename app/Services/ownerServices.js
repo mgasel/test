@@ -464,7 +464,7 @@ module.exports = {
     listing:async(request,response)=>{
         // let list = await servicesModel.find()
         if(request.body.id&&request.body.categoryId){
-            let serviceItems = await serviceItemModel.find({$and:[{serviceId:request.body.id},{categoryId:request.body.categoryId}]})
+            let serviceItems = await serviceItemModel.find({$and:[{serviceId:request.body.id},{categoryId:request.body.categoryId}]}).populate('serviceCategory')
             return ({ statusCode: 200, success: 1, ServiceItems:serviceItems })
         }
         if(request.body.id){
@@ -546,38 +546,40 @@ module.exports = {
                 as: 'laundryServices.serviceCategory'
             } 
         },
-            { $unwind:{path: "$laundryServices.serviceCategory",    preserveNullAndEmptyArrays: true
-        } },
-        {
-            $lookup: {
-                from: 'laundaryitems',
-                  let: { categoryId: "$laundryServices.serviceCategory._id", serviceId: "$laundryServices._id" },
-                // let: { categoryId: "$category._id" },
+        //     { $unwind:{path: "$laundryServices.serviceCategory",    preserveNullAndEmptyArrays: true
+        // } },
+        // {
+        //     $lookup: {
+        //         from: 'laundaryitems',
+        //           let: { categoryId: "$laundryServices.serviceCategory._id", serviceId: "$laundryServices._id" },
+        //         // let: { categoryId: "$category._id" },
 
-                pipeline: [
-                   { $match:
-                      { $expr:
-                         { $and:
-                            [
-                              { $eq: [ "$categoryId",  "$$categoryId" ] },
-                        //    { $eq: [ "$serviceId",  "$$serviceId" ] },
+        //         pipeline: [
+        //            { $match:
+        //               { $expr:
+        //                  { $and:
+        //                     [
+        //                       { $eq: [ "$categoryId",  "$$categoryId" ] },
+        //                 //    { $eq: [ "$serviceId",  "$$serviceId" ] },
 
-                            ]
-                         }
-                      }
-                   },
-                ],
-                as: 'laundryServices.serviceCategory.serviceItems'
-            }
-        },
+        //                     ]
+        //                  }
+        //               }
+        //            },
+        //         ],
+        //         as: 'laundryServices.serviceCategory.serviceItems'
+        //     }
+        // },
 
         {$group:{
             _id : "$_id",
             laundryName: { $first: "$laundryName" },
             // laundryServices:{$push:"$laundryServices"},
-            laundryService:{$push:{laundryServices:"$laundryServices"}}
-            // laundryServices: {$addToSet : "$laundryServices" }
+            // laundryServices:{$push:"$laundryServices"}
+            // laundryService:{$addToSet:"$laundryServices."}
+            laundryServices: {$addToSet : "$laundryServices" }
         }}
+     
         ])
         response.json(laudry)
     },
