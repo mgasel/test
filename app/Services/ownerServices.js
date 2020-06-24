@@ -60,16 +60,24 @@ module.exports = {
         }
     },
     loginOwner: async (request, response) => {
-        const ownwer = await laundryModel.findOne({ $and:[{phoneNumber:request.body.phoneNumber},{countryCode:request.body.countryCode}]})
-        console.log('ownnw',ownwer);
+        try {
+            const ownwer = await laundryModel.findOne({ $and:[{phoneNumber:request.body.phoneNumber},{countryCode:request.body.countryCode}]})
         
-        if (ownwer == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_PHONE_PASSWORD });
-        const compare = bcrypt.compareSync(request.body.password, ownwer.password)
-        if (compare == true) {
-            let token = await authToken.generateOwnwerToken(ownwer)
-            return ({ statusCode: 200, success: 1, msg: AppConstraints.LOGIN_SUCESSFULL, ownwer: ownwer, token: token })
+            if (ownwer == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_PHONE_PASSWORD });
+            const compare = bcrypt.compareSync(request.body.password, ownwer.password)
+            if (compare == true) {
+                let token = await authToken.generateOwnwerToken(ownwer)
+                console.log('sucessful login===============>>>>>>>');
+                console.log('owner',owner);
+                return ({ statusCode: 200, success: 1, msg: AppConstraints.LOGIN_SUCESSFULL, ownwer: ownwer, token: token })
+            }
+            return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_PHONE_PASSWORD })
+        } catch (error) {
+            console.log('errr',error);
+            
+            return ({ statusCode: 400, success: 0, msg: error })
         }
-        return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_PHONE_PASSWORD })
+       
 
     },
     sendOtp: async (request, response) => {
@@ -566,6 +574,7 @@ module.exports = {
                          }
                       }
                    },
+                //    { $project: { stock_item: 0, _id: 0 } }
                 ],
                 as: 'laundryServices.serviceCategory.serviceItems'
             }
@@ -579,16 +588,16 @@ module.exports = {
             // laundryService:{$addToSet:"$laundryServices."}
             // laundryServices: {$addToSet : "$laundryServices" }
         }},
-        {$project:{
-            _id : 1,
-            laundryName: 1,
-            laundryServices:1,
-            laundryServices: {$arrayElemAt : ["$laundryServices", 0]}
-            // laundryServices:{$push:"$laundryServices"},
-            // laundryServices:{$push:"$laundryServices.serviceCategory.serviceItems"}
-            // laundryService:{$addToSet:"$laundryServices."}
-            // laundryServices: {$addToSet : "$laundryServices" }
-        }}
+        // {$project:{
+        //     _id : 1,
+        //     laundryName: 1,
+        //     laundryServices:1,
+        //     laundryServices: {$arrayElemAt : ["$laundryServices", 0]}
+        //     // laundryServices:{$push:"$laundryServices"},
+        //     // laundryServices:{$push:"$laundryServices.serviceCategory.serviceItems"}
+        //     // laundryService:{$addToSet:"$laundryServices."}
+        //     // laundryServices: {$addToSet : "$laundryServices" }
+        // }}
         ])
         response.json(laudry)
     },
