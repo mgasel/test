@@ -166,7 +166,7 @@ module.exports={
    ACCESS_TOKEN:{EN:'Access token is required',AR:'الرجاء إدخال رمز الدخول'},
    UNAUTHORIZED:{EN:'unauthorized or expired accessToken',AR:'رمز الوصول منتهى الصلاحية أو غير مصرح به'},
    INVALID_CURRENT_PASSWORD:{EN:'Invalid current password',AR:'كلمة المرور الحالية غير صحيحة '},
-   PASSWORD_AND_CONFIRM_PASSWORD:{EN:'Password and confirm password must be same',AR:'لابد من تطابق كلمة المرور وتأكيد كلمة المرور'},
+   PASSWORD_AND_CONFIRM_PASSWORD:{EN:'Current password is Invalid',AR:'لابد من تطابق كلمة المرور وتأكيد كلمة المرور'},
    NEW_NOT_EQUAL_TO_CONFIRM:{EN:'New password and current password should not be same',AR:'لا يجب أن تكون كلمة المرور الجديدة هي نفس كلمة المرور الحالية'},
    CHANGED_PASSWORD:{EN:'Your password has been successfully changed',AR:'تم تغير كلمة المرور الخاصة بك بنجاح'},
    PHONE_NUMERIC:{EN:'Phone number should be numeric',AR:'يجب أن يكون رقم الهاتف رقمياً'},
