@@ -207,11 +207,12 @@ module.exports = {
             }
             if (request.body.password) {
                 if (!request.body.newPassword) return ({ statusCode: 400, success: 0, msg: AppConstraints.ENTER_NEW_PASSWORD })
-                console.log('kjjds',find[0].password);
+                // console.log('kjjds',find[0].password);
                 
                 const comparePassword = await bcrypt.compare(request.body.password, find[0].password)
-                console.log('jdss', comparePassword);
-    
+                // console.log('jdss', comparePassword);
+                console.log('................................');
+                
                 if (comparePassword == false) return ({ statusCode: 400, success: 0, msg: AppConstraints.PASSWORD_AND_CONFIRM_PASSWORD })
                 request.body.password = bcrypt.hashSync(request.body.newPassword, salt)
                 let upadate = await laundryModel.update({ _id: request.body.id }, request.body)
