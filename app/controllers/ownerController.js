@@ -164,3 +164,11 @@ exports.deleteService = async(request,response)=>{
     let services = await ownwerServices.deleteServices(request,response)
     response.json(services)
 }
+exports.updatePassword = async(request,response)=>{
+      
+    request.checkBody('id',AppConstraints.INVALID_ID).notEmpty();
+    let errors = request.validationErrors();
+    if (errors){ return response.status(400).json({statusCode:400,success:0 , msg: errors[0].msg, error:errors})}
+    let updatePassword = await ownwerServices.updatePassword(request,response)
+    return response.json(updatePassword)
+}

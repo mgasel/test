@@ -733,6 +733,23 @@ module.exports = {
             console.log('error',error);
             
         }
+    },
+    updatePassword:async(request,response)=>{
+        try {
+            if (!request.body.newPassword) return ({ statusCode: 400, success: 0, msg: AppConstraints.ENTER_NEW_PASSWORD })
+            // console.log('kjjds',find[0].password);
+            let find = await laundryModel.findOne({_id:request.body.id})
+            const comparePassword = await bcrypt.compare(request.body.password, find.password)
+            // console.log('jdss', comparePassword);
+            console.log('................................');
+            
+            if (comparePassword == false) return ({ statusCode: 400, success: 0, msg: AppConstraints.PASSWORD_AND_CONFIRM_PASSWORD })
+            request.body.password = bcrypt.hashSync(request.body.newPassword, salt)
+            let upadate = await laundryModel.update({ _id: request.body.id }, request.body)
+            return ({ statusCode: 200, success: 1, msg: AppConstraints.CHANGE_LAUNDRY_PASSWORD })
+        } catch (error) {
+            return ({ statusCode: 400, success: 0, Error:error })
+        }
     }
     
 }
