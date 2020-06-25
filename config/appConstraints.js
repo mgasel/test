@@ -445,5 +445,6 @@ module.exports={
    EMPTY:{EN:"List Empty",AR:'القائمة فارغة'},
    VALID_ID:{EN:"Please enter valid ID",AR:'يرجى إدخال معرف صالح'},
    DRIVER_NOT_FOUND:{EN:"Driver not found",AR:'لم يتم العثور على السائق'},
-   DELETED : {EN:"Deleted Sucessfully",AR:'حذف بنجاح'}
+   DELETED : {EN:"Deleted Sucessfully",AR:'حذف بنجاح'},
+   CHANGE_PASSWORD:{EN:"Password change sucessfully",AR:"تم تغيير كلمة المرور بنجاح"}
 }

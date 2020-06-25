@@ -214,6 +214,8 @@ module.exports = {
     
                 if (comparePassword == false) return ({ statusCode: 400, success: 0, msg: AppConstraints.PASSWORD_AND_CONFIRM_PASSWORD })
                 request.body.password = bcrypt.hashSync(request.body.newPassword, salt)
+                let upadate = await laundryModel.update({ _id: request.body.id }, request.body)
+                return ({ statusCode: 200, success: 1, msg: AppConstraints.CHANGED_PASSWORD })
             }
             console.log('rew', request.body);
     
