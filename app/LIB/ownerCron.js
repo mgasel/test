@@ -24,33 +24,33 @@ exports.assignDriver = async()=>{
       // console.log('near Driver===>>>>',nearDriver.deviceToken);
       
     
-      if(nearDriver!=null){
-        console.log('near Driver===>>>>',nearDriver.deviceToken);
-        let message = {
-          to : nearDriver,
-          notification: {
-            title: 'Title of your push notification', 
-            body: 'Body of your push notification' 
-        },
-        data:{
-          my_key: 'my value',
-          my_another_key: 'my another value'
-        }
-        }
-        fcm.send(message,(err,send)=>{
-          if(err){
-            console.log('err',err);
+      // if(nearDriver!=null){
+      //   console.log('near Driver===>>>>',nearDriver.deviceToken);
+      //   let message = {
+      //     to : nearDriver,
+      //     notification: {
+      //       title: 'Title of your push notification', 
+      //       body: 'Body of your push notification' 
+      //   },
+      //   data:{
+      //     my_key: 'my value',
+      //     my_another_key: 'my another value'
+      //   }
+      //   }
+      //   fcm.send(message,(err,send)=>{
+      //     if(err){
+      //       console.log('err',err);
             
-          }
-          if(send){
-            console.log('send',send);
+      //     }
+      //     if(send){
+      //       console.log('send',send);
             
-          }
+      //     }
 
-        })
-      //   await bookingModel.update({_id:bookings._id},{driverId:nearDriver._id})
-      //   await userModel.update({_id:nearDriver._id},{isAvailable: false})
-      }
+      //   })
+      // //   await bookingModel.update({_id:bookings._id},{driverId:nearDriver._id})
+      // //   await userModel.update({_id:nearDriver._id},{isAvailable: false})
+      // }
     })
   })
 
