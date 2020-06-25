@@ -21,7 +21,9 @@ let laundaryItems=Schema({
     },
 
 
-    amountPerItem:{type:String,default:Number},
+    amountPerItem:{type:Number,default:Number},//standrad amount
+    instant : {type:Number,default:Number}, // instant amount
+
 
 
     itemInitialCount:{type:Number, default:0},

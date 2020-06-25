@@ -432,12 +432,13 @@ module.exports = {
                                 itemName: laundryServiceItems.itemName,
                                 itemNameAr: laundryServiceItems.itemNameAr,
                                 itemPic: laundryServiceItems.itemPic,
-                                amountPerItem: laundryServiceItems.amountPerItem,
+                                amountPerItem:parseInt(laundryServiceItems.amountPerItem),
                                 categoryId: laundryServiceItems.categoryId,
                                 serviceId: save._id,
                                 series: laundryServiceItems.series,
                                 laundryId: request.body.id,
-                                vendorItemId: laundryServiceItems._id
+                                vendorItemId: laundryServiceItems._id,
+                                instant : parseInt(laundryServiceItems.amountPerItem)
                             }
                             let savesItems = await laundryItemsModel(items).save()
                         })
@@ -467,12 +468,13 @@ module.exports = {
                             itemName: laundryServiceItems.itemName,
                             itemNameAr: laundryServiceItems.itemNameAr,
                             itemPic: laundryServiceItems.itemPic,
-                            amountPerItem: laundryServiceItems.amountPerItem,
+                            amountPerItem:parseInt(laundryServiceItems.amountPerItem),
                             categoryId: category,
                             serviceId: request.body.serviceCategory.launderyServiceId,
                             series: laundryServiceItems.series,
                             laundryId: request.body.serviceCategory.id,
-                            vendorItemId: laundryServiceItems._id
+                            vendorItemId: laundryServiceItems._id,
+                            instant : parseInt(laundryServiceItems.amountPerItem)
                         }
                         let savesItems = await laundryItemsModel(items).save()
                     })
@@ -532,10 +534,20 @@ module.exports = {
         console.log('reee', request.body.laundryId);
         try {
             let findItems = await laundryItemsModel.findOne({ $and: [{ _id: request.body.id }, { laundryId: request.body.laundryId }] })
-            console.log('djdsd', findItems);
-
+            // console.log('djdsd', findItems);
+            if(request.body.instant&&request.body.amountPerItem){
+                if(request.body.amountPerItem>request.body.instant){
+                    return ({ statusCode: 400, success: 0,msg:AppConstraints.STANDRAD_NOT_GREATER});
+                }
+                await laundryItemsModel.update({ _id: findItems._id }, request.body)
+                return ({ statusCode: 200, success: 1, msg: AppConstraints.UPDATE_PRICE })
+            }
+            if(request.body.instant&&request.body.instant<findItems.amountPerItem) return ({ statusCode: 400, success: 0,msg:AppConstraints.STANDRAD_NOT_LESS});
+            if(request.body.amountPerItem>findItems.instant)  return ({ statusCode: 400, success: 0,msg:AppConstraints.STANDRAD_NOT_GREATER});
             if (findItems == null) return response.json({ statusCode: 400, sucess: 0, msg: AppConstraints.INVALID_ID })
-            await laundryItemsModel.update({ _id: findItems._id }, { amountPerItem: request.body.price })
+            console.log('req',request.body);
+            
+            await laundryItemsModel.update({ _id: findItems._id }, request.body)
             return ({ statusCode: 200, success: 1, msg: AppConstraints.UPDATE_PRICE })
         } catch (error) {
             return ({ statusCode: 400, success: 0, msg: error });
@@ -663,21 +675,21 @@ module.exports = {
                     as: 'laundryServices.serviceCategory.serviceItems'
                 }
             },
+        
 
             {
                 $group: {
-                    _id: "$_id",
+                    _id: "$._id",
                     laundryName: { $first: "$laundryName" },
-                    laundryServices: { $push: "$laundryServices" },
-                    "$laundryServices.serviceCategory": { $push: "$laundryServices.serviceCategory" },
+                    laundryServices: { $addToSet: "$laundryServices" },
+                    // "$laundryServices.serviceCategory": { $push: "$laundryServices.serviceCategory" },
                     // serviceItems:{$push:"$laundryServices.serviceCategory.serviceItems"},
 
 
                     // laundryService:{$addToSet:"$laundryServices."}
                     // laundryServices: {$addToSet : "$laundryServices" }
                 }
-            },
-
+            }
             // {$project:{
             //     _id : 1,
             //     laundryName: 1,

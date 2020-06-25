@@ -446,5 +446,7 @@ module.exports={
    VALID_ID:{EN:"Please enter valid ID",AR:'يرجى إدخال معرف صالح'},
    DRIVER_NOT_FOUND:{EN:"Driver not found",AR:'لم يتم العثور على السائق'},
    DELETED : {EN:"Deleted Sucessfully",AR:'حذف بنجاح'},
-   CHANGE_LAUNDRY_PASSWORD:{EN:"Password change sucessfully",AR:"تم تغيير كلمة المرور بنجاح"}
+   CHANGE_LAUNDRY_PASSWORD:{EN:"Password change sucessfully",AR:"تم تغيير كلمة المرور بنجاح"},
+   STANDRAD_NOT_GREATER:{EN:'standard amount did not greater than instant amount',AR:'لم يكن المبلغ القياسي أكبر من المبلغ الفوري'},
+   STANDRAD_NOT_LESS : {EN:'Instant amount did not less than standard amount',AR:'لم يكن المبلغ الفوري أكبر من المبلغ القياسي'}
 }
