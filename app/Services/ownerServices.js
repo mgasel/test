@@ -162,62 +162,122 @@ module.exports = {
         }
     },
     update: async (request, response) => {
-        let find = await laundryModel.find({ $and: [{ _id: request.body.id }, { isDeleted: false }] })
-        if (request.body.phoneNumber ) {
-            let findEmailPassword = await laundryModel.find(
-                    { $and: [{ phoneNumber: request.body.phoneNumber, isDeleted: false }] }    
-                )
+        try {
+            let find = await laundryModel.find({ $and: [{ _id: request.body.id }, { isDeleted: false }] })
+            if (request.body.phoneNumber ) {
+                let findEmailPassword = await laundryModel.find(
+                        { $and: [{ phoneNumber: request.body.phoneNumber, isDeleted: false }] }    
+                    )
+               
+                if (findEmailPassword.length != 0) {
+                    if (findEmailPassword[0]._id.toString() != request.body.id) return ({ statusCode: 200, success: 1, msg: AppConstraints.EMAIL_NUMBER_USED })
+                }
+                // request.body.isVerified = false
+            }
+            if (request.body.email ) {
+                let findEmailPassword = await laundryModel.find(
+                        { $and: [{ email: request.body.email, isDeleted: false }] }    
+                    )
+               
+                if (findEmailPassword.length != 0) {
+                    if (findEmailPassword[0]._id.toString() != request.body.id) return ({ statusCode: 200, success: 1, msg: AppConstraints.EMAIL_NUMBER_USED })
+                }
+                // request.body.isVerified = false
+            }
+            if (find == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_ID })
+            if (request.files) {
+                for (let index in request.files) {
+                    // console.log(demo[index]);
+    
+                    request.files[index].map((currentValue, index, array) => {
+                        console.log('inn', currentValue.fieldname);
+                        if (currentValue.fieldname == 'Document1') {
+    
+                            request.body.Document1 = '/' + currentValue.filename
+                        }
+                        if (currentValue.fieldname == 'Document2') {
+                            request.body.Document2 = '/' + currentValue.filename
+                        }
+                        if (currentValue.fieldname == 'Document3') {
+    
+                            request.body.Document3 = '/' + currentValue.filename
+                        }
+                    })
+                }
+            }
+            if (request.body.password) {
+                if (!request.body.newPassword) return ({ statusCode: 400, success: 0, msg: AppConstraints.ENTER_NEW_PASSWORD })
+                console.log('kjjds',find[0].password);
+                
+                const comparePassword = await bcrypt.compare(request.body.password, find[0].password)
+                console.log('jdss', comparePassword);
+    
+                if (comparePassword == false) return ({ statusCode: 400, success: 0, msg: AppConstraints.PASSWORD_AND_CONFIRM_PASSWORD })
+                request.body.password = bcrypt.hashSync(request.body.newPassword, salt)
+            }
+            console.log('rew', request.body);
+    
+            let upadate = await laundryModel.update({ _id: request.body.id }, request.body)
+            return ({ statusCode: 200, success: 1, msg: AppConstraints.PROFILE_SUCCESSFULLY })
+        } catch (error) {
+            return ({ statusCode: 400, success: 0 , err:error })
+        }
+        // let find = await laundryModel.find({ $and: [{ _id: request.body.id }, { isDeleted: false }] })
+        // if (request.body.phoneNumber ) {
+        //     let findEmailPassword = await laundryModel.find(
+        //             { $and: [{ phoneNumber: request.body.phoneNumber, isDeleted: false }] }    
+        //         )
            
-            if (findEmailPassword.length != 0) {
-                if (findEmailPassword[0]._id.toString() != request.body.id) return ({ statusCode: 200, success: 1, msg: AppConstraints.EMAIL_NUMBER_USED })
-            }
-            // request.body.isVerified = false
-        }
-        if (request.body.email ) {
-            let findEmailPassword = await laundryModel.find(
-                    { $and: [{ email: request.body.email, isDeleted: false }] }    
-                )
+        //     if (findEmailPassword.length != 0) {
+        //         if (findEmailPassword[0]._id.toString() != request.body.id) return ({ statusCode: 200, success: 1, msg: AppConstraints.EMAIL_NUMBER_USED })
+        //     }
+        //     // request.body.isVerified = false
+        // }
+        // if (request.body.email ) {
+        //     let findEmailPassword = await laundryModel.find(
+        //             { $and: [{ email: request.body.email, isDeleted: false }] }    
+        //         )
            
-            if (findEmailPassword.length != 0) {
-                if (findEmailPassword[0]._id.toString() != request.body.id) return ({ statusCode: 200, success: 1, msg: AppConstraints.EMAIL_NUMBER_USED })
-            }
-            // request.body.isVerified = false
-        }
-        if (find == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_ID })
-        if (request.files) {
-            for (let index in request.files) {
-                // console.log(demo[index]);
+        //     if (findEmailPassword.length != 0) {
+        //         if (findEmailPassword[0]._id.toString() != request.body.id) return ({ statusCode: 200, success: 1, msg: AppConstraints.EMAIL_NUMBER_USED })
+        //     }
+        //     // request.body.isVerified = false
+        // }
+        // if (find == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_ID })
+        // if (request.files) {
+        //     for (let index in request.files) {
+        //         // console.log(demo[index]);
 
-                request.files[index].map((currentValue, index, array) => {
-                    console.log('inn', currentValue.fieldname);
-                    if (currentValue.fieldname == 'Document1') {
+        //         request.files[index].map((currentValue, index, array) => {
+        //             console.log('inn', currentValue.fieldname);
+        //             if (currentValue.fieldname == 'Document1') {
 
-                        request.body.Document1 = '/' + currentValue.filename
-                    }
-                    if (currentValue.fieldname == 'Document2') {
-                        request.body.Document2 = '/' + currentValue.filename
-                    }
-                    if (currentValue.fieldname == 'Document3') {
+        //                 request.body.Document1 = '/' + currentValue.filename
+        //             }
+        //             if (currentValue.fieldname == 'Document2') {
+        //                 request.body.Document2 = '/' + currentValue.filename
+        //             }
+        //             if (currentValue.fieldname == 'Document3') {
 
-                        request.body.Document3 = '/' + currentValue.filename
-                    }
-                })
-            }
-        }
-        if (request.body.password) {
-            if (!request.body.newPassword) return ({ statusCode: 400, success: 0, msg: AppConstraints.ENTER_NEW_PASSWORD })
-            console.log('kjjds',find[0].password);
+        //                 request.body.Document3 = '/' + currentValue.filename
+        //             }
+        //         })
+        //     }
+        // }
+        // if (request.body.password) {
+        //     if (!request.body.newPassword) return ({ statusCode: 400, success: 0, msg: AppConstraints.ENTER_NEW_PASSWORD })
+        //     console.log('kjjds',find[0].password);
             
-            const comparePassword = await bcrypt.compare(request.body.password, find[0].password)
-            console.log('jdss', comparePassword);
+        //     const comparePassword = await bcrypt.compare(request.body.password, find[0].password)
+        //     console.log('jdss', comparePassword);
 
-            if (comparePassword == false) return ({ statusCode: 400, success: 0, msg: AppConstraints.PASSWORD_AND_CONFIRM_PASSWORD })
-            request.body.password = bcrypt.hashSync(request.body.newPassword, salt)
-        }
-        console.log('rew', request.body);
+        //     if (comparePassword == false) return ({ statusCode: 400, success: 0, msg: AppConstraints.PASSWORD_AND_CONFIRM_PASSWORD })
+        //     request.body.password = bcrypt.hashSync(request.body.newPassword, salt)
+        // }
+        // console.log('rew', request.body);
 
-        let upadate = await laundryModel.update({ _id: request.body.id }, request.body)
-        return ({ statusCode: 200, success: 1, msg: AppConstraints.PROFILE_SUCCESSFULLY })
+        // let upadate = await laundryModel.update({ _id: request.body.id }, request.body)
+        // return ({ statusCode: 200, success: 1, msg: AppConstraints.PROFILE_SUCCESSFULLY })
     },
     getBranchList: async (request, response) => {
         console.log('...................');
