@@ -149,6 +149,7 @@ deliveryTimeNotAvailable:           { type:Boolean,default:false },
 slotId:                             { type:Schema.Types.ObjectId,ref:"slots"},
 
 isRescheduledBookingByUserDate:     { type:Number,default:0 },
+type : {type:String,enum:['standard','instant']},
 bagNo:{type:String},
 orderType:{type:String},
 deliveryChoice:{type:String},
