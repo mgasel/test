@@ -600,19 +600,37 @@ module.exports = {
             let user = await userModel.findOne({ $and: [{ completePhoneNumber: request.body.completePhoneNumber }, { isDeleted: false }] })
 
             request.body.userId = user._id
+            let current = 0
             let totalAmount = 0
-            await request.body.bookingData.map(async (values, index) => {
+            let curretAmout = []
+            let amount
+            let servicePrice = []
+            let count =
+            await request.body.bookingData.map(async (values, index1) => {
+              
+                let data = values.serviceItem.serviceItem
                 await values.serviceItem.map((service, index) => {
-
-                    totalAmount += service.serviceItemPrice * service.serviceItemQuantity
-
+                    current += service.price * service.serviceItemQuantity
+                    totalAmount += service.price * service.serviceItemQuantity
+                    if(index ==values.serviceItem.length-1 ){
+                        curretAmout.push({totalPrice:current,serviveName:values.serviceName})
+                        current = 0                        
+                    }
+                 
                 })
+            
+                
             })
+            // console.log('curret',curretAmout);
+            
             request.body.totalAmount = totalAmount
             request.body.status = 'CONFIRMED'
 
             let booking = await bookingModel(request.body).save()
-            return ({ statusCode: 200, success: 1, msg: AppConstraints.BOOKING_ACCEPTED, Booking: booking })
+            booking.data = curretAmout
+            console.log('bbb',booking.data);
+            
+            return ({ statusCode: 200, success: 1, msg: AppConstraints.BOOKING_ACCEPTED, Booking: booking, ServicesPrice:curretAmout})
 
 
         } catch (error) {
