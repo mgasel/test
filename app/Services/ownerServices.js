@@ -644,6 +644,7 @@ module.exports = {
                     as: 'laundryServices.serviceCategory'
                 }
             },
+
             {
                 $unwind: {
                     path: "$laundryServices.serviceCategory", preserveNullAndEmptyArrays: true
@@ -675,31 +676,16 @@ module.exports = {
                     as: 'laundryServices.serviceCategory.serviceItems'
                 }
             },
-        
-
+        {
+            $project:{}
+        },
             {
-                $group: {
-                    _id: "$._id",
-                    laundryName: { $first: "$laundryName" },
-                    laundryServices: { $addToSet: "$laundryServices" },
-                    // "$laundryServices.serviceCategory": { $push: "$laundryServices.serviceCategory" },
-                    // serviceItems:{$push:"$laundryServices.serviceCategory.serviceItems"},
-
-
-                    // laundryService:{$addToSet:"$laundryServices."}
-                    // laundryServices: {$addToSet : "$laundryServices" }
+                $group:{
+                    _id:"$_id",
+                    laundryServices:{$push:"$laundryServices"}
                 }
             }
-            // {$project:{
-            //     _id : 1,
-            //     laundryName: 1,
-            //     laundryServices:1,
-            //     laundryServices: {$arrayElemAt : ["$laundryServices", 0]}
-            //     // laundryServices:{$push:"$laundryServices"},
-            //     // laundryServices:{$push:"$laundryServices.serviceCategory.serviceItems"}
-            //     // laundryService:{$addToSet:"$laundryServices."}
-            //     // laundryServices: {$addToSet : "$laundryServices" }
-            // }}
+         
         ])
         response.json(laudry)
     },
@@ -780,6 +766,68 @@ module.exports = {
             return ({ statusCode: 200, success: 1, msg: AppConstraints.CHANGE_LAUNDRY_PASSWORD })
         } catch (error) {
             return ({ statusCode: 400, success: 0, Error: error })
+        }
+    },
+    serviceFullDetails:async(request,response)=>{
+        try {
+            let details = await laundryServiceModel.aggregate([
+                {$match:{$and:[{_id:ObjectId(request.body.id) },{laundryId:ObjectId(request.body.laundryId)}]} },
+                {
+                    $lookup:{
+                        from:'servicecategories',
+                        localField:'serviceCategory',
+                        foreignField:'_id',
+                        as:'serviceCategory'
+                    }
+                },
+                {
+                    $unwind: {
+                        path: "$serviceCategory", preserveNullAndEmptyArrays: true
+                    }
+                },
+                {
+                    $lookup: {
+                        from: 'laundaryitems',
+                        let: { categoryId: "$serviceCategory._id", serviceId: "$_id" },
+                        // let: { categoryId: "$category._id" },
+
+                        pipeline: [
+                            {
+                                $match:
+                                {
+                                    $expr:
+                                    {
+                                        $and:
+                                            [
+                                                { $eq: ["$categoryId", "$$categoryId"] },
+                                                { $eq: ["$serviceId", "$$serviceId"] },
+
+                                            ]
+                                    }
+                                }
+                            },
+                        ],
+                        as: 'serviceCategory.serviceItem'
+                    }
+
+                },
+                {
+                    $group:{
+                        _id:"$_id",
+                        laundryId:{$first:"$laundryId"},
+                        vendorServiceId:{$first:"$vendorServiceId"},
+                        isActive:{$first:"$isActive"},
+                        serviceCategory: {$push:"$serviceCategory"}
+
+                    }
+                }
+            ])
+            
+            return ({ statusCode: 200, success: 1, Services: details})
+            
+        } catch (error) {
+            console.log('err',error);
+            return ({ statusCode: 200, success: 1, Error:error})
         }
     }
 

@@ -36,6 +36,8 @@ module.exports= function(app){
     app.post('/owner/getBookings',authenticattion.verifyOwnerBranch,ownerController.getBooking)
     app.get('/owner/booking/:orderId',authenticattion.verifyOwnerBranch,ownerController.ordersById)
     app.post('/owner/deleteService',authenticattion.verifyOwnerBranch,ownerController.deleteService)
+
+    app.post('/owner/serviceDetails',authenticattion.verifyOwnerBranch,ownerController.servciceDetails)
     
 
 }
