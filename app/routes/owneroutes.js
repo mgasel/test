@@ -44,7 +44,7 @@ module.exports= function(app){
     app.post('/owner/applyPromo',ownerController.applyPromo)
     app.get('/owner/laundriesCoupon',authenticattion.verifyOwnerBranch,ownerController.laundriesCoupons)
 
-    app.get('/owner/orderPdf',authenticattion.verifyOwnerBranch,ownerController.pdf)
+    app.get('/owner/orderPdf',ownerController.pdf)
     app.post('/owner/bookingStatus',authenticattion.verifyOwnerBranch,ownerController.changeStatus)
 
 

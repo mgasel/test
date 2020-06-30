@@ -609,16 +609,22 @@ module.exports = {
             let curretAmout = []
             let amount
             let servicePrice = []
-            let count =
+            let count 
+            let items = 0 
             await request.body.bookingData.map(async (values, index1) => {
               
                 let data = values.serviceItem.serviceItem
                 await values.serviceItem.map((service, index) => {
+                   
+                    items+=service.serviceItemQuantity
+                    // console.log('serr',service.serviceItemQuantity);
+                    items = items
                     current += service.price * service.serviceItemQuantity
                     totalAmount += service.price * service.serviceItemQuantity
                     if(index ==values.serviceItem.length-1 ){
-                        curretAmout.push({totalPrice:current,serviveName:values.serviceName})
-                        current = 0                        
+                        curretAmout.push({totalPrice:current,serviceName:values.serviceName,serviceNameAr:values.serviceNameAr,serviceItemQuantity:items})
+                        current = 0  
+                        items = 0                      
                     }
                  
                 })
@@ -629,12 +635,14 @@ module.exports = {
             
             request.body.totalAmount = totalAmount
             request.body.status = 'CONFIRMED'
-
+            request.body.servicePrice = curretAmout
+            // console.log('srev',service);
+            
             let booking = await bookingModel(request.body).save()
             booking.data = curretAmout
             console.log('bbb',booking.data);
             
-            return ({ statusCode: 200, success: 1, msg: AppConstraints.BOOKING_ACCEPTED, Booking: booking, ServicesPrice:curretAmout})
+            return ({ statusCode: 200, success: 1, msg: AppConstraints.BOOKING_ACCEPTED, Booking: booking})
 
 
         } catch (error) {
@@ -926,24 +934,9 @@ module.exports = {
     },
     downlaodPdf:async(request,response)=>{
         try {
-            let booking = await bookingModel.findOne({_id:'5ef9858cda99642d1b0f3281'})
+            let booking = await bookingModel.findOne({_id:request.query.bookingId})
         let data1 = data(booking)
-        //     let orderList
-        //  let data =  booking.bookingData.forEach(ele => {
-        //     console.log(ele)
-           
-        //     console.log(ele);
-            
-        //     orderList += `
-        //                 <tr>
-        //                     <td style="padding: 20px 0;border-bottom: solid 1px #000;width: 45%;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.serviceId}</td>
-        //                 </tr>`;
-        // });
-        // console.log('data',orderList);
-        
-    // let data = 
-            
-            // document.getElementById("slideContainer").innerHTML = str;         
+             
             pdf.create(data1).toFile('./'+"order"+'.pdf',(err,match)=>{
                 console.log('errr',err);
                 console.log('match',match);
@@ -988,82 +981,79 @@ module.exports = {
 let data =(booking)=>{
     let orderList = ``;
     console.log('--------------',booking)
-    booking.bookingData.map(ele => {
+    booking.servicePrice.map(ele => {
         // console.log(ele)
         orderList += `
                     <tr>
-                        <td style="padding: 20px 0;border-bottom: solid 1px #000;width: 45%;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.serviceId}</td>
-                        <td style="padding: 20px 0;border-bottom: solid 1px #000;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">Kd ${ele.serviceImagepath}</td>
-                        <td style="padding: 20px 0;border-bottom: solid 1px #000;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.serviceNameAr} <span></span></td>
+                        <td style="padding: 20px 0;border-bottom: solid 1px #000;width: 45%;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.serviceName}</td>
+                        <td style="padding: 20px 0;border-bottom: solid 1px #000;width: 45%;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.serviceItemQuantity}</td>
+                        <td style="padding: 20px 0;border-bottom: solid 1px #000;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;"> ${ele.totalPrice}</td>
+            
                     </tr>`;
-        ele.serviceItem.map((data)=>{
-            orderList += `
-            <tr>
-                <td style="padding: 20px 0;border-bottom: solid 1px #000;width: 45%;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${data}</td>
-                <td style="padding: 20px 0;border-bottom: solid 1px #000;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">Kd ${ele.serviceImagepath}</td>
-                <td style="padding: 20px 0;border-bottom: solid 1px #000;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.serviceNameAr} <span></span></td>
-            </tr>`;
-        })
+    
     });
     return `
     <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
-<table colspan="0" cellpadding="0" border="0" style="width:600px;line-height: normal;border: solid 1px #ddd;padding: 20px;">
-    <tr>
-        <td>
-            <table colspan="0" cellpadding="0" border="0" style="width:100%;">
-                <tr>
-                    <td colspan="2"><h3 style="margin: 0;font-size: 22px;color: #000;line-height: normal;font-weight: 600;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">Order Receipt</h3></td>
-                </tr>
-                <tr>
-                    <td style="vertical-align: top;padding-top: 2rem;width: 60%;">
-                        <table colspan="0" cellpadding="0" border="0" style="width:100%;border-collapse: collapse;">
-                            <tr><td colspan="2"><h3 style="margin: 0 0 10px;font-size: 20px;color: #000;font-weight: 600;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Purchased By</h3></td></tr>
-                            <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Buyer Name:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">ABC </p></td></tr>
-                           
-                            <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Order Type:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${booking.type}</p></td></tr>
-                        </table>
-                    </td>
-                    <td align="top" style="vertical-align: top;padding-top: 2rem;width: 30%;">
-                        <table colspan="0" cellpadding="0" border="0" style="width:100%;">
-                            <tr><td><h3 style="margin: 0 0 10px;font-size: 20px;color: #000;font-weight: 600;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Address:</h3></td></tr>
-                           
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td style="width:100%" colspan="2">
-                        <table colspan="0" cellpadding="0" border="0" style="width:100%;">
-                            <tr>
-                                <td colspan="2"><h3 style="margin: 0;font-size: 22px;color: #000;line-height: normal;font-weight: 600;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;padding: 30px 0 15px;">Order Summary</h3></td>
-                            </tr>
-                            <tr>
-                            <td >
-                                <table colspan="0" cellpadding="5" border="1" style="width:100%;border-collapse: collapse;border-top: solid 2px #000;">
-                                    <tr>
-                                        <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;width: 45%;border-bottom: solid 2px #000;">Product Name</th>
-                                        <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Price (with discount)</th>
-                                        <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Quantity</th>
-                                        <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Total</th>
-                                    </tr>
-                                    ${orderList}
-                                </table>
-                            </td>
-                        </tr>
-                            <tr>
-                                <td colspan="4">
-                                    <table colspan="0" cellpadding="0" border="0" style="width: 100%;">
-         
+    <table colspan="0" cellpadding="0" border="0" style="width:600px;line-height: normal;border: solid 1px #ddd;padding: 20px;">
+        <tr>
+            <td>
+                <table colspan="0" cellpadding="0" border="0" style="width:100%;">
+                    <tr>
+                        <td colspan="2"><h3 style="margin: 0;font-size: 22px;color: #000;line-height: normal;font-weight: 600;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">Order Receipt</h3></td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: top;padding-top: 2rem;width: 60%;">
+                            <table colspan="0" cellpadding="0" border="0" style="width:100%;border-collapse: collapse;">
+                                <tr><td colspan="2"><h3 style="margin: 0 0 10px;font-size: 20px;color: #000;font-weight: 600;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Purchased By</h3></td></tr>
+                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Buyer Name:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${booking.userId.name} </p></td></tr>
+                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Buyer Email:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${booking.userId.email}</p></td></tr>
+                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Order Id:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${booking.orderId}</p></td></tr>
+                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Order Time:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${booking.newDate}</p></td></tr>
+                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Order Type:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">Web-Online</p></td></tr>
+                            </table>
+                        </td>
+                        <td align="top" style="vertical-align: top;padding-top: 2rem;width: 30%;">
+                            <table colspan="0" cellpadding="0" border="0" style="width:100%;">
+                                <tr><td><h3 style="margin: 0 0 10px;font-size: 20px;color: #000;font-weight: 600;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Address:</h3></td></tr>
+                                <tr><td><p style="font-size: 16px;line-height: 22px;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight: 500;">${booking.pickUpAddress ? booking.pickUpAddress: '' }</p></td></tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:100%" colspan="2">
+                            <table colspan="0" cellpadding="0" border="0" style="width:100%;">
+                                <tr>
+                                    <td colspan="2"><h3 style="margin: 0;font-size: 22px;color: #000;line-height: normal;font-weight: 600;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;padding: 30px 0 15px;">Order Summary</h3></td>
+                                </tr>
+                                <tr>
+                                <td >
+                                    <table colspan="0" cellpadding="5" border="1" style="width:100%;border-collapse: collapse;border-top: solid 2px #000;">
+                                        <tr>
+                                            <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;width: 45%;border-bottom: solid 2px #000;">Product Name</th>
+                                            <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Quantity</th>
+                                            <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Total</th>
                                         </tr>
+                                        ${orderList}
                                     </table>
                                 </td>
                             </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    </tr>
-</table>
+                                <tr>
+                                    <td colspan="4">
+                                        <table colspan="0" cellpadding="0" border="0" style="width: 100%;">
+                                          
+                                            <tr>
+                                                <td colspan="4"><h3 style="text-align: right;padding: 20px 0 0;font-size: 18px;font-weight: bold;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;text-transform: capitalize;margin: 0;">order Total: <span style="font-weight: 400;color: #333;"> ${booking.totalAmount.toFixed(2)}</span></h3></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
 </div>
     `;
 

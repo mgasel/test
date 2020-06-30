@@ -153,6 +153,7 @@ type : {type:String,enum:['standard','instant']},
 bagNo:{type:String},
 orderType:{type:String},
 deliveryChoice:{type:String},
+servicePrice :  {   type:Object,default:null },
 
 subplanid:{ type:Schema.Types.ObjectId,ref:'subscriptionPlan' },
 
