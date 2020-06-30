@@ -48,7 +48,7 @@ module.exports= function(app){
     app.get('/owner/orderExcel',ownerController.excel)
 
     app.post('/owner/bookingStatus',authenticattion.verifyOwnerBranch,ownerController.changeStatus)
-    app.get('/owner/bagId/:bagNo',ownerController.getBookingByBag)
+    app.get('/owner/bagId/:bagNo',authenticattion.verifyOwnerBranch,ownerController.getBookingByBag)
 
 
 }
