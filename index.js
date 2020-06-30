@@ -20,6 +20,8 @@ const Bootstrap=require('./app/Utils/Bootstrap.js');
 const Socket=require('./app/LIB/SocketManager.js');
 const Scheduler=require('./app/LIB/scheduler.js');
 const ScheduleBooking = require('./app/LIB/ownerCron.js')
+const json2xls = require('json2xls');
+app.use(json2xls.middleware);
 app.use('/api-docs-User', swaggerUi.serve, swaggerUi.setup(swaggerDocumentUser));
 app.use('/api-docs-Driver',swaggerUi.serve,swaggerUi.setup(swaggerDocumentDriver));
 app.use('/api-docs-Admin',swaggerUi.serve, swaggerUi.setup(swaggerDocumentAdmin));

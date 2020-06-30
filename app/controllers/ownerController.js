@@ -196,6 +196,9 @@ exports.laundriesCoupons = async(request,response)=>{
 exports.pdf = async(request,response)=>{
     await ownwerServices.downlaodPdf(request,response)
 }
+exports.excel = async(request,response)=>{
+    await ownwerServices.downloadExcel(request,response)
+}
 exports.changeStatus = async(request,response)=>{
     request.checkBody('status',AppConstraints.INVALID_ID).notEmpty();
     request.checkBody('bookingId',AppConstraints.INVALID_ID).notEmpty();

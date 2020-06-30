@@ -21,6 +21,7 @@ const promoModel = require('../models/laundryPromocodes')
 const moment = require('moment-timezone')
 const pdf = require('html-pdf')
 const fs = require('fs')
+const json2xls = require('json2xls')
 module.exports = {
     registerOwner: async (request, response) => {
         try {
@@ -974,6 +975,34 @@ module.exports = {
         } catch (error) {
             console.log(error);
             
+        }
+    },
+    downloadExcel:async(request,res)=>{
+        try {
+            let booking = await bookingModel.findOne({_id:request.query.bookingId})
+            // let booking  = await bookingModel.aggregate([
+            //     {$match:{_id: ObjectId(request.query.bookingId)}},
+            //     {$project:{_id:0,servicePrice:1}}
+            // ])
+            let recipt = []
+            // recipt.push({type:booking.type})
+            booking.servicePrice.map((object,data)=>{
+                recipt.push(object)
+            })
+            
+            // let recipt =[booking.servicePrice[0],booking.servicePrice[0]]
+     
+            console.log(recipt);
+            
+            
+           res.xls('data.xlsx',recipt);
+        //    console.log('data',data);
+   
+
+        } catch (error) {
+            console.log(error);
+            
+            return ({ statusCode: 400, success: 1, Error:error})
         }
     }
 
