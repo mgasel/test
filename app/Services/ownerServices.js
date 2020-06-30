@@ -604,6 +604,7 @@ module.exports = {
             request.body.orderId = uuid.sync(4)
             let user = await userModel.findOne({ $and: [{ completePhoneNumber: request.body.completePhoneNumber }, { isDeleted: false }] })
             // if(user==null)return response
+            if(user==null)
             request.body.userId = user._id
             let current = 0
             let totalAmount = 0
@@ -935,10 +936,11 @@ module.exports = {
     },
     downlaodPdf:async(request,response)=>{
         try {
-            let booking = await bookingModel.findOne({_id:request.query.bookingId})
+            let booking = await bookingModel.find({_id:request.query.bookingId})
         let data1 = data(booking)
+    //    let  data2 = data(booking)
              
-            pdf.create(data1).toFile('./'+"order"+'.pdf',(err,match)=>{
+            pdf.create(data1,data2).toFile('./'+"order"+'.pdf',(err,match)=>{
                 console.log('errr',err);
                 console.log('match',match);
                 response.download(match.filename)
@@ -1004,12 +1006,24 @@ module.exports = {
             
             return ({ statusCode: 400, success: 1, Error:error})
         }
+    },
+    getBagById : async(request,response)=>{
+        try {
+            const findBooking = await bookingModel.findOne({bagNo:request.params.bagNo})
+            if(findBooking==null) return ({ statusCode: 400, success: 1, Error:AppConstraints.VALID_ID})
+            return  ({ statusCode: 400, success: 1, Booking:findBooking})
+        } catch (error) {
+            return ({ statusCode: 400, success: 1, Error:error})
+        }
     }
 
 }
 let data =(booking)=>{
     let orderList = ``;
     console.log('--------------',booking)
+    console.log(booking);
+    // break:
+    
     booking.servicePrice.map(ele => {
         // console.log(ele)
         orderList += `

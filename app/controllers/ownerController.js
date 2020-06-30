@@ -207,3 +207,7 @@ exports.changeStatus = async(request,response)=>{
     const bookingStatus = await ownwerServices.changeBookingStatus(request,response)
     response.json(bookingStatus)
 }
+exports.getBookingByBag = async(request,response)=>{
+    const booking = await ownwerServices.getBagById(request,response)
+    response.json(booking)
+}
