@@ -38,6 +38,14 @@ module.exports= function(app){
     app.post('/owner/deleteService',authenticattion.verifyOwnerBranch,ownerController.deleteService)
 
     app.post('/owner/serviceDetails',authenticattion.verifyOwnerBranch,ownerController.servciceDetails)
-    
+    // app.post('/owner/orderPdf')
+    /** add promo code  */
+    app.post('/owner/createPromo',ownerController.createPromo)
+    app.post('/owner/applyPromo',ownerController.applyPromo)
+    app.get('/owner/laundriesCoupon',authenticattion.verifyOwnerBranch,ownerController.laundriesCoupons)
+
+    app.get('/owner/orderPdf',authenticattion.verifyOwnerBranch,ownerController.pdf)
+    app.post('/owner/bookingStatus',authenticattion.verifyOwnerBranch,ownerController.changeStatus)
+
 
 }

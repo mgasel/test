@@ -24,7 +24,7 @@ module.exports=function(app){
     app.post('/assignBookingToDriver',admin.assignBookingToDriver);
     app.get('/subscriptionPlanListing',admin.subscriptionPlanListing);
     app.post('/createPrmoCode',admin.createPrmoCode);
-    app.post('/getAllbookingList',admin.getAllbookingList);
+    // app.post('/getAllbookingList',admin.getAllbookingList);
     app.get('/getListOfReviews',admin.getListOfReviews);
     app.post('/addVehicle',admin.addVehicle);
     app.get('/getVehicleListing',admin.getVehicleListing);

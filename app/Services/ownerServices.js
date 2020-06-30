@@ -17,6 +17,10 @@ let ObjectId = require('mongoose').Types.ObjectId
 const bookingModel = require('../models/Bookings')
 const userModel = require('../models/User')
 let uuid = require('uid-safe')
+const promoModel = require('../models/laundryPromocodes')
+const moment = require('moment-timezone')
+const pdf = require('html-pdf')
+const fs = require('fs')
 module.exports = {
     registerOwner: async (request, response) => {
         try {
@@ -598,7 +602,7 @@ module.exports = {
             // request.body.driverId = nearDriver._id
             request.body.orderId = uuid.sync(4)
             let user = await userModel.findOne({ $and: [{ completePhoneNumber: request.body.completePhoneNumber }, { isDeleted: false }] })
-
+            // if(user==null)return response
             request.body.userId = user._id
             let current = 0
             let totalAmount = 0
@@ -649,60 +653,63 @@ module.exports = {
                     as: 'laundryServices'
                 }
             },
+            
             {
                 $unwind: {
-                    path: "$laundryServices", preserveNullAndEmptyArrays: true
+                    path: "$laundryServices", preserveNullAndEmptyArrays: false
                 }
             },
+
             {
                 $lookup: {
                     from: 'servicecategories',
                     localField: "laundryServices.serviceCategory",
                     foreignField: "_id",
-                    as: 'laundryServices.serviceCategory'
+                    as: 'laundryServices.$serviceCategory'
                 }
             },
+            // {
+            //     $unwind: {
+            //         path: "$laundryServices.serviceCategory", preserveNullAndEmptyArrays: false
+            //     }
+            // },
+            // {
+            //     $lookup: {
+            //         from: 'laundaryitems',
+            //         let: { categoryId: "$laundryServices.serviceCategory._id", serviceId: "$laundryServices._id" },
+            //         // let: { categoryId: "$category._id" },
 
-            {
-                $unwind: {
-                    path: "$laundryServices.serviceCategory", preserveNullAndEmptyArrays: true
-                }
-            },
-            {
-                $lookup: {
-                    from: 'laundaryitems',
-                    let: { categoryId: "$laundryServices.serviceCategory._id", serviceId: "$laundryServices._id" },
-                    // let: { categoryId: "$category._id" },
+            //         pipeline: [
+            //             {
+            //                 $match:
+            //                 {
+            //                     $expr:
+            //                     {
+            //                         $and:
+            //                             [
+            //                                 { $eq: ["$categoryId", "$$categoryId"] },
+            //                                 //    { $eq: [ "$serviceId",  "$$serviceId" ] },
 
-                    pipeline: [
-                        {
-                            $match:
-                            {
-                                $expr:
-                                {
-                                    $and:
-                                        [
-                                            { $eq: ["$categoryId", "$$categoryId"] },
-                                            //    { $eq: [ "$serviceId",  "$$serviceId" ] },
-
-                                        ]
-                                }
-                            }
-                        },
-                        //    { $group: {  _id: "$_id",laundryServices:{$addToSet:"$laundryServices"} } },
-                    ],
-                    as: 'laundryServices.serviceCategory.serviceItems'
-                }
-            },
-        {
-            $project:{}
-        },
+            //                             ]
+            //                     }
+            //                 }
+            //             },
+            //             //    { $group: {  _id: "$_id",laundryServices:{$addToSet:"$laundryServices"} } },
+                      
+            //         ],
+            //         as: 'laundryServices.serviceCategory.serviceItems'
+            //     }
+            // },
+          
             {
                 $group:{
+                    // _id:"$_id",
                     _id:"$_id",
-                    laundryServices:{$push:"$laundryServices"}
+                    laundryServices:{$push:"$laundryServices"},
+                    // laundryServices: {  $push: "$laundryServices"} 
                 }
-            }
+            },
+          
          
         ])
         response.json(laudry)
@@ -723,7 +730,7 @@ module.exports = {
     },
     getBookings: async (request, response) => {
         try {
-            let booking = await bookingModel.find({ laundryId: request.body.id })
+            let booking = await bookingModel.find({ laundryId: request.body.id }).populate('userId')
             return ({ statusCode: 200, success: 1, Booking: booking })
         } catch (error) {
             return ({ statusCode: 400, success: 0, msg: error });
@@ -733,7 +740,7 @@ module.exports = {
         try {
 
 
-            let booking = await bookingModel.findOne({ orderId: request.params.orderId })
+            let booking = await bookingModel.findOne({ orderId: request.params.orderId }).populate('userId')
             return ({ statusCode: 200, success: 1, Booking: booking })
         } catch (error) {
 
@@ -845,8 +852,220 @@ module.exports = {
             
         } catch (error) {
             console.log('err',error);
-            return ({ statusCode: 200, success: 1, Error:error})
+            return ({ statusCode: 400, success: 1, Error:error})
+        }
+    },
+    createPromo:async(request,response)=>{
+        try {
+            console.log('request',request.body);
+            if(await laundryModel.findOne({_id:request.body.laundryId})==null)return ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
+            if(await laundryServiceModel.findOne({_id:request.body.serviceId})==null) ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
+            request.body.startDate = moment().unix()
+            request.body.expiryDate = moment(request.body.expiryDate).unix()
+            let promo = await promoModel(request.body).save()
+            return ({ statusCode:200, success: 1,msg:AppConstraints.COUPON_ADDED})
+            
+        } catch (error) {
+            console.log('err',error);
+            
+        }
+    },
+    applyPromo:async(request,response)=>{
+        try {
+            let booking = await bookingModel.findOne({_id:request.body.bookingId})
+            let promo = await promoModel.findOne( { $and:[{_id:request.body.promoId},{isDeleted:false}]})
+            if(promo.expiryDate<moment().unix()) return response.json({statusCode:400,sucess:1,msg:AppConstraints.COUPON_EXPIRE})
+
+            let promoData = 0
+  
+            booking.bookingData.map((object,index)=>{
+                if(object.serviceId==promo.serviceId){
+                    promo.categoryId.map((promoObject,index)=>{
+                        object.serviceItem.map((serviceitems,index)=>{
+                            if(promoObject==serviceitems.categoryId){
+                                promoData += serviceitems.serviceItemQuantity * serviceitems.price  
+                            }
+                        })  
+                    })  
+                }
+            })
+
+            if(promoData<promo.minimumAmount)return  ({ statusCode: 400, success: 0, msg:AppConstraints.MINI_DISCOUNT_PRICE})
+            console.log(booking.totalAmount);
+            let discoutPrice = 0
+            promo.discount = 100/promo.discount
+            discoutPrice = promoData/promo.discount
+            discoutPrice =promoData-discoutPrice
+            booking.totalAmount -= promoData
+            booking.totalAmount+=discoutPrice
+            await bookingModel.update({_id:request.body.bookingId},{totalAmount:booking.totalAmount})
+            return  ({ statusCode: 400, success: 0, msg:AppConstraints.COUPON_APPLIES})
+        } catch (error) {
+            return ({ statusCode: 400, success: 1, Error:error})
+            
+        }
+    },
+    getlaundryCoupons : async(request,response)=>{
+        try {
+            console.log('iddd',request.query);
+
+            if(request.query.id){
+                
+                let promoCodes = await promoModel.findOne({$and:[{laundryId:request.ownerId},{_id:request.query.id}]})
+                if(promoCodes==null) return ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
+                return    ({ statusCode: 400, success: 1, promoCodes:promoCodes})
+            }
+            let promoCodes = await promoModel.find({$and:[{laundryId:request.ownerId}]})
+            return    ({ statusCode: 400, success: 1, promoCodes:promoCodes})
+        } catch (error) {
+            return ({ statusCode: 400, success: 1, Error:error})
+        }
+    },
+    data:(request)=>{
+        return 1
+    },
+    downlaodPdf:async(request,response)=>{
+        try {
+            let booking = await bookingModel.findOne({_id:'5ef9858cda99642d1b0f3281'})
+        let data1 = data(booking)
+        //     let orderList
+        //  let data =  booking.bookingData.forEach(ele => {
+        //     console.log(ele)
+           
+        //     console.log(ele);
+            
+        //     orderList += `
+        //                 <tr>
+        //                     <td style="padding: 20px 0;border-bottom: solid 1px #000;width: 45%;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.serviceId}</td>
+        //                 </tr>`;
+        // });
+        // console.log('data',orderList);
+        
+    // let data = 
+            
+            // document.getElementById("slideContainer").innerHTML = str;         
+            pdf.create(data1).toFile('./'+"order"+'.pdf',(err,match)=>{
+                console.log('errr',err);
+                console.log('match',match);
+                response.download(match.filename)
+            })
+
+            // payload(data)
+        } catch (error) {
+            console.log(error);
+            
+            return ({ statusCode: 400, success: 1, Error:error})
+        }
+
+    },
+
+    changeBookingStatus:async(request,response)=>{
+        try {
+            let findBooking = await bookingModel.find({$and:[{_id:request.body.bookingId},{isDeleted:false}]})
+            if(findBooking==null)  return ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
+            // if(request.body.sat)
+            console.log('...........');
+            
+           if(request.body.status==1){
+            await bookingModel.update({_id:request.body.bookingId},{status:"CONFIRMED"})
+            return  ({ statusCode: 200, success: 1, msg:AppConstraints.BOOKING_CONFIRMED})
+           }
+           if(request.body.status==2){
+            await bookingModel.update({_id:request.body.bookingId},{status:"INPROGRESS"})
+            return  ({ statusCode: 200, success: 1, msg:AppConstraints.BOOKING_INPROGRESS})
+           }
+           if(request.body.status==3){
+            await bookingModel.update({_id:request.body.bookingId},{status:"DELIVERED"})
+            return  ({ statusCode: 200, success: 1, msg:AppConstraints.BOOKING_DELIVERED})
+           }
+        } catch (error) {
+            console.log(error);
+            
         }
     }
 
+}
+let data =(booking)=>{
+    let orderList = ``;
+    console.log('--------------',booking)
+    booking.bookingData.map(ele => {
+        // console.log(ele)
+        orderList += `
+                    <tr>
+                        <td style="padding: 20px 0;border-bottom: solid 1px #000;width: 45%;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.serviceId}</td>
+                        <td style="padding: 20px 0;border-bottom: solid 1px #000;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">Kd ${ele.serviceImagepath}</td>
+                        <td style="padding: 20px 0;border-bottom: solid 1px #000;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.serviceNameAr} <span></span></td>
+                    </tr>`;
+        ele.serviceItem.map((data)=>{
+            orderList += `
+            <tr>
+                <td style="padding: 20px 0;border-bottom: solid 1px #000;width: 45%;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${data}</td>
+                <td style="padding: 20px 0;border-bottom: solid 1px #000;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">Kd ${ele.serviceImagepath}</td>
+                <td style="padding: 20px 0;border-bottom: solid 1px #000;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.serviceNameAr} <span></span></td>
+            </tr>`;
+        })
+    });
+    return `
+    <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+<table colspan="0" cellpadding="0" border="0" style="width:600px;line-height: normal;border: solid 1px #ddd;padding: 20px;">
+    <tr>
+        <td>
+            <table colspan="0" cellpadding="0" border="0" style="width:100%;">
+                <tr>
+                    <td colspan="2"><h3 style="margin: 0;font-size: 22px;color: #000;line-height: normal;font-weight: 600;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">Order Receipt</h3></td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;padding-top: 2rem;width: 60%;">
+                        <table colspan="0" cellpadding="0" border="0" style="width:100%;border-collapse: collapse;">
+                            <tr><td colspan="2"><h3 style="margin: 0 0 10px;font-size: 20px;color: #000;font-weight: 600;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Purchased By</h3></td></tr>
+                            <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Buyer Name:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">ABC </p></td></tr>
+                           
+                            <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Order Type:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${booking.type}</p></td></tr>
+                        </table>
+                    </td>
+                    <td align="top" style="vertical-align: top;padding-top: 2rem;width: 30%;">
+                        <table colspan="0" cellpadding="0" border="0" style="width:100%;">
+                            <tr><td><h3 style="margin: 0 0 10px;font-size: 20px;color: #000;font-weight: 600;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Address:</h3></td></tr>
+                           
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:100%" colspan="2">
+                        <table colspan="0" cellpadding="0" border="0" style="width:100%;">
+                            <tr>
+                                <td colspan="2"><h3 style="margin: 0;font-size: 22px;color: #000;line-height: normal;font-weight: 600;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;padding: 30px 0 15px;">Order Summary</h3></td>
+                            </tr>
+                            <tr>
+                            <td >
+                                <table colspan="0" cellpadding="5" border="1" style="width:100%;border-collapse: collapse;border-top: solid 2px #000;">
+                                    <tr>
+                                        <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;width: 45%;border-bottom: solid 2px #000;">Product Name</th>
+                                        <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Price (with discount)</th>
+                                        <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Quantity</th>
+                                        <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Total</th>
+                                    </tr>
+                                    ${orderList}
+                                </table>
+                            </td>
+                        </tr>
+                            <tr>
+                                <td colspan="4">
+                                    <table colspan="0" cellpadding="0" border="0" style="width: 100%;">
+         
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+</div>
+    `;
+
+    
 }

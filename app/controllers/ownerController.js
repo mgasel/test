@@ -181,3 +181,26 @@ exports.servciceDetails = async(request,response)=>{
     let servicesDetails = await ownwerServices.serviceFullDetails(request,response)
     response.json(servicesDetails)
 }
+exports.createPromo = async(request,response)=>{
+   let promo = await ownwerServices.createPromo(request,response)
+    return response.json(promo)
+}
+exports.applyPromo = async(request,response)=>{
+   let promo = await ownwerServices.applyPromo(request,response)
+   return response.json(promo)
+}
+exports.laundriesCoupons = async(request,response)=>{
+    let allPromos = await ownwerServices.getlaundryCoupons(request,response)
+    return response.json(allPromos)
+}
+exports.pdf = async(request,response)=>{
+    await ownwerServices.downlaodPdf(request,response)
+}
+exports.changeStatus = async(request,response)=>{
+    request.checkBody('status',AppConstraints.INVALID_ID).notEmpty();
+    request.checkBody('bookingId',AppConstraints.INVALID_ID).notEmpty();
+    let errors = request.validationErrors();
+    if (errors){ return response.status(400).json({statusCode:400,success:0 , msg: errors[0].msg, error:errors})}
+    const bookingStatus = await ownwerServices.changeBookingStatus(request,response)
+    response.json(bookingStatus)
+}

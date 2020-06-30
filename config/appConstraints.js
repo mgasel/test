@@ -448,5 +448,12 @@ module.exports={
    DELETED : {EN:"Deleted Sucessfully",AR:'حذف بنجاح'},
    CHANGE_LAUNDRY_PASSWORD:{EN:"Password change sucessfully",AR:"تم تغيير كلمة المرور بنجاح"},
    STANDRAD_NOT_GREATER:{EN:'standard amount did not greater than instant amount',AR:'لم يكن المبلغ القياسي أكبر من المبلغ الفوري'},
-   STANDRAD_NOT_LESS : {EN:'Instant amount did not less than standard amount',AR:'لم يكن المبلغ الفوري أكبر من المبلغ القياسي'}
+   STANDRAD_NOT_LESS : {EN:'Instant amount did not less than standard amount',AR:'لم يكن المبلغ الفوري أكبر من المبلغ القياسي'},
+   MINI_DISCOUNT_PRICE:{EN:'Booking amount is less than minimum discout price'},
+   COUPON_APPLIES:{EN:'Coupon applied sucessfully',AR:'تم تطبيق القسيمة بنجاح'},
+   COUPON_ADDED:{EN:'Counpon added sucessfully',AR:'تمت إضافة القسيمة بنجاح'},
+   COUPON_EXPIRE : {EN:'Coupon is expires',AR:'تنتهي صلاحية القسيمة'},
+   BOOKING_INPROGRESS:{EN:'Booking has benn in progress',AR:'الحجز قيد التقدم'},
+   BOOKING_DELIVERED:{EN:'Booking has benn in delivered',AR:'الحجز قيد التقدم'}
+
 }
