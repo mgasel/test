@@ -32,6 +32,7 @@ transactionId:                      {   type:String,default:"" },
 
 ////////////////for tracking///////////////////////////////////////////
 
+
 isPickedUpfromCustomer:             {   type:Boolean,default:false },
 
 isDeliveredDeliveredToLaundry:      {   type:Boolean,default:false },
@@ -139,6 +140,7 @@ isRescheduledBookingByDriver:       { type:Boolean,default:false },
 
 isRescheduledBookingByUser:         { type:Boolean,default:false },
 
+customerName:                       {type:String,default:''},
 
 newDateToHandelDriverReschedule:    { type:Number },
 
