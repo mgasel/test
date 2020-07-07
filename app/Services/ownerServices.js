@@ -931,18 +931,16 @@ module.exports = {
             return ({ statusCode: 400, success: 1, Error:error})
         }
     },
-    data:(request)=>{
-        return 1
-    },
+ 
     downlaodPdf:async(request,response)=>{
         try {
-            let booking = await bookingModel.find({_id:request.query.bookingId})
+            let booking = await bookingModel.findOne({_id:request.query.bookingId})
         let data1 = data(booking)
     //    let  data2 = data(booking)
              
-            pdf.create(data1,data2).toFile('./'+"order"+'.pdf',(err,match)=>{
-                console.log('errr',err);
-                console.log('match',match);
+            pdf.create(data1).toFile('./'+"order"+'.pdf',(err,match)=>{
+                // console.log('errr',err);
+                // console.log('match',match);
                 response.download(match.filename)
             })
 
@@ -1020,12 +1018,14 @@ module.exports = {
 }
 let data =(booking)=>{
     let orderList = ``;
-    console.log('--------------',booking)
-    console.log(booking);
-    // break:
+    console.log('---------',booking.servicePrice)
+    // console.log(booking);5efaece5ca3dfe31364a5727
+    // break:-5efaece5ca3dfe31364a5727--
+    console.log('booo');
     
     booking.servicePrice.map(ele => {
         // console.log(ele)
+        for(let i=0;i<3;i++){
         orderList += `
                     <tr>
                         <td style="padding: 20px 0;border-bottom: solid 1px #000;width: 45%;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.serviceName}</td>
@@ -1033,7 +1033,8 @@ let data =(booking)=>{
                         <td style="padding: 20px 0;border-bottom: solid 1px #000;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;"> ${ele.totalPrice}</td>
             
                     </tr>`;
-    
+                    
+        }
     });
     return `
     <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
