@@ -604,7 +604,9 @@ module.exports = {
             request.body.orderId = uuid.sync(4)
             let user = await userModel.findOne({ $and: [{ completePhoneNumber: request.body.completePhoneNumber }, { isDeleted: false }] })
             // if(user==null)return response
-            if(user==null)
+            // if(user==null)
+            console.log('user',user);
+            
             request.body.userId = user._id
             let current = 0
             let totalAmount = 0
