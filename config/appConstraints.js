@@ -459,6 +459,6 @@ module.exports={
    INVALID_LAUNDRY_SERVICE_ID:{EN:'Invalid laundry service item id',AR:'معرف عنصر خدمة الغسيل غير صالح'},
    INVALID_CATEGORY_ID:{EN:'Invalid category id',AR:'معرف عنصر خدمة الغسيل غير صالح'},
    SERVICE_ITEMS_EXIST :{EN:'service item already exist ',AR:'عنصر الخدمة موجود بالفعل'},
-   NOT_REGISTER_BOOKING:{EN:'You are not register as user',AR:'أنت غير مسجل كمستخدم'},
+   NOT_REGISTER_BOOKING:{EN:'You are not a registered user',AR:'انت لست مستخدم مسجل'},
 
 }
