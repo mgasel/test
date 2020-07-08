@@ -782,7 +782,11 @@ module.exports = {
     },
     getBookings: async (request, response) => {
         try {
-            let booking = await bookingModel.find({ laundryId: request.body.id }).sort({_id:-1}).populate('userId')
+            let limit = 10
+            if(request.body.limit){
+                limit = limit*request.body.limit
+            }
+            let booking = await bookingModel.find({ laundryId: request.body.id }).sort({_id:-1}).limit(limit).populate('userId')
             return ({ statusCode: 200, success: 1, Booking: booking })
         } catch (error) {
             return ({ statusCode: 400, success: 0, msg: error });
