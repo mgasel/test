@@ -511,7 +511,47 @@ module.exports = {
                 )
 
             }
+            if(request.body.serviceItems){
+                // console.log('service id',request.body.serviceItems.serviceItemId);
+                // console.log('laundryId',request.body.serviceItems.laudryId);
+                // console.log('laundry service is',request.body.serviceItems.laundryServiceId);
+                // console.log('category id',request.body.serviceItems.categoryId);
+                let  findCopyItems = await laundryItemsModel.findOne({vendorItemId:request.body.serviceItems.serviceItemId,laundryId:request.body.serviceItems.laudryId,serviceId:request.body.serviceItems.laundryServiceId,categoryId:request.body.serviceItems.categoryId})
+                if(findCopyItems) return response.json({ statusCode: 400, success: 1, message:AppConstraints.SERVICE_ITEMS_EXIST })
 
+                let serviceItemData = await serviceItemModel.findOne({_id:request.body.serviceItems.serviceItemId})
+                if(!serviceItemData)  return response.json({ statusCode: 400, success: 1, message:AppConstraints.INVALID_SERVICE_ITEM_ID })
+
+                let laudryData = await laundryModel.findOne({_id:request.body.serviceItems.laudryId})
+                if(!laudryData)  return response.json({ statusCode: 400, success: 1, message:AppConstraints.INVALID_SERVICE_ITEM_ID })
+
+                let laundryServiceData = await laundryServiceModel.findOne({_id:request.body.serviceItems.laundryServiceId,laundryId:request.body.serviceItems.laudryId})
+                if(!laundryServiceData)  return response.json({ statusCode: 400, success: 1, message:AppConstraints.INVALID_LAUNDRY_SERVICE_ID })
+
+
+                let categoryData = await categoryModel.findOne({_id:request.body.serviceItems.categoryId})
+                if(!categoryData)  return response.json({ statusCode: 400, success: 1, message:AppConstraints.INVALID_CATEGORY_ID })
+
+
+                let laundryItems = {
+                    itemName: serviceItemData.itemName,
+                    itemNameAr: serviceItemData.itemNameAr,
+                    itemPic: serviceItemData.itemPic,
+                    amountPerItem:parseInt(serviceItemData.amountPerItem),
+                    categoryId: request.body.serviceItems.categoryId,
+                    serviceId: request.body.serviceItems.laundryServiceId,
+                    series: serviceItemData.series,
+                    laundryId: request.body.serviceItems.laudryId,
+                    vendorItemId: serviceItemData._id,
+                    instant : parseInt(serviceItemData.amountPerItem)
+                }
+                // console.log('laundrt',serviceItemData._id);
+                // console.log('laun',serviceItemData);
+                let items = await laundryItemsModel(laundryItems).save()
+
+                return response.json({ statusCode: 200, success: 1, Items: items })
+                
+            }
 
 
 
@@ -1014,6 +1054,16 @@ module.exports = {
             return  ({ statusCode: 400, success: 1, Booking:findBooking})
         } catch (error) {
             return ({ statusCode: 400, success: 1, Error:error})
+        }
+    },
+    deleteServiceItem : async(request,response)=>{
+        try {
+            const items = await laundryItemsModel.findOne({_id:request.body.itemsId})
+            if(items==null) return ({ statusCode: 400, success: 1, Error:AppConstraints.INVALID_SERVICE_ITEM_ID})
+            await laundryItemsModel.deleteOne({_id:request.body.itemsId})
+            return  ({ statusCode: 200, success: 1, items:AppConstraints.DELETED})
+        } catch (error) {
+            
         }
     }
 

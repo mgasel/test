@@ -454,6 +454,11 @@ module.exports={
    COUPON_ADDED:{EN:'Counpon added sucessfully',AR:'تمت إضافة القسيمة بنجاح'},
    COUPON_EXPIRE : {EN:'Coupon is expires',AR:'تنتهي صلاحية القسيمة'},
    BOOKING_INPROGRESS:{EN:'Booking has benn in progress',AR:'الحجز قيد التقدم'},
-   BOOKING_DELIVERED:{EN:'Booking has benn in delivered',AR:'الحجز قيد التقدم'}
+   BOOKING_DELIVERED:{EN:'Booking has benn in delivered',AR:'الحجز قيد التقدم'},
+   INVALID_SERVICE_ITEM_ID:{EN:'Invalid service item id',AR:'معرف عنصر الخدمة غير صالح'},
+   INVALID_LAUNDRY_SERVICE_ID:{EN:'Invalid laundry service item id',AR:'معرف عنصر خدمة الغسيل غير صالح'},
+   INVALID_CATEGORY_ID:{EN:'Invalid category id',AR:'معرف عنصر خدمة الغسيل غير صالح'},
+   SERVICE_ITEMS_EXIST :{EN:'service item already exist ',AR:'عنصر الخدمة موجود بالفعل'},
+
 
 }

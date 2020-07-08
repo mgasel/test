@@ -211,3 +211,7 @@ exports.getBookingByBag = async(request,response)=>{
     const booking = await ownwerServices.getBagById(request,response)
     response.json(booking)
 }
+exports.deleteItems = async(request,response)=>{
+    const items = await ownwerServices.deleteServiceItem(request,response)
+    response.json(items)
+}

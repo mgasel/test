@@ -49,6 +49,8 @@ module.exports= function(app){
 
     app.post('/owner/bookingStatus',authenticattion.verifyOwnerBranch,ownerController.changeStatus)
     app.get('/owner/bagId/:bagNo',authenticattion.verifyOwnerBranch,ownerController.getBookingByBag)
+    
+    app.post('/owner/deleteItems',authenticattion.verifyOwnerBranch,ownerController.deleteItems)
 
 
 }
