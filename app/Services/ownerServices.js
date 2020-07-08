@@ -787,7 +787,7 @@ module.exports = {
                 limit = limit*request.body.limit
             }
             let booking = await bookingModel.find({ laundryId: request.body.id }).sort({_id:-1}).limit(limit).populate('userId')
-            return ({ statusCode: 200, success: 1, Booking: booking })
+            return ({ statusCode: 200, success: 1, Booking: booking , Count : booking.length })
         } catch (error) {
             return ({ statusCode: 400, success: 0, msg: error });
         }
