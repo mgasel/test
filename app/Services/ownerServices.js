@@ -643,6 +643,7 @@ module.exports = {
             // request.body.driverId = nearDriver._id
             request.body.orderId = uuid.sync(4)
             let user = await userModel.findOne({ $and: [{ completePhoneNumber: request.body.completePhoneNumber }, { isDeleted: false }] })
+            if(!user)  return ({ statusCode: 400, success: 0, msg: AppConstraints.NOT_REGISTER_BOOKING })
             // if(user==null)return response
             // if(user==null)
             console.log('user',user);
