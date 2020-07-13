@@ -516,7 +516,7 @@ module.exports = {
                 // console.log('laundryId',request.body.serviceItems.laudryId);
                 // console.log('laundry service is',request.body.serviceItems.laundryServiceId);
                 // console.log('category id',request.body.serviceItems.categoryId);
-                let  findCopyItems = await laundryItemsModel.findOne({$and: [{isDeleted:true},{vendorItemId:request.body.serviceItems.serviceItemId}]})
+                let  findCopyItems = await laundryItemsModel.findOne({$and: [{isDeleted:false},{vendorItemId:request.body.serviceItems.serviceItemId}]})
                 if(findCopyItems) return response.json({ statusCode: 400, success: 1, message:AppConstraints.SERVICE_ITEMS_EXIST })
 
                 // let serviceItemData = await serviceItemModel.findOne({_id:request.body.serviceItems.serviceItemId})
