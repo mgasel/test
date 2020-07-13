@@ -491,6 +491,10 @@ module.exports = {
                 return response.json({ statusCode: 200, success: 1, services: AppConstraints.SERVICES_ADDED })
             }
             if (request.body.emptyServices) {
+               let findServicesData = await laundryServiceModel.findOne({laundryId: request.body.id,vendorServiceId: request.body.emptyServices[0].serviceId,isDeleted:false})
+                if(findServicesData){
+                    return response.json({ statusCode: 200, success: 1, message :'already added' })
+                }
                let findExistService = await laundryServiceModel.findOne({laundryId: request.body.id,vendorServiceId: request.body.emptyServices[0].serviceId,isDeleted:true})
                 if(findExistService){   
                     await laundryServiceModel.update({laundryId: request.body.id,vendorServiceId: request.body.emptyServices[0].serviceId,isDeleted:true},{isDeleted:false})
