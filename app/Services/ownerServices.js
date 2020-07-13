@@ -883,6 +883,7 @@ module.exports = {
                                             [
                                                 { $eq: ["$categoryId", "$$categoryId"] },
                                                 { $eq: ["$serviceId", "$$serviceId"] },
+                                                { $eq: ["$isDeleted", false] }
 
                                             ]
                                     }
@@ -1065,7 +1066,7 @@ module.exports = {
         try {
             const items = await laundryItemsModel.findOne({_id:request.body.itemsId})
             if(items==null) return ({ statusCode: 400, success: 1, Error:AppConstraints.INVALID_SERVICE_ITEM_ID})
-            await laundryItemsModel.deleteOne({_id:request.body.itemsId})
+            await laundryItemsModel.update({_id:request.body.itemsId},{isDeleted:true})
             return  ({ statusCode: 200, success: 1, items:AppConstraints.DELETED})
         } catch (error) {
             
