@@ -513,7 +513,7 @@ module.exports = {
                     let save = await laundryServiceModel(laundryServices).save()
                     await laundryModel.findByIdAndUpdate({ _id: request.body.id }, { $push: { laundryServices: save._id } })
                     let laundryData = await laundryModel.findOne({ _id: request.body.id }).populate('laundryServices')
-                    return response.json({ statusCode: 200, success: 1,Laundry :laundryData})
+                    return response.json({ statusCode: 200, success: 1,Message :"Service added sucessfully"})
                 }
                 )
 
