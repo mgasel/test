@@ -519,18 +519,18 @@ module.exports = {
                 let  findCopyItems = await laundryItemsModel.findOne({isDeleted:false,vendorItemId:request.body.serviceItems.serviceItemId,laundryId:request.body.serviceItems.laudryId,serviceId:request.body.serviceItems.laundryServiceId,categoryId:request.body.serviceItems.categoryId})
                 if(findCopyItems) return response.json({ statusCode: 400, success: 1, message:AppConstraints.SERVICE_ITEMS_EXIST })
 
-                // let serviceItemData = await serviceItemModel.findOne({_id:request.body.serviceItems.serviceItemId})
-                // if(!serviceItemData)  return response.json({ statusCode: 400, success: 1, message:AppConstraints.INVALID_SERVICE_ITEM_ID })
+                let serviceItemData = await serviceItemModel.findOne({_id:request.body.serviceItems.serviceItemId})
+                if(!serviceItemData)  return response.json({ statusCode: 400, success: 1, message:AppConstraints.INVALID_SERVICE_ITEM_ID })
 
-                // let laudryData = await laundryModel.findOne({_id:request.body.serviceItems.laudryId})
-                // if(!laudryData)  return response.json({ statusCode: 400, success: 1, message:AppConstraints.INVALID_SERVICE_ITEM_ID })
+                let laudryData = await laundryModel.findOne({_id:request.body.serviceItems.laudryId})
+                if(!laudryData)  return response.json({ statusCode: 400, success: 1, message:AppConstraints.INVALID_SERVICE_ITEM_ID })
 
-                // let laundryServiceData = await laundryServiceModel.findOne({_id:request.body.serviceItems.laundryServiceId,laundryId:request.body.serviceItems.laudryId})
-                // if(!laundryServiceData)  return response.json({ statusCode: 400, success: 1, message:AppConstraints.INVALID_LAUNDRY_SERVICE_ID })
+                let laundryServiceData = await laundryServiceModel.findOne({_id:request.body.serviceItems.laundryServiceId,laundryId:request.body.serviceItems.laudryId})
+                if(!laundryServiceData)  return response.json({ statusCode: 400, success: 1, message:AppConstraints.INVALID_LAUNDRY_SERVICE_ID })
 
 
-                // let categoryData = await categoryModel.findOne({_id:request.body.serviceItems.categoryId})
-                // if(!categoryData)  return response.json({ statusCode: 400, success: 1, message:AppConstraints.INVALID_CATEGORY_ID })
+                let categoryData = await categoryModel.findOne({_id:request.body.serviceItems.categoryId})
+                if(!categoryData)  return response.json({ statusCode: 400, success: 1, message:AppConstraints.INVALID_CATEGORY_ID })
 
 
                 // let laundryItems = {
