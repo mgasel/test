@@ -776,7 +776,7 @@ module.exports = {
     },
     laundryService: async (request, response) => {
         if (request.body.status == 'service') {
-            let laundry = await laundryServiceModel.find({ $and: [{ laundryId: request.body.id }, { isDeleted: false }] })
+            let laundry = await laundryModel.findOne({ $and: [{ _id: request.body.id }, { isDeleted: false }] }).populate('laundryServices')
             return ({ statusCode: 200, success: 1, Laundry: laundry })
         }
         if (request.body.status == 'category') {
@@ -814,7 +814,6 @@ module.exports = {
         try {
             if (request.body.status == 'service') {
                 findService = await laundryModel.findOne({ _id: request.body.id, laundryServices: request.body.serviceId  })
-                
                 console.log('findServices', findService);
                 if (findService == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.VALID_ID });
                 await laundryModel.update({ _id: findService._id }, { $pull: { laundryServices: request.body.serviceId } })
