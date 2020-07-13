@@ -513,7 +513,7 @@ module.exports = {
                     let save = await laundryServiceModel(laundryServices).save()
                     await laundryModel.findByIdAndUpdate({ _id: request.body.id }, { $push: { laundryServices: save._id } })
                     let laundryData = await laundryModel.findOne({ _id: request.body.id }).populate('laundryServices')
-                    return response.json({ statusCode: 200, success: 1,Message :"Service added sucessfully"})
+                    return response.json({ statusCode: 200, success: 1,Laundry :laundryData})
                 }
                 )
 
@@ -813,11 +813,11 @@ module.exports = {
     deleteServices: async (request, response) => {
         try {
             if (request.body.status == 'service') {
-                findService = await laundryModel.findOne({ $and: [{ _id: request.body.id }, { laundryServices: request.body.serviceId }] })
+                findService = await laundryModel.findOne({ _id: request.body.id, laundryServices: request.body.serviceId  })
                 console.log('findServices', findService);
                 if (findService == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.VALID_ID });
                 await laundryModel.update({ _id: findService._id }, { $pull: { laundryServices: request.body.serviceId } })
-                await laundryServiceModel.update( { _id: request.body.serviceId},{$set:{serviceCategory:[]}},{isDeleted:true})
+                await laundryServiceModel.update( { _id: request.body.serviceId},{isDeleted:true,serviceCategory:[]})
                 await laundryItemsModel.deleteMany({ $and: [{ laundryId: findService._id }, { serviceId: request.body.serviceId }] })
                 return ({ statusCode: 200, success: 1, msg: AppConstraints.DELETED })
             }
