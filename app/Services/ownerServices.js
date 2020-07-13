@@ -491,6 +491,7 @@ module.exports = {
             }
             if (request.body.emptyServices) {
                 console.log('da',request.body.emptyServices[0]);
+                console.log('da',request.body.emptyServices);
                 
                 findExistService = await laundryServiceModel.findOne({laundryId: request.body.id,vendorServiceId:request.body.emptyServices[0],isDeleted:true})
                 if(findExistService){
