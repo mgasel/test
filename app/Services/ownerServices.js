@@ -833,6 +833,7 @@ module.exports = {
                 //   console.log('data',data);
 
                 await laundryItemsModel.deleteMany({ $and: [{ laundryId: request.body.id }, { serviceId: request.body.serviceId }, { categoryId: request.body.categoryId }] })
+                
                 return ({ statusCode: 200, success: 1, msg: AppConstraints.DELETED })
             }
         } catch (error) {
