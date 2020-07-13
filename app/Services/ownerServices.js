@@ -813,7 +813,7 @@ module.exports = {
     deleteServices: async (request, response) => {
         try {
             if (request.body.status == 'service') {
-                findService = await laundryModel.findOne({ $and: [{ _id: request.body.id }, { laundryServices: request.body.serviceId }] })
+                findService = await laundryModel.findOne({ $and: [{ _id: request.body.id }] })
                 console.log('findServices', findService);
                 if (findService == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.VALID_ID });
                 await laundryModel.update({ _id: findService._id }, { $pull: { laundryServices: request.body.serviceId } })
