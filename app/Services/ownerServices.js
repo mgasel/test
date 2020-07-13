@@ -549,7 +549,7 @@ module.exports = {
                 // console.log('laun',serviceItemData);
                 let items = await laundryItemsModel.update({isDeleted:true,vendorItemId:request.body.serviceItems.serviceItemId},{isDeleted:false})
 
-                return response.json({ statusCode: 200, success: 1, Items: items })
+                return response.json({ statusCode: 200, success: 1, Items: 'item addes sucessfully' })
                 
             }
 
