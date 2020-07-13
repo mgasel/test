@@ -22,7 +22,6 @@ const moment = require('moment-timezone')
 const pdf = require('html-pdf')
 const fs = require('fs')
 const json2xls = require('json2xls')
-let mongoose = require('mongoose')
 module.exports = {
     registerOwner: async (request, response) => {
         try {
@@ -513,7 +512,7 @@ module.exports = {
                     let save = await laundryServiceModel(laundryServices).save()
                     await laundryModel.findByIdAndUpdate({ _id: request.body.id }, { $push: { laundryServices: save._id } })
                     let laundryData = await laundryModel.findOne({ _id: request.body.id }).populate('laundryServices')
-                    return response.json({ statusCode: 200, success: 1,Message :"Service added sucessfully"})
+                    return response.json({ statusCode: 200, success: 1,Laundry :laundryData})
                 }
                 )
 
@@ -554,7 +553,7 @@ module.exports = {
                 // }
                 // console.log('laundrt',serviceItemData._id);
                 // console.log('laun',serviceItemData);
-                let items = await laundryItemsModel.update({isDeleted:true,vendorItemId:request.body.serviceItems.serviceItemId,laundryId:request.body.serviceItems.laudryId,serviceId:request.body.serviceItems.laundryServiceId,categoryId:request.body.serviceItems.categoryId},{isDeleted:false})
+                let items = await laundryItemsModel.findByIdAndUpdate({isDeleted:true,vendorItemId:request.body.serviceItems.serviceItemId,laundryId:request.body.serviceItems.laudryId,serviceId:request.body.serviceItems.laundryServiceId,categoryId:request.body.serviceItems.categoryId},{isDeleted:false})
 
                 return response.json({ statusCode: 200, success: 1, Items : items})
                 
@@ -784,7 +783,7 @@ module.exports = {
             return ({ statusCode: 200, success: 1, Category: category })
         }
         if (request.body.status == 'serviceItems') {
-            let serviceItems = await laundryItemsModel.find({ $and: [{ categoryId: request.body.categoryId }, { serviceId: request.body.serviceId }, { laundryId: request.body.id },{isDeleted : false}] })
+            let serviceItems = await laundryItemsModel.find({ $and: [{ categoryId: request.body.categoryId }, { serviceId: request.body.serviceId }, { laundryId: request.body.id }] })
             return ({ statusCode: 200, success: 1, Serviceitems: serviceItems })
         }
     },
@@ -817,7 +816,7 @@ module.exports = {
                 console.log('findServices', findService);
                 if (findService == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.VALID_ID });
                 await laundryModel.update({ _id: findService._id }, { $pull: { laundryServices: request.body.serviceId } })
-                await laundryServiceModel.update( { _id: request.body.serviceId},{$set:{serviceCategory:[]}},{isDeleted:true})
+                await laundryServiceModel.deleteOne({ $and: [{ laundryId: findService._id }, { _id: request.body.serviceId }] })
                 await laundryItemsModel.deleteMany({ $and: [{ laundryId: findService._id }, { serviceId: request.body.serviceId }] })
                 return ({ statusCode: 200, success: 1, msg: AppConstraints.DELETED })
             }
