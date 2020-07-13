@@ -490,7 +490,8 @@ module.exports = {
                 return response.json({ statusCode: 200, success: 1, services: AppConstraints.SERVICES_ADDED })
             }
             if (request.body.emptyServices) {
-
+                console.log('da',request.body.emptyServices[0]);
+                
                 findExistService = await laundryServiceModel.findOne({laundryId: request.body.id,vendorServiceId:request.body.emptyServices[0],isDeleted:true})
                 if(findExistService){
                     console.log('innnnnnn');
