@@ -22,6 +22,7 @@ const moment = require('moment-timezone')
 const pdf = require('html-pdf')
 const fs = require('fs')
 const json2xls = require('json2xls')
+let mongoose = require('mongoose')
 module.exports = {
     registerOwner: async (request, response) => {
         try {
@@ -493,7 +494,7 @@ module.exports = {
                 console.log('da',request.body.emptyServices[0]);
                 console.log('da',request.body.emptyServices);
                 
-               let findExistService = await laundryServiceModel.findOne({laundryId: request.body.id,vendorServiceId:request.body.emptyServices[0],isDeleted:true})
+               let findExistService = await laundryServiceModel.findOne({laundryId: request.body.id,vendorServiceId: mongoose.Types.ObjectId(request.body.emptyServices[0]),isDeleted:true})
                console.log('funnf',findExistService);
                
                 // if(findExistService){
