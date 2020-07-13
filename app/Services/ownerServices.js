@@ -777,7 +777,7 @@ module.exports = {
             return ({ statusCode: 200, success: 1, Category: category })
         }
         if (request.body.status == 'serviceItems') {
-            let serviceItems = await laundryItemsModel.find({ $and: [{ categoryId: request.body.categoryId }, { serviceId: request.body.serviceId }, { laundryId: request.body.id }] })
+            let serviceItems = await laundryItemsModel.find({ $and: [{ categoryId: request.body.categoryId }, { serviceId: request.body.serviceId }, { laundryId: request.body.id },{isDeleted : false}] })
             return ({ statusCode: 200, success: 1, Serviceitems: serviceItems })
         }
     },
