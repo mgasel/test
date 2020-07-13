@@ -494,12 +494,14 @@ module.exports = {
                 console.log('da',request.body.emptyServices);
                 
                let findExistService = await laundryServiceModel.findOne({laundryId: request.body.id,vendorServiceId:request.body.emptyServices[0],isDeleted:true})
-                if(findExistService){
-                    console.log('innnnnnn');
+               console.log('funnf',findExistService);
+               
+                // if(findExistService){
+                //     console.log('innnnnnn');
                     
-                    await laundryServiceModel.update({_id:findExistService._id},{isDeleted:false})
-                    return response.json({ statusCode: 200, success: 1, Message :"Service added sucessfully" })
-                }
+                //     await laundryServiceModel.update({_id:findExistService._id},{isDeleted:false})
+                //     return response.json({ statusCode: 200, success: 1, Message :"Service added sucessfully" })
+                // }
                 laundry = await laundryModel.findOne({ _id: request.body.id })
 
                 if (laundry == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_LAUNDRY_ID })
