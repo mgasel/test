@@ -490,6 +490,11 @@ module.exports = {
                 return response.json({ statusCode: 200, success: 1, services: AppConstraints.SERVICES_ADDED })
             }
             if (request.body.emptyServices) {
+
+                findExistService = await laundryServiceModel.findOne({laundryId: request.body.id,vendorServiceId:request.body.emptyServices[0],isDeleted:true})
+                if(findExistService){
+                    await laundryServiceModel.update({_id:findExistService._id},{isDeleted:false})
+                }
                 laundry = await laundryModel.findOne({ _id: request.body.id })
 
                 if (laundry == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_LAUNDRY_ID })
@@ -810,7 +815,7 @@ module.exports = {
                 console.log('findServices', findService);
                 if (findService == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.VALID_ID });
                 await laundryModel.update({ _id: findService._id }, { $pull: { laundryServices: request.body.serviceId } })
-                await laundryServiceModel.deleteOne({ $and: [{ laundryId: findService._id }, { _id: request.body.serviceId }] })
+                await laundryServiceModel.update( { _id: request.body.serviceId},{isDeleted:true})
                 await laundryItemsModel.deleteMany({ $and: [{ laundryId: findService._id }, { serviceId: request.body.serviceId }] })
                 return ({ statusCode: 200, success: 1, msg: AppConstraints.DELETED })
             }
