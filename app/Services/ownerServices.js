@@ -516,7 +516,7 @@ module.exports = {
                 // console.log('laundryId',request.body.serviceItems.laudryId);
                 // console.log('laundry service is',request.body.serviceItems.laundryServiceId);
                 // console.log('category id',request.body.serviceItems.categoryId);
-                let  findCopyItems = await laundryItemsModel.findOne({$and: [{isDeleted:false},{vendorItemId:request.body.serviceItems.serviceItemId}]})
+                let  findCopyItems = await laundryItemsModel.findOne({isDeleted:false,vendorItemId:request.body.serviceItems.serviceItemId,laundryId:request.body.serviceItems.laudryId,serviceId:request.body.serviceItems.laundryServiceId,categoryId:request.body.serviceItems.categoryId})
                 if(findCopyItems) return response.json({ statusCode: 400, success: 1, message:AppConstraints.SERVICE_ITEMS_EXIST })
 
                 // let serviceItemData = await serviceItemModel.findOne({_id:request.body.serviceItems.serviceItemId})
@@ -547,9 +547,9 @@ module.exports = {
                 // }
                 // console.log('laundrt',serviceItemData._id);
                 // console.log('laun',serviceItemData);
-                let items = await laundryItemsModel.update({isDeleted:true,vendorItemId:request.body.serviceItems.serviceItemId},{isDeleted:false})
+                let items = await laundryItemsModel.update({isDeleted:true,vendorItemId:request.body.serviceItems.serviceItemId,laundryId:request.body.serviceItems.laudryId,serviceId:request.body.serviceItems.laundryServiceId,categoryId:request.body.serviceItems.categoryId},{isDeleted:false})
 
-                return response.json({ statusCode: 200, success: 1, Items: 'item added sucessfully' })
+                return response.json({ statusCode: 200, success: 1, Message : 'service item added sucessfully'})
                 
             }
 
