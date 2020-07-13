@@ -494,8 +494,8 @@ module.exports = {
                let findExistService = await laundryServiceModel.findOne({laundryId: request.body.id,vendorServiceId: request.body.emptyServices[0].serviceId,isDeleted:true})
                 if(findExistService){   
                     await laundryServiceModel.update({laundryId: request.body.id,vendorServiceId: request.body.emptyServices[0].serviceId,isDeleted:true},{isDeleted:false})
-                    await laundryModel.findByIdAndUpdate({ _id: request.body.id }, { $push: { laundryServices: findExistService._id } })
-                    return response.json({ statusCode: 200, success: 1, Message :"Service added sucessfully" })
+                     let laundryData = await laundryModel.findByIdAndUpdate({ _id: request.body.id }, { $push: { laundryServices: findExistService._id } })
+                    return response.json({ statusCode: 200, success: 1, Laundry :laundryData })
                 }
                 laundry = await laundryModel.findOne({ _id: request.body.id })
 
@@ -556,7 +556,7 @@ module.exports = {
                 // console.log('laun',serviceItemData);
                 let items = await laundryItemsModel.update({isDeleted:true,vendorItemId:request.body.serviceItems.serviceItemId,laundryId:request.body.serviceItems.laudryId,serviceId:request.body.serviceItems.laundryServiceId,categoryId:request.body.serviceItems.categoryId},{isDeleted:false})
 
-                return response.json({ statusCode: 200, success: 1, Message : 'service item added sucessfully'})
+                return response.json({ statusCode: 200, success: 1, Items : items})
                 
             }
 
