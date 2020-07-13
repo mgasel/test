@@ -495,6 +495,7 @@ module.exports = {
                 if(findExistService){   
                     await laundryServiceModel.update({laundryId: request.body.id,vendorServiceId: request.body.emptyServices[0].serviceId,isDeleted:true},{isDeleted:false})
                     return response.json({ statusCode: 200, success: 1, Message :"Service added sucessfully" })
+                    
                 }
                 laundry = await laundryModel.findOne({ _id: request.body.id })
 
