@@ -817,7 +817,7 @@ module.exports = {
                 console.log('findServices', findService);
                 if (findService == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.VALID_ID });
                 await laundryModel.update({ _id: findService._id }, { $pull: { laundryServices: request.body.serviceId } })
-                await laundryServiceModel.update( { _id: request.body.serviceId},{isDeleted:true})
+                await laundryServiceModel.update( { _id: request.body.serviceId},{$set:{serviceCategory:[]}},{isDeleted:true})
                 await laundryItemsModel.deleteMany({ $and: [{ laundryId: findService._id }, { serviceId: request.body.serviceId }] })
                 return ({ statusCode: 200, success: 1, msg: AppConstraints.DELETED })
             }
