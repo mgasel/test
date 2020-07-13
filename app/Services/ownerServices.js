@@ -776,7 +776,7 @@ module.exports = {
     },
     laundryService: async (request, response) => {
         if (request.body.status == 'service') {
-            let laundry = await laundryModel.findOne({ $and: [{ _id: request.body.id }, { isDeleted: false }] }).populate('laundryServices')
+            let laundry = await laundryServiceModel.find({ $and: [{ laundryId: request.body.id }, { isDeleted: false }] })
             return ({ statusCode: 200, success: 1, Laundry: laundry })
         }
         if (request.body.status == 'category') {
