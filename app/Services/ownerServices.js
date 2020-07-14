@@ -512,7 +512,9 @@ module.exports = {
                         hexString: findService.hexString,
                         serviceCategory: object.serviceCategory,
                         laundryId: request.body.id,
-                        vendorServiceId: findService._id
+                        vendorServiceId: findService._id,
+                        vendorlaundryDate:moment(findService.createDate).unix()
+
                     }
                     let save = await laundryServiceModel(laundryServices).save()
                     await laundryModel.findByIdAndUpdate({ _id: request.body.id }, { $push: { laundryServices: save._id } })
@@ -780,7 +782,7 @@ module.exports = {
     },
     laundryService: async (request, response) => {
         if (request.body.status == 'service') {
-            let laundry = await laundryServiceModel.find({ $and: [{ laundryId: request.body.id }, { isDeleted: false }] })
+            let laundry = await laundryServiceModel.find({ $and: [{ laundryId: request.body.id }, { isDeleted: false }] }).sort({vendorlaundryDate:1})
             return ({ statusCode: 200, success: 1, Laundry: laundry })
         }
         if (request.body.status == 'category') {

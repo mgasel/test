@@ -57,6 +57,10 @@ let laundryService=Schema({
     vendorServiceId:{
         type:Schema.Types.ObjectId,
         ref:'Service'
+    },
+    vendorlaundryDate : {
+        type:Number,
+        default:0
     }
 });
 
