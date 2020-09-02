@@ -796,11 +796,13 @@ module.exports = {
     },
     getBookings: async (request, response) => {
         try {
-            let limit = 10
-            if(request.body.limit){
-                limit = limit*request.body.limit
+            let limit = 10 , skip = 0
+            if(request.body.skip == null ){
+                skip = 0
+            }else{
+                skip = request.body.skip *10
             }
-            let booking = await bookingModel.find({ laundryId: request.body.id }).sort({_id:-1}).limit(limit).populate('userId')
+            let booking = await bookingModel.find({ laundryId: request.body.id }).sort({_id:-1}).skip(skip).limit(limit).populate('userId')
             return ({ statusCode: 200, success: 1, Booking: booking , Count : booking.length })
         } catch (error) {
             return ({ statusCode: 400, success: 0, msg: error });
