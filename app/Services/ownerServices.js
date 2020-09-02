@@ -797,7 +797,7 @@ module.exports = {
     getBookings: async (request, response) => {
         try {
             let limit = 10 , skip = 0
-            if(request.body.skip == null ){
+            if(request.body.skip == null || request.body.skip == 0 ){
                 skip = 0
             }else{
                 skip = request.body.skip *10
