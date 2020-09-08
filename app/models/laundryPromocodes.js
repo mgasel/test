@@ -9,7 +9,7 @@ let laundryPromos=Schema({
 
     created_at:                         {  type:Date,default:Date.now },
 
-    // usedBy:                             [{type:Schema.Types.ObjectId,ref:'User'}],
+    usedBy:                             [{type:Schema.Types.ObjectId,ref:'User'}],
 
     isDeleted:                          { type:Boolean,default:false },
 
