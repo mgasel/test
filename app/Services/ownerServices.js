@@ -810,6 +810,35 @@ module.exports = {
             return ({ statusCode: 400, success: 0, msg: error });
         }
     },
+    getBookingsByDate: async (request, response) => {
+        try {
+            console.log('r',request.laundryId);
+            let limit = 10 , skip = 0
+            if(request.body.skip == null || request.body.skip == 0 ){
+                skip = 0
+            }else{
+                skip = request.body.skip *10
+            }
+            let query = {}
+            if(request.body.startDate && request.body.endDate){
+                query = {
+                    laundryId: request.body.laundryId,
+                    createDate : { $lte: request.body.startDate ,$gte: request.body.endDate }
+                }
+            }
+            else{
+                query = {
+                    laundryId: request.body.laundryId,
+                } 
+            }
+            console.log('qury',query);
+            let booking = await bookingModel.find({laundryId:mongoose.Types.ObjectId(request.body.laundryId)}).sort({_id:-1}).skip(skip).limit(limit).populate('userId')
+            let count = await bookingModel.find({ laundryId: request.body.id })
+            return ({ statusCode: 200, success: 1, Booking: booking , Count : count.length })
+        } catch (error) {
+            return ({ statusCode: 400, success: 0, msg: error });
+        }
+    },
     getOrderById: async (request, response) => {
         try {
 
@@ -1018,11 +1047,11 @@ module.exports = {
     },
     getlaundryCouponsById : async(request,response)=>{
         try {
-            console.log('iddd',request.query);
+            console.log('iddd',request.laundryId);
 
            
                 
-                let promoCodes = await promoModel.findOne({$and:[{laundryId:request.ownerId,_id:request.params.id,isDeleted:"false"}]}).populate('laundryId branchesId serviceId categoryId')
+                let promoCodes = await promoModel.findOne({$and:[{laundryId:request.laundryId,_id:request.params.id,isDeleted:"false"}]}).populate('laundryId branchesId serviceId categoryId')
                 if(promoCodes==null) return ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
                 return    ({ statusCode: 200, success: 1, promoCodes:promoCodes})
          

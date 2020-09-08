@@ -17,9 +17,9 @@ let PromoCode=Schema({
 
     startDate:                          { type:Number,default:0},
 
-    laundryId: { type: Schema.Types.ObjectId, ref: "laundries" },
+    laundryId: { type: Schema.Types.ObjectId, ref: "Laundry" },
 
-    branchesId: [{ type: Schema.Types.ObjectId, ref: "laundries" }],
+    branchesId: [{ type: Schema.Types.ObjectId, ref: "Laundry" }],
   
     serviceId: [{ type: Schema.Types.ObjectId, ref: "laundryService" }],
   
