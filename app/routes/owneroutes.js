@@ -34,6 +34,7 @@ module.exports= function(app){
     app.post('/owner/laundryData',authenticattion.verifyOwnerBranch,ownerController.laundryDetails)
     app.post('/owner/laundryDetails',authenticattion.verifyOwnerBranch,ownerController.laundryServices)
     app.post('/owner/getBookings',authenticattion.verifyOwnerBranch,ownerController.getBooking)
+    
     app.get('/owner/booking/:orderId',authenticattion.verifyOwnerBranch,ownerController.ordersById)
     app.post('/owner/deleteService',authenticattion.verifyOwnerBranch,ownerController.deleteService)
 
@@ -45,6 +46,7 @@ module.exports= function(app){
     app.post('/owner/applyPromo',ownerController.applyPromo)
     app.get('/owner/laundriesCoupon',authenticattion.verifyOwnerBranch,ownerController.laundriesCoupons)
     app.get('/owner/laundriesCouponById/:id',authenticattion.verifyOwnerBranch,ownerController.laundriesCouponsById)
+
     app.post('/owner/deleteLaundriesCoupon',authenticattion.verifyOwnerBranch,ownerController.deleteLaundryCoupon)
     app.get('/owner/orderPdf',ownerController.pdf)
     app.get('/owner/orderExcel',ownerController.excel)

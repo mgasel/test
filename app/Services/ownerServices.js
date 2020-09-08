@@ -695,6 +695,7 @@ module.exports = {
             request.body.status = 'CONFIRMED'
             request.body.servicePrice = curretAmout
             // console.log('srev',service);
+            request.body.createDate = moment().valueOf()
             
             let booking = await bookingModel(request.body).save()
             booking.data = curretAmout
