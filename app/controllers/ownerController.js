@@ -197,6 +197,14 @@ exports.laundriesCoupons = async(request,response)=>{
     let allPromos = await ownwerServices.getlaundryCoupons(request,response)
     return response.json(allPromos)
 }
+exports.laundriesCouponsById = async(request,response)=>{
+    let allPromos = await ownwerServices.getlaundryCouponsById(request,response)
+    return response.json(allPromos)
+}
+exports.deleteLaundryCoupon = async(request,response)=>{
+    let allPromos = await ownwerServices.deletelaundryCoupons(request,response)
+    return response.json(allPromos)
+}
 exports.pdf = async(request,response)=>{
     await ownwerServices.downlaodPdf(request,response)
 }
