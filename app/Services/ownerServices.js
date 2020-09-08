@@ -937,8 +937,11 @@ module.exports = {
             request.body.laundryId = request.laundryId
             console.log('data=============', Math.random().toString(36).substring(8));
             request.body.promoCode =  Math.random().toString(36).substring(8)
-            request.body.startDate = moment().unix()
-            request.body.expiryDate = moment(request.body.expiryDate).unix()
+            if(request.body.startDate && request.body.expiryDate){
+                request.body.startDate = moment(request.body.startDate).unix()
+                request.body.expiryDate = moment(request.body.expiryDate).unix()
+            }
+          
             let promo = await promoModel(request.body).save()
             return ({ statusCode:200, success: 1,msg:AppConstraints.COUPON_ADDED ,Promo:promo })
             

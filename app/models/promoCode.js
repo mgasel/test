@@ -25,7 +25,9 @@ let PromoCode=Schema({
   
     categoryId: [{ type: Schema.Types.ObjectId, ref: "serviceCategory" }],
   
-    minimumAmount: { type: Number },
+    minimumOrderAmount: { type: Number },
+
+    customerType : {type : String},
   
     isDeleted: { type: String, default: false },
   
