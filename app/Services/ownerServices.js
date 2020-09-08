@@ -1007,7 +1007,7 @@ module.exports = {
 
            
                 
-                let promoCodes = await promoModel.find({laundryId:request.ownerId,isDeleted:"false"})
+                let promoCodes = await promoModel.find({laundryId:request.ownerId,isDeleted:"false"}).populate('laundryId branchesId serviceId categoryId')
                 // if(promoCodes==null) return ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
                 return    ({ statusCode: 400, success: 1, promoCodes:promoCodes})
            
@@ -1021,7 +1021,7 @@ module.exports = {
 
            
                 
-                let promoCodes = await promoModel.findOne({$and:[{laundryId:request.ownerId,_id:request.params.id,isDeleted:"false"}]})
+                let promoCodes = await promoModel.findOne({$and:[{laundryId:request.ownerId,_id:request.params.id,isDeleted:"false"}]}).populate('laundryId branchesId serviceId categoryId')
                 if(promoCodes==null) return ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
                 return    ({ statusCode: 200, success: 1, promoCodes:promoCodes})
          
