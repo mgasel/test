@@ -41,6 +41,7 @@ module.exports= function(app){
     // app.post('/owner/orderPdf')
     /** add promo code  */
     app.post('/owner/createPromo',authenticattion.verifyOwnerBranch,ownerController.createPromo)
+    app.post('/owner/updatePromo',authenticattion.verifyOwnerBranch,ownerController.updatePromo)
     app.post('/owner/applyPromo',ownerController.applyPromo)
     app.get('/owner/laundriesCoupon',authenticattion.verifyOwnerBranch,ownerController.laundriesCoupons)
 

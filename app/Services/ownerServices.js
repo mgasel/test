@@ -931,14 +931,32 @@ module.exports = {
     },
     createPromo:async(request,response)=>{
         try {
-            console.log('request',request);
+            // console.log('request',request);
             // if(await laundryModel.findOne({_id:request.body.laundryId})==null)return ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
             if(await laundryServiceModel.findOne({_id:request.body.serviceId})==null) ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
             request.body.laundryId = request.laundryId
+            console.log('data=============', Math.random().toString(36).substring(8));
+            request.body.promoCode =  Math.random().toString(36).substring(8)
             request.body.startDate = moment().unix()
             request.body.expiryDate = moment(request.body.expiryDate).unix()
             let promo = await promoModel(request.body).save()
             return ({ statusCode:200, success: 1,msg:AppConstraints.COUPON_ADDED ,Promo:promo })
+            
+        } catch (error) {
+            console.log('err',error);
+            
+        }
+    },
+    updatePromo:async(request,response)=>{
+        try {
+            console.log('request',request);
+            if(await laundryModel.findOne({_id:request.body.promoId,laundryId:request.ownerId,isDeleted:false})==null)return ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
+            if(await laundryServiceModel.findOne({_id:request.body.serviceId})==null) ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
+            // request.body.laundryId = request.laundryId
+            // request.body.startDate = moment().unix()
+            // request.body.expiryDate = moment(request.body.expiryDate).unix()
+            let promo = await promoModel.update({_id:request.body.promoId,isDeleted:false},request.body)
+            return ({ statusCode:200, success: 1,msg:AppConstraints.COUPON_UPDATED  })
             
         } catch (error) {
             console.log('err',error);

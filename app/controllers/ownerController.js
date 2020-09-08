@@ -185,6 +185,10 @@ exports.createPromo = async(request,response)=>{
    let promo = await ownwerServices.createPromo(request,response)
     return response.json(promo)
 }
+exports.updatePromo = async(request,response)=>{
+    let promo = await ownwerServices.updatePromo(request,response)
+     return response.json(promo)
+ }
 exports.applyPromo = async(request,response)=>{
    let promo = await ownwerServices.applyPromo(request,response)
    return response.json(promo)

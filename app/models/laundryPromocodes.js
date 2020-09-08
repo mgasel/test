@@ -37,8 +37,8 @@ let laundryPromos = Schema({
    
   serviceType : {type : String , default : ""},
 
-  discount : {type : Number},
   
+
 
   
 });

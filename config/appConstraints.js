@@ -452,6 +452,7 @@ module.exports={
    MINI_DISCOUNT_PRICE:{EN:'Booking amount is less than minimum discout price'},
    COUPON_APPLIES:{EN:'Coupon applied sucessfully',AR:'تم تطبيق القسيمة بنجاح'},
    COUPON_ADDED:{EN:'Counpon added sucessfully',AR:'تمت إضافة القسيمة بنجاح'},
+   COUPON_UPDATED:{EN:'Counpon update sucessfully',AR:'تحديث القسيمة بنجاح'},
    COUPON_EXPIRE : {EN:'Coupon is expires',AR:'تنتهي صلاحية القسيمة'},
    BOOKING_INPROGRESS:{EN:'Booking has benn in progress',AR:'الحجز قيد التقدم'},
    BOOKING_DELIVERED:{EN:'Booking has benn in delivered',AR:'الحجز قيد التقدم'},
