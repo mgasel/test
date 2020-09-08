@@ -31,11 +31,12 @@ module.exports = {
             const verify = jwt.verify(request.headers.token,'ownwerSecret')
             console.log('verify',verify);
             request.ownerId = verify.id
+            request.laundryId = verify.id
             const owner = await ownwerLaundry.findOne({$and:[{_id:verify.id},{isDeleted:false}]})
             // console.log('verifiiiy');
             
             if(owner==null)return response.status(400).json({statusCode:400,success:0 , msg: AppConstraints.INVALID_TOKEN_KEY})
-          
+           
             next()
             
         } catch (error) {

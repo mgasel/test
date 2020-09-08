@@ -1,32 +1,45 @@
-let mongoose=require('mongoose');
-let Schema=mongoose.Schema;
-let laundryPromos=Schema({
-    promoCode:                          {  type:String,default:"",index:true },
+let mongoose = require("mongoose");
+let Schema = mongoose.Schema;
+let laundryPromos = Schema({
+  promoCode: { type: String, default: "", index: true },
 
-    expiryDate:                         {  type:Number },
+  expiryDate: { type: Number },
 
-    message:                            {  type:String,default:"" },
+  message: { type: String, default: "" },
 
-    created_at:                         {  type:Date,default:Date.now },
+  created_at: { type: Date, default: Date.now },
 
-    usedBy:                             [{type:Schema.Types.ObjectId,ref:'User'}],
+  usedBy: [{ type: Schema.Types.ObjectId, ref: "User" }],
 
-    isDeleted:                          { type:Boolean,default:false },
+  isDeleted: { type: Boolean, default: false },
 
-    discount:                           { type:Number,default:0.0 },
+  discount: { type: Number, default: 0.0 },
 
-    startDate:                          { type:Number},
+  startDate: { type: Number },
 
-    laundryId:                           {type:Schema.Types.ObjectId,ref:'laundries'},
+  laundryId: { type: Schema.Types.ObjectId, ref: "laundries" },
 
-    serviceId:                            {type:Schema.Types.ObjectId,ref:'laundryService'},
+  branchesId: [{ type: Schema.Types.ObjectId, ref: "laundries" }],
 
-    categoryId:                         [ {type:Schema.Types.ObjectId,ref:'serviceCategory'}],
+  serviceId: [{ type: Schema.Types.ObjectId, ref: "laundryService" }],
 
-    minimumAmount:                      {type:Number},
-    
-    isDeleted :                         {type:String,default:false}
+  categoryId: [{ type: Schema.Types.ObjectId, ref: "serviceCategory" }],
 
+  minimumAmount: { type: Number },
 
+  isDeleted: { type: String, default: false },
+
+  deliveryOption : {type: String,default : ""},
+
+  paymentMethod : {type : String , default: ""},
+
+  orderChannel : {type: String , default: ""},
+   
+  serviceType : {type : String , default : ""},
+
+  discount : {type : Number},
+  
+
+  
 });
-module.exports=mongoose.model('laundryPromos',laundryPromos);
+module.exports = mongoose.model("laundryPromos", laundryPromos);

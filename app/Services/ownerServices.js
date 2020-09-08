@@ -17,7 +17,7 @@ let ObjectId = require('mongoose').Types.ObjectId
 const bookingModel = require('../models/Bookings')
 const userModel = require('../models/User')
 let uuid = require('uid-safe')
-const promoModel = require('../models/laundryPromocodes')
+const promoModel = require('../models/promoCode')
 const moment = require('moment-timezone')
 const pdf = require('html-pdf')
 const fs = require('fs')
@@ -931,13 +931,14 @@ module.exports = {
     },
     createPromo:async(request,response)=>{
         try {
-            console.log('request',request.body);
-            if(await laundryModel.findOne({_id:request.body.laundryId})==null)return ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
+            console.log('request',request);
+            // if(await laundryModel.findOne({_id:request.body.laundryId})==null)return ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
             if(await laundryServiceModel.findOne({_id:request.body.serviceId})==null) ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
+            request.body.laundryId = request.laundryId
             request.body.startDate = moment().unix()
             request.body.expiryDate = moment(request.body.expiryDate).unix()
             let promo = await promoModel(request.body).save()
-            return ({ statusCode:200, success: 1,msg:AppConstraints.COUPON_ADDED})
+            return ({ statusCode:200, success: 1,msg:AppConstraints.COUPON_ADDED ,Promo:promo })
             
         } catch (error) {
             console.log('err',error);
@@ -985,8 +986,8 @@ module.exports = {
 
             if(request.query.id){
                 
-                let promoCodes = await promoModel.findOne({$and:[{laundryId:request.ownerId},{_id:request.query.id}]})
-                if(promoCodes==null) return ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
+                let promoCodes = await promoModel.find({$and:[{laundryId:request.ownerId}]})
+                // if(promoCodes==null) return ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
                 return    ({ statusCode: 400, success: 1, promoCodes:promoCodes})
             }
             let promoCodes = await promoModel.find({$and:[{laundryId:request.ownerId}]})

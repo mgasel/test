@@ -40,7 +40,7 @@ module.exports= function(app){
     app.post('/owner/serviceDetails',authenticattion.verifyOwnerBranch,ownerController.servciceDetails)
     // app.post('/owner/orderPdf')
     /** add promo code  */
-    app.post('/owner/createPromo',ownerController.createPromo)
+    app.post('/owner/createPromo',authenticattion.verifyOwnerBranch,ownerController.createPromo)
     app.post('/owner/applyPromo',ownerController.applyPromo)
     app.get('/owner/laundriesCoupon',authenticattion.verifyOwnerBranch,ownerController.laundriesCoupons)
 
