@@ -803,7 +803,7 @@ module.exports = {
                 skip = request.body.skip *10
             }
             let booking = await bookingModel.find({ laundryId: request.body.id }).sort({_id:-1}).skip(skip).limit(limit).populate('userId')
-            let count = await bookingModel.countDocument({ laundryId: request.body.id })
+            let count = await bookingModel.countDocuments({ laundryId: request.body.id })
             return ({ statusCode: 200, success: 1, Booking: booking , Count : count })
         } catch (error) {
             return ({ statusCode: 400, success: 0, msg: error });
