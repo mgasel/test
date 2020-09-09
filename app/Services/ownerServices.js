@@ -296,14 +296,55 @@ module.exports = {
         if (list.length == 0) return ({ statusCode: 400, success: 0, msg: AppConstraints.EMPTY, List: list })
         return ({ statusCode: 200, success: 1, List: list })
     },
-    getAllBranchList: async (request, response) => {
+    getAllBranchServices: async (request, response) => {
         console.log('...................');
-
-        let list = await laundryModel.find({ $and: [
-            {$or:[{_id:request.body.id},{ownerId: request.body.id}]}    
-        ],
-        isDeleted: false
-         })
+        let ids = request.body.ids.map( id => mongoose.Types.ObjectId(id) )
+        // let list = await laundryServiceModel.aggregate([{
+        //      $match:{
+        //         'laundryId' : { $in: ids }
+        //       }, },
+        //       {$unwind : "$serviceCategory" },
+        //       {
+        //         $lookup:
+        //           {
+        //             from: "servicecategories",
+        //             localField: "serviceCategory",
+        //             foreignField: "_id",
+        //             as: "as"
+        //           }
+        //      }
+        //     // { $lookup: {
+        //     //     from:"laundryservices",
+        //     //     let: { "id": "$_id" },
+        //     //     pipeline: [
+        //     //        { "$match": { "$expr": { "$eq": [ "$laundryId", "$$id" ] } } },
+        //     //          {$unwind : "$serviceCategory" },
+        //     //     {
+        //     //         $lookup: {
+        //     //             from: "servicecategories",
+        //     //             localField: "serviceCategory",
+        //     //             foreignField: "_id",
+        //     //             as: "serviceCategory"
+        //     //         },
+                    
+        //     //     },
+        //         // {$unwind : "$serviceCategory" },
+        //     //      ],
+        //     //      as: "laundryservicesData"
+        //     //   }},
+         
+        // ]) 
+        let list = await laundryServiceModel.find({'laundryId' : { $in: ids }}).populate('serviceCategory')
+        // let categoriesIds = []
+        // list.map((data)=>{
+        //     data.serviceCategory.map((ids)=>{
+        //         categoriesIds.push(`${ids}`)
+             
+        //     })
+        // })
+        // let uniqueIds = [...new Set(categoriesIds)];
+        // let 
+      
 
         if (list.length == 0) return ({ statusCode: 400, success: 0, msg: AppConstraints.EMPTY, List: list })
         return ({ statusCode: 200, success: 1, List: list })
