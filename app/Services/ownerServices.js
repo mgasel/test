@@ -659,7 +659,8 @@ module.exports = {
             if(!user)  return ({ statusCode: 400, success: 0, msg: AppConstraints.NOT_REGISTER_BOOKING })
             // if(user==null)return response
             // if(user==null)
-            console.log('user',user);
+            // console.log('user',user);
+            console.log('req===========>>>>>>>>>',request.laundryId);
             
             request.body.userId = user._id
             let current = 0
@@ -812,30 +813,44 @@ module.exports = {
     },
     getBookingsByDate: async (request, response) => {
         try {
-            console.log('r',request.laundryId);
+            // console.log('r',request.laundryId);
             let limit = 10 , skip = 0
+          
             if(request.body.skip == null || request.body.skip == 0 ){
                 skip = 0
             }else{
                 skip = request.body.skip *10
             }
             let query = {}
+            if(request.body.number){
+                const user = await userModel.findOne({completePhoneNumber:request.body.phoneNumber})
+                query.userId = mongoose.Types.ObjectId(user._id)
+            }
+            if(request.body.status){
+             
+                // query["status"] = request.body.status
+                query.status = request.body.status
+            }
             if(request.body.startDate && request.body.endDate){
+                console.log('data-----',moment(request.body.startDate).startOf().valueOf());
                 query = {
-                    laundryId: request.body.laundryId,
-                    createDate : { $lte: request.body.startDate ,$gte: request.body.endDate }
+                    createDate : { $gte:moment(request.body.startDate).startOf('day').valueOf() ,$lte:moment(request.body.endDate).endOf('day').valueOf() }
                 }
             }
-            else{
-                query = {
-                    laundryId: request.body.laundryId,
-                } 
+            if(request.body.bagNo){
+                query.bagNo = request.body.bagNo
             }
+            if(request.body.serviceType){
+                query.type = request.body.serviceType
+            }
+            query.laundryId = mongoose.Types.ObjectId(request.laundryId)
+            console.log('rq',request.laundryId);
             console.log('qury',query);
-            let booking = await bookingModel.find({laundryId:mongoose.Types.ObjectId(request.body.laundryId)}).sort({_id:-1}).skip(skip).limit(limit).populate('userId')
+            let booking = await bookingModel.find(query).sort({_id:-1}).skip(skip).limit(limit).populate('userId')
             let count = await bookingModel.find({ laundryId: request.body.id })
             return ({ statusCode: 200, success: 1, Booking: booking , Count : count.length })
         } catch (error) {
+            console.log('errr',error);
             return ({ statusCode: 400, success: 0, msg: error });
         }
     },

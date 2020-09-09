@@ -152,9 +152,9 @@ slotId:                             { type:Schema.Types.ObjectId,ref:"slots"},
 
 isRescheduledBookingByUserDate:     { type:Number,default:0 },
 type : {type:String,enum:['standard','instant']},
-bagNo:{type:String},
-orderType:{type:String},
-deliveryChoice:{type:String},
+bagNo:{type:String,default:''},
+orderType:{type:String,default:''},
+deliveryChoice:{type:String,default:''},
 servicePrice :  {   type:Object,default:null },
 
 subplanid:{ type:Schema.Types.ObjectId,ref:'subscriptionPlan' },
