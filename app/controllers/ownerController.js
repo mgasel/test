@@ -114,6 +114,17 @@ exports.getAllBranchesServices  = async(request,response)=>{
     let branchList = await ownwerServices.getAllBranchServices(request,response)
     return response.json(branchList)
 }
+exports.getAllBranchesServicesItems  = async(request,response)=>{
+    console.log('k,,,,,,,,,');
+    
+    // request.checkBody('id',AppConstraints.INVALID_ID).notEmpty();
+    // let errors = request.validationErrors();
+    // if (errors){ return response.status(400).json({statusCode:400,success:0 , msg: errors[0].msg, error:errors})}
+    // console.log('.................');
+    
+    let branchList = await ownwerServices.getAllBranchServicesItems(request,response)
+    return response.json(branchList)
+}
 exports.addCategories = async(request,response)=>{
     let data = await ownwerServices.addCategory(request,response)
     return response.json(data)
