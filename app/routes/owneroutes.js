@@ -19,6 +19,7 @@ module.exports= function(app){
 ]),ownerController.update)
     app.post('/owner/updatePassword',authenticattion.verifyOwnerBranch,ownerController.updatePassword)
     app.post('/owner/branchList',authenticattion.verifyOwnwer,ownerController.getList)
+    app.post('/owner/getLaundries',authenticattion.verifyOwnerBranch,ownerController.getAllBranchesList)
     app.post('/owner/addCategory',ownerController.addCategories)
     app.post('/owner/services',ownerController.addServices)
     app.post('/owner/serviceItem',ownerController.addServiceItem)
@@ -54,6 +55,8 @@ module.exports= function(app){
 
     app.post('/owner/bookingStatus',authenticattion.verifyOwnerBranch,ownerController.changeStatus)
     app.get('/owner/bagId/:bagNo',authenticattion.verifyOwnerBranch,ownerController.getBookingByBag)
+
+    
     
     app.post('/owner/deleteItems',authenticattion.verifyOwnerBranch,ownerController.deleteItems)
 

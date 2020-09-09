@@ -296,6 +296,18 @@ module.exports = {
         if (list.length == 0) return ({ statusCode: 400, success: 0, msg: AppConstraints.EMPTY, List: list })
         return ({ statusCode: 200, success: 1, List: list })
     },
+    getAllBranchList: async (request, response) => {
+        console.log('...................');
+
+        let list = await laundryModel.find({ $and: [
+            {$or:[{_id:request.body.id},{ownerId: request.body.id}]}    
+        ],
+        isDeleted: false
+         })
+
+        if (list.length == 0) return ({ statusCode: 400, success: 0, msg: AppConstraints.EMPTY, List: list })
+        return ({ statusCode: 200, success: 1, List: list })
+    },
     addServices: async (request, response) => {
         let Services = await servicesModel(request.body).save()
         response.json({ Services: Services })
