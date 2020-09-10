@@ -317,7 +317,7 @@ module.exports = {
     getAllBranchServicesItems: async (request, response) => {
         console.log('...................');
         // let ids = request.body.ids.map( id => mongoose.Types.ObjectId(id) )
-        let list = await laundryItemsModel.find({'laundryId' : { $in: request.body.laundryIds },'serviceId':{$in: request.body.servicesIds},'categoryId':{$in: request.body.categoriesIds},isDeleted:false})
+        let list = await laundryItemsModel.find({'laundryId' : { $in: request.body.laundryIds },'serviceId':{$in: request.body.servicesIds},'categoryId':{$in: request.body.categoriesIds},isDeleted:false}).populate('categoryId')
         // let categoriesIds = []
         // list.map((data)=>{
         //     data.serviceCategory.map((ids)=>{
@@ -1129,16 +1129,40 @@ module.exports = {
  
     downlaodPdf:async(request,response)=>{
         try {
-            let booking = await bookingModel.findOne({_id:request.query.bookingId})
-        let data1 = data(booking)
+            let booking = await bookingModel.find({laundryId:request.query.laundryId},{   orderId:1,
+                totalAmount:1,
+               paymentOption:1,
+               deliveryChoice:1,
+               laundryId:1
+            }).populate('laundryId')
+
+            let recipt = []
+            let laundryDetails = booking[0].laundryId
+            booking.map((bookingData)=>{
+                let paymentOption 
+                if(bookingData.paymentOption== "CASH_ON_DELIVERY"){
+                    paymentOption = "Cash"
+                }
+                if(bookingData.paymentOption== "NET_BANKING"){
+                    paymentOption = "Net Banking"
+                }
+                if(bookingData.paymentOption== "CREDIT_DEBIT_CARD"){
+                    paymentOption = "Card"
+                }
+                recipt.push({orderId:bookingData.orderId,totalAmount:bookingData.totalAmount,paymentOption:paymentOption,deliveryChoice:bookingData.deliveryChoice})
+            })    
+        let data1 = data(recipt,laundryDetails)
     //    let  data2 = data(booking)
              
+    
+    console.log("========>>>>>>>>>>",recipt);
             pdf.create(data1).toFile('./'+"order"+'.pdf',(err,match)=>{
                 // console.log('errr',err);
                 // console.log('match',match);
                 response.download(match.filename)
             })
 
+            
             // payload(data)
         } catch (error) {
             console.log(error);
@@ -1232,25 +1256,28 @@ module.exports = {
     }
 
 }
-let data =(booking)=>{
+let data =(booking,laundryDetails)=>{
+    console.log('laundry details',laundryDetails);
     let orderList = ``;
-    console.log('---------',booking.servicePrice)
+    console.log('---------',booking)
     // console.log(booking);5efaece5ca3dfe31364a5727
     // break:-5efaece5ca3dfe31364a5727--
     console.log('booo');
     
-    booking.servicePrice.map(ele => {
+    booking.map(ele => {
         // console.log(ele)
-        for(let i=0;i<3;i++){
+        // for(let i=0;i<3;i++){
         orderList += `
                     <tr>
-                        <td style="padding: 20px 0;border-bottom: solid 1px #000;width: 45%;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.serviceName}</td>
-                        <td style="padding: 20px 0;border-bottom: solid 1px #000;width: 45%;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.serviceItemQuantity}</td>
-                        <td style="padding: 20px 0;border-bottom: solid 1px #000;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;"> ${ele.totalPrice}</td>
+                        <td style="padding: 20px 0;border-bottom: solid 1px #000;width: 45%;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.orderId}</td>
+                        <td style="padding: 20px 0;border-bottom: solid 1px #000;width: 45%;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.totalAmount}</td>
+                        <td style="padding: 20px 0;border-bottom: solid 1px #000;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;"> ${ele.paymentOption}</td>
+                        <td style="padding: 20px 0;border-bottom: solid 1px #000;width: 45%;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.deliveryChoice}</td>
+
             
                     </tr>`;
                     
-        }
+        // }
     });
     return `
     <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
@@ -1265,10 +1292,10 @@ let data =(booking)=>{
                         <td style="vertical-align: top;padding-top: 2rem;width: 60%;">
                             <table colspan="0" cellpadding="0" border="0" style="width:100%;border-collapse: collapse;">
                                 <tr><td colspan="2"><h3 style="margin: 0 0 10px;font-size: 20px;color: #000;font-weight: 600;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Purchased By</h3></td></tr>
-                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Buyer Name:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${booking.userId.name} </p></td></tr>
-                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Buyer Email:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${booking.userId.email}</p></td></tr>
-                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Order Id:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${booking.orderId}</p></td></tr>
-                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Order Time:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${booking.newDate}</p></td></tr>
+                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Laundry Name:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${laundryDetails.laundryName} </p></td></tr>
+                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Email:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${laundryDetails.email}</p></td></tr>
+                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Phone Number Id:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;"> +${laundryDetails.countryCode }${laundryDetails.phoneNumber }</p></td></tr>
+                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Order Time:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${booking[0].deliveryChoice}</p></td></tr>
                                 <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Order Type:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">Web-Online</p></td></tr>
                             </table>
                         </td>
@@ -1289,9 +1316,11 @@ let data =(booking)=>{
                                 <td >
                                     <table colspan="0" cellpadding="5" border="1" style="width:100%;border-collapse: collapse;border-top: solid 2px #000;">
                                         <tr>
-                                            <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;width: 45%;border-bottom: solid 2px #000;">Product Name</th>
-                                            <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Quantity</th>
-                                            <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Total</th>
+                                            <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;width: 45%;border-bottom: solid 2px #000;">Order No</th>
+                                            <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Amount</th>
+                                            <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Paymeny Mode</th>
+                                            <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Delivery Type</th>
+
                                         </tr>
                                         ${orderList}
                                     </table>
@@ -1302,7 +1331,7 @@ let data =(booking)=>{
                                         <table colspan="0" cellpadding="0" border="0" style="width: 100%;">
                                           
                                             <tr>
-                                                <td colspan="4"><h3 style="text-align: right;padding: 20px 0 0;font-size: 18px;font-weight: bold;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;text-transform: capitalize;margin: 0;">order Total: <span style="font-weight: 400;color: #333;"> ${booking.totalAmount.toFixed(2)}</span></h3></td>
+                                                <td colspan="4"><h3 style="text-align: right;padding: 20px 0 0;font-size: 18px;font-weight: bold;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;text-transform: capitalize;margin: 0;">order Total: <span style="font-weight: 400;color: #333;"> ${booking[0].totalAmount.toFixed(2)}</span></h3></td>
                                             </tr>
                                         </table>
                                     </td>
