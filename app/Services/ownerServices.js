@@ -941,6 +941,9 @@ module.exports = {
             console.log('rq',request.laundryId);
             console.log('qury',query);
             let demo= {}
+            
+
+            
             if(request.body.deliveryChoice||request.body.serviceType){
                 if(request.body.deliveryChoice == "both"&&request.body.serviceType == "both"){
                     query["$or"] = [ { deliveryChoice: "From store" }, { deliveryChoice: "Home delivery" },{ type: "standard" }, { type: "instant" } ]
