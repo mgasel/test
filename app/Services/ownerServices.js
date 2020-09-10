@@ -1174,41 +1174,37 @@ module.exports = {
     },
     downloadExcel:async(request,res)=>{
         try {
-            let booking = await bookingModel.findOne({_id:request.query.bookingId})
-            // let booking  = await bookingModel.aggregate([
-            //     {$match:{_id: ObjectId(request.query.bookingId)}},
-            //     {$project:{_id:0,servicePrice:1}}
-            // ])
+            console.log('start date',moment(request.body.startDate).startOf('day').format());
+            let booking = await bookingModel.aggregate([
+                
+                { $match: {laundryId:mongoose.Types.ObjectId(request.query.laundryId)},
+                },
+                {$match:{createDate : { $gte:moment(request.query.startDate).startOf('day').valueOf() ,$lte:moment(request.query.endDate).endOf('day').valueOf() }}},
+                {
+                    $project:{
+                        _id:0,
+                        orderId:1,
+                         totalAmount:1,
+                        paymentOption:1,
+                        deliveryChoice:1
+                    }
+                }
+            ])
             let recipt = []
-            // recipt.push({type:booking.type})
-            // booking.servicePrice.map((object,data)=>{
-            //     console.log('object',object);
-            //     recipt.push(object)
-            // })
-            
-            var jsn = [{
-                "name": "Nilesh",
-                "school": "RDTC",
-                "marks": "77"
-               },{
-                "name": "Sagar",
-                "school": "RC",
-                "marks": "99.99"
-               },{
-                "name": "Prashant",
-                "school": "Solapur",
-                "marks": "100"
-             }]
-
-            // let recipt =[booking.servicePrice[0],booking.servicePrice[0]]
-     
-            console.log(jsn);
-            
-            
-           res.xls('data.xlsx',jsn);
-        //    console.log('data',data);
-   
-
+            booking.map((bookingData)=>{
+                let paymentOption 
+                if(bookingData.paymentOption== "CASH_ON_DELIVERY"){
+                    paymentOption = "Cash"
+                }
+                if(bookingData.paymentOption== "NET_BANKING"){
+                    paymentOption = "Net Banking"
+                }
+                if(bookingData.paymentOption== "CREDIT_DEBIT_CARD"){
+                    paymentOption = "Card"
+                }
+                recipt.push({"Order No":bookingData.orderId,"Amount":bookingData.totalAmount,"Payment Mode":paymentOption,"Delivery Type":bookingData.deliveryChoice})
+            })
+           res.xls('Bookings.xlsx',recipt);
         } catch (error) {
             console.log(error);
             
