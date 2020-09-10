@@ -1076,6 +1076,8 @@ module.exports = {
             console.log('data=============', Math.random().toString(36).substring(8));
             request.body.promoCode =  Math.random().toString(36).substring(8)
             if(request.body.startDate && request.body.expiryDate){
+                console.log('start date',request.body.startDate)
+                console.log('end date',request.body.expiryDate);
                 request.body.startDate = moment(request.body.startDate).unix()
                 request.body.expiryDate = moment(request.body.expiryDate).unix()
             }
@@ -1186,7 +1188,7 @@ module.exports = {
  
     downlaodPdf:async(request,response)=>{
         try {
-            let booking = await bookingModel.find({laundryId:request.query.laundryId},{   orderId:1,
+            let booking = await bookingModel.find({laundryId:request.query.laundryId,createDate : { $gte:moment(request.query.startDate).startOf('day').valueOf() ,$lte:moment(request.query.endDate).endOf('day').valueOf() }},{   orderId:1,
                 totalAmount:1,
                paymentOption:1,
                deliveryChoice:1,
@@ -1314,6 +1316,7 @@ module.exports = {
 
 }
 let data =(booking,laundryDetails)=>{
+    console.log('data',laundryDetails);
     console.log('laundry details',laundryDetails.email);
     let orderList = ``;
     console.log('---------',booking)
@@ -1348,11 +1351,10 @@ let data =(booking,laundryDetails)=>{
                     <tr>
                         <td style="vertical-align: top;padding-top: 2rem;width: 60%;">
                             <table colspan="0" cellpadding="0" border="0" style="width:100%;border-collapse: collapse;">
-                                <tr><td colspan="2"><h3 style="margin: 0 0 10px;font-size: 20px;color: #000;font-weight: 600;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Purchased By</h3></td></tr>
                                 <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Laundry Name:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${laundryDetails.laundryName} </p></td></tr>
                                 <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Email:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${laundryDetails.email}</p></td></tr>
                                 <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Phone Number :</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;"> ${laundryDetails.countryCode }${laundryDetails.phoneNumber }</p></td></tr>
-                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Address :</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;"> ${laundryDetails.countryCode }${laundryDetails.phoneNumber }</p></td></tr>
+                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Address :</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;"> ${laundryDetails.laundryAddress }</p></td></tr>
 
                             </table>
                         </td>
@@ -1388,7 +1390,7 @@ let data =(booking,laundryDetails)=>{
                                         <table colspan="0" cellpadding="0" border="0" style="width: 100%;">
                                           
                                             <tr>
-                                                <td colspan="4"><h3 style="text-align: right;padding: 20px 0 0;font-size: 18px;font-weight: bold;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;text-transform: capitalize;margin: 0;">order Total: <span style="font-weight: 400;color: #333;"> ${booking[0].totalAmount.toFixed(2)}</span></h3></td>
+                                               
                                             </tr>
                                         </table>
                                     </td>
