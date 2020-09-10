@@ -291,7 +291,7 @@ module.exports = {
     getBranchList: async (request, response) => {
         console.log('...................');
 
-        let list = await laundryModel.find({ $and: [{ ownerId: request.body.id }, { isDeleted: false }] })
+        let list = await laundryModel.find({ $or: [{ ownerId: request.body.id },{ _id: request.body.id }], isDeleted: false  })
 
         if (list.length == 0) return ({ statusCode: 400, success: 0, msg: AppConstraints.EMPTY, List: list })
         return ({ statusCode: 200, success: 1, List: list })
@@ -1181,16 +1181,31 @@ module.exports = {
             // ])
             let recipt = []
             // recipt.push({type:booking.type})
-            booking.servicePrice.map((object,data)=>{
-                recipt.push(object)
-            })
+            // booking.servicePrice.map((object,data)=>{
+            //     console.log('object',object);
+            //     recipt.push(object)
+            // })
             
+            var jsn = [{
+                "name": "Nilesh",
+                "school": "RDTC",
+                "marks": "77"
+               },{
+                "name": "Sagar",
+                "school": "RC",
+                "marks": "99.99"
+               },{
+                "name": "Prashant",
+                "school": "Solapur",
+                "marks": "100"
+             }]
+
             // let recipt =[booking.servicePrice[0],booking.servicePrice[0]]
      
-            console.log(recipt);
+            console.log(jsn);
             
             
-           res.xls('data.xlsx',recipt);
+           res.xls('data.xlsx',jsn);
         //    console.log('data',data);
    
 
