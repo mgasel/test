@@ -24,6 +24,8 @@ let PromoCode=Schema({
     serviceId: [{ type: Schema.Types.ObjectId, ref: "laundryService" }],
   
     categoryId: [{ type: Schema.Types.ObjectId, ref: "serviceCategory" }],
+
+    serviceItems : [{ type: Schema.Types.ObjectId, ref: "laundaryItems" }],
   
     minimumOrderAmount: { type: Number },
 
@@ -38,6 +40,8 @@ let PromoCode=Schema({
     orderChannel : {type: String , default: ""},
      
     serviceType : {type : String , default : ""},
+
+    type: {type : String,default:"Percentage"}
 
 });
 module.exports=mongoose.model('PromoCode',PromoCode);

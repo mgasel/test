@@ -363,7 +363,6 @@ module.exports = {
                                     $and:
                                         [
                                             { $eq: ["$$id", "$categoryId"] },
-                                            // { $eq: ["$serviceId", "$$serviceId"] },
 
                                         ]
                                 }
@@ -1146,7 +1145,7 @@ module.exports = {
 
            
                 
-                let promoCodes = await promoModel.find({laundryId:request.ownerId,isDeleted:"false"}).populate('laundryId branchesId serviceId categoryId')
+                let promoCodes = await promoModel.find({laundryId:request.ownerId,isDeleted:"false"}).populate('laundryId branchesId serviceId categoryId serviceItems')
                 // if(promoCodes==null) return ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
                 return    ({ statusCode: 400, success: 1, promoCodes:promoCodes})
            
@@ -1160,7 +1159,7 @@ module.exports = {
 
            
                 
-                let promoCodes = await promoModel.findOne({$and:[{laundryId:request.laundryId,_id:request.params.id,isDeleted:"false"}]}).populate('laundryId branchesId serviceId categoryId')
+                let promoCodes = await promoModel.findOne({$and:[{laundryId:request.laundryId,_id:request.params.id,isDeleted:"false"}]}).populate('laundryId branchesId serviceId categoryId serviceItems')
                 if(promoCodes==null) return ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
                 return    ({ statusCode: 200, success: 1, promoCodes:promoCodes})
          
