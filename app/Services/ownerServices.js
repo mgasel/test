@@ -915,6 +915,7 @@ module.exports = {
                 skip = request.body.skip *10
             }
             let query = {}
+            let data = []
             if(request.body.number){
                 const user = await userModel.findOne({completePhoneNumber:request.body.phoneNumber})
                 query.userId = mongoose.Types.ObjectId(user._id)
@@ -923,22 +924,43 @@ module.exports = {
              
                 // query["status"] = request.body.status
                 query.status = request.body.status
+                data.push({query:request.body.status})
             }
             if(request.body.startDate && request.body.endDate){
                 console.log('data-----',moment(request.body.startDate).startOf().valueOf());
                 query = {
                     createDate : { $gte:moment(request.body.startDate).startOf('day').valueOf() ,$lte:moment(request.body.endDate).endOf('day').valueOf() }
                 }
+                data.push({  createDate : { $gte:moment(request.body.startDate).startOf('day').valueOf() ,$lte:moment(request.body.endDate).endOf('day').valueOf() }})
             }
             if(request.body.bagNo){
                 query.bagNo = request.body.bagNo
-            }
-            if(request.body.serviceType){
-                query.type = request.body.serviceType
+                data.push({bagNo:request.body.bagNo})
             }
             query.laundryId = mongoose.Types.ObjectId(request.laundryId)
             console.log('rq',request.laundryId);
             console.log('qury',query);
+            let demo= {}
+            if(request.body.deliveryChoice||request.body.serviceType){
+                if(request.body.deliveryChoice == "both"&&request.body.serviceType == "both"){
+                    query["$or"] = [ { deliveryChoice: "From store" }, { deliveryChoice: "Home delivery" },{ type: "standard" }, { type: "instant" } ]
+                }
+                else{
+                    if(request.body.serviceType == "both"){
+                    
+                        query["$or"] = [ { type: "standard" }, { type: "instant" } ]
+                    }
+                    else{
+                        type = request.body.serviceType  
+                    }
+                    if(request.body.deliveryChoice == "both"){
+                        query["$or"] = [ { deliveryChoice: "From store" }, { deliveryChoice: "Home delivery" },{ type: "standard" }, { type: "instant" } ]
+                    }
+                    else{
+                        deliveryChoice = request.body.deliveryChoice
+                    }
+                }
+            }
             let booking = await bookingModel.find(query).sort({_id:-1}).skip(skip).limit(limit).populate('userId')
             let count = await bookingModel.find({ laundryId: request.body.id })
             return ({ statusCode: 200, success: 1, Booking: booking , Count : count.length })
