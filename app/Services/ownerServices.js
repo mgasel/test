@@ -7,6 +7,7 @@ const laundryItemsModel = require('../models/laundryItems')
 const AppConstraints = require('../../config/appConstraints')
 const laundryBooking = require('../models/laundryBooking')
 const otpModel = require('../models/otp')
+
 const laundryServiceModel = require('../models/laundryService')
 const bcrypt = require('bcrypt')
 const salt = 10
@@ -316,8 +317,65 @@ module.exports = {
     },
     getAllBranchServicesItems: async (request, response) => {
         console.log('...................');
-        // let ids = request.body.ids.map( id => mongoose.Types.ObjectId(id) )
-        let list = await laundryItemsModel.find({'laundryId' : { $in: request.body.laundryIds },'serviceId':{$in: request.body.servicesIds},'categoryId':{$in: request.body.categoriesIds},isDeleted:false}).populate('categoryId')
+        let laundryIds = request.body.laundryIds.map( id => mongoose.Types.ObjectId(id) )
+        let categoriesIds = request.body.categoriesIds.map( id => mongoose.Types.ObjectId(id) )
+        let servicesIds = request.body.servicesIds.map( id => mongoose.Types.ObjectId(id) )
+        // console.log('cate ',categoriesIds);
+        // let list = await laundryItemsModel.find({'laundryId' : { $in: request.body.laundryIds },'serviceId':{$in: request.body.servicesIds},'categoryId':{$in: request.body.categoriesIds},isDeleted:false})
+//         var cars = [{ make: 'audi', model: 'r8', year: '2012' }, { make: 'audi', model: 'rs5', year: '2013' }, { make: 'ford', model: 'mustang', year: '2012' }, { make: 'ford', model: 'fusion', year: '2015' }, { make: 'kia', model: 'optima', year: '2012' }],
+//     result = cars.reduce(function (r, a) {
+//         r[a.make] = r[a.make] || [];
+//         r[a.make].push(a);
+//         return r;
+//     }, Object.create(null));
+
+// console.log(result)
+
+// var cars = [{ make: 'audi', model: 'r8', year: '2012' }, { make: 'audi', model: 'rs5', year: '2013' }, { make: 'ford', model: 'mustang', year: '2012' }, { make: 'ford', model: 'fusion', year: '2015' }, { make: 'kia', model: 'optima', year: '2012' }],
+//     result = list.reduce(function (r, a) {
+//         r[a.categoryId] = r[a.categoryId] || [];
+//         r[a.categoryId].push(a);
+//         return r;
+//     }, Object.create(null));
+
+// console.log(result)
+        let list = await categoryModel.aggregate([
+            {
+                $match :  {  '_id' : { $in: categoriesIds }}
+            },
+            {
+                $lookup: {
+                    from: 'laundaryitems',
+                    let: { categoryId: "$category._id", id: "$_id" },
+
+                    pipeline: [
+                        {
+                            $match:
+                            {
+                                laundryId : { $in: laundryIds},
+                                serviceId : {$in:servicesIds}
+                                
+                            },
+                            $match:
+                            {
+                                $expr:
+                                {
+                                    $and:
+                                        [
+                                            { $eq: ["$$id", "$categoryId"] },
+                                            // { $eq: ["$serviceId", "$$serviceId"] },
+
+                                        ]
+                                }
+                            }
+                        },
+                    ],
+                    as: 'serviceItem'
+                }
+
+            },
+         
+        ])
         // let categoriesIds = []
         // list.map((data)=>{
         //     data.serviceCategory.map((ids)=>{
@@ -1257,7 +1315,7 @@ module.exports = {
 
 }
 let data =(booking,laundryDetails)=>{
-    console.log('laundry details',laundryDetails);
+    console.log('laundry details',laundryDetails.email);
     let orderList = ``;
     console.log('---------',booking)
     // console.log(booking);5efaece5ca3dfe31364a5727
@@ -1294,14 +1352,14 @@ let data =(booking,laundryDetails)=>{
                                 <tr><td colspan="2"><h3 style="margin: 0 0 10px;font-size: 20px;color: #000;font-weight: 600;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Purchased By</h3></td></tr>
                                 <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Laundry Name:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${laundryDetails.laundryName} </p></td></tr>
                                 <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Email:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${laundryDetails.email}</p></td></tr>
-                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Phone Number Id:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;"> +${laundryDetails.countryCode }${laundryDetails.phoneNumber }</p></td></tr>
-                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Order Time:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${booking[0].deliveryChoice}</p></td></tr>
-                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Order Type:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">Web-Online</p></td></tr>
+                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Phone Number :</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;"> ${laundryDetails.countryCode }${laundryDetails.phoneNumber }</p></td></tr>
+                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Address :</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;"> ${laundryDetails.countryCode }${laundryDetails.phoneNumber }</p></td></tr>
+
                             </table>
                         </td>
                         <td align="top" style="vertical-align: top;padding-top: 2rem;width: 30%;">
                             <table colspan="0" cellpadding="0" border="0" style="width:100%;">
-                                <tr><td><h3 style="margin: 0 0 10px;font-size: 20px;color: #000;font-weight: 600;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;">Address:</h3></td></tr>
+                    
                                 <tr><td><p style="font-size: 16px;line-height: 22px;font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif;font-weight: 500;">${booking.pickUpAddress ? booking.pickUpAddress: '' }</p></td></tr>
                             </table>
                         </td>
