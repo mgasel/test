@@ -292,7 +292,15 @@ module.exports = {
     getBranchList: async (request, response) => {
         console.log('...................');
 
-        let list = await laundryModel.find({ $or: [{ ownerId: request.body.id }], isDeleted: false  })
+        let list = await laundryModel.find({ $or: [{ ownerId: request.body.id },], isDeleted: false  })
+
+        if (list.length == 0) return ({ statusCode: 400, success: 0, msg: AppConstraints.EMPTY, List: list })
+        return ({ statusCode: 200, success: 1, List: list })
+    },
+    getAllBranchList: async (request, response) => {
+        console.log('...................');
+
+        let list = await laundryModel.find({ $or: [{ ownerId: request.body.id },{ _id: request.body.id }], isDeleted: false  })
 
         if (list.length == 0) return ({ statusCode: 400, success: 0, msg: AppConstraints.EMPTY, List: list })
         return ({ statusCode: 200, success: 1, List: list })
@@ -1130,7 +1138,7 @@ module.exports = {
             if(request.body.startDate && request.body.expiryDate){
                 console.log('start date',request.body.startDate)
                 console.log('end date',request.body.expiryDate);
-                request.body.startDate = moment(request.body.startDate).valueOf()
+               request.body.startDate = moment(request.body.startDate).valueOf()
                 request.body.expiryDate = moment(request.body.expiryDate).valueOf()
             }
             let promo = await promoModel.findByIdAndUpdate({_id:request.body.promoId,isDeleted:false},request.body,{new:true})
