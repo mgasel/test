@@ -292,7 +292,7 @@ module.exports = {
     getBranchList: async (request, response) => {
         console.log('...................');
 
-        let list = await laundryModel.find({ $or: [{ ownerId: request.body.id },{ _id: request.body.id }], isDeleted: false  })
+        let list = await laundryModel.find({ $or: [{ ownerId: request.body.id }], isDeleted: false  })
 
         if (list.length == 0) return ({ statusCode: 400, success: 0, msg: AppConstraints.EMPTY, List: list })
         return ({ statusCode: 200, success: 1, List: list })
