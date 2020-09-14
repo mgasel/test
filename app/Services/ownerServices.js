@@ -1106,7 +1106,7 @@ module.exports = {
                 request.body.startDate = moment(request.body.startDate).unix()
                 request.body.expiryDate = moment(request.body.expiryDate).unix()
             }
-          
+          console.log('date----------->>>>>>',moment("2020-01-19T09:05:08+05:30").format());
             let promo = await promoModel(request.body).save()
             return ({ statusCode:200, success: 1,msg:AppConstraints.COUPON_ADDED ,Promo:promo })
             
@@ -1123,7 +1123,13 @@ module.exports = {
             // request.body.laundryId = request.laundryId
             // request.body.startDate = moment().unix()
             // request.body.expiryDate = moment(request.body.expiryDate).unix()
-            let promo = await promoModel.update({_id:request.body.promoId,isDeleted:false},request.body,{new:true})
+            if(request.body.startDate && request.body.expiryDate){
+                console.log('start date',request.body.startDate)
+                console.log('end date',request.body.expiryDate);
+                request.body.startDate = moment(request.body.startDate).unix()
+                request.body.expiryDate = moment(request.body.expiryDate).unix()
+            }
+            let promo = await promoModel.findByIdAndUpdate({_id:request.body.promoId,isDeleted:false},request.body,{new:true})
             return ({ statusCode:200, success: 1,msg:AppConstraints.COUPON_UPDATED ,promo : promo  })
             
         } catch (error) {

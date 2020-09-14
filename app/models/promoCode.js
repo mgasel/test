@@ -26,6 +26,7 @@ let PromoCode=Schema({
     categoryId: [{ type: Schema.Types.ObjectId, ref: "serviceCategory" }],
 
     serviceItems : [{ type: Schema.Types.ObjectId, ref: "laundaryItems" }],
+
   
     minimumOrderAmount: { type: Number },
 
