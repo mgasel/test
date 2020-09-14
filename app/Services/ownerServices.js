@@ -1101,8 +1101,8 @@ module.exports = {
             // console.log('data=============', Math.random().toString(36).substring(8));
             request.body.promoCode =  Math.random().toString(36).substring(8)
             if(request.body.startDate && request.body.expiryDate){
-                // console.log('start date',request.body.startDate)
-                // console.log('end date',request.body.expiryDate);
+                console.log('start date',request.body.startDate)
+                console.log('end date',request.body.expiryDate);
                 request.body.startDate = moment(request.body.startDate).unix()
                 request.body.expiryDate = moment(request.body.expiryDate).unix()
                 console.log('data---',moment(request.body.startDate).format());
