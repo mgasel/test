@@ -1113,7 +1113,7 @@ module.exports = {
                 console.log('end date',request.body.expiryDate);
                 request.body.startDate = moment(request.body.startDate).valueOf()
                 request.body.expiryDate = moment(request.body.expiryDate).valueOf()
-                if(moment(request.body.expiryDate).valueOf()> moment(request.body.startDate).valueOf()){
+                if(moment(request.body.expiryDate).valueOf()< moment(request.body.startDate).valueOf()){
                     return ({ statusCode:200, success: 0,msg:AppConstraints.START_DATE_LESS_THEN_EXPIRE , })
                 }
             }
@@ -1140,7 +1140,7 @@ module.exports = {
                 console.log('end date',request.body.expiryDate);
                request.body.startDate = moment(request.body.startDate).valueOf()
                 request.body.expiryDate = moment(request.body.expiryDate).valueOf()
-                if(moment(request.body.expiryDate).valueOf()> moment(request.body.startDate).valueOf()){
+                if(moment(request.body.expiryDate).valueOf()< moment(request.body.startDate).valueOf()){
                     return ({ statusCode:200, success: 0,msg:AppConstraints.START_DATE_LESS_THEN_EXPIRE , })
                 }
             }
