@@ -1130,8 +1130,8 @@ module.exports = {
             if(request.body.startDate && request.body.expiryDate){
                 console.log('start date',request.body.startDate)
                 console.log('end date',request.body.expiryDate);
-                request.body.startDate = moment(request.body.startDate).unix()
-                request.body.expiryDate = moment(request.body.expiryDate).unix()
+                request.body.startDate = moment(request.body.startDate).valueOf()
+                request.body.expiryDate = moment(request.body.expiryDate).valueOf()
             }
             let promo = await promoModel.findByIdAndUpdate({_id:request.body.promoId,isDeleted:false},request.body,{new:true})
             return ({ statusCode:200, success: 1,msg:AppConstraints.COUPON_UPDATED ,promo : promo  })
