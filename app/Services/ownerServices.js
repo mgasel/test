@@ -1109,8 +1109,7 @@ module.exports = {
             // console.log('data=============', Math.random().toString(36).substring(8));
             request.body.promoCode =  Math.random().toString(36).substring(8)
             if(request.body.startDate && request.body.expiryDate){
-                console.log('start date',request.body.startDate)
-                console.log('end date',request.body.expiryDate);
+            
                 request.body.startDate = moment(request.body.startDate).valueOf()
                 request.body.expiryDate = moment(request.body.expiryDate).valueOf()
                 if(moment(request.body.expiryDate).valueOf()< moment(request.body.startDate).valueOf()){
@@ -1134,7 +1133,7 @@ module.exports = {
             // request.body.laundryId = request.laundryId
             // request.body.startDate = moment().unix()
             // request.body.expiryDate = moment(request.body.expiryDate).unix()
-
+            console.log('date----------->>>>>>',moment(1631267321491).format());
             if(request.body.startDate && request.body.expiryDate){
                 console.log('start date',request.body.startDate)
                 console.log('end date',request.body.expiryDate);
@@ -1194,7 +1193,7 @@ module.exports = {
 
            
                 
-                let promoCodes = await promoModel.find({laundryId:request.ownerId,isDeleted:"false"}).populate('laundryId branchesId serviceId categoryId serviceItems')
+                let promoCodes = await promoModel.find({laundryId:request.ownerId,isDeleted:"false"}).sort({_id:-1}).populate('laundryId branchesId serviceId categoryId serviceItems')
                 // if(promoCodes==null) return ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
                 return    ({ statusCode: 400, success: 1, promoCodes:promoCodes})
            
