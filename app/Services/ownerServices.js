@@ -972,7 +972,7 @@ module.exports = {
                 }
             }
             let booking = await bookingModel.find(query).sort({_id:-1}).skip(skip).limit(limit).populate('userId')
-            let count = await bookingModel.find({ laundryId: request.body.id })
+            let count = await bookingModel.find({ laundryId: mongoose.Types.ObjectId(request.laundryId)})
             return ({ statusCode: 200, success: 1, Booking: booking , Count : count.length })
         } catch (error) {
             console.log('errr',error);
