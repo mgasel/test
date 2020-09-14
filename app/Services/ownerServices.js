@@ -935,8 +935,9 @@ module.exports = {
                 data.push({query:request.body.status})
             }
             if(request.body.startDate && request.body.endDate){
-                console.log('data-----',moment(request.body.startDate).startOf().valueOf());
-                query.createDate = { $gte:moment(request.body.startDate).startOf('day').valueOf() ,$lte:moment(request.body.endDate).endOf('day').valueOf() }
+                console.log('data-----',moment(request.body.startDate).startOf("day").format());
+                console.log('data====>>',moment(request.body.endDate).endOf("day").format());
+                query.createDate = { $gte:moment(request.body.startDate).startOf("day").valueOf() ,$lte:moment(request.body.endDate).endOf("day").valueOf() }
                 
                 data.push({  createDate : { $gte:moment(request.body.startDate).startOf('day').valueOf() ,$lte:moment(request.body.endDate).endOf('day').valueOf() }})
             }
@@ -1112,9 +1113,9 @@ module.exports = {
                 console.log('end date',request.body.expiryDate);
                 request.body.startDate = moment(request.body.startDate).valueOf()
                 request.body.expiryDate = moment(request.body.expiryDate).valueOf()
-                console.log('data---',moment(request.body.startDate).format());
-                console.log('data---',moment(request.body.expiryDate).format());
-
+                if(moment(request.body.expiryDate).valueOf()> moment(request.body.startDate).valueOf()){
+                    return ({ statusCode:200, success: 0,msg:AppConstraints.START_DATE_LESS_THEN_EXPIRE , })
+                }
             }
           console.log('date----------->>>>>>',moment("2020-01-19T09:05:08+05:30").format());
             let promo = await promoModel(request.body).save()
@@ -1139,7 +1140,11 @@ module.exports = {
                 console.log('end date',request.body.expiryDate);
                request.body.startDate = moment(request.body.startDate).valueOf()
                 request.body.expiryDate = moment(request.body.expiryDate).valueOf()
+                if(moment(request.body.expiryDate).valueOf()> moment(request.body.startDate).valueOf()){
+                    return ({ statusCode:200, success: 0,msg:AppConstraints.START_DATE_LESS_THEN_EXPIRE , })
+                }
             }
+            
             let promo = await promoModel.findByIdAndUpdate({_id:request.body.promoId,isDeleted:false},request.body,{new:true})
             return ({ statusCode:200, success: 1,msg:AppConstraints.COUPON_UPDATED ,promo : promo  })
             
