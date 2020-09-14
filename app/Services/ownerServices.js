@@ -916,7 +916,7 @@ module.exports = {
         try {
             // console.log('r',request.laundryId);
             let limit = 10 , skip = 0
-          
+            console.log('req',request.body);
             if(request.body.skip == null || request.body.skip == 0 ){
                 skip = 0
             }else{
@@ -929,16 +929,15 @@ module.exports = {
                 query.userId = mongoose.Types.ObjectId(user._id)
             }
             if(request.body.status){
-             
+             console.log('---->>>>>>>');
                 // query["status"] = request.body.status
                 query.status = request.body.status
                 data.push({query:request.body.status})
             }
             if(request.body.startDate && request.body.endDate){
                 console.log('data-----',moment(request.body.startDate).startOf().valueOf());
-                query = {
-                    createDate : { $gte:moment(request.body.startDate).startOf('day').valueOf() ,$lte:moment(request.body.endDate).endOf('day').valueOf() }
-                }
+                query.createDate = { $gte:moment(request.body.startDate).startOf('day').valueOf() ,$lte:moment(request.body.endDate).endOf('day').valueOf() }
+                
                 data.push({  createDate : { $gte:moment(request.body.startDate).startOf('day').valueOf() ,$lte:moment(request.body.endDate).endOf('day').valueOf() }})
             }
             if(request.body.bagNo){
