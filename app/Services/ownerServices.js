@@ -1098,15 +1098,18 @@ module.exports = {
             // if(await laundryModel.findOne({_id:request.body.laundryId})==null)return ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
             if(await laundryServiceModel.findOne({_id:request.body.serviceId})==null) ({ statusCode: 400, success: 0, msg:AppConstraints.VALID_ID})
             request.body.laundryId = request.laundryId
-            console.log('data=============', Math.random().toString(36).substring(8));
+            // console.log('data=============', Math.random().toString(36).substring(8));
             request.body.promoCode =  Math.random().toString(36).substring(8)
             if(request.body.startDate && request.body.expiryDate){
-                console.log('start date',request.body.startDate)
-                console.log('end date',request.body.expiryDate);
+                // console.log('start date',request.body.startDate)
+                // console.log('end date',request.body.expiryDate);
                 request.body.startDate = moment(request.body.startDate).unix()
                 request.body.expiryDate = moment(request.body.expiryDate).unix()
+                console.log('data---',moment(request.body.startDate).format());
+                console.log('data---',moment(request.body.expiryDate).format());
+
             }
-          console.log('date----------->>>>>>',moment("2020-01-19T09:05:08+05:30").format());
+        //   console.log('date----------->>>>>>',moment("2020-01-19T09:05:08+05:30").format());
             let promo = await promoModel(request.body).save()
             return ({ statusCode:200, success: 1,msg:AppConstraints.COUPON_ADDED ,Promo:promo })
             
@@ -1123,6 +1126,7 @@ module.exports = {
             // request.body.laundryId = request.laundryId
             // request.body.startDate = moment().unix()
             // request.body.expiryDate = moment(request.body.expiryDate).unix()
+
             if(request.body.startDate && request.body.expiryDate){
                 console.log('start date',request.body.startDate)
                 console.log('end date',request.body.expiryDate);
