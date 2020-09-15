@@ -926,7 +926,7 @@ module.exports = {
             let data = []
             if(request.body.number){
                 const user = await userModel.findOne({completePhoneNumber:request.body.number})
-                console.log('user',user);
+                if(!user)  return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_PHONE_PASSWORD });
                 query.userId = mongoose.Types.ObjectId(user._id)
             }
             if(request.body.status){
@@ -947,7 +947,6 @@ module.exports = {
                 data.push({bagNo:request.body.bagNo})
             }
             query.laundryId = mongoose.Types.ObjectId(request.laundryId)
-            query.isDeleted = "false"
             console.log('rq',request.laundryId);
             console.log('qury',query);
             let demo= {}
