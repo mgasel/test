@@ -963,18 +963,18 @@ module.exports = {
                     
                         query["$or"] = [ { type: "standard" }, { type: "instant" } ]
                     }
-                    else{
-                        type = request.body.serviceType  
+                    else if(request.body.serviceType){
+                        query.type = request.body.serviceType  
                     }
                     if(request.body.deliveryChoice == "both"){
                         query["$or"] = [ { deliveryChoice: "From store" }, { deliveryChoice: "Home delivery" },{ type: "standard" }, { type: "instant" } ]
                     }
-                    else{
-                        deliveryChoice = request.body.deliveryChoice
+                    else if(request.body.deliveryChoice){
+                       query.deliveryChoice = request.body.deliveryChoice
                     }
                 }
             }
-            
+            console.log('query',query);
             let count = await bookingModel.find({ laundryId: mongoose.Types.ObjectId(request.laundryId)})
             if(request.body.number){
                 const user = await userModel.findOne({completePhoneNumber:request.body.number})
