@@ -1,7 +1,10 @@
 const cron = require('node-cron')
 const bookingModel = require('../models/Bookings')
+const promoCodeModel = require('../models/promoCode')
+const moment = require('moment-timezone')
 const userModel = require('../models/User')
 const FCM = require('fcm-node')
+const { default: async } = require('async')
 const serverKey = 'AIzaSyCqXl2CnsIZSKmxOlfAhXzRuW8qsZLWLa0'
 const fcm = new FCM(serverKey)
 exports.assignDriver = async()=>{
@@ -39,10 +42,7 @@ exports.assignDriver = async()=>{
       //   }
       //   fcm.send(message,(err,send)=>{
       //     if(err){
-      //       console.log('err',err);
-            
-      //     }
-      //     if(send){
+      //       console.log('erbookingModel
       //       console.log('send',send);
             
       //     }
@@ -55,3 +55,10 @@ exports.assignDriver = async()=>{
   })
 
 } 
+exports.removeCoupon = async()=>{
+  cron.schedule('*/60 * * * * *',async()=>{
+  
+   await promoCodeModel.findOneAndUpdate({expiryDate: { $lt:  moment().valueOf()}},{isDeleted:"true"})
+    
+  })
+}
