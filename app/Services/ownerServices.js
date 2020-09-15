@@ -946,7 +946,12 @@ module.exports = {
             console.log('rq',request.laundryId);
             console.log('qury',query);
             let demo= {}
-            
+            if(request.body.orderId){
+                console.log('---->>>>>>>');
+                   // query["status"] = request.body.status
+                   query.orderId = request.body.orderId
+                
+               }
 
             
             if(request.body.deliveryChoice||request.body.serviceType){
