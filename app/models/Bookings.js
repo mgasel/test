@@ -30,6 +30,7 @@ isQuickService:                     {   type:Boolean,default:false },
 
 transactionId:                      {   type:String,default:"" },
 
+
 ////////////////for tracking///////////////////////////////////////////
 
 
@@ -44,6 +45,8 @@ isDeliveredDeliveredToLaundry:      {   type:Boolean,default:false },
 //////////////////////////for tracking////////////////////////////////
 
 isCompleted:                        {   type:Boolean,default:false },
+
+completePhoneNumber :                 {type:String,default:""},
 
 isDeleted:                          {   type:Boolean,default:false },
 
