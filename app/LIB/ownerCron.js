@@ -56,9 +56,9 @@ exports.assignDriver = async()=>{
 
 } 
 exports.removeCoupon = async()=>{
-  cron.schedule('*/60 * * * * *',async()=>{
+  cron.schedule('*/3 * * * * *',async()=>{
   
-   await promoCodeModel.findOneAndUpdate({expiryDate: { $lt:  moment().valueOf()}},{isDeleted:"true"})
+   await promoCodeModel.updateMany({expiryDate: { $lt:  moment().valueOf()},isDeleted:"false"},{isDeleted:"true"})
     
   })
 }
