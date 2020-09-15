@@ -924,11 +924,7 @@ module.exports = {
             }
             let query = {}
             let data = []
-            if(request.body.number){
-                const user = await userModel.findOne({completePhoneNumber:request.body.number})
-                if(!user)  return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_PHONE_PASSWORD });
-                query.userId = mongoose.Types.ObjectId(user._id)
-            }
+         
             if(request.body.status){
              console.log('---->>>>>>>');
                 // query["status"] = request.body.status
@@ -973,8 +969,14 @@ module.exports = {
                     }
                 }
             }
-            let booking = await bookingModel.find(query).sort({_id:-1}).skip(skip).limit(limit).populate('userId')
+            
             let count = await bookingModel.find({ laundryId: mongoose.Types.ObjectId(request.laundryId)})
+            if(request.body.number){
+                const user = await userModel.findOne({completePhoneNumber:request.body.number})
+                if(!user)   return ({ statusCode: 200, success: 1, Booking: [] , Count : count.length })
+                query.userId = mongoose.Types.ObjectId(user._id)
+            }
+            let booking = await bookingModel.find(query).sort({_id:-1}).skip(skip).limit(limit).populate('userId')
             return ({ statusCode: 200, success: 1, Booking: booking , Count : count.length })
         } catch (error) {
             console.log('errr',error);
