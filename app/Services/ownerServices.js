@@ -956,6 +956,7 @@ module.exports = {
             
             if(request.body.deliveryChoice||request.body.serviceType){
                 if(request.body.deliveryChoice == "both"&&request.body.serviceType == "both"){
+                    console.log('innnnn');
                     query["$or"] = [ { deliveryChoice: "From store" }, { deliveryChoice: "Home delivery" },{ type: "standard" }, { type: "instant" } ]
                 }
                 else{
@@ -967,7 +968,7 @@ module.exports = {
                         query.type = request.body.serviceType  
                     }
                     if(request.body.deliveryChoice == "both"){
-                        query["$or"] = [ { deliveryChoice: "From store" }, { deliveryChoice: "Home delivery" },{ type: "standard" }, { type: "instant" } ]
+                        query["$or"] = [ { deliveryChoice: "From store" }, { deliveryChoice: "Home delivery" } ]
                     }
                     else if(request.body.deliveryChoice){
                        query.deliveryChoice = request.body.deliveryChoice
