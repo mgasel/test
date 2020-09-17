@@ -20,10 +20,12 @@ const userModel = require('../models/User')
 let uuid = require('uid-safe')
 const promoModel = require('../models/promoCode')
 const moment = require('moment-timezone')
-const pdf = require('html-pdf')
+const Promise = require('bluebird')
+const pdf = Promise.promisifyAll(require('html-pdf'))
 const fs = require('fs')
 const json2xls = require('json2xls')
 let mongoose = require('mongoose')
+const { default: async } = require('async')
 module.exports = {
     registerOwner: async (request, response) => {
         try {
@@ -983,7 +985,38 @@ module.exports = {
                 query.userId = mongoose.Types.ObjectId(user._id)
             }
             let booking = await bookingModel.find(query).sort({_id:-1}).skip(skip).limit(limit).populate('userId')
-            return ({ statusCode: 200, success: 1, Booking: booking , Count : count.length })
+            let recipt = []
+            let laundryDetails = booking[0].laundryId
+            booking.map((bookingData)=>{
+                let paymentOption 
+                if(bookingData.paymentOption== "CASH_ON_DELIVERY"){
+                    paymentOption = "Cash"
+                }
+                if(bookingData.paymentOption== "NET_BANKING"){
+                    paymentOption = "Net Banking"
+                }
+                if(bookingData.paymentOption== "CREDIT_DEBIT_CARD"){
+                    paymentOption = "Card"
+                }
+                recipt.push({orderId:bookingData.orderId,totalAmount:bookingData.totalAmount,paymentOption:paymentOption,deliveryChoice:bookingData.deliveryChoice})
+            })    
+        let data1 = await pdfData(recipt,laundryDetails)
+    //    let  data2 = data(booking)
+             
+    
+
+        
+        //  await pdf.createAsync(data1).toFile('./'+"order"+'.pdf',(err,match)=>{
+        //         // console.log('errr',err);
+               
+        //     //     Pdflink =  match.filename
+        //     //     console.log('match',Pdflink);
+        //     //   return  response.send(match.filename)
+        //     console.log(match.filename);
+        //     })
+        let Pdflink = await pdf.createAsync(data1, { format: 'A4', filename: './'+"order"+'.pdf' }); 
+        console.log('data',Pdflink.filename);      
+            return ({ statusCode: 200, success: 1, Booking: booking , Count : count.length, pdfLinK : Pdflink.filename })
         } catch (error) {
             console.log('errr',error);
             return ({ statusCode: 400, success: 0, msg: error });
@@ -1370,7 +1403,7 @@ module.exports = {
     }
 
 }
-let data =(booking,laundryDetails)=>{
+let pdfData = async(booking,laundryDetails)=>{
     console.log('data',laundryDetails);
     console.log('laundry details',laundryDetails.email);
     let orderList = ``;
@@ -1379,7 +1412,7 @@ let data =(booking,laundryDetails)=>{
     // break:-5efaece5ca3dfe31364a5727--
     console.log('booo');
     
-    booking.map(ele => {
+   await booking.map(ele => {
         // console.log(ele)
         // for(let i=0;i<3;i++){
         orderList += `
