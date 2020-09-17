@@ -55,7 +55,7 @@
     "swagger-ui-express": "^2.0.15",
     "twilio": "^3.17.3",
     "uid-safe": "^2.1.5",
-    "uuid": "^8.1.0"
+    "uuid": "^8.3.0"
   },
   "devDependencies": {
     "request": "^2.87.0",

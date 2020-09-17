@@ -25,6 +25,7 @@ const pdf = Promise.promisifyAll(require('html-pdf'))
 const fs = require('fs')
 const json2xls = require('json2xls')
 let mongoose = require('mongoose')
+const { v4: uuidv4 } = require('uuid')
 const { default: async } = require('async')
 module.exports = {
     registerOwner: async (request, response) => {
@@ -999,7 +1000,9 @@ module.exports = {
                     paymentOption = "Card"
                 }
                 recipt.push({orderId:bookingData.orderId,totalAmount:bookingData.totalAmount,paymentOption:paymentOption,deliveryChoice:bookingData.deliveryChoice})
-            })    
+            }) 
+            console.log('recipt',recipt);  
+            console.log('uuidv4()',uuidv4()); 
         let data1 = await pdfData(recipt,laundryDetails)
     //    let  data2 = data(booking)
              
@@ -1014,9 +1017,11 @@ module.exports = {
         //     //   return  response.send(match.filename)
         //     console.log(match.filename);
         //     })
-        let Pdflink = await pdf.createAsync(data1, { format: 'A4', filename: './'+"order"+'.pdf' }); 
+        console.log('dir',__dirname);
+        let id = uuidv4()
+        let Pdflink = await pdf.createAsync(data1, { format: 'A4', filename: './app/uploader/'+id+"order"+'.pdf' }); 
         console.log('data',Pdflink.filename);      
-            return ({ statusCode: 200, success: 1, Booking: booking , Count : count.length, pdfLinK : Pdflink.filename })
+            return ({ statusCode: 200, success: 1, Booking: booking , Count : count.length, pdfLinK :  `/${id}order.pdf` })
         } catch (error) {
             console.log('errr',error);
             return ({ statusCode: 400, success: 0, msg: error });
