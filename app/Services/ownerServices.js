@@ -911,8 +911,12 @@ module.exports = {
             let booking = await bookingModel.find({ laundryId: request.body.id }).sort({_id:-1}).skip(skip).limit(limit).populate('userId')
             let count = await bookingModel.find({ laundryId: request.body.id })
             let recipt = []
-            let laundryDetails = booking[0].laundryId
-            booking.map((bookingData)=>{
+            if(skip !=0){
+                limit = limit*skip
+            }
+            let bookingPdf = await bookingModel.find({ laundryId: request.body.id }).sort({_id:-1}).limit(limit).populate('userId')
+            let laundryDetails = bookingPdf[0].laundryId
+            bookingPdf.map((bookingData)=>{
                 let paymentOption 
                 if(bookingData.paymentOption== "CASH_ON_DELIVERY"){
                     paymentOption = "Cash"
