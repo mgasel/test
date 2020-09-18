@@ -1440,10 +1440,10 @@ let pdfData = async(booking,laundryDetails)=>{
         // for(let i=0;i<3;i++){
         orderList += `
                     <tr>
-                        <td style="padding: 20px 0;border-bottom: solid 1px #000;width: 45%;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.orderId}</td>
-                        <td style="padding: 20px 0;border-bottom: solid 1px #000;width: 45%;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.totalAmount}</td>
-                        <td style="padding: 20px 0;border-bottom: solid 1px #000;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;"> ${ele.paymentOption}</td>
-                        <td style="padding: 20px 0;border-bottom: solid 1px #000;width: 45%;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.deliveryChoice}</td>
+                        <td style="display:inherit;text-align:ceneter;padding: 20px ;border-bottom: solid 1px #000;width: 45%;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.orderId}</td>
+                        <td style="display:inherit;text-align:ceneter;padding: 20px ;border-bottom: solid 1px #000;width: 45%;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.totalAmount}</td>
+                        <td style="display:inherit;text-align:ceneter;padding: 20px ;border-bottom: solid 1px #000;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;"> ${ele.paymentOption}</td>
+                        <td style="display:inherit;text-align:ceneter;padding: 20px ;border-bottom: solid 1px #000;width: 45%;font-size: 16px;color: #000;line-height: 22px;font-weight: 400;">${ele.deliveryChoice}</td>
 
             
                     </tr>`;
@@ -1462,7 +1462,7 @@ let pdfData = async(booking,laundryDetails)=>{
                     <tr>
                         <td style="vertical-align: top;padding-top: 2rem;width: 60%;">
                             <table colspan="0" cellpadding="0" border="0" style="width:100%;border-collapse: collapse;">                                                                                                                                                                                                                 
-                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Laundry Name:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${laundryDetails.laundryName!=undefined?laundryDetails.laundryName:"N.A"} </p></td></tr>
+                                <tr><td style="texpadding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Laundry Name:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${laundryDetails.laundryName!=undefined?laundryDetails.laundryName:"N.A"} </p></td></tr>
                                 <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Email:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${laundryDetails.email != undefined ?laundryDetails.email: "N.A" }</p></td></tr>
                                 <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Phone Number :</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;"> ${laundryDetails.countryCode }${laundryDetails.phoneNumber }</p></td></tr>
                                 <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Address :</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;"> ${laundryDetails.laundryAddress != undefined ? laundryDetails.laundryAddress : "N.A" }</p></td></tr>
@@ -1486,10 +1486,10 @@ let pdfData = async(booking,laundryDetails)=>{
                                 <td >
                                     <table colspan="0" cellpadding="5" border="1" style="width:100%;border-collapse: collapse;border-top: solid 2px #000;">
                                         <tr>
-                                            <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;width: 45%;border-bottom: solid 2px #000;">Order No</th>
-                                            <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Amount</th>
-                                            <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Paymeny Mode</th>
-                                            <th style="padding: 10px 0;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Delivery Type</th>
+                                            <th style="padding: 20px ;text-align: left;font-size: 16px;color: #000;font-weight: 600;width: 45%;border-bottom: solid 2px #000;">Order No</th>
+                                            <th style="padding: 20px ;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Amount</th>
+                                            <th style="padding: 20px ;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Paymeny Mode</th>
+                                            <th style="padding: 20px ;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Delivery Type</th>
 
                                         </tr>
                                         ${orderList}
