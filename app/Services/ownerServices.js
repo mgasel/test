@@ -914,7 +914,7 @@ module.exports = {
             if(skip !=0){
                 limit = limit*skip
             }
-            let bookingPdf = await bookingModel.find({ laundryId: request.body.id }).sort({_id:-1}).limit(limit).populate('userId')
+            let bookingPdf = await bookingModel.find({ laundryId: request.body.id }).sort({_id:-1}).limit(limit).populate('userId laundryId')
             let laundryDetails = bookingPdf[0].laundryId
             bookingPdf.map((bookingData)=>{
                 let paymentOption 
@@ -1014,9 +1014,10 @@ module.exports = {
             if(skip !=0){
                 limit = limit*skip
             }
-            let bookingPdf = await bookingModel.find(query).sort({_id:-1}).skip(skip).limit(limit).populate('userId')
+            let bookingPdf = await bookingModel.find(query).sort({_id:-1}).skip(skip).limit(limit).populate('userId laundryId')
 
             let recipt = []
+            console.log('daat',bookingPdf[0].laundryId);
             let laundryDetails = bookingPdf[0].laundryId
             bookingPdf.map((bookingData)=>{
                 let paymentOption 
