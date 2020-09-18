@@ -1011,9 +1011,14 @@ module.exports = {
                 query.userId = mongoose.Types.ObjectId(user._id)
             }
             let booking = await bookingModel.find(query).sort({_id:-1}).skip(skip).limit(limit).populate('userId')
+            if(skip !=0){
+                limit = limit*skip
+            }
+            let bookingPdf = await bookingModel.find(query).sort({_id:-1}).skip(skip).limit(limit).populate('userId')
+
             let recipt = []
-            let laundryDetails = booking[0].laundryId
-            booking.map((bookingData)=>{
+            let laundryDetails = bookingPdf[0].laundryId
+            bookingPdf.map((bookingData)=>{
                 let paymentOption 
                 if(bookingData.paymentOption== "CASH_ON_DELIVERY"){
                     paymentOption = "Cash"
