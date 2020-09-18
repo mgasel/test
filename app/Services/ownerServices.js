@@ -910,7 +910,28 @@ module.exports = {
             }
             let booking = await bookingModel.find({ laundryId: request.body.id }).sort({_id:-1}).skip(skip).limit(limit).populate('userId')
             let count = await bookingModel.find({ laundryId: request.body.id })
-            return ({ statusCode: 200, success: 1, Booking: booking , Count : count.length })
+            let recipt = []
+            let laundryDetails = booking[0].laundryId
+            booking.map((bookingData)=>{
+                let paymentOption 
+                if(bookingData.paymentOption== "CASH_ON_DELIVERY"){
+                    paymentOption = "Cash"
+                }
+                if(bookingData.paymentOption== "NET_BANKING"){
+                    paymentOption = "Net Banking"
+                }
+                if(bookingData.paymentOption== "CREDIT_DEBIT_CARD"){
+                    paymentOption = "Card"
+                }
+                recipt.push({orderId:bookingData.orderId,totalAmount:bookingData.totalAmount,paymentOption:paymentOption,deliveryChoice:bookingData.deliveryChoice})
+            }) 
+            console.log('recipt',recipt);  
+            console.log('uuidv4()',uuidv4()); 
+        let data1 = await pdfData(recipt,laundryDetails)
+        console.log('dir',__dirname);
+        let id = uuidv4()
+        let Pdflink = await pdf.createAsync(data1, { format: 'A4', filename: './app/uploader/'+id+"order"+'.pdf' }); 
+            return ({ statusCode: 200, success: 1, Booking: booking , Count : count.length,  pdfLinK :  `/${id}order.pdf` })
         } catch (error) {
             return ({ statusCode: 400, success: 0, msg: error });
         }
@@ -1004,19 +1025,6 @@ module.exports = {
             console.log('recipt',recipt);  
             console.log('uuidv4()',uuidv4()); 
         let data1 = await pdfData(recipt,laundryDetails)
-    //    let  data2 = data(booking)
-             
-    
-
-        
-        //  await pdf.createAsync(data1).toFile('./'+"order"+'.pdf',(err,match)=>{
-        //         // console.log('errr',err);
-               
-        //     //     Pdflink =  match.filename
-        //     //     console.log('match',Pdflink);
-        //     //   return  response.send(match.filename)
-        //     console.log(match.filename);
-        //     })
         console.log('dir',__dirname);
         let id = uuidv4()
         let Pdflink = await pdf.createAsync(data1, { format: 'A4', filename: './app/uploader/'+id+"order"+'.pdf' }); 
