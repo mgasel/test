@@ -1450,6 +1450,7 @@ let pdfData = async(booking,laundryDetails)=>{
                     
         // }
     });
+    
     return `
     <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
     <table colspan="0" cellpadding="0" border="0" style="width:600px;line-height: normal;border: solid 1px #ddd;padding: 20px;">
