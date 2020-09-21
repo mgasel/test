@@ -1037,7 +1037,7 @@ module.exports = {
         let data1 = await pdfData(recipt,laundryDetails)
         console.log('dir',__dirname);
         let id = uuidv4()
-        let Pdflink = await pdf.createAsync(data1, { format: 'A4', filename: './app/uploader/'+id+"order"+'.pdf' }); 
+        let Pdflink = await pdf.createAsync(data1, { filename: './app/uploader/'+id+"order"+'.pdf' }); 
         console.log('data',Pdflink.filename);      
             return ({ statusCode: 200, success: 1, Booking: booking , Count : count.length, pdfLinK :  `/${id}order.pdf` })
         } catch (error) {
@@ -1462,7 +1462,7 @@ let pdfData = async(booking,laundryDetails)=>{
                     <tr>
                         <td style="vertical-align: top;padding-top: 2rem;width: 60%;">
                             <table colspan="0" cellpadding="0" border="0" style="width:100%;border-collapse: collapse;">                                                                                                                                                                                                                 
-                                <tr><td style="texpadding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Laundry Name:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${laundryDetails.laundryName!=undefined?laundryDetails.laundryName:"N.A"} </p></td></tr>
+                                <tr><td style="width:100%;display:inline-block;vertical-align:middle;texpadding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Laundry Name:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${laundryDetails.laundryName!=undefined?laundryDetails.laundryName:"N.A"} </p></td></tr>
                                 <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Email:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${laundryDetails.email != undefined ?laundryDetails.email: "N.A" }</p></td></tr>
                                 <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Phone Number :</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;"> ${laundryDetails.countryCode }${laundryDetails.phoneNumber }</p></td></tr>
                                 <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Address :</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;"> ${laundryDetails.laundryAddress != undefined ? laundryDetails.laundryAddress : "N.A" }</p></td></tr>
@@ -1486,10 +1486,10 @@ let pdfData = async(booking,laundryDetails)=>{
                                 <td >
                                     <table colspan="0" cellpadding="5" border="1" style="width:100%;border-collapse: collapse;border-top: solid 2px #000;">
                                         <tr>
-                                            <th style="padding: 20px ;text-align: left;font-size: 16px;color: #000;font-weight: 600;width: 45%;border-bottom: solid 2px #000;">Order No</th>
-                                            <th style="padding: 20px ;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Amount</th>
-                                            <th style="padding: 20px ;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Paymeny Mode</th>
-                                            <th style="padding: 20px ;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Delivery Type</th>
+                                            <th style="padding: 10px ;text-align: left;font-size: 16px;color: #000;font-weight: 600;width: 45%;border-bottom: solid 2px #000;">Order No</th>
+                                            <th style="padding: 10px ;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Amount</th>
+                                            <th style="padding: 10px ;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Paymeny Mode</th>
+                                            <th style="padding: 10px ;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Delivery Type</th>
 
                                         </tr>
                                         ${orderList}
