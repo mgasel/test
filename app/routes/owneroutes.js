@@ -58,10 +58,13 @@ module.exports= function(app){
 
     app.post('/owner/bookingStatus',authenticattion.verifyOwnerBranch,ownerController.changeStatus)
     app.get('/owner/bagId/:bagNo',authenticattion.verifyOwnerBranch,ownerController.getBookingByBag)
-
-    
     
     app.post('/owner/deleteItems',authenticattion.verifyOwnerBranch,ownerController.deleteItems)
+    app.post('/owner/addPlan',ownerController.addPlan)
+    app.get('/owner/getPlans',authenticattion.verifyOwnerBranch,ownerController.getPlan)
+
+    app.post('/owner/buySubscription',authenticattion.verifyOwnerBranch,ownerController.addPlan)
+
 
 
 }

@@ -19,6 +19,7 @@ const bookingModel = require('../models/Bookings')
 const userModel = require('../models/User')
 let uuid = require('uid-safe')
 const promoModel = require('../models/promoCode')
+const subscriptionPlan = require('../models/laundrySubscriptionPlans')
 const moment = require('moment-timezone')
 const Promise = require('bluebird')
 const pdf = Promise.promisifyAll(require('html-pdf'))
@@ -942,9 +943,7 @@ module.exports = {
     },
     getBookingsByDate: async (request, response) => {
         try {
-            // console.log('r',request.laundryId);
             let limit = 10 , skip = 0
-            console.log('req',request.body);
             if(request.body.skip == null || request.body.skip == 0 ){
                 skip = 0
             }else{
@@ -954,7 +953,6 @@ module.exports = {
             let data = []
          
             if(request.body.status){
-             console.log('---->>>>>>>');
                 // query["status"] = request.body.status
                 query.status = request.body.status
                 data.push({query:request.body.status})
@@ -971,11 +969,8 @@ module.exports = {
                 data.push({bagNo:request.body.bagNo})
             }
             query.laundryId = mongoose.Types.ObjectId(request.laundryId)
-            console.log('rq',request.laundryId);
-            console.log('qury',query);
-            let demo= {}
             if(request.body.orderId){
-                console.log('---->>>>>>>');
+               
                    // query["status"] = request.body.status
                    query.orderId = request.body.orderId
                 
@@ -1423,7 +1418,25 @@ module.exports = {
         } catch (error) {
             
         }
-    }
+    },
+    addPlans : async(request,response)=>{
+        try {
+            const plans = await subscriptionPlan(request.body).save()
+            // if(findBooking==null) return ({ statusCode: 400, success: 1, Error:AppConstraints.VALID_ID})
+            return  ({ statusCode: 400, success: 1, Plans:plans})
+        } catch (error) {
+            return ({ statusCode: 400, success: 1, Error:error})
+        }
+    },
+    getPlans : async(request,response)=>{
+        try {
+            const plans = await subscriptionPlan.find({})
+            // if(findBooking==null) return ({ statusCode: 400, success: 1, Error:AppConstraints.VALID_ID})
+            return  ({ statusCode: 400, success: 1, Plans:plans})
+        } catch (error) {
+            return ({ statusCode: 400, success: 1, Error:error})
+        }
+    },
 
 }
 let pdfData = async(booking,laundryDetails)=>{
@@ -1450,8 +1463,6 @@ let pdfData = async(booking,laundryDetails)=>{
                     
         // }
     });
-
-    
     return `
     <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
     <table colspan="0" cellpadding="0" border="0" style="width:600px;line-height: normal;border: solid 1px #ddd;padding: 20px;">
@@ -1464,10 +1475,10 @@ let pdfData = async(booking,laundryDetails)=>{
                     <tr>
                         <td style="vertical-align: top;padding-top: 2rem;width: 60%;">
                             <table colspan="0" cellpadding="0" border="0" style="width:100%;border-collapse: collapse;">                                                                                                                                                                                                                 
-                                <tr><td style="width:40%;padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Laundry Name:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 13px;font-weight: 400;color: #000;line-height: normal;">${laundryDetails.laundryName!=undefined?laundryDetails.laundryName:"N.A"} </p></td></tr>
-                                <tr><td style="width:40%;padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Email:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 13px;font-weight: 400;color: #000;line-height: normal;">${laundryDetails.email != undefined ?laundryDetails.email: "N.A" }</p></td></tr>
-                                <tr><td style="width:40%;padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Phone Number :</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 13px;font-weight: 400;color: #000;line-height: normal;"> ${laundryDetails.countryCode }${laundryDetails.phoneNumber }</p></td></tr>
-                                <tr><td style="width:40%;padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Address :</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 13px;font-weight: 400;color: #000;line-height: normal;"> ${laundryDetails.laundryAddress != undefined ? laundryDetails.laundryAddress : "N.A" }</p></td></tr>
+                                <tr><td style="texpadding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Laundry Name:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${laundryDetails.laundryName!=undefined?laundryDetails.laundryName:"N.A"} </p></td></tr>
+                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Email:</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;">${laundryDetails.email != undefined ?laundryDetails.email: "N.A" }</p></td></tr>
+                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Phone Number :</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;"> ${laundryDetails.countryCode }${laundryDetails.phoneNumber }</p></td></tr>
+                                <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 16px;font-weight: bold;color: #000;line-height: normal;">Address :</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 15px;font-weight: 400;color: #000;line-height: normal;"> ${laundryDetails.laundryAddress != undefined ? laundryDetails.laundryAddress : "N.A" }</p></td></tr>
 
                             </table>
                         </td>
@@ -1488,10 +1499,10 @@ let pdfData = async(booking,laundryDetails)=>{
                                 <td >
                                     <table colspan="0" cellpadding="5" border="1" style="width:100%;border-collapse: collapse;border-top: solid 2px #000;">
                                         <tr>
-                                            <th style="width:50%;padding: 10px ;text-align: left;font-size: 14px;color: #000;font-weight: 600;width: 45%;border-bottom: solid 2px #000;">Order No</th>
-                                            <th style="width:50%;padding: 10px ;text-align: left;font-size: 14px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Amount</th>
-                                            <th style="width:50%;padding: 10px ;text-align: left;font-size: 14px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Paymeny Mode</th>
-                                            <th style="width:50%;padding: 10px ;text-align: left;font-size: 14px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Delivery Type</th>
+                                            <th style="padding: 10px ;text-align: left;font-size: 16px;color: #000;font-weight: 600;width: 45%;border-bottom: solid 2px #000;">Order No</th>
+                                            <th style="padding: 0px ;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Amount</th>
+                                            <th style="padding: 20px ;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Paymeny Mode</th>
+                                            <th style="padding: 20px ;text-align: left;font-size: 16px;color: #000;font-weight: 600;    border-bottom: solid 2px #000;">Delivery Type</th>
 
                                         </tr>
                                         ${orderList}

@@ -267,3 +267,11 @@ exports.deleteItems = async(request,response)=>{
     const items = await ownwerServices.deleteServiceItem(request,response)
     response.json(items)
 }
+exports.addPlan = async(request,response)=>{
+    const booking = await ownwerServices.addPlans(request,response)
+    response.json(booking)
+}
+exports.getPlan = async(request,response)=>{
+    const booking = await ownwerServices.getPlans(request,response)
+    response.json(booking)
+}
