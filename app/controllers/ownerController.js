@@ -275,3 +275,11 @@ exports.getPlan = async(request,response)=>{
     const booking = await ownwerServices.getPlans(request,response)
     response.json(booking)
 }
+exports.buyPlan = async(request,response)=>{
+    const booking = await ownwerServices.buyPlans(request,response)
+    response.json(booking)
+}
+exports.hyperPayStep1 = async(request,response)=>{
+    const booking = await ownwerServices.hyperPayStep1(request,response)
+    response.json(booking)
+}

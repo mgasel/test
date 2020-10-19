@@ -28,6 +28,7 @@ const json2xls = require('json2xls')
 let mongoose = require('mongoose')
 const { v4: uuidv4 } = require('uuid')
 const { default: async } = require('async')
+const Laundry = require('../models/Laundry')
 module.exports = {
     registerOwner: async (request, response) => {
         try {
@@ -1437,6 +1438,260 @@ module.exports = {
             return ({ statusCode: 400, success: 1, Error:error})
         }
     },
+    buyPlans : async(request,response)=>{
+        try {
+            console.log(request.body, "bodyyyyyyyyyyyyyyy hyperPayStep1");
+            if (!request.headers['authorization'])
+                return response.status(400).json({ statusCode: 400, success: 0, msg: AppConstraints.ACCESS_TOKEN.EN });
+            let validateToken = await UnivershalFunction.ValidateUserAccessToken(request.headers['authorization']);
+            if (!validateToken)
+                return response.status(401).json({ statusCode: 401, success: 0, msg: AppConstraints.UNAUTHORIZED.EN });
+            let errors = await request.validationErrors();
+            if (errors)
+                return response.status(400).json({ statusCode: 400, success: 0, msg: errors[0].msg, error: errors });
+    
+            // const random = Math.random() * (1000 - 50) + 1000;
+    
+            //   if (validateToken.isSubscriptiveUser) return response.status(400).json({ statusCode: 400, success: 0, msg: AppConstraints.PURCHASED_SUB.EN });
+            // request.body.cardNumber = '424242424242'
+            //console.log(request.body.amount, 'amount');
+            //console.log(request.body.currency, 'currency');
+            //console.log(request.body.paymentType, 'paymentType');
+            //console.log(request.body.notificationUrl, 'notificationUrl');
+            //console.log(request.body.isSubscriptionPlan, 'isSubscriptionPlan');
+            // console.log(request.body, 'cardNumber');
+            let jsonRes = {};
+            var path = '/v1/checkouts';
+            var d = {
+                //   'authentication.userId': '8ac9a4ca68c1e6640168d9f9c8b65f69',
+                //   'authentication.password': 'Kk8egrf9Fh',
+                //   'authentication.entityId': '8ac9a4ca68c1e6640168d9fa15e35f6d',
+    
+                amount: Number.parseFloat(Number(request.body.amount)).toFixed(2),
+                currency: request.body.currency,
+                paymentType: request.body.paymentType,
+                notificationUrl: request.body.notificationUrl,
+                merchantTransactionId: request.body.merchantTransactionId,
+                'customer.email': request.body.email,
+                'customer.givenName': request.body.givenName,
+                'customer.surname': request.body.surname,
+                'billing.street1': "Olayih",
+                'billing.city': "Riyadh",
+                'billing.state': "Central",
+                'billing.country': "SA",
+                'billing.postcode': "12611",
+                createRegistration: 'true'
+            };
+            //    d.authentication = {}
+            // d['authentication.userId'] = '8ac7a4c7679c71ed0167b705a421278d'
+            // d['authentication.password'] = '7MbQFsQdCj'
+    
+            if (request.body.isSubscriptionPlan) {
+                d.recurringType = "INITIAL";
+                // d['authentication.entityId'] = '8ac7a4c86b308f7b016b46012a211942'//moto
+                d['authentication.entityId'] = '8acda4c96ade4a49016afe7f214811e3'//moto
+                //console.log(">>>>>>>>>>>>>>>>>>>>>d3",d)
+            } else {
+                // d['authentication.entityId'] = '8ac7a4c7679c71ed0167b705fd7a2791'
+                d['authentication.entityId'] = '8ac9a4ca68c1e6640168d9fa15e35f6d'
+            }
+            //console.log(d);
+            //    let findToken = await hypertoken.find({ userId: validateToken._id });
+            //    if (findToken.length > 0) {
+            //       for (let i = 0; i < findToken.length; i++) {
+            //          if (findToken[i].token != '' || findToken[i].token != null) {
+            //             d[`registrations[${[ i ]}].id`] = findToken[i].token;
+            //          }
+            //       }
+            //    }
+            //console.log(d);
+            var data = querystring.stringify(d);
+            var options = {
+                port: 443,
+                //host: 'test.oppwa.com',
+                host: 'oppwa.com',
+                path: path,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Content-Length': data.length,
+                    Authorization:
+                        'Bearer OGFjOWE0Y2E2OGMxZTY2NDAxNjhkOWY5YzhiNjVmNjl8S2s4ZWdyZjlGaA=='
+                }
+            };
+            let x;
+            // let url = 'https://oppwa.com' + path
+            // await axios.post(url, data, {
+            //     headers: {
+            //         'Content-Type': 'application/x-www-form-urlencoded',
+            //         'Content-Length': data.length,
+            //         "Authorization": 'Bearer OGFjOWE0Y2E2OGMxZTY2NDAxNjhkOWY5YzhiNjVmNjl8S2s4ZWdyZjlGaA==',
+            //         // "Authorization": 'Bearer OGFjN2E0Yzc2NzljNzFlZDAxNjdiNzA1YTQyMTI3OGR8N01iUUZzUWRDag==',
+            //     },
+            // }).then( async (resp) => {
+            var postRequest = await https.request(options, function (res) {
+                res.setEncoding('utf8');
+                res.on('data', async function (chunk) {
+                    //  //console.log('asdadadadasdasda', JSON.stringify(JSON.parse(chunk)));
+                    console.log('asdadadadasdasda', chunk);
+                    let jsonRes = JSON.parse(chunk);
+                    // console.log('---------asdadadadasdasda', resp);
+                    // let jsonRes = resp.data
+                    console.log('asdadadadasdasda', jsonRes);
+    
+                    let cardCheck = await User.findOneAndUpdate({ _id: validateToken._id, 'cardRegistationId.cardNumber': { $ne: request.body.cardNumber } }, { $addToSet: { cardRegistationId: { cardNumber: request.body.cardNumber, registrationId: jsonRes.id } } })
+                    //console.log('++++++++++++++*****************', cardCheck)
+                    let cardCheckStatus = true
+                    if (cardCheck && cardCheck._id) {
+                        cardCheckStatus = false
+                    }
+                    //  x = JSON.parse(chunk);
+                    //  //console.log(x);
+                    jsonRes.cardCheckStatus = cardCheckStatus
+                    // console.log('+++++++++++++111111', JSON.stringify(jsonRes))
+                    return response
+                        .status(200)
+                        .json({ success: 1, statusCode: 200, msg: AppConstraints.SUCCESS.EN, data: jsonRes });
+                })
+                // .catch(err => {
+                //     console.log('err', err);
+                //     return response.status(500).json({ success: 0, statusCode: 500, msg: err.message, err: err.message })
+                // })
+            });
+            postRequest.write(data);
+            postRequest.end();
+        } catch (err) {
+            return response.status(500).json({ statusCode: 500, success: 0, msg: err.message, err: err.message });
+        }
+    },
+    hyperPayStep1 : async (request, response) => {
+        try {
+            console.log('req.id');
+            // console.log(request.body, "bodyyyyyyyyyyyyyyy hyperPayStep1");
+            // if (!request.headers['authorization'])
+            //     return response.status(400).json({ statusCode: 400, success: 0, msg: AppConstraints.ACCESS_TOKEN.EN });
+            // let validateToken = await UnivershalFunction.ValidateUserAccessToken(request.headers['authorization']);
+            // if (!validateToken)
+            //     return response.status(401).json({ statusCode: 401, success: 0, msg: AppConstraints.UNAUTHORIZED.EN });
+            // let errors = await request.validationErrors();
+            // if (errors)
+            //     return response.status(400).json({ statusCode: 400, success: 0, msg: errors[0].msg, error: errors });
+    
+            // const random = Math.random() * (1000 - 50) + 1000;
+    
+            //   if (validateToken.isSubscriptiveUser) return response.status(400).json({ statusCode: 400, success: 0, msg: AppConstraints.PURCHASED_SUB.EN });
+            // request.body.cardNumber = '424242424242'
+            //console.log(request.body.amount, 'amount');
+            //console.log(request.body.currency, 'currency');
+            //console.log(request.body.paymentType, 'paymentType');
+            //console.log(request.body.notificationUrl, 'notificationUrl');
+            //console.log(request.body.isSubscriptionPlan, 'isSubscriptionPlan');
+            // console.log(request.body, 'cardNumber');
+            let jsonRes = {};
+            var path = '/v1/checkouts';
+            var d = {
+                //   'authentication.userId': '8ac9a4ca68c1e6640168d9f9c8b65f69',
+                //   'authentication.password': 'Kk8egrf9Fh',
+                //   'authentication.entityId': '8ac9a4ca68c1e6640168d9fa15e35f6d',
+    
+                amount: Number.parseFloat(Number(request.body.amount)).toFixed(2),
+                currency: request.body.currency,
+                paymentType: request.body.paymentType,
+                notificationUrl: request.body.notificationUrl,
+                merchantTransactionId: request.body.merchantTransactionId,
+                'customer.email': request.body.email,
+                'customer.givenName': request.body.givenName,
+                'customer.surname': request.body.surname,
+                'billing.street1': "Olayih",
+                'billing.city': "Riyadh",
+                'billing.state': "Central",
+                'billing.country': "SA",
+                'billing.postcode': "12611",
+                createRegistration: 'true'
+            };
+            //    d.authentication = {}
+            // d['authentication.userId'] = '8ac7a4c7679c71ed0167b705a421278d'
+            // d['authentication.password'] = '7MbQFsQdCj'
+    
+            if (request.body.isSubscriptionPlan) {
+                d.recurringType = "INITIAL";
+                // d['authentication.entityId'] = '8ac7a4c86b308f7b016b46012a211942'//moto
+                d['authentication.entityId'] = '8acda4c96ade4a49016afe7f214811e3'//moto
+                //console.log(">>>>>>>>>>>>>>>>>>>>>d3",d)
+            } else {
+                // d['authentication.entityId'] = '8ac7a4c7679c71ed0167b705fd7a2791'
+                d['authentication.entityId'] = '8ac9a4ca68c1e6640168d9fa15e35f6d'
+            }
+            //console.log(d);
+            //    let findToken = await hypertoken.find({ userId: validateToken._id });
+            //    if (findToken.length > 0) {
+            //       for (let i = 0; i < findToken.length; i++) {
+            //          if (findToken[i].token != '' || findToken[i].token != null) {
+            //             d[`registrations[${[ i ]}].id`] = findToken[i].token;
+            //          }
+            //       }
+            //    }
+            //console.log(d);
+            var data = querystring.stringify(d);
+            var options = {
+                port: 443,
+                //host: 'test.oppwa.com',
+                host: 'oppwa.com',
+                path: path,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Content-Length': data.length,
+                    Authorization:
+                        'Bearer OGFjOWE0Y2E2OGMxZTY2NDAxNjhkOWY5YzhiNjVmNjl8S2s4ZWdyZjlGaA=='
+                }
+            };
+            let x;
+            // let url = 'https://oppwa.com' + path
+            // await axios.post(url, data, {
+            //     headers: {
+            //         'Content-Type': 'application/x-www-form-urlencoded',
+            //         'Content-Length': data.length,
+            //         "Authorization": 'Bearer OGFjOWE0Y2E2OGMxZTY2NDAxNjhkOWY5YzhiNjVmNjl8S2s4ZWdyZjlGaA==',
+            //         // "Authorization": 'Bearer OGFjN2E0Yzc2NzljNzFlZDAxNjdiNzA1YTQyMTI3OGR8N01iUUZzUWRDag==',
+            //     },
+            // }).then( async (resp) => {
+            var postRequest = await https.request(options, function (res) {
+                res.setEncoding('utf8');
+                res.on('data', async function (chunk) {
+                    //  //console.log('asdadadadasdasda', JSON.stringify(JSON.parse(chunk)));
+                    console.log('asdadadadasdasda', chunk);
+                    let jsonRes = JSON.parse(chunk);
+                    // console.log('---------asdadadadasdasda', resp);
+                    // let jsonRes = resp.data
+                    console.log('asdadadadasdasda', jsonRes);
+    
+                    let cardCheck = await Laundry.findOneAndUpdate({ _id: request._id, 'cardRegistationId.cardNumber': { $ne: request.body.cardNumber } }, { $addToSet: { cardRegistationId: { cardNumber: request.body.cardNumber, registrationId: jsonRes.id } } })
+                    //console.log('++++++++++++++*****************', cardCheck)
+                    let cardCheckStatus = true
+                    if (cardCheck && cardCheck._id) {
+                        cardCheckStatus = false
+                    }
+                    //  x = JSON.parse(chunk);
+                    //  //console.log(x);
+                    jsonRes.cardCheckStatus = cardCheckStatus
+                    // console.log('+++++++++++++111111', JSON.stringify(jsonRes))
+                    return response
+                        .status(200)
+                        .json({ success: 1, statusCode: 200, msg: AppConstraints.SUCCESS.EN, data: jsonRes });
+                })
+                // .catch(err => {
+                //     console.log('err', err);
+                //     return response.status(500).json({ success: 0, statusCode: 500, msg: err.message, err: err.message })
+                // })
+            });
+            postRequest.write(data);
+            postRequest.end();
+        } catch (err) {
+            return response.status(500).json({ statusCode: 500, success: 0, msg: err.message, err: err.message });
+        }
+    }
+    
 
 }
 let pdfData = async(booking,laundryDetails)=>{

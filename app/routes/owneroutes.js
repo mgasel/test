@@ -63,7 +63,11 @@ module.exports= function(app){
     app.post('/owner/addPlan',ownerController.addPlan)
     app.get('/owner/getPlans',authenticattion.verifyOwnerBranch,ownerController.getPlan)
 
-    app.post('/owner/buySubscription',authenticattion.verifyOwnerBranch,ownerController.addPlan)
+    app.post('/owner/buySubscription',authenticattion.verifyOwnerBranch,ownerController.buyPlan)
+    app.post('/owner/hyperPayGenrateToken',authenticattion.verifyOwnerBranch,ownerController.hyperPayStep1)
+
+   
+
 
 
 

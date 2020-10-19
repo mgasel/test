@@ -39,7 +39,11 @@ let Laundry=Schema({
     Document1:{type:String},
     Document2:{type:String},
     Document3:{type:String},
-    laundryServices:[{type:Schema.Types.ObjectId,ref:'laundryService'}]
+    laundryServices:[{type:Schema.Types.ObjectId,ref:'laundryService'}],
+    cardRegistationId: [{
+        cardNumber: { type: String, default: "" },
+        registrationId: { type: String, default: "" }
+    }]
 });
 
 
