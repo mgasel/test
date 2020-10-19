@@ -281,5 +281,11 @@ exports.buyPlan = async(request,response)=>{
 }
 exports.hyperPayStep1 = async(request,response)=>{
     const booking = await ownwerServices.hyperPayStep1(request,response)
-    response.json(booking)
+    // console.log('booking',booking);
+    // response.json(booking)
+}
+exports.recurringPayment = async(request,response)=>{
+    const booking = await ownwerServices.recurringPayment(request,response)
+    // console.log('booking',booking);
+    // response.json(booking)
 }

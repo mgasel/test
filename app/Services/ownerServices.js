@@ -7,7 +7,8 @@ const laundryItemsModel = require('../models/laundryItems')
 const AppConstraints = require('../../config/appConstraints')
 const laundryBooking = require('../models/laundryBooking')
 const otpModel = require('../models/otp')
-
+const https = require('https');
+let querystring = require('querystring');
 const laundryServiceModel = require('../models/laundryService')
 const bcrypt = require('bcrypt')
 const salt = 10
@@ -1580,7 +1581,7 @@ module.exports = {
             // const random = Math.random() * (1000 - 50) + 1000;
     
             //   if (validateToken.isSubscriptiveUser) return response.status(400).json({ statusCode: 400, success: 0, msg: AppConstraints.PURCHASED_SUB.EN });
-            // request.body.cardNumber = '424242424242'
+            request.body.cardNumber = '424242424242'
             //console.log(request.body.amount, 'amount');
             //console.log(request.body.currency, 'currency');
             //console.log(request.body.paymentType, 'paymentType');
@@ -1592,13 +1593,13 @@ module.exports = {
             var d = {
                 //   'authentication.userId': '8ac9a4ca68c1e6640168d9f9c8b65f69',
                 //   'authentication.password': 'Kk8egrf9Fh',
-                //   'authentication.entityId': '8ac9a4ca68c1e6640168d9fa15e35f6d',
+                  'authentication.entityId': '8a8294174d0595bb014d05d829cb01cd',
     
                 amount: Number.parseFloat(Number(request.body.amount)).toFixed(2),
                 currency: request.body.currency,
                 paymentType: request.body.paymentType,
-                notificationUrl: request.body.notificationUrl,
-                merchantTransactionId: request.body.merchantTransactionId,
+                // notificationUrl: request.body.notificationUrl,
+                // merchantTransactionId: request.body.merchantTransactionId,
                 'customer.email': request.body.email,
                 'customer.givenName': request.body.givenName,
                 'customer.surname': request.body.surname,
@@ -1613,15 +1614,18 @@ module.exports = {
             // d['authentication.userId'] = '8ac7a4c7679c71ed0167b705a421278d'
             // d['authentication.password'] = '7MbQFsQdCj'
     
-            if (request.body.isSubscriptionPlan) {
-                d.recurringType = "INITIAL";
-                // d['authentication.entityId'] = '8ac7a4c86b308f7b016b46012a211942'//moto
-                d['authentication.entityId'] = '8acda4c96ade4a49016afe7f214811e3'//moto
-                //console.log(">>>>>>>>>>>>>>>>>>>>>d3",d)
-            } else {
-                // d['authentication.entityId'] = '8ac7a4c7679c71ed0167b705fd7a2791'
-                d['authentication.entityId'] = '8ac9a4ca68c1e6640168d9fa15e35f6d'
-            }
+            // if (request.body.isSubscriptionPlan) {
+            //     d.recurringType = "INITIAL";
+            //     // d['authentication.entityId'] = '8ac7a4c86b308f7b016b46012a211942'//moto
+            //     d['authentication.entityId'] = '8acda4c96ade4a49016afe7f214811e3'//moto
+            //     //console.log(">>>>>>>>>>>>>>>>>>>>>d3",d)
+            // } else {
+            //     // d['authentication.entityId'] = '8ac7a4c7679c71ed0167b705fd7a2791'
+            //     d['authentication.entityId'] = '8ac9a4ca68c1e6640168d9fa15e35f6d'
+            // }
+
+
+
             //console.log(d);
             //    let findToken = await hypertoken.find({ userId: validateToken._id });
             //    if (findToken.length > 0) {
@@ -1660,25 +1664,29 @@ module.exports = {
                 res.setEncoding('utf8');
                 res.on('data', async function (chunk) {
                     //  //console.log('asdadadadasdasda', JSON.stringify(JSON.parse(chunk)));
-                    console.log('asdadadadasdasda', chunk);
-                    let jsonRes = JSON.parse(chunk);
+                    // console.log('asdadadadasdasda', chunk);
+                    // let jsonRes = JSON.parse(chunk);
                     // console.log('---------asdadadadasdasda', resp);
                     // let jsonRes = resp.data
-                    console.log('asdadadadasdasda', jsonRes);
-    
-                    let cardCheck = await Laundry.findOneAndUpdate({ _id: request._id, 'cardRegistationId.cardNumber': { $ne: request.body.cardNumber } }, { $addToSet: { cardRegistationId: { cardNumber: request.body.cardNumber, registrationId: jsonRes.id } } })
-                    //console.log('++++++++++++++*****************', cardCheck)
+                    console.log('asdadadadasdasda', chunk);
+                    
+                    let cardCheck = await Laundry.findOneAndUpdate({ _id: request.laundryId,
+                         'cardRegistationId.cardNumber': { $ne: request.body.cardNumber } 
+                        }, { $addToSet: { cardRegistationId: { cardNumber: request.body.cardNumber, registrationId: jsonRes.id } } })
+                    console.log('++++++++++++++*****************', cardCheck)
                     let cardCheckStatus = true
                     if (cardCheck && cardCheck._id) {
                         cardCheckStatus = false
                     }
-                    //  x = JSON.parse(chunk);
-                    //  //console.log(x);
+                     x = JSON.parse(chunk);
+                     //console.log(x);
                     jsonRes.cardCheckStatus = cardCheckStatus
-                    // console.log('+++++++++++++111111', JSON.stringify(jsonRes))
-                    return response
-                        .status(200)
-                        .json({ success: 1, statusCode: 200, msg: AppConstraints.SUCCESS.EN, data: jsonRes });
+                    console.log('+++++++++++++111111', JSON.stringify(jsonRes))
+        
+                    // return response.send(1)
+                    // return  ({ success: 1, statusCode: 200, msg: AppConstraints.SUCCESS.EN, data: jsonRes})
+
+                    return response.json({ success: 1, statusCode: 200, msg: AppConstraints.SUCCESS.EN, data: jsonRes , Chunk : x });
                 })
                 // .catch(err => {
                 //     console.log('err', err);
@@ -1689,6 +1697,104 @@ module.exports = {
             postRequest.end();
         } catch (err) {
             return response.status(500).json({ statusCode: 500, success: 0, msg: err.message, err: err.message });
+        }
+    },
+    recurringPayment : async (request, response) => {
+        request.checkBody('amount', AppConstraints.AMOUNT).notEmpty();
+        request.checkBody('cardRegId', AppConstraints.CARD_REG_ID).notEmpty();
+        console.log(request.body, 'request.body')
+        const cardRegId = request.body.cardRegId;
+        const amount = Number(request.body.amount);
+        const random = Math.random() * (1000 - 50) + 1000;
+        //url = `https://test.oppwa.com/v1/registrations/${cardRegId}/payments`;
+        url = `https://oppwa.com/v1/registrations/${cardRegId}/payments`;
+        var d = {
+            //"entityId": '8ac7a4c86b308f7b016b46012a211942', //you need to use the recurring entityID
+            "entityId": '8a8294174d0595bb014d05d829cb01cd',
+            "amount": Number.parseFloat(amount).toFixed(2),
+            "currency": 'SAR',
+            "paymentType": 'DB',
+            //   merchantTransactionId: random,
+            "merchantTransactionId": request.body.merchantTransactionId,
+            "recurringType": 'REPEATED', //For recurring
+        };
+        try {
+            var data = querystring.stringify(d);
+            var path = `/v1/registrations/${cardRegId}/payments`
+    
+            var options = {
+                port: 443,
+                //host: 'test.oppwa.com',
+                host: 'oppwa.com',
+                path: path,
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'Content-Length': data.length,
+                    Authorization:
+                        'Bearer OGFjOWE0Y2E2OGMxZTY2NDAxNjhkOWY5YzhiNjVmNjl8S2s4ZWdyZjlGaA=='
+                }
+            };
+            console.log(data, 'data')
+    
+            // const res = await axios.post(url, data, {
+            //     headers: {
+            //         // 'Content-Type': 'application/x-www-form-urlencoded',
+            //         // 'Content-Length': data.length,
+            //         "Authorization": 'Bearer OGFjOWE0Y2E2OGMxZTY2NDAxNjhkOWY5YzhiNjVmNjl8S2s4ZWdyZjlGaA==',
+            //         // "Authorization": 'Bearer OGFjN2E0Yzc2NzljNzFlZDAxNjdiNzA1YTQyMTI3OGR8N01iUUZzUWRDag==',
+            //     },
+            // });
+    
+            var postRequest = await https.request(options, function (res) {
+                res.setEncoding('utf8');
+                res.on('data', async function (chunk) {
+                    //  //console.log('asdadadadasdasda', JSON.stringify(JSON.parse(chunk)));
+    
+                    let jsonRes = JSON.parse(chunk);
+                    console.log('asdadadadasdasda', jsonRes);
+                    //console.log(res.data,'res.data');
+                    // jsonRes = res.data;
+                    const resultCode = jsonRes.result.code;
+                    //console.log(resultCode,"resulttttttttttt")
+                    const successPattern = /(000\.000\.|000\.100\.1|000\.[36])/;
+                    const manuallPattern = /(000\.400\.0[^3]|000\.400\.100)/;
+                    const match1 = successPattern.test(resultCode);
+                    const match2 = manuallPattern.test(resultCode);
+                    let msg = '';
+                    let paymentStatus = 0;
+                    if (match1 || match2) {
+    
+                        let transection = new Transections();
+                        transection.jsonRes = jsonRes;
+                        
+                        transection.save();
+                        return response.status(200).json({
+                            success: 1,
+                            statusCode: 200,
+                            msg: 'success',
+                            data: jsonRes,
+                        });
+                    } else {
+                        msg = 'Payment is Rejected';
+                        paymentStatus = 0;
+    
+                        return response
+                            .status(500)
+                            .json({ success: 1, statusCode: 500, msg: jsonRes.result.description, paymentStatus: paymentStatus, data: jsonRes });
+                    }
+                })
+            })
+            postRequest.write(data);
+            postRequest.end();
+        } catch (error) {
+            console.error(error);
+            return response.status(500).json({
+                statusCode: 500,
+                success: 0,
+                msg: error.message,
+                err: error.message,
+            });
         }
     }
     
