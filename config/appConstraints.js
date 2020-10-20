@@ -464,7 +464,7 @@ module.exports={
    INVALID_CATEGORY_ID:{EN:'Invalid category id',AR:'معرف عنصر خدمة الغسيل غير صالح'},
    SERVICE_ITEMS_EXIST :{EN:'service item already exist ',AR:'عنصر الخدمة موجود بالفعل'},
    NOT_REGISTER_BOOKING:{EN:'You are not a registered user',AR:'انت لست مستخدم مسجل'},
-   START_DATE_LESS_THEN_EXPIRE:{EN:'start date always less then expire date',AR:"تاريخ البدء دائمًا أقل من تاريخ انتهاء الصلاحية"},\
+   START_DATE_LESS_THEN_EXPIRE:{EN:'start date always less then expire date',AR:"تاريخ البدء دائمًا أقل من تاريخ انتهاء الصلاحية"},
    FETCHED_SUCESSFULLY  :{EN:'Fetched sucessfyully',AR:'تم جلبها بنجاح'}
 
 
