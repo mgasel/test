@@ -1448,7 +1448,7 @@ module.exports = {
         try {
             const plans = await subscriptionPlan.find({})
             // if(findBooking==null) return ({ statusCode: 400, success: 1, Error:AppConstraints.VALID_ID})
-            return  ({ statusCode: 200, success: 1, Plans:plans})
+            return  ({ statusCode: 200, success: 1,msg: AppConstraints.FETCHED_SUCESSFULLY, Plans:plans})
         } catch (error) {
             return ({ statusCode: 400, success: 1, Error:error})
         }
