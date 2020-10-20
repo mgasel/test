@@ -239,6 +239,7 @@ module.exports={
    ITEM_DELETED_SUCCESSFULLY:{EN:'Service item has deleted successfully',AR:'تم حذف  الخدمة بنجاح'},
    PLANE_NAME:{EN:'Plane name is required',AR:'اسم الباقة مطلوب'},
    ALREADY_SUBSCRIPTION_PLAN:{EN:'The subscription plan you have entered is already registered',AR:'اشتراك الباقة الذى قمت بإدخاله مُسجل سابقًا'},
+   SUBSRIPTION_PENDING :{EN:'Subscriptiion Pending',AR:'الاشتراك معلق'},
    SUBSCRIPTION_PLANE_CREATED:{EN:'Subscription plane has been created successfully',AR:'تم إنشاء اشتراك الباقة بنجاح'},
    PLANE_ID:{EN:'Plan id is required',AR:'الرجاء إدخال كود الباقة'},
    PLANE_ID_NOT_VALID:{EN:'Plan id should be a valid mongo id',AR:'يجب أن يكون كود الباقة كود مونجو صحيح'},
@@ -431,6 +432,7 @@ module.exports={
    LOGIN_SUCESSFULL : {EN:"Login Sucessfull",AR:"نجح تسجيل الدخول"},
    VALID_OTP : {EN:"Please enter valid OTP",AR:"الرجاء إدخال otp صالح"},
    ENTER_OWNER_ID:{EN:"Please Enter the owner ID",AR:'يرجى إدخال معرف المالك'},
+   SUBSCRIPTION_PENDING : {EN:"Subscription Pending",AR:'الاشتراك معلق'},
    NUMBER_ALREADY_EXIST:{EN:"Phone Number already exist",AR:'رقم الهاتف موجود بالفعل'},
    REQUIRED_COUNTRY:{EN:'Country code is required',AR:'رمز البلد مطلوب'},
    NUMBER_INVALID : {EN:'Invalid phone number',AR:'رقم الهاتف غير صحيح'},
@@ -462,7 +464,8 @@ module.exports={
    INVALID_CATEGORY_ID:{EN:'Invalid category id',AR:'معرف عنصر خدمة الغسيل غير صالح'},
    SERVICE_ITEMS_EXIST :{EN:'service item already exist ',AR:'عنصر الخدمة موجود بالفعل'},
    NOT_REGISTER_BOOKING:{EN:'You are not a registered user',AR:'انت لست مستخدم مسجل'},
-   START_DATE_LESS_THEN_EXPIRE:{EN:'start date always less then expire date',AR:"تاريخ البدء دائمًا أقل من تاريخ انتهاء الصلاحية"},
+   START_DATE_LESS_THEN_EXPIRE:{EN:'start date always less then expire date',AR:"تاريخ البدء دائمًا أقل من تاريخ انتهاء الصلاحية"},\
+   FETCHED_SUCESSFULLY  :{EN:'Fetched sucessfyully',AR:'تم جلبها بنجاح'}
 
 
 }

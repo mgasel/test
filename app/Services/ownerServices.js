@@ -1,4 +1,5 @@
 const laundryModel = require('../models/Laundry')
+const laundrySubscription = require('../models/laundryBuySubscription')
 // const ownwerModel = require('../models/owner')
 const servicesModel = require('../models/Services')
 const categoryModel = require('../models/serviceItemCategory')
@@ -30,6 +31,7 @@ let mongoose = require('mongoose')
 const { v4: uuidv4 } = require('uuid')
 const { default: async } = require('async')
 const Laundry = require('../models/Laundry')
+const laundryBuySubscription = require('../models/laundryBuySubscription')
 module.exports = {
     registerOwner: async (request, response) => {
         try {
@@ -79,8 +81,14 @@ module.exports = {
             if (ownwer == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_PHONE_PASSWORD });
             const compare = bcrypt.compareSync(request.body.password, ownwer.password)
             if (compare == true) {
+                // console.log('owner------->>>>>>',ownwer);
+                // const checkSubscription = await laundryBuySubscription.findOne({laundryId:ownwer._id})
+                // const checkSubscriptionBranches = await laundryBuySubscription.findOne({subscriptionBanches:ownwer._id})
+                // console.log("check Subscription",checkSubscriptionBranches);
+                // if(!checkSubscription && !checkSubscriptionBranches) return ({ statusCode: 400, success: 0, msg: AppConstraints.SUBSRIPTION_PENDING });
+                // console.log("checkSubscription",checkSubscription);
                 let token = await authToken.generateOwnwerToken(ownwer)
-                console.log('sucessful login===============>>>>>>>');
+                // console.log('sucessful login===============>>>>>>>');
                 console.log('owner', ownwer);
                 return ({ statusCode: 200, success: 1, msg: AppConstraints.LOGIN_SUCESSFULL, ownwer: ownwer, token: token })
             }
@@ -131,7 +139,10 @@ module.exports = {
     addBranches: async (request, response) => {
         try {
             console.log('oor', request.body.ownerId, "fa", request.ownerId);
-
+            // let findOwner =  await Laundry.findOne({_id:request.ownerId})
+            // if(findOwner.subscriptionLimit<= 0){
+            //     return ({ statusCode: 400, success: 0, msg: AppConstraints.SUBSCRIPTION_PENDING });
+            // }
             if (request.body.ownerId != request.ownerId.toString()) return ({ statusCode: 400, success: 0, msg: AppConstraints.ENTER_OWNER_ID })
             if (await laundryModel.findOne({ $and: [{ phoneNumber: request.body.phoneNumber }, { isDeleted: false }] }) != null) return ({ statusCode: 400, success: 0, msg: AppConstraints.NUMBER_ALREADY_EXIST })
             //  if(await laundryModel.findOne({$and:[{$or:[{phoneNumber:request.body.phoneNumber},{isDeleted:false}]},{$or:[{email:request.body.email},{isDeleted:false}]}]})!=null)  return ({ statusCode: 400, success: 0, msg: AppConstraints.NUMBER_ALREADY_EXIST })
@@ -142,6 +153,9 @@ module.exports = {
             let password = Math.random().toString(36).slice(-8);
             request.body.password = bcrypt.hashSync(password, salt)
             const laundry = await laundryModel(request.body).save()
+            // await laundryModel.update({_id:request.ownerId},{ $inc: { subscriptionLimit: -1 } })
+            // await laundryBuySubscription.update({laundryId:request.ownerId},{ $push: { subscriptionBanches: laundry._id } })
+
             let token = await authToken.generateOwnwerToken(laundry)
             let data = {
                 phoneNumber: request.body.countryCode + request.body.phoneNumber,
@@ -1434,7 +1448,7 @@ module.exports = {
         try {
             const plans = await subscriptionPlan.find({})
             // if(findBooking==null) return ({ statusCode: 400, success: 1, Error:AppConstraints.VALID_ID})
-            return  ({ statusCode: 400, success: 1, Plans:plans})
+            return  ({ statusCode: 200, success: 1, Plans:plans})
         } catch (error) {
             return ({ statusCode: 400, success: 1, Error:error})
         }
@@ -1581,13 +1595,16 @@ module.exports = {
             // const random = Math.random() * (1000 - 50) + 1000;
     
             //   if (validateToken.isSubscriptiveUser) return response.status(400).json({ statusCode: 400, success: 0, msg: AppConstraints.PURCHASED_SUB.EN });
-            request.body.cardNumber = '424242424242'
+            // request.body.cardNumber = '424242424242'
             //console.log(request.body.amount, 'amount');
             //console.log(request.body.currency, 'currency');
             //console.log(request.body.paymentType, 'paymentType');
             //console.log(request.body.notificationUrl, 'notificationUrl');
             //console.log(request.body.isSubscriptionPlan, 'isSubscriptionPlan');
             // console.log(request.body, 'cardNumber');
+            findPalns = await subscriptionPlan.findOne({_id:request.body.subscriptionId}).lean()
+            console.log('findPalns------',findPalns.planAmount);   
+            //    }
             let jsonRes = {};
             var path = '/v1/checkouts';
             var d = {
@@ -1595,7 +1612,7 @@ module.exports = {
                 //   'authentication.password': 'Kk8egrf9Fh',
                   'authentication.entityId': '8a8294174d0595bb014d05d829cb01cd',
     
-                amount: Number.parseFloat(Number(request.body.amount)).toFixed(2),
+                amount: Number.parseFloat(Number(findPalns.planAmount)).toFixed(2),
                 currency: request.body.currency,
                 paymentType: request.body.paymentType,
                 // notificationUrl: request.body.notificationUrl,
@@ -1673,7 +1690,7 @@ module.exports = {
                     let cardCheck = await Laundry.findOneAndUpdate({ _id: request.laundryId,
                          'cardRegistationId.cardNumber': { $ne: request.body.cardNumber } 
                         }, { $addToSet: { cardRegistationId: { cardNumber: request.body.cardNumber, registrationId: jsonRes.id } } })
-                    console.log('++++++++++++++*****************', cardCheck)
+                    // console.log('++++++++++++++*****************', cardCheck)
                     let cardCheckStatus = true
                     if (cardCheck && cardCheck._id) {
                         cardCheckStatus = false
@@ -1681,7 +1698,7 @@ module.exports = {
                      x = JSON.parse(chunk);
                      //console.log(x);
                     jsonRes.cardCheckStatus = cardCheckStatus
-                    console.log('+++++++++++++111111', JSON.stringify(jsonRes))
+                    // console.log('+++++++++++++111111', JSON.stringify(jsonRes))
         
                     // return response.send(1)
                     // return  ({ success: 1, statusCode: 200, msg: AppConstraints.SUCCESS.EN, data: jsonRes})
@@ -1707,11 +1724,13 @@ module.exports = {
         const amount = Number(request.body.amount);
         const random = Math.random() * (1000 - 50) + 1000;
         //url = `https://test.oppwa.com/v1/registrations/${cardRegId}/payments`;
+        findPalns = await subscriptionPlan.findOne({_id:request.body.subscriptionId}).lean()
+        console.log('findPalns------',findPalns.planAmount); 
         url = `https://oppwa.com/v1/registrations/${cardRegId}/payments`;
         var d = {
             //"entityId": '8ac7a4c86b308f7b016b46012a211942', //you need to use the recurring entityID
             "entityId": '8a8294174d0595bb014d05d829cb01cd',
-            "amount": Number.parseFloat(amount).toFixed(2),
+            "amount": Number.parseFloat(findPalns.planAmount).toFixed(2),
             "currency": 'SAR',
             "paymentType": 'DB',
             //   merchantTransactionId: random,
@@ -1752,7 +1771,7 @@ module.exports = {
                     //  //console.log('asdadadadasdasda', JSON.stringify(JSON.parse(chunk)));
     
                     let jsonRes = JSON.parse(chunk);
-                    console.log('asdadadadasdasda', jsonRes);
+                    // console.log('asdadadadasdasda', jsonRes);
                     //console.log(res.data,'res.data');
                     // jsonRes = res.data;
                     const resultCode = jsonRes.result.code;
@@ -1764,10 +1783,31 @@ module.exports = {
                     let msg = '';
                     let paymentStatus = 0;
                     if (match1 || match2) {
-    
+                        console.log('laundry id',request.laundryId);
+                        if(findPalns.planName=="Basic"){
+                      let subscription =  await laundryBuySubscription({
+                            laundryId:request.laundryId,
+                            subscriptionPlanId : request.body.subscriptionId,
+                            startDate : moment().startOf("day").valueOf(),
+                            endDate : moment().add(12, 'M').endOf("day").valueOf()
+                        }).save()
+                    
+                        await Laundry.update({_id:request.laundryId},{subscriptionLimit:1})
+                        }
+                        else{
+                            let subscription =  await laundryBuySubscription({
+                                laundryId:request.laundryId,
+                                subscriptionPlanId : request.body.subscriptionId,
+                                startDate : moment().startOf("day").valueOf(),
+                                endDate : moment().add(12, 'M').endOf("day").valueOf()
+                            }).save()
+                       
+                            await Laundry.update({_id:request.laundryId},{subscriptionLimit:3})
+                            }
+
                         let transection = new Transections();
                         transection.jsonRes = jsonRes;
-                        
+                     
                         transection.save();
                         return response.status(200).json({
                             success: 1,
@@ -1775,7 +1815,8 @@ module.exports = {
                             msg: 'success',
                             data: jsonRes,
                         });
-                    } else {
+                    } 
+                    else {
                         msg = 'Payment is Rejected';
                         paymentStatus = 0;
     
