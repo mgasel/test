@@ -1746,8 +1746,8 @@ module.exports = {
     
             var options = {
                 port: 443,
-                //host: 'test.oppwa.com',
-                host: 'oppwa.com',
+                host: 'test.oppwa.com',
+                // host: 'oppwa.com',
                 path: path,
                 method: 'POST',
                 headers: {
@@ -1840,8 +1840,133 @@ module.exports = {
                 err: error.message,
             });
         }
-    }
+    },
+    hyperPayStep2 : async (request, response) => {
+        try {
+              
+            var path = `/v1/checkouts/${request.body.checkoutId}/payment`;
+            //    path += '?authentication.userId=8ac9a4ca68c1e6640168d9f9c8b65f69';
+            //    path += '&authentication.password=Kk8egrf9Fh';
+            //    path += '&authentication.entityId=8ac9a4ca68c1e6640168d9fa15e35f6d';
+            // path += '?authentication.userId=8ac7a4c7679c71ed0167b705a421278d'
+            // path += '&authentication.password=7MbQFsQdCj'
+            //MODO 8acda4c96ade4a49016afe7f214811e3
+            // request.body.isSubscriptionPlan = true
+
+/**************** */
+            // if (request.body.isSubscriptionPlan) {
+            //     // d.recurringType = "INITIAL";
+            //     //path += '&authentication.entityId=8ac7a4c86b308f7b016b46012a211942'
+            //     path += '?authentication.entityId=8acda4c96ade4a49016afe7f214811e3'
+            // } else {
+            //     // path += '&authentication.entityId=8ac7a4c7679c71ed0167b705fd7a2791'
+            //     path += '?authentication.entityId=8ac9a4ca68c1e6640168d9fa15e35f6d'
+            // }
+            // console.log('++++++++++++++++++', path);
+    /*********** */
+    path += '?entityId=8a8294174d0595bb014d05d829cb01cd'
+            // var options = {
+            //     port: 443,
+            //     host: 'oppwa.com',
+            //     //host: 'test.oppwa.com',
+            //     path: path,
+            //     method: 'GET',
+            //     headers: {
+            //         Authorization:
+            //             'Bearer OGFjOWE0Y2E2OGMxZTY2NDAxNjhkOWY5YzhiNjVmNjl8S2s4ZWdyZjlGaA=='
+            //     }
+            // };
+            //console.log('++++++++++++++++++opt', options);
+            let url = `test.oppwa.com` + path
+            await axios.get(url, {
+                headers: {
+                    // 'Content-Type': 'application/x-www-form-urlencoded',
+                    // 'Content-Length': data.length,
+                    "Authorization": 'Bearer OGFjOWE0Y2E2OGMxZTY2NDAxNjhkOWY5YzhiNjVmNjl8S2s4ZWdyZjlGaA==',
+                    // "Authorization": 'Bearer OGFjN2E0Yzc2NzljNzFlZDAxNjdiNzA1YTQyMTI3OGR8N01iUUZzUWRDag==',
+                },
+            }).then(async resp => {
+                // var postRequest = https.request(options, function (res) {
     
+                //     res.setEncoding('utf8');
+                //     res.on('data', async function (chunk) {
+                //         //console.log('++++++++++++++++++chunk', chunk);
+    
+                //         jsonRes = JSON.parse(chunk);
+                let jsonRes = resp.data
+                console.log("jsonRes", jsonRes, "jsonRes");
+                let transection = new Transections();
+                transection.jsonRes = jsonRes;
+                transection.save();
+                // let findToken = await hypertoken.findOne({ userId: validateToken._id, token: jsonRes.registrationId });
+    
+                const resultCode = jsonRes.result.code;
+                //console.log(resultCode,"resulttttttttttt")
+                const successPattern = /(000\.000\.|000\.100\.1|000\.[36])/;
+                const manuallPattern = /(000\.400\.0[^3]|000\.400\.100)/;
+                const match1 = successPattern.test(resultCode);
+                const match2 = manuallPattern.test(resultCode);
+                let msg = '';
+                let paymentStatus = 0;
+                if (match1 || match2) {
+                    // console.log('__________', jsonRes)
+                    const card = new Card({
+                        userId: validateToken._id,
+                        token: jsonRes.registrationId,
+                        brand: jsonRes.paymentBrand,
+                        bin: jsonRes.card.bin,
+                        last4Digits: jsonRes.card.last4Digits,
+                        expiryMonth: jsonRes.card.expiryMonth,
+                        expiryYear: jsonRes.card.expiryYear,
+                        holder: jsonRes.card.holder,
+                        merchantTransactionId: jsonRes.merchantTransactionId
+                    });
+                    const cardSavingResult = await card.save();
+                    const reverseResult = await reversePayment(jsonRes.id);
+                    //console.log(reverseResult);
+                    msg = 'Payment is Successful';
+                    paymentStatus = 1;
+    
+                } else {
+                    msg = 'Payment is Rejected';
+                    paymentStatus = 0;
+    
+                    return response
+                        .status(400)
+                        .json({ success: 1, statusCode: 400, msg: jsonRes.result.description, paymentStatus: paymentStatus, data: jsonRes });
+                }
+    
+    
+                if (!findToken && (match1 || match2)) {
+                    if (jsonRes.registrationId != null || jsonRes.registrationId != undefined) {
+                        let token = new hypertoken();
+                        token.userId = validateToken._id;
+                        token.token = jsonRes.registrationId;
+                        let x = await token.save();
+                        //console.log(x);
+                    }
+                }
+    
+                //console.log('_______________________', jsonRes, msg, paymentStatus)
+                return response
+                    .status(200)
+                    .json({ success: 1, statusCode: 200, msg: msg, paymentStatus: paymentStatus, data: jsonRes });
+            }).catch(err => {
+                console.log('_______________________', err)
+                return response
+                    .status(500)
+                    .json({ success: 0, statusCode: 500, msg: err.message, err: err.message })
+            })
+    
+            // });
+            // postRequest.on('error', (error) => {
+            //     console.log(error, 'errorerrorerrorerrorerrorerror')
+            // })
+            // postRequest.end();
+        } catch (err) {
+            return response.status(500).json({ statusCode: 500, success: 0, msg: err.message, err: err.message });
+        }
+    }
 
 }
 let pdfData = async(booking,laundryDetails)=>{
