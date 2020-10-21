@@ -7,6 +7,7 @@ const serviceItemModel = require('../models/serviceItems')
 const laundryItemsModel = require('../models/laundryItems')
 const AppConstraints = require('../../config/appConstraints')
 const laundryBooking = require('../models/laundryBooking')
+const Transections = require('../models/transectionLogs');
 const otpModel = require('../models/otp')
 const https = require('https');
 let querystring = require('querystring');
@@ -1588,7 +1589,7 @@ module.exports = {
         
                     // return response.send(1)
                     // return  ({ success: 1, statusCode: 200, msg: AppConstraints.SUCCESS.EN, data: jsonRes})
-
+                    console.log('innnnnnnnnnnnnnnn');
                     return response.json({ success: 1, statusCode: 200, msg: AppConstraints.SUCCESS.EN, data: jsonRes , Chunk : x });
                 })
                 // .catch(err => {
@@ -1599,6 +1600,7 @@ module.exports = {
             postRequest.write(data);
             postRequest.end();
         } catch (err) {
+            console.log('eerr',err);
             return response.status(500).json({ statusCode: 500, success: 0, msg: err.message, err: err.message });
         }
     },
@@ -1641,7 +1643,7 @@ module.exports = {
                         'Bearer OGFjOWE0Y2E2OGMxZTY2NDAxNjhkOWY5YzhiNjVmNjl8S2s4ZWdyZjlGaA=='
                 }
             };
-            console.log(data, 'data')
+            // console.log(data, '#############')
     
             // const res = await axios.post(url, data, {
             //     headers: {
@@ -1656,7 +1658,7 @@ module.exports = {
                 res.setEncoding('utf8');
                 res.on('data', async function (chunk) {
                     //  //console.log('asdadadadasdasda', JSON.stringify(JSON.parse(chunk)));
-    
+                    console.log("###################");
                     let jsonRes = JSON.parse(chunk);
                     // console.log('asdadadadasdasda', jsonRes);
                     //console.log(res.data,'res.data');
@@ -1667,9 +1669,12 @@ module.exports = {
                     const manuallPattern = /(000\.400\.0[^3]|000\.400\.100)/;
                     const match1 = successPattern.test(resultCode);
                     const match2 = manuallPattern.test(resultCode);
+                    console.log('result code',resultCode);
+                    console.log('match',match1);
+                    console.log('mtch---',match2);
                     let msg = '';
                     let paymentStatus = 0;
-                    if (match1 || match2) {
+                    // if (match1 || match2) {
                         console.log('laundry id',request.laundryId);
                         if(findPalns.planName=="Basic"){
                       let subscription =  await laundryBuySubscription({
@@ -1702,15 +1707,15 @@ module.exports = {
                             msg: 'success',
                             data: jsonRes,
                         });
-                    } 
-                    else {
-                        msg = 'Payment is Rejected';
-                        paymentStatus = 0;
+                    // } 
+                    // else {
+                    //     msg = 'Payment is Rejected';
+                    //     paymentStatus = 0;
     
-                        return response
-                            .status(500)
-                            .json({ success: 1, statusCode: 500, msg: jsonRes.result.description, paymentStatus: paymentStatus, data: jsonRes });
-                    }
+                    //     return response
+                    //         .status(500)
+                    //         .json({ success: 1, statusCode: 500, msg: jsonRes.result.description, paymentStatus: paymentStatus, data: jsonRes });
+                    // }
                 })
             })
             postRequest.write(data);
