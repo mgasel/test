@@ -240,6 +240,7 @@ module.exports={
    PLANE_NAME:{EN:'Plane name is required',AR:'اسم الباقة مطلوب'},
    ALREADY_SUBSCRIPTION_PLAN:{EN:'The subscription plan you have entered is already registered',AR:'اشتراك الباقة الذى قمت بإدخاله مُسجل سابقًا'},
    SUBSRIPTION_PENDING :{EN:'Subscriptiion Pending',AR:'الاشتراك معلق'},
+   SUBSRIPTION_VALID :{EN:'Already Subscribed',AR:'مشترك بالفعل'},
    SUBSCRIPTION_PLANE_CREATED:{EN:'Subscription plane has been created successfully',AR:'تم إنشاء اشتراك الباقة بنجاح'},
    PLANE_ID:{EN:'Plan id is required',AR:'الرجاء إدخال كود الباقة'},
    PLANE_ID_NOT_VALID:{EN:'Plan id should be a valid mongo id',AR:'يجب أن يكون كود الباقة كود مونجو صحيح'},

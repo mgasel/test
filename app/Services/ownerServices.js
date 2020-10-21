@@ -1459,7 +1459,7 @@ module.exports = {
         try {
             const plans = await subscriptionPlan.find({})
             // if(findBooking==null) return ({ statusCode: 400, success: 1, Error:AppConstraints.VALID_ID})
-            const LaundryPalns = await laundryBuySubscription.find({laundryId:request.laundryId})
+            const LaundryPalns = await laundryBuySubscription.findOne({laundryId:request.laundryId})
             return  ({ statusCode: 200, success: 1,msg: AppConstraints.FETCHED_SUCESSFULLY, Plans:plans,laundryPalns:LaundryPalns})
         } catch (error) {
             return ({ statusCode: 400, success: 1, Error:error})
@@ -1856,7 +1856,21 @@ module.exports = {
         } catch (err) {
             return response.status(500).json({ statusCode: 500, success: 0, msg: err.message, err: err.message });
         }
-    }
+    },
+    checkSubscription: async (request, response) => {
+        try {
+            const checkSubscription = await laundryBuySubscription.findOne({laundryId:request.laundryId})
+            const checkSubscriptionBranches = await laundryBuySubscription.findOne({subscriptionBanches:request.laundryId})
+            if(!checkSubscription && !checkSubscriptionBranches) return ({ statusCode: 400, success: 0, msg: AppConstraints.SUBSRIPTION_PENDING   });    
+             return ({ statusCode: 200, success: 1, msg: AppConstraints.SUBSRIPTION_VALID })
+            
+      
+        } catch (error) {
+            return ({ statusCode: 400, success: 0, msg: error })
+        }
+
+
+    },
 
 }
 let pdfData = async(booking,laundryDetails)=>{

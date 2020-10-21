@@ -69,6 +69,8 @@ module.exports= function(app){
     app.post('/owner/hyperPayGenrateToken',authenticattion.verifyOwnerBranch,ownerController.hyperPayStep1)
     app.post('/owner/recurringPayment',authenticattion.verifyOwnerBranch,ownerController.recurringPayment)
     app.post('/owner/hyperPayTrancationStatus',authenticattion.verifyOwnerBranch,ownerController.hyperPayStep2)
+    app.get('/owner/checkSubscription',authenticattion.verifyOwnerBranch,ownerController.checkSubscription)
+
 
     // app.post('/hyperPayTrancationStatus',user.hyperPayStep2);
 

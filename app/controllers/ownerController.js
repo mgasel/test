@@ -295,3 +295,8 @@ exports.hyperPayStep2 = async(request,response)=>{
     // console.log('booking',booking);
     // response.json(booking)
 }
+exports.checkSubscription = async(request,response)=>{
+    const booking = await ownwerServices.checkSubscription(request,response)
+    // console.log('booking',booking);
+    response.json(booking)
+}
