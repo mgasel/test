@@ -86,12 +86,13 @@ module.exports = {
                 const checkSubscription = await laundryBuySubscription.findOne({laundryId:ownwer._id})
                 const checkSubscriptionBranches = await laundryBuySubscription.findOne({subscriptionBanches:ownwer._id})
                 console.log("check Subscription",checkSubscriptionBranches);
-                if(!checkSubscription && !checkSubscriptionBranches) return ({ statusCode: 400, success: 0, msg: AppConstraints.SUBSRIPTION_PENDING });
+                
                 console.log("checkSubscription",checkSubscription);
                 let token = await authToken.generateOwnwerToken(ownwer)
+                if(!checkSubscription && !checkSubscriptionBranches) return ({ statusCode: 200, success: 0, msg: AppConstraints.SUBSRIPTION_PENDING ,isSubscription : 0 , ownwer: ownwer, token: token  });
                 // console.log('sucessful login===============>>>>>>>');
                 console.log('owner', ownwer);
-                return ({ statusCode: 200, success: 1, msg: AppConstraints.LOGIN_SUCESSFULL, ownwer: ownwer, token: token })
+                return ({ statusCode: 200, success: 1, msg: AppConstraints.LOGIN_SUCESSFULL,isSubscription : 0, ownwer: ownwer, token: token })
             }
             return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_PHONE_PASSWORD })
         } catch (error) {
