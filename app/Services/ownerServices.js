@@ -1610,7 +1610,7 @@ module.exports = {
             var d = {
                 //   'authentication.userId': '8ac9a4ca68c1e6640168d9f9c8b65f69',
                 //   'authentication.password': 'Kk8egrf9Fh',
-                  'authentication.entityId': '8acda4c96ade4a49016afe7f214811e3',
+                  'authentication.entityId': '8a8294174d0595bb014d05d829cb01cd',
     
                 amount: Number.parseFloat(Number(findPalns.planAmount)).toFixed(2),
                 currency: request.body.currency,
@@ -1729,7 +1729,7 @@ module.exports = {
         url = `https://oppwa.com/v1/registrations/${cardRegId}/payments`;
         var d = {
             //"entityId": '8ac7a4c86b308f7b016b46012a211942', //you need to use the recurring entityID
-            "entityId": '8acda4c96ade4a49016afe7f214811e3',
+            "entityId": '8a8294174d0595bb014d05d829cb01cd',
             "amount": Number.parseFloat(findPalns.planAmount).toFixed(2),
             "currency": 'SAR',
             "paymentType": 'DB',
