@@ -1612,7 +1612,9 @@ module.exports = {
                 //   'authentication.password': 'Kk8egrf9Fh',
                   'authentication.entityId': '8a8294174d0595bb014d05d829cb01cd',
     
-                amount: Number.parseFloat(Number(findPalns.planAmount)).toFixed(2),
+                // amount: Number.parseFloat(Number(findPalns.planAmount)).toFixed(2),
+                amount: '1',
+
                 currency: request.body.currency,
                 paymentType: request.body.paymentType,
                 // notificationUrl: request.body.notificationUrl,
@@ -1717,7 +1719,7 @@ module.exports = {
         }
     },
     recurringPayment : async (request, response) => {
-        
+
         request.checkBody('amount', AppConstraints.AMOUNT).notEmpty();
         request.checkBody('cardRegId', AppConstraints.CARD_REG_ID).notEmpty();
         console.log(request.body, 'request.body')
