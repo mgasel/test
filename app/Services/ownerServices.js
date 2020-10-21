@@ -1717,6 +1717,7 @@ module.exports = {
         }
     },
     recurringPayment : async (request, response) => {
+        
         request.checkBody('amount', AppConstraints.AMOUNT).notEmpty();
         request.checkBody('cardRegId', AppConstraints.CARD_REG_ID).notEmpty();
         console.log(request.body, 'request.body')
