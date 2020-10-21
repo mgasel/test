@@ -82,12 +82,12 @@ module.exports = {
             if (ownwer == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_PHONE_PASSWORD });
             const compare = bcrypt.compareSync(request.body.password, ownwer.password)
             if (compare == true) {
-                // console.log('owner------->>>>>>',ownwer);
-                // const checkSubscription = await laundryBuySubscription.findOne({laundryId:ownwer._id})
-                // const checkSubscriptionBranches = await laundryBuySubscription.findOne({subscriptionBanches:ownwer._id})
-                // console.log("check Subscription",checkSubscriptionBranches);
-                // if(!checkSubscription && !checkSubscriptionBranches) return ({ statusCode: 400, success: 0, msg: AppConstraints.SUBSRIPTION_PENDING });
-                // console.log("checkSubscription",checkSubscription);
+                console.log('owner------->>>>>>',ownwer);
+                const checkSubscription = await laundryBuySubscription.findOne({laundryId:ownwer._id})
+                const checkSubscriptionBranches = await laundryBuySubscription.findOne({subscriptionBanches:ownwer._id})
+                console.log("check Subscription",checkSubscriptionBranches);
+                if(!checkSubscription && !checkSubscriptionBranches) return ({ statusCode: 400, success: 0, msg: AppConstraints.SUBSRIPTION_PENDING });
+                console.log("checkSubscription",checkSubscription);
                 let token = await authToken.generateOwnwerToken(ownwer)
                 // console.log('sucessful login===============>>>>>>>');
                 console.log('owner', ownwer);
@@ -140,10 +140,10 @@ module.exports = {
     addBranches: async (request, response) => {
         try {
             console.log('oor', request.body.ownerId, "fa", request.ownerId);
-            // let findOwner =  await Laundry.findOne({_id:request.ownerId})
-            // if(findOwner.subscriptionLimit<= 0){
-            //     return ({ statusCode: 400, success: 0, msg: AppConstraints.SUBSCRIPTION_PENDING });
-            // }
+            let findOwner =  await Laundry.findOne({_id:request.ownerId})
+            if(findOwner.subscriptionLimit<= 0){
+                return ({ statusCode: 400, success: 0, msg: AppConstraints.SUBSCRIPTION_PENDING });
+            }
             if (request.body.ownerId != request.ownerId.toString()) return ({ statusCode: 400, success: 0, msg: AppConstraints.ENTER_OWNER_ID })
             if (await laundryModel.findOne({ $and: [{ phoneNumber: request.body.phoneNumber }, { isDeleted: false }] }) != null) return ({ statusCode: 400, success: 0, msg: AppConstraints.NUMBER_ALREADY_EXIST })
             //  if(await laundryModel.findOne({$and:[{$or:[{phoneNumber:request.body.phoneNumber},{isDeleted:false}]},{$or:[{email:request.body.email},{isDeleted:false}]}]})!=null)  return ({ statusCode: 400, success: 0, msg: AppConstraints.NUMBER_ALREADY_EXIST })
@@ -154,8 +154,8 @@ module.exports = {
             let password = Math.random().toString(36).slice(-8);
             request.body.password = bcrypt.hashSync(password, salt)
             const laundry = await laundryModel(request.body).save()
-            // await laundryModel.update({_id:request.ownerId},{ $inc: { subscriptionLimit: -1 } })
-            // await laundryBuySubscription.update({laundryId:request.ownerId},{ $push: { subscriptionBanches: laundry._id } })
+            await laundryModel.update({_id:request.ownerId},{ $inc: { subscriptionLimit: -1 } })
+            await laundryBuySubscription.update({laundryId:request.ownerId},{ $push: { subscriptionBanches: laundry._id } })
 
             let token = await authToken.generateOwnwerToken(laundry)
             let data = {
