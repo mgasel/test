@@ -92,7 +92,7 @@ module.exports = {
                 if(!checkSubscription && !checkSubscriptionBranches) return ({ statusCode: 200, success: 0, msg: AppConstraints.SUBSRIPTION_PENDING ,isSubscription : 0 , ownwer: ownwer, token: token  });
                 // console.log('sucessful login===============>>>>>>>');
                 console.log('owner', ownwer);
-                return ({ statusCode: 200, success: 1, msg: AppConstraints.LOGIN_SUCESSFULL,isSubscription : 0, ownwer: ownwer, token: token })
+                return ({ statusCode: 200, success: 1, msg: AppConstraints.LOGIN_SUCESSFULL,isSubscription : 1, ownwer: ownwer, token: token })
             }
             return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_PHONE_PASSWORD })
         } catch (error) {
