@@ -128,9 +128,9 @@ module.exports = {
     },
     verifyOtp: async (request, response) => {
         try {
-            let otp = await otpModel.findOne({ otp: request.body.otp })
+            let otp = await otpModel.findOne({ otp: request.body.otp,phoneNumber: request.body.phoneNumber, countryCode: request.body.countryCode  })
             if (otp == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.VALID_OTP })
-            await otpModel.deleteOne({ otp: request.body.otp })
+            await otpModel.deleteOne({ otp: request.body.otp, phoneNumber: request.body.phoneNumber, countryCode: request.body.countryCode })
             return ({ statusCode: 200, success: 1, msg: AppConstraints.OTP_VERIFIED_SUCCESSFULLY })
 
         } catch (error) {
@@ -1235,9 +1235,7 @@ module.exports = {
             let booking = await bookingModel.findOne({_id:request.body.bookingId})
             let promo = await promoModel.findOne( { $and:[{_id:request.body.promoId},{isDeleted:false}]})
             if(promo.expiryDate<moment().unix()) return response.json({statusCode:400,sucess:1,msg:AppConstraints.COUPON_EXPIRE})
-
-            let promoData = 0
-  
+            let promoData = 0 
             booking.bookingData.map((object,index)=>{
                 if(object.serviceId==promo.serviceId){
                     promo.categoryId.map((promoObject,index)=>{
@@ -1249,7 +1247,6 @@ module.exports = {
                     })  
                 }
             })
-
             if(promoData<promo.minimumAmount)return  ({ statusCode: 400, success: 0, msg:AppConstraints.MINI_DISCOUNT_PRICE})
             console.log(booking.totalAmount);
             let discoutPrice = 0
