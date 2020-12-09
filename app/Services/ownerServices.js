@@ -143,7 +143,7 @@ module.exports = {
             console.log('oor', request.body.ownerId, "fa", request.ownerId);
             let findOwner =  await Laundry.findOne({_id:request.ownerId})
             if(findOwner.subscriptionLimit<= 0){
-                return ({ statusCode: 400, success: 0, msg: AppConstraints.SUBSCRIPTION_PENDING });
+                return ({ statusCode: 400, success: 0, msg: AppConstraints.REACH_MAXIMUM_LIMIT });
             }
             if (request.body.ownerId != request.ownerId.toString()) return ({ statusCode: 400, success: 0, msg: AppConstraints.ENTER_OWNER_ID })
             if (await laundryModel.findOne({ $and: [{ phoneNumber: request.body.phoneNumber }, { isDeleted: false }] }) != null) return ({ statusCode: 400, success: 0, msg: AppConstraints.NUMBER_ALREADY_EXIST })
