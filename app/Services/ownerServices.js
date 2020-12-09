@@ -85,8 +85,8 @@ module.exports = {
                 // console.log('owner------->>>>>>',ownwer);
                 console.log("date",moment().valueOf());
                 console.log("date",moment().format());
-
-                const checkSubscription = await laundryBuySubscription.findOne({laundryId:ownwer._id,endDate:{$lte:moment().valueOf()}})
+                let date = moment().valueOf()
+                const checkSubscription = await laundryBuySubscription.findOne({laundryId:ownwer._id,endDate:{$gte:date}})
                 const checkSubscriptionBranches = await laundryBuySubscription.findOne({subscriptionBanches:ownwer._id})
                 console.log("check Subscription",checkSubscriptionBranches);
                 
