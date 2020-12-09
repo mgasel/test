@@ -83,7 +83,7 @@ module.exports = {
             const compare = bcrypt.compareSync(request.body.password, ownwer.password)
             if (compare == true) {
                 console.log('owner------->>>>>>',ownwer);
-                const checkSubscription = await laundryBuySubscription.findOne({laundryId:ownwer._id,isExpire:false,endDate:{$gte:moment().unix()}})
+                const checkSubscription = await laundryBuySubscription.findOne({laundryId:ownwer._id,isExpire:false,isDelete:false,endDate:{$gte:moment().unix()}})
                 const checkSubscriptionBranches = await laundryBuySubscription.findOne({subscriptionBanches:ownwer._id})
                 console.log("check Subscription",checkSubscriptionBranches);
                 
