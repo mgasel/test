@@ -82,8 +82,8 @@ module.exports = {
             if (ownwer == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_PHONE_PASSWORD });
             const compare = bcrypt.compareSync(request.body.password, ownwer.password)
             if (compare == true) {
-                console.log('owner------->>>>>>',ownwer);
-                const checkSubscription = await laundryBuySubscription.findOne({laundryId:ownwer._id,isExpire:false,isDelete:false,endDate:{$gte:moment().unix()}})
+                // console.log('owner------->>>>>>',ownwer);
+                const checkSubscription = await laundryBuySubscription.findOne({laundryId:ownwer._id,isExpire:false,isDelete:false,endDate:{$gte:moment().valueOf()}})
                 const checkSubscriptionBranches = await laundryBuySubscription.findOne({subscriptionBanches:ownwer._id})
                 console.log("check Subscription",checkSubscriptionBranches);
                 
@@ -91,7 +91,7 @@ module.exports = {
                 let token = await authToken.generateOwnwerToken(ownwer)
                 if(!checkSubscription && !checkSubscriptionBranches) return ({ statusCode: 200, success: 0, msg: AppConstraints.SUBSRIPTION_PENDING ,isSubscription : 0 , ownwer: ownwer, token: token  });
                 // console.log('sucessful login===============>>>>>>>');
-                console.log('owner', ownwer);
+                // console.log('owner', ownwer);
                 return ({ statusCode: 200, success: 1, msg: AppConstraints.LOGIN_SUCESSFULL,isSubscription : 1, ownwer: ownwer, token: token })
             }
             return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_PHONE_PASSWORD })
