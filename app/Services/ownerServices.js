@@ -1692,7 +1692,7 @@ module.exports = {
                                 endDate : moment().add(12, 'M').endOf("day").valueOf()
                             }).save()
                        
-                            await Laundry.update({_id:request.laundryId},{subscriptionLimit:3})
+                            await Laundry.update({_id:request.laundryId},{subscriptionLimit:2})
                             }
 
                         let transection = new Transections();
