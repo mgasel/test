@@ -434,6 +434,7 @@ module.exports={
    VALID_OTP : {EN:"Please enter valid OTP",AR:"الرجاء إدخال otp صالح"},
    ENTER_OWNER_ID:{EN:"Please Enter the owner ID",AR:'يرجى إدخال معرف المالك'},
    SUBSCRIPTION_PENDING : {EN:"Subscription Pending",AR:'الاشتراك معلق'},
+   REACH_MAXIMUM_LIMIT : {EN:"As per your subscription plan, you have reached maximum limit of your branches",AR:'وفقًا لخطة الاشتراك الخاصة بك ، فقد وصلت إلى الحد الأقصى لعدد فروعك'},
    NUMBER_ALREADY_EXIST:{EN:"Phone Number already exist",AR:'رقم الهاتف موجود بالفعل'},
    REQUIRED_COUNTRY:{EN:'Country code is required',AR:'رمز البلد مطلوب'},
    NUMBER_INVALID : {EN:'Invalid phone number',AR:'رقم الهاتف غير صحيح'},

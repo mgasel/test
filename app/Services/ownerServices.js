@@ -82,16 +82,19 @@ module.exports = {
             if (ownwer == null) return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_PHONE_PASSWORD });
             const compare = bcrypt.compareSync(request.body.password, ownwer.password)
             if (compare == true) {
-                console.log('owner------->>>>>>',ownwer);
-                const checkSubscription = await laundryBuySubscription.findOne({laundryId:ownwer._id})
-                const checkSubscriptionBranches = await laundryBuySubscription.findOne({subscriptionBanches:ownwer._id})
+                // console.log('owner------->>>>>>',ownwer);
+                console.log("date",moment().valueOf());
+                console.log("date",moment().format());
+                let date = moment().valueOf()
+                const checkSubscription = await laundryBuySubscription.findOne({laundryId:ownwer._id,endDate:{$gte:date}})
+                const checkSubscriptionBranches = await laundryBuySubscription.findOne({subscriptionBanches:ownwer._id,endDate:{$gte:date}})
                 console.log("check Subscription",checkSubscriptionBranches);
                 
                 console.log("checkSubscription",checkSubscription);
                 let token = await authToken.generateOwnwerToken(ownwer)
                 if(!checkSubscription && !checkSubscriptionBranches) return ({ statusCode: 200, success: 0, msg: AppConstraints.SUBSRIPTION_PENDING ,isSubscription : 0 , ownwer: ownwer, token: token  });
                 // console.log('sucessful login===============>>>>>>>');
-                console.log('owner', ownwer);
+                // console.log('owner', ownwer);
                 return ({ statusCode: 200, success: 1, msg: AppConstraints.LOGIN_SUCESSFULL,isSubscription : 1, ownwer: ownwer, token: token })
             }
             return ({ statusCode: 400, success: 0, msg: AppConstraints.INVALID_PHONE_PASSWORD })
@@ -143,7 +146,7 @@ module.exports = {
             console.log('oor', request.body.ownerId, "fa", request.ownerId);
             let findOwner =  await Laundry.findOne({_id:request.ownerId})
             if(findOwner.subscriptionLimit<= 0){
-                return ({ statusCode: 400, success: 0, msg: AppConstraints.SUBSCRIPTION_PENDING });
+                return ({ statusCode: 400, success: 0, msg: AppConstraints.REACH_MAXIMUM_LIMIT });
             }
             if (request.body.ownerId != request.ownerId.toString()) return ({ statusCode: 400, success: 0, msg: AppConstraints.ENTER_OWNER_ID })
             if (await laundryModel.findOne({ $and: [{ phoneNumber: request.body.phoneNumber }, { isDeleted: false }] }) != null) return ({ statusCode: 400, success: 0, msg: AppConstraints.NUMBER_ALREADY_EXIST })
@@ -1692,7 +1695,7 @@ module.exports = {
                                 endDate : moment().add(30, 'days').endOf("day").valueOf()
                             }).save()
                        
-                            await Laundry.update({_id:request.laundryId},{subscriptionLimit:3})
+                            await Laundry.update({_id:request.laundryId},{subscriptionLimit:2})
                             }
 
                         let transection = new Transections();
