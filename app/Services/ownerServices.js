@@ -1679,7 +1679,7 @@ module.exports = {
                             laundryId:request.laundryId,
                             subscriptionPlanId : request.body.subscriptionId,
                             startDate : moment().startOf("day").valueOf(),
-                            endDate : moment().add(12, 'M').endOf("day").valueOf()
+                            endDate : moment().add(30, 'days').endOf("day").valueOf()
                         }).save()
                     
                         await Laundry.update({_id:request.laundryId},{subscriptionLimit:1})
@@ -1689,7 +1689,7 @@ module.exports = {
                                 laundryId:request.laundryId,
                                 subscriptionPlanId : request.body.subscriptionId,
                                 startDate : moment().startOf("day").valueOf(),
-                                endDate : moment().add(12, 'M').endOf("day").valueOf()
+                                endDate : moment().add(30, 'days').endOf("day").valueOf()
                             }).save()
                        
                             await Laundry.update({_id:request.laundryId},{subscriptionLimit:3})
