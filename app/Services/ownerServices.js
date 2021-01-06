@@ -1496,7 +1496,9 @@ module.exports = {
             var d = {
                 //   'authentication.userId': '8ac9a4ca68c1e6640168d9f9c8b65f69',
                 //   'authentication.password': 'Kk8egrf9Fh',
-                  'authentication.entityId': '8a8294174d0595bb014d05d829cb01cd',
+                //   'authentication.entityId': '8a8294174d0595bb014d05d829cb01cd',
+                'authentication.entityId': '8acda4c96ade4a49016afe7f214811e3',//moto
+
     
                 amount: Number.parseFloat(Number(findPalns.planAmount)).toFixed(2),
                 // amount: '1',
@@ -1544,8 +1546,8 @@ module.exports = {
             var data = querystring.stringify(d);
             var options = {
                 port: 443,
-                host: 'test.oppwa.com',
-                // host: 'oppwa.com',
+                // host: 'test.oppwa.com',
+                host: 'oppwa.com',
                 path: path,
                 method: 'POST',
                 headers: {
@@ -1616,10 +1618,12 @@ module.exports = {
         //url = `https://test.oppwa.com/v1/registrations/${cardRegId}/payments`;
         findPalns = await subscriptionPlan.findOne({_id:request.body.subscriptionId}).lean()
         console.log('findPalns------',findPalns.planAmount); 
-        url = `https://oppwa.com/v1/registrations/${cardRegId}/payments`;
+        // url = `https://oppwa.com/v1/registrations/${cardRegId}/payments`;
+          url = `https://oppwa.com/v1/registrations/${cardRegId}/payments`;
+
         var d = {
             //"entityId": '8ac7a4c86b308f7b016b46012a211942', //you need to use the recurring entityID
-            "entityId": '8a8294174d0595bb014d05d829cb01cd',
+            "entityId": '8acda4c96ade4a49016afe7f214811e3',
             "amount": Number.parseFloat(findPalns.planAmount).toFixed(2),
             "currency": 'SAR',
             "paymentType": 'DB',
@@ -1633,8 +1637,8 @@ module.exports = {
     
             var options = {
                 port: 443,
-                host: 'test.oppwa.com',
-                // host: 'oppwa.com',
+                // host: 'test.oppwa.com',
+                host: 'oppwa.com',
                 path: path,
                 method: 'POST',
                 headers: {
