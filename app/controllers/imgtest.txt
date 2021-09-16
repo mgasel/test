@@ -1,0 +1,140 @@
+[TAILING] Tailing last 15 lines for [1] process (change the value with --lines option)
+/root/.pm2/logs/testproject-error.log last 15 lines:
+1|testproj | (node:22594) UnhandledPromiseRejectionWarning: TypeError: Cannot read property '_id' of null
+1|testproj |     at /home/mgasel/public_html/3ndktest/app/LIB/scheduler.js:597:63
+1|testproj |     at runMicrotasks (<anonymous>)
+1|testproj |     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+1|testproj | (node:22594) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 416)
+1|testproj | (node:22594) UnhandledPromiseRejectionWarning: TypeError: Cannot read property '_id' of null
+1|testproj |     at /home/mgasel/public_html/3ndktest/app/LIB/scheduler.js:597:63
+1|testproj |     at runMicrotasks (<anonymous>)
+1|testproj |     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+1|testproj | (node:22594) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 417)
+1|testproj | (node:22594) UnhandledPromiseRejectionWarning: TypeError: Cannot read property '_id' of null
+1|testproj |     at /home/mgasel/public_html/3ndktest/app/LIB/scheduler.js:597:63
+1|testproj |     at runMicrotasks (<anonymous>)
+1|testproj |     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+1|testproj | (node:22594) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 418)
+
+/root/.pm2/logs/testproject-out.log last 15 lines:
+1|testproj |                                                                 <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 8px;font-weight: bold;color: #000;line-height: normal;">Plan Duration :</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;"> 1 Month</p></td></tr>
+1|testproj |                             </table>
+1|testproj |                         </td>
+1|testproj |                                                 </tr>
+1|testproj |                                                  <tr>
+1|testproj |                         <td colspan="2"><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">Thank you for purchasing the Plan!</p></td>
+1|testproj |                     </tr>
+1|testproj |     </table>
+1|testproj |             </td>
+1|testproj |         </tr>
+1|testproj |     </table>
+1|testproj | </div>    
+1|testproj | data {
+1|testproj |   filename: '/home/mgasel/public_html/3ndktest/app/uploader/123invoice.pdf'
+1|testproj | }
+
+1|testproject  | pdf request received
+1|testproject  | invoice {
+1|testproject  |   id: '8ac9a4a178d4f98a0178dbc7e2bc46a1',
+1|testproject  |   registrationId: '8ac9a4a178d4f98a0178dbc7e2464678',
+1|testproject  |   paymentType: 'DB',
+1|testproject  |   paymentBrand: 'VISA',
+1|testproject  |   card: {
+1|testproject  |     bin: '471110',
+1|testproject  |     binCountry: 'US',
+1|testproject  |     last4Digits: '0000',
+1|testproject  |     holder: 'HSHHAH',
+1|testproject  |     expiryMonth: '06',
+1|testproject  |     expiryYear: '2030'
+1|testproject  |   },
+1|testproject  |   customer: {
+1|testproject  |     givenName: 'abcd',
+1|testproject  |     surname: 'abcd',
+1|testproject  |     email: 'ahmadfarewai@nasher.co',
+1|testproject  |     ip: '106.208.55.182',
+1|testproject  |     ipCountry: 'IN'
+1|testproject  |   },
+1|testproject  |   billing: {
+1|testproject  |     street1: 'Olayih',
+1|testproject  |     city: 'Riyadh',
+1|testproject  |     state: 'CENTRAL',
+1|testproject  |     postcode: '12611',
+1|testproject  |     country: 'SA'
+1|testproject  |   }
+1|testproject  | }
+1|testproject  | plans { planName: 'Basic', planamount: '100', perPeriod: '1 Month' }
+1|testproject  | entered
+1|testproject  | link1 /home/mgasel/public_html/3ndktest/app/qrcode/MgaselLogo.jpeg
+1|testproject  | html 
+1|testproject  |     <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+1|testproject  |     <table colspan="0" cellpadding="0" border="1" style="width:600px;line-height: normal;border: solid 1px #ddd;padding: 20px;">
+1|testproject  |         <tr>
+1|testproject  |             <td>
+1|testproject  |                 <table colspan="0" cellpadding="0" border="0" style="width:100%;">
+1|testproject  | <tr>
+1|testproject  |                                 <td >
+1|testproject  |                                  <img src="https://78.47.198.99/qrcode/MgaselLogo.jpeg" style="width:100px;height:100px;"/>
+1|testproject  |                                  </td>
+1|testproject  |                                 <td >
+1|testproject  |                                  <img src="/home/mgasel/public_html/3ndktest/app/qrcode/MgaselQRCode.jpeg"  style="width:100px;height:100px;"/>
+1|testproject  |                                  </td>
+1|testproject  |                                 </tr>
+1|testproject  |                 <tr>
+1|testproject  |                 <tr>
+1|testproject  |                 <td colspan="2"><h3 style="margin: 0;font-size: 12px;color: #000;line-height: normal;font-weight: 600;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">Mgasel Laundry App</h3></td>
+1|testproject  |             </tr>
+1|testproject  |                     <tr>
+1|testproject  |                     <td colspan="2"><p style="margin: 0;font-size: 8px;color: #000;line-height: normal;font-weight: 600;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">Invoice/Receipt</p></td>
+1|testproject  |                     </tr>
+1|testproject  |   <tr>
+1|testproject  |                         <td style="vertical-align: top;padding-top: 2rem;width: 60%;">
+1|testproject  |                             <table colspan="0" cellpadding="0" border="0" style="width:100%;border-collapse: collapse;">                                                                                                                                                                                                  
+1|testproject  |                                 <tr><td style="padding-bottom: 5px;"><p style="margin: 0;font-size: 8px;font-weight: bold;color: #000;line-height: normal;">Billed From :<br/></p><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;"> Closets Solutions Co. Ltd,<br /> Imam Saud Bin Abdulaziz Road, <br />An Nakheel,<br/> Riyadh 12381<br/></p></td></tr>
+1|testproject  |                             </table>
+1|testproject  |                         </td>
+1|testproject  |                                         </tr>
+1|testproject  |                                          <tr>
+1|testproject  |                         <td style="vertical-align: top;padding-top: 2rem;width: 60%;">
+1|testproject  |                             <table colspan="0" cellpadding="0" border="0" style="width:100%;border-collapse: collapse;">   <p style="margin: 0;font-size: 8px;font-weight: bold;color: #000;line-height: normal;">Billed To :<br/></p>                                                                                    
+1|testproject  |                                 <tr><td ><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">abcd </p></td></tr>
+1|testproject  |                                 <tr><td ><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">ahmadfarewai@nasher.co</p></td></tr>
+1|testproject  |                                 <tr><td ><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">Olayih </p></td></tr>
+1|testproject  |                                 <tr><td ><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">Riyadh</p></td></tr>
+1|testproject  |                                                                 <tr><td ><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">CENTRAL </p></td></tr>
+1|testproject  |                                 <tr><td ><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">12611</p></td></tr>
+1|testproject  |                                                                 <tr><td style="padding-bottom: 10px; "><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">SA </p></td></tr>
+1|testproject  |                             </table>
+1|testproject  |                         </td>
+1|testproject  |                                                 </tr>
+1|testproject  |                                                 <tr>
+1|testproject  |                                                 <td style="padding-bottom: 10px; width:60%;">
+1|testproject  |  <p style="margin: 0;font-size: 8px;font-weight: bold;color: #000;line-height: normal;">Purchase date :</p>
+1|testproject  |                                                 <p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">
+1|testproject  |                                                 18/6/2021</p></td></tr>
+1|testproject  |                                                 <tr>
+1|testproject  |                                                 <td style="padding-bottom: 5px; width:60%;">
+1|testproject  |                                                 <p style="margin: 0;font-size: 8px;font-weight: bold;color: #000;line-height: normal;">Payment Method :</p>
+1|testproject  |                                                 <p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">
+1|testproject  |                                                 VISA ending with 0000 </p></td>
+1|testproject  |                                                 </tr>
+1|testproject  |                                                 <tr>
+1|testproject  |                         <td style="vertical-align: top;width: 60%;">
+1|testproject  |                             <table colspan="0" cellpadding="0" border="0" style="border-collapse: collapse;">                                                                                                                                                                                                             
+1|testproject  | <p style="margin: 0;font-size: 8px;font-weight: bold;color: #000;line-height: normal;padding-bottom: 2px;">Plan Details :<br/></p>
+1|testproject  | <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 8px;font-weight: bold;color: #000;line-height: normal;">Plan Name :</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;"> Basic</p></td></tr>
+1|testproject  |                                 <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 8px;font-weight: bold;color: #000;line-height: normal;">Plan Amount :</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;"> N.A</p></td></tr>
+1|testproject  |                                                                 <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 8px;font-weight: bold;color: #000;line-height: normal;">Plan Duration :</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;"> 1 Month</p></td></tr>
+1|testproject  |                             </table>
+1|testproject  |                         </td>
+1|testproject  |                                                 </tr>
+1|testproject  |                                                  <tr>
+1|testproject  |                         <td colspan="2"><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">Thank you for purchasing the Plan!</p></td>
+1|testproject  |                     </tr>
+1|testproject  |     </table>
+1|testproject  |             </td>
+1|testproject  |         </tr>
+1|testproject  |     </table>
+1|testproject  | </div>    
+1|testproject  | data {
+1|testproject  |   filename: '/home/mgasel/public_html/3ndktest/app/uploader/123invoice.pdf'
+1|testproject  | }

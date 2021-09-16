@@ -159,7 +159,8 @@ bagNo:{type:String,default:''},
 orderType:{type:String,default:''},
 deliveryChoice:{type:String,default:''},
 servicePrice :  {   type:Object,default:null },
-
+tax : {type:Number,default:0},
+customerPhoneNumber :                 {type:String,default:""},
 subplanid:{ type:Schema.Types.ObjectId,ref:'subscriptionPlan' },
 
     isReviewd: {type:Boolean, required:true, default:false}

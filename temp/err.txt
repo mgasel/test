@@ -1,0 +1,863 @@
+[TAILING] Tailing last 15 lines for [1] process (change the value with --lines option)
+/root/.pm2/logs/testproject-error.log last 15 lines:
+1|testproj |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproj |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproj |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproj |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproj |     at internal/main/run_main_module.js:17:47
+1|testproj | npm ERR! code ELIFECYCLE
+1|testproj | npm ERR! errno 1
+1|testproj | npm ERR! node-js-getting-started@0.3.0 start: `node index.js`
+1|testproj | npm ERR! Exit status 1
+1|testproj | npm ERR! 
+1|testproj | npm ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproj | npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+1|testproj | 
+1|testproj | npm ERR! A complete log of this run can be found in:
+1|testproj | npm ERR!     /root/.npm/_logs/2021-07-25T12_59_16_210Z-debug.log
+
+/root/.pm2/logs/testproject-out.log last 15 lines:
+1|testproj | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproj | > node index.js
+1|testproj | 
+1|testproj | 
+1|testproj | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproj | > node index.js
+1|testproj | 
+1|testproj | 
+1|testproj | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproj | > node index.js
+1|testproj | 
+1|testproj | 
+1|testproj | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproj | > node index.js
+1|testproj | 
+
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6
+1|testproject  |     app.post('/owner/registerLaundry',upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
+1|testproject  |                                                             ^
+1|testproject  | TypeError: upload.ownerDocuments.fields is not a function
+1|testproject  |     at module.exports (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6:61)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:38)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm
+1|testproject  |  ERR! code ELIFECYCLE
+1|testproject  | npm ERR!
+1|testproject  |  errno 1
+1|testproject  | npm 
+1|testproject  | ERR! node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm ERR! 
+1|testproject  | npm ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm
+1|testproject  |  ERR! This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-07-25T12_59_19_378Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6
+1|testproject  |     app.post('/owner/registerLaundry',upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
+1|testproject  |                                                             ^
+1|testproject  | TypeError: upload.ownerDocuments.fields is not a function
+1|testproject  |     at module.exports (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6:61)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:38)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm
+1|testproject  |  ERR! code ELIFECYCLE
+1|testproject  | npm ERR!
+1|testproject  |  errno 1
+1|testproject  | npm ERR!
+1|testproject  |  node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm ERR! 
+1|testproject  | npm
+1|testproject  |  ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-07-25T12_59_22_386Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6
+1|testproject  |     app.post('/owner/registerLaundry',upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
+1|testproject  |                                                             ^
+1|testproject  | TypeError: upload.ownerDocuments.fields is not a function
+1|testproject  |     at module.exports (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6:61)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:38)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm
+1|testproject  |  ERR! code ELIFECYCLE
+1|testproject  | npm ERR! errno 1
+1|testproject  | npm ERR!
+1|testproject  |  node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm 
+1|testproject  | ERR! 
+1|testproject  | npm ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-07-25T12_59_25_487Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6
+1|testproject  |     app.post('/owner/registerLaundry',upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
+1|testproject  |                                                             ^
+1|testproject  | TypeError: upload.ownerDocuments.fields is not a function
+1|testproject  |     at module.exports (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6:61)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:38)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm ERR! 
+1|testproject  | code ELIFECYCLE
+1|testproject  | npm ERR! errno 1
+1|testproject  | npm 
+1|testproject  | ERR! node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm
+1|testproject  |  ERR! 
+1|testproject  | npm ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm
+1|testproject  |  ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-07-25T12_59_28_842Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6
+1|testproject  |     app.post('/owner/registerLaundry',upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
+1|testproject  |                                                             ^
+1|testproject  | TypeError: upload.ownerDocuments.fields is not a function
+1|testproject  |     at module.exports (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6:61)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:38)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm
+1|testproject  |  ERR! code ELIFECYCLE
+1|testproject  | npm ERR! errno 1
+1|testproject  | npm
+1|testproject  |  ERR! node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm
+1|testproject  |  ERR! 
+1|testproject  | npm ERR!
+1|testproject  |  Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-07-25T12_59_32_071Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6
+1|testproject  |     app.post('/owner/registerLaundry',upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
+1|testproject  |                                                             ^
+1|testproject  | TypeError: upload.ownerDocuments.fields is not a function
+1|testproject  |     at module.exports (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6:61)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:38)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm ERR!
+1|testproject  |  code ELIFECYCLE
+1|testproject  | npm ERR! errno 1
+1|testproject  | npm ERR!
+1|testproject  |  node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm ERR!
+1|testproject  |  
+1|testproject  | npm ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm ERR!
+1|testproject  |  This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-07-25T12_59_35_238Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6
+1|testproject  |     app.post('/owner/registerLaundry',upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
+1|testproject  |                                                             ^
+1|testproject  | TypeError: upload.ownerDocuments.fields is not a function
+1|testproject  |     at module.exports (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6:61)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:38)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm
+1|testproject  |  ERR! code ELIFECYCLE
+1|testproject  | npm 
+1|testproject  | ERR! errno 1
+1|testproject  | npm ERR!
+1|testproject  |  node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm
+1|testproject  |  ERR! 
+1|testproject  | npm 
+1|testproject  | ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-07-25T12_59_38_259Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6
+1|testproject  |     app.post('/owner/registerLaundry',upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
+1|testproject  |                                                             ^
+1|testproject  | TypeError: upload.ownerDocuments.fields is not a function
+1|testproject  |     at module.exports (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6:61)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:38)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm
+1|testproject  |  ERR! code ELIFECYCLE
+1|testproject  | npm ERR! errno 1
+1|testproject  | npm ERR!
+1|testproject  |  node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm 
+1|testproject  | ERR! 
+1|testproject  | npm 
+1|testproject  | ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-07-25T12_59_41_350Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6
+1|testproject  |     app.post('/owner/registerLaundry',upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
+1|testproject  |                                                             ^
+1|testproject  | TypeError: upload.ownerDocuments.fields is not a function
+1|testproject  |     at module.exports (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6:61)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:38)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm
+1|testproject  |  ERR! code ELIFECYCLE
+1|testproject  | npm ERR! errno 1
+1|testproject  | npm 
+1|testproject  | ERR! node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm ERR!
+1|testproject  |  
+1|testproject  | npm ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm 
+1|testproject  | ERR! This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-07-25T12_59_44_422Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6
+1|testproject  |     app.post('/owner/registerLaundry',upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
+1|testproject  |                                                             ^
+1|testproject  | TypeError: upload.ownerDocuments.fields is not a function
+1|testproject  |     at module.exports (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6:61)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:38)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm
+1|testproject  |  ERR! code ELIFECYCLE
+1|testproject  | npm ERR! errno 1
+1|testproject  | npm 
+1|testproject  | ERR! node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm
+1|testproject  |  ERR! 
+1|testproject  | npm ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm ERR!
+1|testproject  |  This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-07-25T12_59_47_210Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6
+1|testproject  |     app.post('/owner/registerLaundry',upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
+1|testproject  |                                                             ^
+1|testproject  | TypeError: upload.ownerDocuments.fields is not a function
+1|testproject  |     at module.exports (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6:61)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:38)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm
+1|testproject  |  ERR! code ELIFECYCLE
+1|testproject  | npm ERR! errno 1
+1|testproject  | npm ERR!
+1|testproject  |  node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm ERR! 
+1|testproject  | npm ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm ERR!
+1|testproject  |  This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-07-25T12_59_50_655Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6
+1|testproject  |     app.post('/owner/registerLaundry',upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
+1|testproject  |                                                             ^
+1|testproject  | TypeError: upload.ownerDocuments.fields is not a function
+1|testproject  |     at module.exports (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6:61)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:38)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm
+1|testproject  |  ERR! code ELIFECYCLE
+1|testproject  | npm ERR! errno 1
+1|testproject  | npm 
+1|testproject  | ERR! node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm ERR! 
+1|testproject  | npm ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm ERR!
+1|testproject  |  This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-07-25T12_59_54_104Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6
+1|testproject  |     app.post('/owner/registerLaundry',upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
+1|testproject  |                                                             ^
+1|testproject  | TypeError: upload.ownerDocuments.fields is not a function
+1|testproject  |     at module.exports (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6:61)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:38)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm
+1|testproject  |  ERR! code ELIFECYCLE
+1|testproject  | npm ERR! errno 1
+1|testproject  | npm
+1|testproject  |  ERR! node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm ERR! 
+1|testproject  | npm 
+1|testproject  | ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-07-25T12_59_57_337Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6
+1|testproject  |     app.post('/owner/registerLaundry',upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
+1|testproject  |                                                             ^
+1|testproject  | TypeError: upload.ownerDocuments.fields is not a function
+1|testproject  |     at module.exports (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6:61)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:38)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm
+1|testproject  |  ERR! code ELIFECYCLE
+1|testproject  | npm ERR! errno 1
+1|testproject  | npm 
+1|testproject  | ERR! node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm ERR! 
+1|testproject  | npm ERR!
+1|testproject  |  Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-07-25T12_59_59_836Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6
+1|testproject  |     app.post('/owner/registerLaundry',upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
+1|testproject  |                                                             ^
+1|testproject  | TypeError: upload.ownerDocuments.fields is not a function
+1|testproject  |     at module.exports (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6:61)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:38)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm ERR!
+1|testproject  |  code ELIFECYCLE
+1|testproject  | npm ERR! errno 1
+1|testproject  | npm ERR!
+1|testproject  |  node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm ERR! 
+1|testproject  | npm ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm
+1|testproject  |  ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-07-25T13_00_03_581Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6
+1|testproject  |     app.post('/owner/registerLaundry',upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
+1|testproject  |                                                             ^
+1|testproject  | TypeError: upload.ownerDocuments.fields is not a function
+1|testproject  |     at module.exports (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6:61)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:38)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm ERR! 
+1|testproject  | code ELIFECYCLE
+1|testproject  | npm ERR! errno 1
+1|testproject  | npm 
+1|testproject  | ERR! node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm 
+1|testproject  | ERR! 
+1|testproject  | npm ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm ERR!
+1|testproject  |  This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-07-25T13_00_06_573Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6
+1|testproject  |     app.post('/owner/registerLaundry',upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
+1|testproject  |                                                             ^
+1|testproject  | TypeError: upload.ownerDocuments.fields is not a function
+1|testproject  |     at module.exports (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6:61)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:38)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm 
+1|testproject  | ERR! code ELIFECYCLE
+1|testproject  | npm ERR! errno 1
+1|testproject  | npm ERR!
+1|testproject  |  node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm ERR! 
+1|testproject  | npm ERR!
+1|testproject  |  Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm 
+1|testproject  | ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-07-25T13_00_09_930Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6
+1|testproject  |     app.post('/owner/registerLaundry',upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
+1|testproject  |                                                             ^
+1|testproject  | TypeError: upload.ownerDocuments.fields is not a function
+1|testproject  |     at module.exports (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6:61)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:38)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm
+1|testproject  |  ERR! code ELIFECYCLE
+1|testproject  | npm ERR! errno 1
+1|testproject  | npm ERR!
+1|testproject  |  node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm ERR!
+1|testproject  |  
+1|testproject  | npm ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm 
+1|testproject  | ERR! This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-07-25T13_00_13_059Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6
+1|testproject  |     app.post('/owner/registerLaundry',upload.ownerDocuments.fields([{name:'Document1',maxCount:1},
+1|testproject  |                                                             ^
+1|testproject  | TypeError: upload.ownerDocuments.fields is not a function
+1|testproject  |     at module.exports (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:6:61)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:38)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm
+1|testproject  |  ERR! code ELIFECYCLE
+1|testproject  | npm ERR!
+1|testproject  |  errno 1
+1|testproject  | npm
+1|testproject  |  ERR! node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm ERR! 
+1|testproject  | npm 
+1|testproject  | ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-07-25T13_00_15_825Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47

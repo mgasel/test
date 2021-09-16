@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"itemQwery":{"$numberInt":"1"}},"name":"itemQwery_1","background":true},{"v":{"$numberInt":"2"},"key":{"itemQueryAr":{"$numberInt":"1"}},"name":"itemQueryAr_1","background":true}],"uuid":"5b51301770fb4543b98e87ec9daeaefc","collectionName":"subscriptionplanitems"}

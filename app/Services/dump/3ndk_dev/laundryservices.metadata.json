@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"serviceName":{"$numberInt":"1"}},"name":"serviceName_1","background":true},{"v":{"$numberInt":"2"},"key":{"serviceNameAr":{"$numberInt":"1"}},"name":"serviceNameAr_1","background":true}],"uuid":"15319c504b3c41a39f4a6679d0ddbb9b","collectionName":"laundryservices"}

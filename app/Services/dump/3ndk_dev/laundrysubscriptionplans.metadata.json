@@ -1,0 +1,1 @@
+{"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_"},{"v":{"$numberInt":"2"},"key":{"planName":{"$numberInt":"1"}},"name":"planName_1","background":true},{"v":{"$numberInt":"2"},"key":{"planNameAr":{"$numberInt":"1"}},"name":"planNameAr_1","background":true}],"uuid":"d7cb61a320e649cb93cdae6f0f7622e4","collectionName":"laundrysubscriptionplans"}

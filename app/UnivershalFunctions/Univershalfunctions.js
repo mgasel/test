@@ -36,11 +36,20 @@ exports.EncryptPassword=async(password)=>{
 exports.sendEmailByNodemailerOnly=async(email,content,subject)=>{
     try{
 
-        const transporter = await nodemailer.createTransport({
+/*        const transporter = await nodemailer.createTransport({
             service: 'gmail',
             auth: {
             user:process.env.EMAIL_ADDRESS_DUMMY,
             pass:process.env.PASSWORD
+            }
+        });
+*/
+
+const transporter = await nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+            user:"farheena.had@gmail.com",
+            pass:"gmail123@"
             }
         });
 
@@ -49,7 +58,13 @@ exports.sendEmailByNodemailerOnly=async(email,content,subject)=>{
             from:process.env.EMAIL_ADDRESS_DUMMY,
             to:email,
             subject:subject,
-            html:content
+            html:content,
+	    attachments: [
+    {
+      filename: "test1.pdf",
+      path:  "/home/mgasel/public_html/test1.pdf",
+    },
+  ],
         };
 
 
@@ -67,17 +82,73 @@ exports.sendEmailByNodemailerOnly=async(email,content,subject)=>{
     }
 }
 
+exports.sendEmailwithpdf=async(email,content,subject,fpath,fname)=>{
+    try{
+
+/*        const transporter = await nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+            user:process.env.EMAIL_ADDRESS_DUMMY,
+            pass:process.env.PASSWORD
+            }
+        });
+*/
+
+const transporter = await nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+            user:process.env.EMAILMGASEL, /*"farheena.had@gmail.com",*/
+            pass:process.env.PWDMGASEL   /*"gmail123@"*/
+            }
+        });
+
+
+        var mailOptions = {
+            from:"info@mgasel.com",
+            to:email,
+            subject:subject,
+            html:content,
+            attachments: [
+    {
+      filename:fname, /* "test1.pdf",*/
+      path:fpath	/*  "/home/mgasel/public_html/test1.pdf",*/
+    },
+],
+};
+
+
+       let sendEmail=await transporter.sendMail(mailOptions);
+
+       if(sendEmail.error)   console.log(sendEmai.error,'error while sending email');
+
+
+       return true;
+
+
+    }catch(err){
+        console.log(err,'error data');
+        return false;
+    }
+}
+
 
 
 exports.sendEmail = async(email,content,subject)=>{
-    try{
-        const transporter = await nodemailer.createTransport(sesTransport({
+console.log("send email started");
+  try{
+ /*       const transporter = await nodemailer.createTransport(sesTransport({
         accessKeyId:process.env.ACCESS_KEY_ID,
         secretAccessKey:process.env.SECRET_ACCESS_KEY,
         region:process.env.REGION
+        }));*/
+
+const transporter = await nodemailer.createTransport(sesTransport({
+        accessKeyId:"292248728736-c0lgk1c1ndlhdj144dailpqmcliqu08c.apps.googleusercontent.com",
+ secretAccessKey:"3R6DdAh_ePtICIQyFW5m-r-D",
+region:process.env.REGION
         }));
 
-
+console.log("trsnaporteer created");
         const mailOptions = {
             from:process.env.EMAIL_ADDRESS,
             to:email,
@@ -86,6 +157,7 @@ exports.sendEmail = async(email,content,subject)=>{
         }
 
         const sendEmai=await transporter.sendMail(mailOptions);
+console.log("after send mail");
 
         if(sendEmai.error)   console.log(sendEmai.error,'error while sending email');
       

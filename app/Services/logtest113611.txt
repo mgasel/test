@@ -1,0 +1,35 @@
+[TAILING] Tailing last 15 lines for [0] process (change the value with --lines option)
+/root/.pm2/logs/3ndk-backend-error.log last 15 lines:
+0|3ndk_bac |     at /home/mgasel/public_html/3ndk-backend/app/LIB/scheduler.js:597:63
+0|3ndk_bac |     at runMicrotasks (<anonymous>)
+0|3ndk_bac |     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+0|3ndk_bac | TypeError: Cannot read property '_id' of null
+0|3ndk_bac |     at /home/mgasel/public_html/3ndk-backend/app/LIB/scheduler.js:597:63
+0|3ndk_bac |     at runMicrotasks (<anonymous>)
+0|3ndk_bac |     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+0|3ndk_bac | TypeError: Cannot read property '_id' of null
+0|3ndk_bac |     at /home/mgasel/public_html/3ndk-backend/app/LIB/scheduler.js:597:63
+0|3ndk_bac |     at runMicrotasks (<anonymous>)
+0|3ndk_bac |     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+0|3ndk_bac | TypeError: Cannot read property '_id' of null
+0|3ndk_bac |     at /home/mgasel/public_html/3ndk-backend/app/LIB/scheduler.js:597:63
+0|3ndk_bac |     at runMicrotasks (<anonymous>)
+0|3ndk_bac |     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+
+/root/.pm2/logs/3ndk-backend-out.log last 15 lines:
+0|3ndk_bac | Bootstrapping finished for luvdeep@code-brew.com
+0|3ndk_bac | Bootstrapping finished for admin3@codebrew.com
+0|3ndk_bac | Bootstrapping finished for garimasharma@code-brew.com
+0|3ndk_bac | Bootstrapping finished for test@yopmail.com
+0|3ndk_bac | Bootstrapping finished for shubhamsood@code-brew.com
+0|3ndk_bac | Bootstrapping finished for omer@3ndk.com
+0|3ndk_bac | Bootstrapping finished for abdullah@3ndk.com
+0|3ndk_bac | Bootstrapping finished for osama@3ndk.com
+0|3ndk_bac | Bootstrapping finished for yasir@3ndk.com
+0|3ndk_bac | Bootstrapping finished for contact-us@3ndk.com
+0|3ndk_bac | Bootstrapping finished for 1.0
+0|3ndk_bac | Bootstrapping finished
+0|3ndk_bac | Bootstrapping finished for nora@nasher.co
+0|3ndk_bac | Bootstrapping finished for bookings@3ndk.com
+0|3ndk_bac | Bootstrapping finished
+

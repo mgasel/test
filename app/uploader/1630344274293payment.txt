@@ -1,0 +1,50 @@
+hello world123
+plans [
+  {
+    planName: 'Annually',
+    planAmount: '999',
+    planNameAr: 'سنويا',
+    planAmountAr: '',
+    perPeriod: '1 year',
+    perPeriodAr: '',
+    addBranches: 1,
+    isActive: true,
+    isDeleted: false,
+    isBlocked: false,
+    weekendService: false,
+    isSelected: 'false',
+    _id: 6059aa481781e2e59c6eeb2b,
+    created_at: null,
+    _v: '0'
+  }
+]
+owner {
+  laundryName: 'Test Laundry',
+  laundryAddress: 'Sector 30, Chandigarh, India',
+  laundryLat: 30.716292,
+  laundryLong: 76.78702899999996,
+  isActive: true,
+  isDeleted: true,
+  services: [
+    5c8694b5e7f95910bd05fb33,
+    5bc45e64de51373d690b8229,
+    5bc45e35de51373d690b8228,
+    5bacc2c17d1a7123248782f7
+  ],
+  serviceCategory: [
+    5d7245f23b32c90885ab003c,
+    5d72462b3b32c90885ab003d,
+    5d7246703b32c90885ab003e
+  ],
+  email: '',
+  userName: '',
+  isVerified: true,
+  subscriptionLimit: 1,
+  laundryServices: [],
+  _id: 5bacc40f7d1a7123248782fb,
+  currentLocation: [ 76.78702899999996, 30.716292 ],
+  districtId: 5bacc3e37d1a7123248782fa,
+  created_at: 2018-09-27T11:50:39.630Z,
+  __v: 0,
+  cardRegistationId: []
+}

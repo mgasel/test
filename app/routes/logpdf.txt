@@ -1,0 +1,180 @@
+[TAILING] Tailing last 15 lines for [all] processes (change the value with --lines option)
+/root/.pm2/pm2.log last 15 lines:
+PM2        | 2021-06-14T20:41:06: PM2 log: App [3ndk_backend:0] exited with code [1] via signal [SIGINT]
+PM2        | 2021-06-14T20:41:06: PM2 log: App [3ndk_backend:0] starting in -fork mode-
+PM2        | 2021-06-14T20:41:06: PM2 log: App [3ndk_backend:0] online
+PM2        | 2021-06-14T20:41:09: PM2 log: App [3ndk_backend:0] exited with code [1] via signal [SIGINT]
+PM2        | 2021-06-14T20:41:09: PM2 log: App [3ndk_backend:0] starting in -fork mode-
+PM2        | 2021-06-14T20:41:09: PM2 log: App [3ndk_backend:0] online
+PM2        | 2021-06-14T20:41:11: PM2 log: App [3ndk_backend:0] exited with code [1] via signal [SIGINT]
+PM2        | 2021-06-14T20:41:11: PM2 log: App [3ndk_backend:0] starting in -fork mode-
+PM2        | 2021-06-14T20:41:11: PM2 log: App [3ndk_backend:0] online
+PM2        | 2021-06-14T20:41:14: PM2 log: App [3ndk_backend:0] exited with code [1] via signal [SIGINT]
+PM2        | 2021-06-14T20:41:14: PM2 log: App [3ndk_backend:0] starting in -fork mode-
+PM2        | 2021-06-14T20:41:14: PM2 log: App [3ndk_backend:0] online
+PM2        | 2021-06-14T20:41:17: PM2 log: App [3ndk_backend:0] exited with code [1] via signal [SIGINT]
+PM2        | 2021-06-14T20:41:17: PM2 log: App [3ndk_backend:0] starting in -fork mode-
+PM2        | 2021-06-14T20:41:17: PM2 log: App [3ndk_backend:0] online
+
+/root/.pm2/logs/3ndk-backend-out.log last 15 lines:
+0|3ndk_bac |     isReviewd: false,
+0|3ndk_bac |     __v: 0,
+0|3ndk_bac |     userId: model {
+0|3ndk_bac |       '$__': [InternalCache],
+0|3ndk_bac |       isNew: false,
+0|3ndk_bac |       errors: undefined,
+0|3ndk_bac |       _doc: [Object],
+0|3ndk_bac |       '$init': true
+0|3ndk_bac |     },
+0|3ndk_bac |     type: 'standard',
+0|3ndk_bac |     laundryId: 5f4cb5f1393d38222b369fa8,
+0|3ndk_bac |     _id: 60c7278f9bfa27371972e9a0
+0|3ndk_bac |   },
+0|3ndk_bac |   '$init': true
+0|3ndk_bac | }
+
+/root/.pm2/logs/3ndk-backend-error.log last 15 lines:
+0|3ndk_bac |     at Module.require (internal/modules/cjs/loader.js:1025:19)
+0|3ndk_bac |     at Module.Hook._require.Module.require (/root/.nvm/versions/node/v12.18.3/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+0|3ndk_bac |     at require (internal/modules/cjs/helpers.js:72:18)
+0|3ndk_bac |     at Object.<anonymous> (/home/mgasel/public_html/3ndk-backend/index.js:62:1)
+0|3ndk_bac |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+0|3ndk_bac |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+0|3ndk_bac |     at Module.load (internal/modules/cjs/loader.js:985:32)
+0|3ndk_bac |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+0|3ndk_bac |     at Object.<anonymous> (/root/.nvm/versions/node/v12.18.3/lib/node_modules/pm2/lib/ProcessContainerFork.js:33:23)
+0|3ndk_bac |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+0|3ndk_bac |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+0|3ndk_bac |     at Module.load (internal/modules/cjs/loader.js:985:32)
+0|3ndk_bac |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+0|3ndk_bac |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+0|3ndk_bac |     at internal/main/run_main_module.js:17:47
+
+0|3ndk_backend  | TypeError: Promise.promisifyAll is not a function
+0|3ndk_backend  |     at Object.<anonymous> (/home/mgasel/public_html/3ndk-backend/app/controllers/ownerController.js:8:21)
+0|3ndk_backend  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+0|3ndk_backend  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+0|3ndk_backend  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+0|3ndk_backend  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+0|3ndk_backend  |     at Module.require (internal/modules/cjs/loader.js:1025:19)
+0|3ndk_backend  |     at Module.Hook._require.Module.require (/root/.nvm/versions/node/v12.18.3/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+0|3ndk_backend  |     at require (internal/modules/cjs/helpers.js:72:18)
+0|3ndk_backend  |     at Object.<anonymous> (/home/mgasel/public_html/3ndk-backend/app/routes/owneroutes.js:1:23)
+0|3ndk_backend  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+0|3ndk_backend  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+0|3ndk_backend  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+0|3ndk_backend  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+0|3ndk_backend  |     at Module.require (internal/modules/cjs/loader.js:1025:19)
+0|3ndk_backend  |     at Module.Hook._require.Module.require (/root/.nvm/versions/node/v12.18.3/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+0|3ndk_backend  |     at require (internal/modules/cjs/helpers.js:72:18)
+0|3ndk_backend  |     at Object.<anonymous> (/home/mgasel/public_html/3ndk-backend/index.js:62:1)
+0|3ndk_backend  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+0|3ndk_backend  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+0|3ndk_backend  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+0|3ndk_backend  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+0|3ndk_backend  |     at Object.<anonymous> (/root/.nvm/versions/node/v12.18.3/lib/node_modules/pm2/lib/ProcessContainerFork.js:33:23)
+0|3ndk_backend  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+0|3ndk_backend  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+0|3ndk_backend  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+0|3ndk_backend  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+0|3ndk_backend  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+0|3ndk_backend  |     at internal/main/run_main_module.js:17:47
+PM2             | App [3ndk_backend:0] exited with code [1] via signal [SIGINT]
+PM2             | App [3ndk_backend:0] starting in -fork mode-
+PM2             | App [3ndk_backend:0] online
+0|3ndk_backend  | TypeError: Promise.promisifyAll is not a function
+0|3ndk_backend  |     at Object.<anonymous> (/home/mgasel/public_html/3ndk-backend/app/controllers/ownerController.js:8:21)
+0|3ndk_backend  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+0|3ndk_backend  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+0|3ndk_backend  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+0|3ndk_backend  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+0|3ndk_backend  |     at Module.require (internal/modules/cjs/loader.js:1025:19)
+0|3ndk_backend  |     at Module.Hook._require.Module.require (/root/.nvm/versions/node/v12.18.3/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+0|3ndk_backend  |     at require (internal/modules/cjs/helpers.js:72:18)
+0|3ndk_backend  |     at Object.<anonymous> (/home/mgasel/public_html/3ndk-backend/app/routes/owneroutes.js:1:23)
+0|3ndk_backend  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+0|3ndk_backend  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+0|3ndk_backend  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+0|3ndk_backend  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+0|3ndk_backend  |     at Module.require (internal/modules/cjs/loader.js:1025:19)
+0|3ndk_backend  |     at Module.Hook._require.Module.require (/root/.nvm/versions/node/v12.18.3/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+0|3ndk_backend  |     at require (internal/modules/cjs/helpers.js:72:18)
+0|3ndk_backend  |     at Object.<anonymous> (/home/mgasel/public_html/3ndk-backend/index.js:62:1)
+0|3ndk_backend  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+0|3ndk_backend  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+0|3ndk_backend  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+0|3ndk_backend  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+0|3ndk_backend  |     at Object.<anonymous> (/root/.nvm/versions/node/v12.18.3/lib/node_modules/pm2/lib/ProcessContainerFork.js:33:23)
+0|3ndk_backend  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+0|3ndk_backend  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+0|3ndk_backend  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+0|3ndk_backend  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+0|3ndk_backend  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+0|3ndk_backend  |     at internal/main/run_main_module.js:17:47
+PM2             | App [3ndk_backend:0] exited with code [1] via signal [SIGINT]
+PM2             | App [3ndk_backend:0] starting in -fork mode-
+PM2             | App [3ndk_backend:0] online
+0|3ndk_backend  | TypeError: Promise.promisifyAll is not a function
+0|3ndk_backend  |     at Object.<anonymous> (/home/mgasel/public_html/3ndk-backend/app/controllers/ownerController.js:8:21)
+0|3ndk_backend  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+0|3ndk_backend  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+0|3ndk_backend  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+0|3ndk_backend  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+0|3ndk_backend  |     at Module.require (internal/modules/cjs/loader.js:1025:19)
+0|3ndk_backend  |     at Module.Hook._require.Module.require (/root/.nvm/versions/node/v12.18.3/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+0|3ndk_backend  |     at require (internal/modules/cjs/helpers.js:72:18)
+0|3ndk_backend  |     at Object.<anonymous> (/home/mgasel/public_html/3ndk-backend/app/routes/owneroutes.js:1:23)
+0|3ndk_backend  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+0|3ndk_backend  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+0|3ndk_backend  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+0|3ndk_backend  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+0|3ndk_backend  |     at Module.require (internal/modules/cjs/loader.js:1025:19)
+0|3ndk_backend  |     at Module.Hook._require.Module.require (/root/.nvm/versions/node/v12.18.3/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+0|3ndk_backend  |     at require (internal/modules/cjs/helpers.js:72:18)
+0|3ndk_backend  |     at Object.<anonymous> (/home/mgasel/public_html/3ndk-backend/index.js:62:1)
+0|3ndk_backend  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+0|3ndk_backend  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+0|3ndk_backend  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+0|3ndk_backend  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+0|3ndk_backend  |     at Object.<anonymous> (/root/.nvm/versions/node/v12.18.3/lib/node_modules/pm2/lib/ProcessContainerFork.js:33:23)
+0|3ndk_backend  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+0|3ndk_backend  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+0|3ndk_backend  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+0|3ndk_backend  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+0|3ndk_backend  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+0|3ndk_backend  |     at internal/main/run_main_module.js:17:47
+PM2             | App [3ndk_backend:0] exited with code [1] via signal [SIGINT]
+PM2             | App [3ndk_backend:0] starting in -fork mode-
+PM2             | App [3ndk_backend:0] online
+0|3ndk_backend  | TypeError: Promise.promisifyAll is not a function
+0|3ndk_backend  |     at Object.<anonymous> (/home/mgasel/public_html/3ndk-backend/app/controllers/ownerController.js:8:21)
+0|3ndk_backend  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+0|3ndk_backend  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+0|3ndk_backend  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+0|3ndk_backend  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+0|3ndk_backend  |     at Module.require (internal/modules/cjs/loader.js:1025:19)
+0|3ndk_backend  |     at Module.Hook._require.Module.require (/root/.nvm/versions/node/v12.18.3/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+0|3ndk_backend  |     at require (internal/modules/cjs/helpers.js:72:18)
+0|3ndk_backend  |     at Object.<anonymous> (/home/mgasel/public_html/3ndk-backend/app/routes/owneroutes.js:1:23)
+0|3ndk_backend  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+0|3ndk_backend  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+0|3ndk_backend  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+0|3ndk_backend  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+0|3ndk_backend  |     at Module.require (internal/modules/cjs/loader.js:1025:19)
+0|3ndk_backend  |     at Module.Hook._require.Module.require (/root/.nvm/versions/node/v12.18.3/lib/node_modules/pm2/node_modules/require-in-the-middle/index.js:80:39)
+0|3ndk_backend  |     at require (internal/modules/cjs/helpers.js:72:18)
+0|3ndk_backend  |     at Object.<anonymous> (/home/mgasel/public_html/3ndk-backend/index.js:62:1)
+0|3ndk_backend  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+0|3ndk_backend  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+0|3ndk_backend  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+0|3ndk_backend  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+0|3ndk_backend  |     at Object.<anonymous> (/root/.nvm/versions/node/v12.18.3/lib/node_modules/pm2/lib/ProcessContainerFork.js:33:23)
+0|3ndk_backend  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+0|3ndk_backend  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+0|3ndk_backend  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+0|3ndk_backend  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+0|3ndk_backend  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+0|3ndk_backend  |     at internal/main/run_main_module.js:17:47
+PM2             | App [3ndk_backend:0] exited with code [1] via signal [SIGINT]
+PM2             | App [3ndk_backend:0] starting in -fork mode-
+PM2             | App [3ndk_backend:0] online

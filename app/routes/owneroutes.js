@@ -39,6 +39,7 @@ module.exports= function(app){
     app.post('/owner/laundryDetails',authenticattion.verifyOwnerBranch,ownerController.laundryServices)
     app.post('/owner/getBookings',authenticattion.verifyOwnerBranch,ownerController.getBooking)
     app.post('/owner/getBookingsByDate',authenticattion.verifyOwnerBranch,ownerController.getBookingByDate)
+    app.post('/owner/getBookingswithtax',ownerController.getBookingswithtax)
 
     app.get('/owner/booking/:orderId',authenticattion.verifyOwnerBranch,ownerController.ordersById)
     app.post('/owner/deleteService',authenticattion.verifyOwnerBranch,ownerController.deleteService)
@@ -70,9 +71,16 @@ module.exports= function(app){
     app.post('/owner/recurringPayment',authenticattion.verifyOwnerBranch,ownerController.recurringPayment)
     app.post('/owner/hyperPayTrancationStatus',authenticattion.verifyOwnerBranch,ownerController.hyperPayStep2)
     app.get('/owner/checkSubscription',authenticattion.verifyOwnerBranch,ownerController.checkSubscription)
-
-
-    // app.post('/hyperPayTrancationStatus',user.hyperPayStep2);
+app.get('/owner/sendEmail',ownerController.sendEmail)
+app.get('/owner/pdfReceipt',ownerController.pdfReceipt)
+app.get('/owner/getTax',ownerController.getTax)
+app.post('/owner/updateTax',ownerController.updateTax)
+app.post('/owner/getplandates',ownerController.getplandate)
+app.post('/owner/sendPlanMail',ownerController.sendPlanMail)
+app.post('/owner/testqrcode',ownerController.testqrcode)
+app.get('/owner/getplandates',ownerController.getplandate)
+    
+// app.post('/hyperPayTrancationStatus',user.hyperPayStep2);
 
 
 

@@ -118,6 +118,7 @@ let User = Schema({
         cardNumber: { type: String, default: "" },
         registrationId: { type: String, default: "" }
     }],
+    referralCode:{ type: String, default: '' },
 
 });
 

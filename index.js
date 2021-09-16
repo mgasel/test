@@ -59,7 +59,8 @@ require('./app/routes/userroutes.js')(app);
 require('./app/routes/adminroutes.js')(app);
 require('./app/routes/driverroutes.js')(app);
 require('./app/LIB/imageUploader.js')(app);
-require('./app/routes/owneroutes.js')(app)
+require('./app/routes/owneroutes.js')(app);
+require('./app/routes/laundryadminroutes.js')(app);
 
 Bootstrap.bootstrapAdmin(function (err, message) {
   if (err) {
@@ -81,11 +82,11 @@ Socket.connectSocket(server,redisClient);
 // Scheduler.notifyToUserThoughEmail();
 // Scheduler.notifyUserThroughMessage();
 
-Scheduler.changeStatusShedulerDriver();
-Scheduler.changeStatusSheduler();
-Scheduler.inAppNotificationToUser();
-Scheduler.changeStatusShedulerUser()
-Scheduler.autoRenewFunction()
+//Scheduler.changeStatusShedulerDriver();
+//Scheduler.changeStatusSheduler();
+//Scheduler.inAppNotificationToUser();
+//Scheduler.changeStatusShedulerUser()
+//Scheduler.autoRenewFunction()
 
 // ScheduleBooking.removeCoupon()
 // Scheduler.backupScheduler();

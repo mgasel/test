@@ -1,0 +1,84 @@
+[TAILING] Tailing last 15 lines for [1] process (change the value with --lines option)
+/root/.pm2/logs/testproject-out.log last 15 lines:
+1|testproj |       totalPrice: 6
+1|testproj |     }
+1|testproj |   ],
+1|testproj |   tax: 15,
+1|testproj |   isReviewd: false,
+1|testproj |   _id: 60c726ee9bfa27371972e99f,
+1|testproj |   laundryId: 5f4cb5f1393d38222b369fa8,
+1|testproj |   type: 'standard',
+1|testproj |   userId: {
+1|testproj |     deviceToken: '12345',
+1|testproj |     langaugeType: 'EN',
+1|testproj |     _id: 606d9873f60c001c81cb5de7
+1|testproj |   },
+1|testproj |   __v: 0
+1|testproj | }
+
+/root/.pm2/logs/testproject-error.log last 15 lines:
+1|testproj | (node:2758) UnhandledPromiseRejectionWarning: TypeError: Cannot read property '_id' of null
+1|testproj |     at /home/mgasel/public_html/3ndktest/app/LIB/scheduler.js:597:63
+1|testproj |     at runMicrotasks (<anonymous>)
+1|testproj |     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+1|testproj | (node:2758) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 418)
+1|testproj | (node:2758) UnhandledPromiseRejectionWarning: TypeError: Cannot read property '_id' of null
+1|testproj |     at /home/mgasel/public_html/3ndktest/app/LIB/scheduler.js:597:63
+1|testproj |     at runMicrotasks (<anonymous>)
+1|testproj |     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+1|testproj | (node:2758) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 419)
+1|testproj | (node:2758) UnhandledPromiseRejectionWarning: TypeError: Cannot read property '_id' of null
+1|testproj |     at /home/mgasel/public_html/3ndktest/app/LIB/scheduler.js:597:63
+1|testproj |     at runMicrotasks (<anonymous>)
+1|testproj |     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+1|testproj | (node:2758) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 420)
+
+1|testproject  | pdf request received
+1|testproject  | invoice {
+1|testproject  |   id: '8ac9a4a178d4f98a0178dbc7e2bc46a1',
+1|testproject  |   registrationId: '8ac9a4a178d4f98a0178dbc7e2464678',
+1|testproject  |   paymentType: 'DB',
+1|testproject  |   paymentBrand: 'VISA',
+1|testproject  |   card: {
+1|testproject  |     bin: '471110',
+1|testproject  |     binCountry: 'US',
+1|testproject  |     last4Digits: '0000',
+1|testproject  |     holder: 'HSHHAH',
+1|testproject  |     expiryMonth: '06',
+1|testproject  |     expiryYear: '2030'
+1|testproject  |   },
+1|testproject  |   customer: {
+1|testproject  |     givenName: 'abcd',
+1|testproject  |     surname: 'abcd',
+1|testproject  |     email: 'ahmadfarewai@nasher.co',
+1|testproject  |     ip: '106.208.55.182',
+1|testproject  |     ipCountry: 'IN'
+1|testproject  |   },
+1|testproject  |   billing: {
+1|testproject  |     street1: 'Olayih',
+1|testproject  |     city: 'Riyadh',
+1|testproject  |     state: 'CENTRAL',
+1|testproject  |     postcode: '12611',
+1|testproject  |     country: 'SA'
+1|testproject  |   }
+1|testproject  | }
+1|testproject  | plans { planName: 'Basic', planamount: '100', perPeriod: '1 Month' }
+1|testproject  | entered
+1|testproject  | ReferenceError: date is not defined
+1|testproject  |     at pdfCreate (/home/mgasel/public_html/3ndktest/app/controllers/ownerController.js:441:20)
+1|testproject  |     at exports.pdfReceipt (/home/mgasel/public_html/3ndktest/app/controllers/ownerController.js:351:17)
+1|testproject  |     at Layer.handle [as handle_request] (/home/mgasel/public_html/3ndktest/node_modules/express/lib/router/layer.js:95:5)
+1|testproject  |     at next (/home/mgasel/public_html/3ndktest/node_modules/express/lib/router/route.js:137:13)
+1|testproject  |     at Route.dispatch (/home/mgasel/public_html/3ndktest/node_modules/express/lib/router/route.js:112:3)
+1|testproject  |     at Layer.handle [as handle_request] (/home/mgasel/public_html/3ndktest/node_modules/express/lib/router/layer.js:95:5)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/express/lib/router/index.js:281:22
+1|testproject  |     at Function.process_params (/home/mgasel/public_html/3ndktest/node_modules/express/lib/router/index.js:335:12)
+1|testproject  |     at next (/home/mgasel/public_html/3ndktest/node_modules/express/lib/router/index.js:275:10)
+1|testproject  |     at SendStream.error (/home/mgasel/public_html/3ndktest/node_modules/serve-static/index.js:121:7)
+1|testproject  |     at SendStream.emit (events.js:315:20)
+1|testproject  |     at SendStream.EventEmitter.emit (domain.js:483:12)
+1|testproject  |     at SendStream.error (/home/mgasel/public_html/3ndktest/node_modules/send/index.js:270:17)
+1|testproject  |     at SendStream.onStatError (/home/mgasel/public_html/3ndktest/node_modules/send/index.js:421:12)
+1|testproject  |     at next (/home/mgasel/public_html/3ndktest/node_modules/send/index.js:735:16)
+1|testproject  |     at onstat (/home/mgasel/public_html/3ndktest/node_modules/send/index.js:724:14)
+1|testproject  |     at FSReqCallback.oncomplete (fs.js:168:21)

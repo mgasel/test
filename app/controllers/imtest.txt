@@ -1,0 +1,259 @@
+[TAILING] Tailing last 15 lines for [1] process (change the value with --lines option)
+/root/.pm2/logs/testproject-out.log last 15 lines:
+1|testproj |   isReviewd: false,
+1|testproj |   _id: 60c726ee9bfa27371972e99f,
+1|testproj |   laundryId: 5f4cb5f1393d38222b369fa8,
+1|testproj |   type: 'standard',
+1|testproj |   userId: {
+1|testproj |     deviceToken: '12345',
+1|testproj |     langaugeType: 'EN',
+1|testproj |     _id: 606d9873f60c001c81cb5de7
+1|testproj |   },
+1|testproj |   __v: 0
+1|testproj | }
+1|testproj | 
+1|testproj | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproj | > node index.js
+1|testproj | 
+
+/root/.pm2/logs/testproject-error.log last 15 lines:
+1|testproj |     at require (internal/modules/cjs/helpers.js:72:18)
+1|testproj |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:1)
+1|testproj |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproj |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproj |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproj |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproj |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproj |     at internal/main/run_main_module.js:17:47
+1|testproj | npm ERR! code ELIFECYCLE
+1|testproj | npm ERR! errno 1
+1|testproj | npm ERR! node-js-getting-started@0.3.0 start: `node index.js`
+1|testproj | npm ERR! Exit status 1
+1|testproj | npm ERR! 
+1|testproj | npm ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproj | npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-06-18T16_28_02_129Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/controllers/ownerController.js:465
+1|testproject  |     <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+1|testproject  |          ^^^^^
+1|testproject  | SyntaxError: Unexpected identifier
+1|testproject  |     at compileFunction (<anonymous>)
+1|testproject  |     at wrapSafe (internal/modules/cjs/loader.js:1053:16)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1101:27)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Module.require (internal/modules/cjs/loader.js:1025:19)
+1|testproject  |     at require (internal/modules/cjs/helpers.js:72:18)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:1:23)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Module.require (internal/modules/cjs/loader.js:1025:19)
+1|testproject  |     at require (internal/modules/cjs/helpers.js:72:18)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:1)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm
+1|testproject  |  ERR! code ELIFECYCLE
+1|testproject  | npm ERR! errno 1
+1|testproject  | npm ERR! node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm 
+1|testproject  | ERR! Exit status 1
+1|testproject  | npm ERR! 
+1|testproject  | npm ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-06-18T16_28_07_960Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/controllers/ownerController.js:465
+1|testproject  |     <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+1|testproject  |          ^^^^^
+1|testproject  | SyntaxError: Unexpected identifier
+1|testproject  |     at compileFunction (<anonymous>)
+1|testproject  |     at wrapSafe (internal/modules/cjs/loader.js:1053:16)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1101:27)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Module.require (internal/modules/cjs/loader.js:1025:19)
+1|testproject  |     at require (internal/modules/cjs/helpers.js:72:18)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:1:23)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Module.require (internal/modules/cjs/loader.js:1025:19)
+1|testproject  |     at require (internal/modules/cjs/helpers.js:72:18)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:1)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm
+1|testproject  |  ERR! code ELIFECYCLE
+1|testproject  | npm ERR! errno 1
+1|testproject  | npm ERR! node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm ERR! 
+1|testproject  | npm ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-06-18T16_28_11_407Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/controllers/ownerController.js:465
+1|testproject  |     <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+1|testproject  |          ^^^^^
+1|testproject  | SyntaxError: Unexpected identifier
+1|testproject  |     at compileFunction (<anonymous>)
+1|testproject  |     at wrapSafe (internal/modules/cjs/loader.js:1053:16)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1101:27)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Module.require (internal/modules/cjs/loader.js:1025:19)
+1|testproject  |     at require (internal/modules/cjs/helpers.js:72:18)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:1:23)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Module.require (internal/modules/cjs/loader.js:1025:19)
+1|testproject  |     at require (internal/modules/cjs/helpers.js:72:18)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:1)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm
+1|testproject  |  ERR! code ELIFECYCLE
+1|testproject  | npm ERR! errno 1
+1|testproject  | npm ERR!
+1|testproject  |  node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm ERR! 
+1|testproject  | npm
+1|testproject  |  ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-06-18T16_28_17_512Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js
+1|testproject  | WARNING: The `useMongoClient` option is no longer necessary in mongoose 5.x, please remove it.
+1|testproject  |     at handleUseMongoClient (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:1008:17)
+1|testproject  |     at NativeConnection.Connection.openUri (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/connection.js:775:7)
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:351:10
+1|testproject  |     at /home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:32:5
+1|testproject  |     at new Promise (<anonymous>)
+1|testproject  |     at promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/helpers/promiseOrCallback.js:31:10)
+1|testproject  |     at Mongoose._promiseOrCallback (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:1149:10)
+1|testproject  |     at Mongoose.connect (/home/mgasel/public_html/3ndktest/node_modules/mongoose/lib/index.js:350:20)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:37:10)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | /home/mgasel/public_html/3ndktest/app/controllers/ownerController.js:465
+1|testproject  |     <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+1|testproject  |          ^^^^^
+1|testproject  | SyntaxError: Unexpected identifier
+1|testproject  |     at wrapSafe (internal/modules/cjs/loader.js:1053:16)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1101:27)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Module.require (internal/modules/cjs/loader.js:1025:19)
+1|testproject  |     at require (internal/modules/cjs/helpers.js:72:18)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/app/routes/owneroutes.js:1:23)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Module.require (internal/modules/cjs/loader.js:1025:19)
+1|testproject  |     at require (internal/modules/cjs/helpers.js:72:18)
+1|testproject  |     at Object.<anonymous> (/home/mgasel/public_html/3ndktest/index.js:62:1)
+1|testproject  |     at Module._compile (internal/modules/cjs/loader.js:1137:30)
+1|testproject  |     at Object.Module._extensions..js (internal/modules/cjs/loader.js:1157:10)
+1|testproject  |     at Module.load (internal/modules/cjs/loader.js:985:32)
+1|testproject  |     at Function.Module._load (internal/modules/cjs/loader.js:878:14)
+1|testproject  |     at Function.executeUserEntryPoint [as runMain] (internal/modules/run_main.js:71:12)
+1|testproject  |     at internal/main/run_main_module.js:17:47
+1|testproject  | npm
+1|testproject  |  ERR! code ELIFECYCLE
+1|testproject  | npm ERR! errno 1
+1|testproject  | npm 
+1|testproject  | ERR! node-js-getting-started@0.3.0 start: `node index.js`
+1|testproject  | npm ERR! Exit status 1
+1|testproject  | npm ERR! 
+1|testproject  | npm
+1|testproject  |  ERR! Failed at the node-js-getting-started@0.3.0 start script.
+1|testproject  | npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
+1|testproject  | npm ERR! A complete log of this run can be found in:
+1|testproject  | npm ERR!     /root/.npm/_logs/2021-06-18T16_28_20_713Z-debug.log
+1|testproject  | > node-js-getting-started@0.3.0 start /home/mgasel/public_html/3ndktest
+1|testproject  | > node index.js

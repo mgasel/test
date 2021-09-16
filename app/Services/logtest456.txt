@@ -1,0 +1,335 @@
+[TAILING] Tailing last 15 lines for [1] process (change the value with --lines option)
+/root/.pm2/logs/testproject-error.log last 15 lines:
+1|testproj |     at /home/mgasel/public_html/3ndktest/app/LIB/scheduler.js:597:63
+1|testproj |     at runMicrotasks (<anonymous>)
+1|testproj |     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+1|testproj | (node:10853) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 415)
+1|testproj | (node:10853) UnhandledPromiseRejectionWarning: TypeError: Cannot read property '_id' of null
+1|testproj |     at /home/mgasel/public_html/3ndktest/app/LIB/scheduler.js:597:63
+1|testproj |     at runMicrotasks (<anonymous>)
+1|testproj |     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+1|testproj | (node:10853) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 416)
+1|testproj | (node:10853) UnhandledPromiseRejectionWarning: TypeError: Cannot read property '_id' of null
+1|testproj |     at /home/mgasel/public_html/3ndktest/app/LIB/scheduler.js:597:63
+1|testproj |     at runMicrotasks (<anonymous>)
+1|testproj |     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+1|testproj | (node:10853) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 417)
+1|testproj | (node:10853) DeprecationWarning: Mongoose: `findOneAndUpdate()` and `findOneAndDelete()` without the `useFindAndModify` option set to false are deprecated. See: https://mongoosejs.com/docs/deprecations.html#findandmodify
+
+/root/.pm2/logs/testproject-out.log last 15 lines:
+1|testproj |   ],
+1|testproj |   created_at: 2021-06-03T11:03:19.199Z,
+1|testproj |   __v: 0
+1|testproj | }
+1|testproj | jsonResId undefined
+1|testproj | chunk {
+1|testproj |   result: { code: '000.200.100', description: 'successfully created checkout' },
+1|testproj |   buildNumber: '25012af73706e29d69a34b842b51b0e43d826150@2021-06-17 07:04:26 +0000',
+1|testproj |   timestamp: '2021-06-17 07:47:02+0000',
+1|testproj |   ndc: 'BD29FEEB9F4E4CA4BE205C4B02F47E22.prod02-vm-tx07',
+1|testproj |   id: 'BD29FEEB9F4E4CA4BE205C4B02F47E22.prod02-vm-tx07'
+1|testproj | }
+1|testproj | cardcheckstatus false
+1|testproj | jsonRes step1 { cardCheckStatus: false }
+1|testproj | innnnnnnnnnnnnnnn
+
+1|testproject  | verify {
+1|testproject  |   id: '60b8b6f7601e901238a6ba58',
+1|testproject  |   email: 'hajeraafsheen05@gmail.com',
+1|testproject  |   iat: 1623914587
+1|testproject  | }
+1|testproject  | user det {
+1|testproject  |   Profilepic: { original: '', thumbnail: '' },
+1|testproject  |   licencePic: { licencePicOriginal: '', licencePicThumbnail: '' },
+1|testproject  |   phoneNumber: '919000207254',
+1|testproject  |   callingCode: '91',
+1|testproject  |   accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYjhiNmY3NjAxZTkwMTIzOGE2YmE1OCIsImVtYWlsIjoiaGFqZXJhYWZzaGVlbjA1QGdtYWlsLmNvbSIsImlhdCI6MTYyMzkxNDU4N30.p85A_wZLyhvuDzhgQkHnDTWEaVQMO--rmraWg_GFGEU',
+1|testproject  |   emailVerificationcode: null,
+1|testproject  |   isActive: true,
+1|testproject  |   isBlocked: false,
+1|testproject  |   isDeleted: false,
+1|testproject  |   isVerified: false,
+1|testproject  |   isEmailVerified: false,
+1|testproject  |   deviceType: 'andriod',
+1|testproject  |   isOnline: true,
+1|testproject  |   deviceToken: '12345',
+1|testproject  |   lat: 0,
+1|testproject  |   long: 0,
+1|testproject  |   isTCAccepted: true,
+1|testproject  |   userType: 'USER',
+1|testproject  |   hasSubscribed: false,
+1|testproject  |   isActualPurchaser: false,
+1|testproject  |   isSubscriptiveUser: false,
+1|testproject  |   isAvailable: true,
+1|testproject  |   load: 0,
+1|testproject  |   gender: '',
+1|testproject  |   countryName: '',
+1|testproject  |   dateOfBirth: 0,
+1|testproject  |   house_flat: '',
+1|testproject  |   landmark: '',
+1|testproject  |   location: '',
+1|testproject  |   completePhoneNumber: '91919000207254',
+1|testproject  |   incentive: 0,
+1|testproject  |   isRated: false,
+1|testproject  |   nationality: '',
+1|testproject  |   cityName: '',
+1|testproject  |   couponApplied: false,
+1|testproject  |   packChoosen: false,
+1|testproject  |   langaugeType: 'EN',
+1|testproject  |   weekendFlag: false,
+1|testproject  |   districtId: [],
+1|testproject  |   _id: 60b8b6f7601e901238a6ba59,
+1|testproject  |   password: '$2b$10$oG/WMZiS3/Li3omVs84v6OxQsSNRXXiD6W0ggdPTx9PsjRkB6ydaW',
+1|testproject  |   name: 'hshejejej',
+1|testproject  |   email: 'hajeraafsheen05@gmail.com',
+1|testproject  |   cardRegistationId: [],
+1|testproject  |   createDate: 2021-06-03T11:03:19.209Z,
+1|testproject  |   __v: 0
+1|testproject  | }
+1|testproject  | tokens user eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYjhiNmY3NjAxZTkwMTIzOGE2YmE1OCIsImVtYWlsIjoiaGFqZXJhYWZzaGVlbjA1QGdtYWlsLmNvbSIsImlhdCI6MTYyMzkxNDU4N30.p85A_wZLyhvuDzhgQkHnDTWEaVQMO--rmraWg_GFGEU
+1|testproject  | token header eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYjhiNmY3NjAxZTkwMTIzOGE2YmE1OCIsImVtYWlsIjoiaGFqZXJhYWZzaGVlbjA1QGdtYWlsLmNvbSIsImlhdCI6MTYyMzkxNDU4N30.p85A_wZLyhvuDzhgQkHnDTWEaVQMO--rmraWg_GFGEU
+1|testproject  | verify user {
+1|testproject  |   Profilepic: { original: '', thumbnail: '' },
+1|testproject  |   licencePic: { licencePicOriginal: '', licencePicThumbnail: '' },
+1|testproject  |   phoneNumber: '919000207254',
+1|testproject  |   callingCode: '91',
+1|testproject  |   accessToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYwYjhiNmY3NjAxZTkwMTIzOGE2YmE1OCIsImVtYWlsIjoiaGFqZXJhYWZzaGVlbjA1QGdtYWlsLmNvbSIsImlhdCI6MTYyMzkxNDU4N30.p85A_wZLyhvuDzhgQkHnDTWEaVQMO--rmraWg_GFGEU',
+1|testproject  |   emailVerificationcode: null,
+1|testproject  |   isActive: true,
+1|testproject  |   isBlocked: false,
+1|testproject  |   isDeleted: false,
+1|testproject  |   isVerified: false,
+1|testproject  |   isEmailVerified: false,
+1|testproject  |   deviceType: 'andriod',
+1|testproject  |   isOnline: true,
+1|testproject  |   deviceToken: '12345',
+1|testproject  |   lat: 0,
+1|testproject  |   long: 0,
+1|testproject  |   isTCAccepted: true,
+1|testproject  |   userType: 'USER',
+1|testproject  |   hasSubscribed: false,
+1|testproject  |   isActualPurchaser: false,
+1|testproject  |   isSubscriptiveUser: false,
+1|testproject  |   isAvailable: true,
+1|testproject  |   load: 0,
+1|testproject  |   gender: '',
+1|testproject  |   countryName: '',
+1|testproject  |   dateOfBirth: 0,
+1|testproject  |   house_flat: '',
+1|testproject  |   landmark: '',
+1|testproject  |   location: '',
+1|testproject  |   completePhoneNumber: '91919000207254',
+1|testproject  |   incentive: 0,
+1|testproject  |   isRated: false,
+1|testproject  |   nationality: '',
+1|testproject  |   cityName: '',
+1|testproject  |   couponApplied: false,
+1|testproject  |   packChoosen: false,
+1|testproject  |   langaugeType: 'EN',
+1|testproject  |   weekendFlag: false,
+1|testproject  |   districtId: [],
+1|testproject  |   _id: 60b8b6f7601e901238a6ba59,
+1|testproject  |   password: '$2b$10$oG/WMZiS3/Li3omVs84v6OxQsSNRXXiD6W0ggdPTx9PsjRkB6ydaW',
+1|testproject  |   name: 'hshejejej',
+1|testproject  |   email: 'hajeraafsheen05@gmail.com',
+1|testproject  |   cardRegistationId: [],
+1|testproject  |   createDate: 2021-06-03T11:03:19.209Z,
+1|testproject  |   __v: 0
+1|testproject  | }
+1|testproject  | step2 request {
+1|testproject  |   amount: '1',
+1|testproject  |   cardRegId: 'BD29FEEB9F4E4CA4BE205C4B02F47E22.prod02-vm-tx07',
+1|testproject  |   subscriptionId: '5fd09ccf5e4c428aaec403dc',
+1|testproject  |   checkoutId: 'BD29FEEB9F4E4CA4BE205C4B02F47E22.prod02-vm-tx07'
+1|testproject  | }
+1|testproject  | step2 path /v1/checkouts/BD29FEEB9F4E4CA4BE205C4B02F47E22.prod02-vm-tx07/payment
+1|testproject  | step2 path /v1/checkouts/BD29FEEB9F4E4CA4BE205C4B02F47E22.prod02-vm-tx07/payment?entityId=8acda4c96ade4a49016afe7f214811e3
+1|testproject  | ++++++++++++++++++opt {
+1|testproject  |   port: 443,
+1|testproject  |   host: 'oppwa.com',
+1|testproject  |   path: '/v1/checkouts/BD29FEEB9F4E4CA4BE205C4B02F47E22.prod02-vm-tx07/payment?entityId=8acda4c96ade4a49016afe7f214811e3',
+1|testproject  |   method: 'GET',
+1|testproject  |   headers: {
+1|testproject  |     Authorization: 'Bearer OGFjOWE0Y2E2OGMxZTY2NDAxNjhkOWY5YzhiNjVmNjl8S2s4ZWdyZjlGaA=='
+1|testproject  |   }
+1|testproject  | }
+1|testproject  | step2 url https://oppwa.com/v1/checkouts/BD29FEEB9F4E4CA4BE205C4B02F47E22.prod02-vm-tx07/payment?entityId=8acda4c96ade4a49016afe7f214811e3
+1|testproject  | jsonRes {
+1|testproject  |   id: '8ac9a4a47a13eba6017a18f078d27bff',
+1|testproject  |   registrationId: '8ac9a4a27a13eba8017a18f0770f0407',
+1|testproject  |   paymentType: 'DB',
+1|testproject  |   paymentBrand: 'VISA',
+1|testproject  |   result: {
+1|testproject  |     code: '800.120.101',
+1|testproject  |     description: 'maximum number of transactions per account already exceeded'
+1|testproject  |   },
+1|testproject  |   card: {
+1|testproject  |     bin: '489022',
+1|testproject  |     binCountry: 'SA',
+1|testproject  |     last4Digits: '3228',
+1|testproject  |     holder: 'AHMAD ABDURRAHMAN',
+1|testproject  |     expiryMonth: '12',
+1|testproject  |     expiryYear: '2025'
+1|testproject  |   },
+1|testproject  |   customer: {
+1|testproject  |     givenName: 'hshejejej',
+1|testproject  |     surname: 'hshejejej',
+1|testproject  |     email: 'hajeraafsheen05@gmail.com',
+1|testproject  |     ip: '122.175.77.132',
+1|testproject  |     ipCountry: 'IN'
+1|testproject  |   },
+1|testproject  |   billing: {
+1|testproject  |     street1: 'Olayih',
+1|testproject  |     city: 'Riyadh',
+1|testproject  |     state: 'CENTRAL',
+1|testproject  |     postcode: '12611',
+1|testproject  |     country: 'SA'
+1|testproject  |   },
+1|testproject  |   customParameters: {
+1|testproject  |     SHOPPER_MSDKIntegrationType: 'Checkout UI',
+1|testproject  |     SHOPPER_device: 'samsung samsung SM-J810G',
+1|testproject  |     CTPE_DESCRIPTOR_TEMPLATE: '',
+1|testproject  |     SHOPPER_OS: 'Android 10',
+1|testproject  |     SHOPPER_MSDKVersion: '2.31.0'
+1|testproject  |   },
+1|testproject  |   risk: { score: '-200' },
+1|testproject  |   buildNumber: '25012af73706e29d69a34b842b51b0e43d826150@2021-06-17 07:04:26 +0000',
+1|testproject  |   timestamp: '2021-06-17 07:47:30+0000',
+1|testproject  |   ndc: 'BD29FEEB9F4E4CA4BE205C4B02F47E22.prod02-vm-tx07'
+1|testproject  | } jsonRes
+1|testproject  | invoice start pdf
+1|testproject  | invoice {
+1|testproject  |   id: '8ac9a4a47a13eba6017a18f078d27bff',
+1|testproject  |   registrationId: '8ac9a4a27a13eba8017a18f0770f0407',
+1|testproject  |   paymentType: 'DB',
+1|testproject  |   paymentBrand: 'VISA',
+1|testproject  |   result: {
+1|testproject  |     code: '800.120.101',
+1|testproject  |     description: 'maximum number of transactions per account already exceeded'
+1|testproject  |   },
+1|testproject  |   card: {
+1|testproject  |     bin: '489022',
+1|testproject  |     binCountry: 'SA',
+1|testproject  |     last4Digits: '3228',
+1|testproject  |     holder: 'AHMAD ABDURRAHMAN',
+1|testproject  |     expiryMonth: '12',
+1|testproject  |     expiryYear: '2025'
+1|testproject  |   },
+1|testproject  |   customer: {
+1|testproject  |     givenName: 'hshejejej',
+1|testproject  |     surname: 'hshejejej',
+1|testproject  |     email: 'hajeraafsheen05@gmail.com',
+1|testproject  |     ip: '122.175.77.132',
+1|testproject  |     ipCountry: 'IN'
+1|testproject  |   },
+1|testproject  |   billing: {
+1|testproject  |     street1: 'Olayih',
+1|testproject  |     city: 'Riyadh',
+1|testproject  |     state: 'CENTRAL',
+1|testproject  |     postcode: '12611',
+1|testproject  |     country: 'SA'
+1|testproject  |   },
+1|testproject  |   customParameters: {
+1|testproject  |     SHOPPER_MSDKIntegrationType: 'Checkout UI',
+1|testproject  |     SHOPPER_device: 'samsung samsung SM-J810G',
+1|testproject  |     CTPE_DESCRIPTOR_TEMPLATE: '',
+1|testproject  |     SHOPPER_OS: 'Android 10',
+1|testproject  |     SHOPPER_MSDKVersion: '2.31.0'
+1|testproject  |   },
+1|testproject  |   risk: { score: '-200' },
+1|testproject  |   buildNumber: '25012af73706e29d69a34b842b51b0e43d826150@2021-06-17 07:04:26 +0000',
+1|testproject  |   timestamp: '2021-06-17 07:47:30+0000',
+1|testproject  |   ndc: 'BD29FEEB9F4E4CA4BE205C4B02F47E22.prod02-vm-tx07'
+1|testproject  | }
+1|testproject  | plans {
+1|testproject  |   _id: 5fd09ccf5e4c428aaec403dc,
+1|testproject  |   isSelected: 'false',
+1|testproject  |   weekendService: false,
+1|testproject  |   isBlocked: false,
+1|testproject  |   isDeleted: false,
+1|testproject  |   created_at: 2020-10-14T04:05:08.079Z,
+1|testproject  |   isActive: false,
+1|testproject  |   addBranches: 1,
+1|testproject  |   perPeriodAr: '',
+1|testproject  |   perPeriod: '1 month',
+1|testproject  |   planAmountAr: '',
+1|testproject  |   planNameAr: '',
+1|testproject  |   planAmount: 1,
+1|testproject  |   planName: 'Basic_Test',
+1|testproject  |   __v: 0,
+1|testproject  |   amount: 1
+1|testproject  | }
+1|testproject  | entered
+1|testproject  | html 
+1|testproject  |     <div style="font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">
+1|testproject  |     <table colspan="0" cellpadding="0" border="1" style="width:600px;line-height: normal;border: solid 1px #ddd;padding: 20px;">
+1|testproject  |         <tr>
+1|testproject  |             <td>
+1|testproject  |                 <table colspan="0" cellpadding="0" border="0" style="width:100%;">
+1|testproject  |                 <tr>
+1|testproject  |                 <td colspan="2"><h3 style="margin: 0;font-size: 12px;color: #000;line-height: normal;font-weight: 600;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">Mgasel Laundry App</h3></td>
+1|testproject  |             </tr>
+1|testproject  |                     <tr>
+1|testproject  |                         <td colspan="2"><p style="margin: 0;font-size: 8px;color: #000;line-height: normal;font-weight: 600;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;">Invoice/Receipt</p></td>
+1|testproject  |                     </tr>
+1|testproject  |                     <tr>
+1|testproject  |                         <td style="vertical-align: top;padding-top: 2rem;width: 60%;">
+1|testproject  |                             <table colspan="0" cellpadding="0" border="0" style="width:100%;border-collapse: collapse;">                                                                                                                                                                                                                 
+1|testproject  |                                 
+1|testproject  |                                 <tr><td style="padding-bottom: 5px;"><p style="margin: 0;font-size: 8px;font-weight: bold;color: #000;line-height: normal;">Billed From :<br/></p><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;"> Closets Solutions Co. Ltd,<br /> Imam Saud Bin Abdulaziz Road, <br />An Nakheel,<br/> Riyadh 12381<br/></p></td></tr>
+1|testproject  |                             </table>
+1|testproject  |                         </td>
+1|testproject  | 					</tr>
+1|testproject  | 					 <tr>
+1|testproject  |                         <td style="vertical-align: top;padding-top: 2rem;width: 60%;">
+1|testproject  |                             <table colspan="0" cellpadding="0" border="0" style="width:100%;border-collapse: collapse;">   <p style="margin: 0;font-size: 8px;font-weight: bold;color: #000;line-height: normal;">Billed To :<br/></p>                                                                                                                                                                                                              
+1|testproject  |                                 <tr><td ><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">hshejejej </p></td></tr>
+1|testproject  |                                 <tr><td ><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">hajeraafsheen05@gmail.com</p></td></tr>
+1|testproject  |                                 <tr><td ><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">Olayih </p></td></tr>
+1|testproject  |                                 <tr><td ><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">Riyadh</p></td></tr>
+1|testproject  | 								<tr><td ><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">CENTRAL </p></td></tr>
+1|testproject  |                                 <tr><td ><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">12611</p></td></tr>
+1|testproject  | 								<tr><td style="padding-bottom: 10px; "><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">SA </p></td></tr>
+1|testproject  |                                 
+1|testproject  |                             </table>
+1|testproject  |                         </td>
+1|testproject  | 						</tr>
+1|testproject  | 						<tr>
+1|testproject  | 						<td style="padding-bottom: 10px; width:60%;">
+1|testproject  | 						<p style="margin: 0;font-size: 8px;font-weight: bold;color: #000;line-height: normal;">Purchase date :</p>
+1|testproject  | 						
+1|testproject  | 						<p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">
+1|testproject  | 						17/6/2021</p></td></tr>
+1|testproject  | 						
+1|testproject  | 						<tr>
+1|testproject  | 						<td style="padding-bottom: 5px; width:60%;">
+1|testproject  | 						<p style="margin: 0;font-size: 8px;font-weight: bold;color: #000;line-height: normal;">Payment Method :</p>
+1|testproject  | 						<p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">
+1|testproject  | 						VISA ending with 3228 </p></td>
+1|testproject  | 						</tr>
+1|testproject  | 						<tr>
+1|testproject  |                         <td style="vertical-align: top;width: 60%;">
+1|testproject  |                             <table colspan="0" cellpadding="0" border="0" style="border-collapse: collapse;">                                                                                                                                                                                                                 
+1|testproject  | 								
+1|testproject  | <p style="margin: 0;font-size: 8px;font-weight: bold;color: #000;line-height: normal;padding-bottom: 2px;">Plan Details :<br/></p> 			
+1|testproject  | <tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 8px;font-weight: bold;color: #000;line-height: normal;">Plan Name :</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;"> Basic_Test</p></td></tr>
+1|testproject  | 				<tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 8px;font-weight: bold;color: #000;line-height: normal;">Plan Amount :</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;"> 1</p></td></tr>
+1|testproject  | 								<tr><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 8px;font-weight: bold;color: #000;line-height: normal;">Plan Duration :</p></td><td style="padding-bottom: 10px;"><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;"> 1 month</p></td></tr>
+1|testproject  |                             </table>
+1|testproject  |                         </td>
+1|testproject  | 						</tr>
+1|testproject  | 						 <tr>
+1|testproject  |                         <td colspan="2"><p style="margin: 0;font-size: 8px;font-weight: 400;color: #000;line-height: normal;">Thank you for purchasing the Plan!</p></td>
+1|testproject  |                     </tr>
+1|testproject  | 					</table>
+1|testproject  |             </td>
+1|testproject  |         </tr>
+1|testproject  |     </table>
+1|testproject  | </div>    
+1|testproject  | data {
+1|testproject  |   filename: '/home/mgasel/public_html/3ndktest/app/uploader/05c02a29-aa36-405d-8879-a3dd9303751einvoice.pdf'
+1|testproject  | }
+1|testproject  | (node:10853) UnhandledPromiseRejectionWarning: ReferenceError: UnivershalFunction is not defined
+1|testproject  |     at IncomingMessage.<anonymous> (/home/mgasel/public_html/3ndktest/app/Services/ownerServices.js:1889:1)
+1|testproject  |     at processTicksAndRejections (internal/process/task_queues.js:97:5)
+1|testproject  | (node:10853) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). To terminate the node process on unhandled promise rejection, use the CLI flag `--unhandled-rejections=strict` (see https://nodejs.org/api/cli.html#cli_unhandled_rejections_mode). (rejection id: 418)
